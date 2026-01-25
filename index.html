@@ -1,71 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>PHK UMB</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHK UMB</title>
 
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #ffffff;
-      text-align: center;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 20px;
+      width: 100%;
+      max-width: 420px;
+      padding: 40px 20px;
+      text-align: center;
     }
 
-    h1 {
-      font-size: 42px;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
+    .logo-box {
+      border: 2px solid #fff;
+      padding: 28px 16px;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 3px;
     }
 
     .subtitle {
-      font-size: 18px;
-      opacity: 0.85;
-      margin-bottom: 50px;
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.8;
+      letter-spacing: 1px;
     }
 
-    .lang-box {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 30px;
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .lang-title {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 12px;
-      color: #00e0ff;
-    }
-
-    .lang-text {
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .contact {
-      margin-top: 40px;
-      font-size: 16px;
-      opacity: 0.9;
-    }
-
-    .contact a {
-      color: #00e0ff;
+    .menu a {
+      display: block;
+      padding: 14px;
+      border: 1px solid #fff;
       text-decoration: none;
-      font-weight: bold;
+      color: #fff;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .menu a:hover {
+      background: #fff;
+      color: #000;
     }
 
     footer {
-      margin-top: 60px;
-      font-size: 14px;
+      margin-top: 40px;
+      font-size: 12px;
       opacity: 0.6;
     }
   </style>
@@ -73,59 +79,23 @@
 
 <body>
   <div class="container">
-    <h1>PHK UMB</h1>
-    <div class="subtitle">
-      Universal Monetary Bridge
+
+    <div class="logo-box">
+      <div class="logo">PHK UMB</div>
+      <div class="subtitle">PHK Universal Monetary Bank</div>
     </div>
 
-    <!-- English -->
-    <div class="lang-box">
-      <div class="lang-title">English</div>
-      <div class="lang-text">
-        PHK UMB is a universal monetary bridge connecting digital assets,
-        real-world finance, and future technologies.<br />
-        Built for global trust, transparency, and innovation.
-      </div>
-    </div>
-
-    <!-- Korean -->
-    <div class="lang-box">
-      <div class="lang-title">한국어</div>
-      <div class="lang-text">
-        PHK UMB는 디지털 자산과 현실 금융,
-        그리고 미래 기술을 연결하는 범용 통화 브리지입니다.<br />
-        신뢰, 투명성, 혁신을 기반으로 한 글로벌 금융 구조를 지향합니다.
-      </div>
-    </div>
-
-    <!-- Chinese -->
-    <div class="lang-box">
-      <div class="lang-title">中文</div>
-      <div class="lang-text">
-        PHK UMB 是一个连接数字资产、现实金融与未来技术的
-        通用货币桥梁。<br />
-        致力于建立全球信任、透明和创新的金融体系。
-      </div>
-    </div>
-
-    <!-- Arabic -->
-    <div class="lang-box">
-      <div class="lang-title">العربية</div>
-      <div class="lang-text" dir="rtl">
-        PHK UMB هو جسر نقدي عالمي يربط الأصول الرقمية
-        بالتمويل الحقيقي وتقنيات المستقبل.<br />
-        مبني على الثقة والشفافية والابتكار على مستوى العالم.
-      </div>
-    </div>
-
-    <div class="contact">
-      Contact :
-      <a href="mailto:contact@phkumb.com">contact@phkumb.com</a>
+    <div class="menu">
+      <a href="#">BANK</a>
+      <a href="#">PAY</a>
+      <a href="#">VAULT</a>
+      <a href="#">ECOSYSTEM</a>
     </div>
 
     <footer>
-      © 2026 PHK UMB. All Rights Reserved.
+      © PHK UMB
     </footer>
+
   </div>
 </body>
 </html>

@@ -56,16 +56,16 @@ h1 {
   margin-top: 20px;
   font-size: 18px;
   opacity: 0.85;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 .section {
-  margin-top: 100px;
+  margin-top: 110px;
 }
 
 .section h2 {
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .section p {
@@ -83,7 +83,7 @@ h1 {
 
 .card {
   border: 1px solid #00eaff44;
-  padding: 28px;
+  padding: 30px;
   background: rgba(0,234,255,0.04);
 }
 
@@ -94,11 +94,11 @@ h1 {
 
 .card p {
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.8;
 }
 
 .actions {
-  margin-top: 80px;
+  margin-top: 90px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -120,7 +120,7 @@ h1 {
 }
 
 footer {
-  margin-top: 140px;
+  margin-top: 160px;
   padding: 40px;
   border-top: 1px solid #ffffff22;
   text-align: center;
@@ -135,77 +135,48 @@ footer {
 <header>
   <div class="logo">PHK UMB</div>
   <div class="lang">
-    <button onclick="setLang('ko')">KO</button>
     <button onclick="setLang('en')">EN</button>
     <button onclick="setLang('ar')">AR</button>
+    <button onclick="setLang('ko')">KO</button>
     <button onclick="setLang('zh')">中文</button>
   </div>
 </header>
 
 <main>
 
-  <h1 id="title">하늘 교통의 시대를 만듭니다</h1>
-  <div class="subtitle" id="subtitle">
-    PHK UMB는 도심 드론 택시와 도심 항공 모빌리티(UAM)를 중심으로<br>
-    도시·산업·국가를 연결하는 차세대 하늘 교통 인프라 플랫폼입니다.
-  </div>
+  <h1 id="title"></h1>
+  <div class="subtitle" id="subtitle"></div>
 
   <section class="section">
-    <h2 id="aboutTitle">PHK UMB란?</h2>
-    <p id="aboutText">
-      PHK UMB(Urban Mobility Bridge)는 기존 도로 중심 교통의 한계를 넘어
-      하늘을 새로운 이동 인프라로 전환하는 글로벌 UAM 플랫폼입니다.<br><br>
-      우리는 드론 택시, eVTOL, 스마트 버티포트, 디지털 결제,
-      도시 항공 노선 네트워크를 하나의 통합 시스템으로 구축합니다.
-    </p>
+    <h2 id="aboutTitle"></h2>
+    <p id="aboutText"></p>
   </section>
 
   <section class="section">
-    <h2 id="coreTitle">핵심 영역</h2>
-
+    <h2 id="coreTitle"></h2>
     <div class="grid">
       <div class="card">
-        <h3 id="c1t">도심 드론 택시</h3>
-        <p id="c1d">
-          자율비행 기반 드론 택시를 통해
-          출퇴근, 공항 이동, 도심 간 이동을 혁신합니다.
-        </p>
+        <h3 id="c1t"></h3>
+        <p id="c1d"></p>
       </div>
-
       <div class="card">
-        <h3 id="c2t">산업·항만·공단 연결</h3>
-        <p id="c2d">
-          항만, 산업단지, 물류 허브를 공중 루트로 연결하여
-          시간과 비용을 획기적으로 절감합니다.
-        </p>
+        <h3 id="c2t"></h3>
+        <p id="c2d"></p>
       </div>
-
       <div class="card">
-        <h3 id="c3t">응급·재난·특수 임무</h3>
-        <p id="c3d">
-          응급 환자 이송, 재난 대응,
-          특수 공공 임무를 위한 전용 항공 네트워크를 제공합니다.
-        </p>
+        <h3 id="c3t"></h3>
+        <p id="c3d"></p>
       </div>
-
       <div class="card">
-        <h3 id="c4t">도시 간 하늘 노선</h3>
-        <p id="c4d">
-          울산·부산·수도권을 시작으로
-          국가 단위 하늘 교통 노선을 구축합니다.
-        </p>
+        <h3 id="c4t"></h3>
+        <p id="c4d"></p>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <h2 id="visionTitle">비전</h2>
-    <p id="visionText">
-      PHK UMB의 목표는 단순한 이동 수단이 아닙니다.<br><br>
-      우리는 하늘 교통을 통해 도시 구조를 재편하고,
-      산업 경쟁력을 높이며,
-      국가 단위 UAM 인프라 표준을 만들어 갑니다.
-    </p>
+    <h2 id="visionTitle"></h2>
+    <p id="visionText"></p>
   </section>
 
   <div class="actions">
@@ -218,32 +189,94 @@ footer {
 
 <footer>
   © PHK UMB · Urban Mobility Bridge<br>
-  Contact: contact@phkumb.co
+  contact@phkumb.co
 </footer>
 
 <script>
+const T = {
+  en: {
+    title: "Building the Era of Aerial Mobility",
+    subtitle: "PHK UMB is a global Urban Air Mobility platform connecting cities through drone taxis and next-generation aerial transport.",
+    aboutTitle: "What is PHK UMB?",
+    aboutText: "PHK UMB (Urban Mobility Bridge) is an integrated aerial mobility platform designed to overcome the limitations of ground transportation. We build drone taxi networks, eVTOL operations, smart vertiports, and urban air routes as a unified infrastructure.",
+    coreTitle: "Core Domains",
+    c1t: "Urban Drone Taxi",
+    c1d: "Autonomous drone taxi services for commuting, airport transfers, and intra-city mobility.",
+    c2t: "Industrial & Port Connectivity",
+    c2d: "Aerial routes connecting ports, industrial zones, and logistics hubs for efficiency.",
+    c3t: "Emergency & Special Missions",
+    c3d: "Rapid-response air mobility for medical transport, disaster response, and public missions.",
+    c4t: "Intercity Air Routes",
+    c4d: "Nationwide aerial corridors starting from Ulsan, Busan, and metropolitan areas.",
+    visionTitle: "Vision",
+    visionText: "PHK UMB aims to redefine urban structure by integrating aerial transportation into daily life, establishing national and global UAM standards."
+  },
+  ko: {
+    title: "하늘 교통의 시대를 만듭니다",
+    subtitle: "PHK UMB는 드론 택시와 UAM을 중심으로 도시와 국가를 연결하는 하늘 교통 플랫폼입니다.",
+    aboutTitle: "PHK UMB란?",
+    aboutText: "PHK UMB(Urban Mobility Bridge)는 기존 도로 교통의 한계를 넘어 하늘을 새로운 이동 인프라로 전환하는 통합 UAM 플랫폼입니다.",
+    coreTitle: "핵심 영역",
+    c1t: "도심 드론 택시",
+    c1d: "출퇴근·공항 이동·도심 간 이동을 위한 자율비행 드론 택시.",
+    c2t: "산업·항만 연결",
+    c2d: "산업단지·항만·물류 거점을 공중 루트로 연결.",
+    c3t: "응급·재난 임무",
+    c3d: "응급 환자 이송 및 재난 대응을 위한 항공 네트워크.",
+    c4t: "도시 간 하늘 노선",
+    c4d: "울산·부산을 시작으로 전국 단위 UAM 노선 구축.",
+    visionTitle: "비전",
+    visionText: "PHK UMB는 하늘 교통을 통해 도시 구조와 국가 경쟁력을 재편합니다."
+  },
+  ar: {
+    title: "نصنع عصر النقل الجوي",
+    subtitle: "PHK UMB منصة عالمية للنقل الجوي الحضري تربط المدن عبر سيارات الأجرة الجوية.",
+    aboutTitle: "ما هو PHK UMB؟",
+    aboutText: "PHK UMB منصة متكاملة للنقل الجوي تهدف إلى تجاوز قيود النقل الأرضي وبناء بنية تحتية جوية حديثة.",
+    coreTitle: "المجالات الأساسية",
+    c1t: "سيارات الأجرة الجوية",
+    c1d: "خدمات نقل جوي ذاتي داخل المدن.",
+    c2t: "ربط الموانئ والصناعة",
+    c2d: "مسارات جوية للموانئ والمناطق الصناعية.",
+    c3t: "الطوارئ والمهام الخاصة",
+    c3d: "دعم طبي واستجابة للكوارث.",
+    c4t: "مسارات بين المدن",
+    c4d: "شبكة جوية وطنية بين المدن.",
+    visionTitle: "الرؤية",
+    visionText: "إعادة تشكيل المدن من خلال النقل الجوي."
+  },
+  zh: {
+    title: "打造空中交通新时代",
+    subtitle: "PHK UMB 是连接城市的全球城市空中交通平台。",
+    aboutTitle: "什么是 PHK UMB？",
+    aboutText: "PHK UMB 是一个整合无人机出租车与城市空中交通的综合平台。",
+    coreTitle: "核心领域",
+    c1t: "城市无人机出租车",
+    c1d: "用于通勤和机场接送的空中出行方式。",
+    c2t: "产业与港口连接",
+    c2d: "连接港口和工业区的空中航线。",
+    c3t: "应急与特殊任务",
+    c3d: "医疗和灾害应急空中运输。",
+    c4t: "城市间航线",
+    c4d: "全国级城市空中走廊。",
+    visionTitle: "愿景",
+    visionText: "通过空中交通重塑城市结构。"
+  }
+};
+
 function setLang(l) {
-  const t = {
-    ko: {
-      title: "하늘 교통의 시대를 만듭니다",
-      subtitle: "PHK UMB는 도심 드론 택시와 UAM을 중심으로 도시와 국가를 연결합니다."
-    },
-    en: {
-      title: "Building the Era of Aerial Mobility",
-      subtitle: "PHK UMB connects cities and nations through drone taxis and UAM infrastructure."
-    },
-    ar: {
-      title: "نصنع عصر النقل الجوي",
-      subtitle: "PHK UMB تربط المدن والدول عبر سيارات الأجرة الجوية."
-    },
-    zh: {
-      title: "打造空中交通新时代",
-      subtitle: "PHK UMB 通过无人机出租车连接城市与国家。"
-    }
-  };
-  document.getElementById("title").innerText = t[l].title;
-  document.getElementById("subtitle").innerText = t[l].subtitle;
+  Object.keys(T[l]).forEach(id => {
+    document.getElementById(id).innerText = T[l][id];
+  });
 }
+
+// 자동 언어 감지
+const browserLang = navigator.language.startsWith("ar") ? "ar"
+  : navigator.language.startsWith("zh") ? "zh"
+  : navigator.language.startsWith("ko") ? "ko"
+  : "en";
+
+setLang(browserLang);
 </script>
 
 </body>

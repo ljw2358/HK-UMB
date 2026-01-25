@@ -1,96 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>PHK-UMB | Urban Mobility & Beyond</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PHK-UMB is an Urban Air Mobility initiative integrating eVTOL air taxi, smart cities, and next-generation mobility infrastructure.">
+    <title>PHK UMB - Global Gateway</title>
     <style>
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #0b0f1a;
-            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
             text-align: center;
         }
-        header {
-            padding: 80px 20px 40px;
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 90%;
         }
         h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
             letter-spacing: 2px;
         }
-        h2 {
-            font-weight: 300;
-            color: #9bb1ff;
-            margin-top: 10px;
+        .lang-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
         }
-        section {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            line-height: 1.7;
-            color: #d0d6f0;
+        .lang-item {
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            transition: 0.3s;
         }
-        .box {
-            border: 1px solid #2a2f4a;
-            border-radius: 12px;
-            padding: 30px;
-            margin: 30px 0;
-            background: rgba(255,255,255,0.03);
+        .lang-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
         }
-        footer {
-            padding: 30px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-        .highlight {
-            color: #6f8cff;
+        .lang-title {
+            display: block;
             font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .arabic {
+            direction: rtl;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>PHK-UMB</h1>
-    <h2>Urban Mobility & Beyond</h2>
-</header>
+    <div class="container">
+        <h1>PHK UMB</h1>
+        
+        <div class="lang-grid">
+            <div class="lang-item">
+                <span class="lang-title">English</span>
+                Welcome to PHK UMB
+            </div>
 
-<section>
-    <div class="box">
-        <p>
-            <span class="highlight">PHK-UMB</span> is an advanced mobility initiative focused on
-            <span class="highlight">Urban Air Mobility (UAM)</span>,
-            integrating eVTOL air taxi systems, smart infrastructure,
-            and next-generation transportation networks.
-        </p>
+            <div class="lang-item">
+                <span class="lang-title">한국어</span>
+                PHK UMB에 오신 것을 환영합니다
+            </div>
+
+            <div class="lang-item">
+                <span class="lang-title">中文</span>
+                欢迎来到 PHK UMB
+            </div>
+
+            <div class="lang-item arabic">
+                <span class="lang-title">العربية</span>
+                مرحباً بكم في PHK UMB
+            </div>
+        </div>
     </div>
-
-    <div class="box">
-        <p>
-            Our vision goes beyond transportation.
-            PHK-UMB connects air mobility, digital finance,
-            smart cities, and autonomous systems into a single ecosystem.
-        </p>
-    </div>
-
-    <div class="box">
-        <p>
-            Designed for future cities, PHK-UMB supports:
-            <br><br>
-            • eVTOL Air Taxi Operations<br>
-            • Urban & Regional Mobility Networks<br>
-            • Smart City Integration<br>
-            • Sustainable Electric Aviation
-        </p>
-    </div>
-</section>
-
-<footer>
-    © PHK-UMB | Urban Mobility & Beyond<br>
-    Contact: info@phkbank.com
-</footer>
 
 </body>
 </html>

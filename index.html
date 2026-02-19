@@ -1,283 +1,315 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HK UMB | Urban Air Mobility</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HK-UMB: Next-Generation Drone Taxi, UAM, and Autonomous Flight Systems by Hye-Gong">
+    <title>HK-UMB | The Sky is No Longer the Limit</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;400;700&family=Noto+Sans+SC:wght@100;400;700&family=Noto+Sans+Arabic:wght@100;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        /* [1] SYSTEM COLORS - 항공 및 미래 도시 느낌의 사이언 & 다크 블루 */
+        :root {
+            --sky-cyan: #00f2ff;
+            --deep-ocean: #000b1a;
+            --cloud-white: #ffffff;
+            --caution-yellow: #ffcc00;
+            --glass-blue: rgba(0, 242, 255, 0.05);
+            --transition-fast: all 0.3s ease;
+            --transition-smooth: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
 
-<style>
-body {
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: radial-gradient(circle at top, #0b1225, #020617);
-  color: #ffffff;
-}
+        /* [2] RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--deep-ocean); 
+            color: var(--cloud-white); 
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-header {
-  padding: 24px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+        /* [3] DYNAMIC SKY BACKGROUND */
+        .sky-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, #001a33 0%, #000b1a 100%);
+            z-index: -1;
+        }
+        .grid-plane {
+            position: absolute; width: 200%; height: 200%;
+            background-image: linear-gradient(var(--glass-blue) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--glass-blue) 1px, transparent 1px);
+            background-size: 100px 100px;
+            transform: perspective(1000px) rotateX(60deg) translateZ(-500px);
+            bottom: -50%; left: -50%;
+            animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove { from {transform: perspective(1000px) rotateX(60deg) translateY(0);} to {transform: perspective(1000px) rotateX(60deg) translateY(100px);} }
 
-.logo {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
+        /* [4] NAVIGATION */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(0, 11, 26, 0.85); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--sky-cyan); padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Orbitron'; font-weight: 900; font-size: 1.8rem; color: #fff; letter-spacing: 2px; }
+        .logo span { color: var(--sky-cyan); text-shadow: 0 0 10px var(--sky-cyan); }
+        
+        .nav-actions { display: flex; gap: 15px; }
+        .lang-btn {
+            background: transparent; border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; padding: 10px 20px; font-family: 'Orbitron'; font-size: 0.7rem;
+            cursor: pointer; transition: var(--transition-fast);
+        }
+        .lang-btn:hover, .lang-btn.active { 
+            background: var(--sky-cyan); color: #000; border-color: var(--sky-cyan);
+            box-shadow: 0 0 20px var(--sky-cyan);
+        }
 
-.lang button {
-  margin-left: 8px;
-  background: transparent;
-  border: 1px solid #00eaff66;
-  color: #00eaff;
-  padding: 6px 10px;
-  cursor: pointer;
-  font-size: 12px;
-}
+        /* [5] HERO SECTION */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; padding: 0 20px;
+        }
+        .hero-title {
+            font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 7rem); font-weight: 900;
+            margin-bottom: 10px; color: #fff; text-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
+        }
+        .hero-sub { font-size: 1.4rem; color: var(--sky-cyan); letter-spacing: 10px; font-family: 'Share Tech Mono'; margin-bottom: 40px; }
+        .hero-desc { max-width: 900px; font-size: 1.2rem; color: #888; margin-bottom: 50px; }
 
-.lang button:hover {
-  background: #00eaff;
-  color: #000;
-}
+        /* [6] SECTION STYLE */
+        section { padding: 150px 0; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 50px; }
+        .content-panel { display: none; }
+        .content-panel.active { display: block; animation: flightEntry 1s forwards; }
+        @keyframes flightEntry { from {opacity: 0; transform: translateY(50px) scale(0.95);} to {opacity: 1; transform: translateY(0) scale(1);} }
 
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 80px 24px;
-}
+        .uam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+        .uam-card {
+            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(0, 242, 255, 0.1);
+            padding: 60px; border-radius: 5px; transition: var(--transition-smooth);
+            position: relative; overflow: hidden;
+        }
+        .uam-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--sky-cyan), transparent);
+            transform: translateX(-100%); transition: 0.5s;
+        }
+        .uam-card:hover { background: rgba(0, 242, 255, 0.05); border-color: var(--sky-cyan); transform: translateY(-10px); }
+        .uam-card:hover::before { transform: translateX(100%); }
+        .uam-card h3 { font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 20px; color: var(--sky-cyan); }
 
-h1 {
-  font-size: 42px;
-  line-height: 1.3;
-}
+        /* [7] AIRCRAFT SPECS TABLE */
+        .specs-ui { background: #000; padding: 40px; border-radius: 10px; border: 1px solid #1a1a1a; margin-top: 80px; }
+        .specs-table { width: 100%; border-collapse: collapse; font-family: 'Share Tech Mono'; }
+        .specs-table th { text-align: left; padding: 20px; color: var(--caution-yellow); border-bottom: 1px solid #333; }
+        .specs-table td { padding: 20px; border-bottom: 1px solid #111; color: #aaa; }
 
-.subtitle {
-  margin-top: 20px;
-  font-size: 18px;
-  opacity: 0.85;
-  line-height: 1.8;
-}
+        /* [8] FLIGHT STATUS HUD */
+        .hud-display {
+            border: 2px solid var(--sky-cyan); padding: 30px; margin-top: 100px;
+            background: rgba(0, 242, 255, 0.02); font-family: 'Share Tech Mono';
+            display: flex; justify-content: space-around; text-align: center;
+        }
+        .hud-item .val { font-size: 2.5rem; color: var(--sky-cyan); display: block; }
+        .hud-item .lbl { font-size: 0.8rem; color: #555; text-transform: uppercase; }
 
-.section {
-  margin-top: 110px;
-}
+        /* [9] FOOTER */
+        footer { padding: 120px 0; background: #000205; text-align: center; border-top: 1px solid #111; }
+        .footer-logo { font-family: 'Orbitron'; font-size: 2.5rem; margin-bottom: 30px; }
+        .footer-contact { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--sky-cyan); text-decoration: none; margin: 30px 0; display: block; }
+        .footer-bottom { margin-top: 60px; font-size: 0.8rem; color: #333; letter-spacing: 2px; }
 
-.section h2 {
-  font-size: 28px;
-  margin-bottom: 24px;
-}
-
-.section p {
-  font-size: 16px;
-  line-height: 1.9;
-  opacity: 0.9;
-}
-
-.grid {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-}
-
-.card {
-  border: 1px solid #00eaff44;
-  padding: 30px;
-  background: rgba(0,234,255,0.04);
-}
-
-.card h3 {
-  margin-top: 0;
-  font-size: 18px;
-}
-
-.card p {
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.actions {
-  margin-top: 90px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 420px;
-}
-
-.actions a {
-  text-decoration: none;
-  text-align: center;
-  padding: 18px;
-  border: 1px solid #00eaff;
-  color: #00eaff;
-  font-size: 16px;
-}
-
-.actions a:hover {
-  background: #00eaff;
-  color: #000;
-}
-
-footer {
-  margin-top: 160px;
-  padding: 40px;
-  border-top: 1px solid #ffffff22;
-  text-align: center;
-  font-size: 13px;
-  opacity: 0.7;
-}
-</style>
+        /* [10] RTL FOR ARABIC */
+        .rtl { direction: rtl; text-align: right; }
+    </style>
 </head>
+<body onload="initFlight()">
 
-<body>
-
-<header>
-  <div class="logo">HK UMB</div>
-  <div class="lang">
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('ar')">AR</button>
-    <button onclick="setLang('ko')">KO</button>
-    <button onclick="setLang('zh')">中文</button>
-  </div>
-</header>
-
-<main>
-
-  <h1 id="title"></h1>
-  <div class="subtitle" id="subtitle"></div>
-
-  <section class="section">
-    <h2 id="aboutTitle"></h2>
-    <p id="aboutText"></p>
-  </section>
-
-  <section class="section">
-    <h2 id="coreTitle"></h2>
-    <div class="grid">
-      <div class="card">
-        <h3 id="c1t"></h3>
-        <p id="c1d"></p>
-      </div>
-      <div class="card">
-        <h3 id="c2t"></h3>
-        <p id="c2d"></p>
-      </div>
-      <div class="card">
-        <h3 id="c3t"></h3>
-        <p id="c3d"></p>
-      </div>
-      <div class="card">
-        <h3 id="c4t"></h3>
-        <p id="c4d"></p>
-      </div>
+    <div class="sky-bg">
+        <div class="grid-plane"></div>
     </div>
-  </section>
 
-  <section class="section">
-    <h2 id="visionTitle"></h2>
-    <p id="visionText"></p>
-  </section>
+    <nav>
+        <div class="logo">HK-<span>UMB</span></div>
+        <div class="nav-actions">
+            <button class="lang-btn active" onclick="switchLang('en', this)">EN</button>
+            <button class="lang-btn" onclick="switchLang('kr', this)">KR</button>
+            <button class="lang-btn" onclick="switchLang('cn', this)">CN</button>
+            <button class="lang-btn" onclick="switchLang('ar', this)">AR</button>
+        </div>
+    </nav>
 
-  <div class="actions">
-    <a href="#">DRONE TAXI REQUEST</a>
-    <a href="#">CITY AIR ROUTES</a>
-    <a href="mailto:info@hkumb.com">CONTACT US</a>
-  </div>
+    <section class="hero">
+        <div class="hero-sub">URBAN MOBILITY BEYOND</div>
+        <h1 class="hero-title">SKY TAXI HUB</h1>
+        <p class="hero-desc" id="hero-p">HK-UMB is pioneering the autonomous sky. Under Chairman Hye-Gong's leadership, we are deploying a fleet of AI-driven eVTOL aircraft to reclaim the city's lost time.</p>
+        <button class="lang-btn" style="padding: 15px 45px; font-size: 0.9rem;" onclick="window.scrollTo(0, 1000)">View Flight Routes</button>
+    </section>
 
-</main>
+    <div id="en" class="content-panel active">
+        <div class="container">
+            <h2>01. Future Flight Solutions</h2>
+            <div class="uam-grid">
+                <div class="uam-card">
+                    <h3>eVTOL HK-1</h3>
+                    <p>Electric Vertical Take-Off and Landing vehicle. Zero emissions, near-silent propulsion, and 100% autonomous navigation via Figure AI Core.</p>
+                </div>
+                <div class="uam-card">
+                    <h3>Vertiport Network</h3>
+                    <p>Strategic docking stations integrated with HK-Fusion micro-grids, allowing rapid 5-minute charging for cross-city hops.</p>
+                </div>
+                <div class="uam-card">
+                    <h3>Air Traffic AI</h3>
+                    <p>Real-time swarm intelligence managing thousands of flight paths simultaneously, ensuring 0% collision probability.</p>
+                </div>
+            </div>
 
-<footer>
-  © HK UMB · Urban Mobility Bridge<br>
-  info@phkumb.com
-</footer>
+            <div class="specs-ui">
+                <h2 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--sky-cyan);">Vehicle Technical Specifications</h2>
+                
+                <table class="specs-table">
+                    <tr><th>Parameter</th><th>HK-1 Standard</th><th>HK-X Long Range</th></tr>
+                    <tr><td>Max Cruise Speed</td><td>240 km/h</td><td>480 km/h</td></tr>
+                    <tr><td>Flight Range</td><td>150 km</td><td>600 km</td></tr>
+                    <tr><td>Max Payload</td><td>450 kg (4 Passengers)</td><td>900 kg (Cargo/VVIP)</td></tr>
+                    <tr><td>Propulsion</td><td>Distributed Electric (8 Rotors)</td><td>HK-Fusion Plasma Hybrid</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<script>
-const T = {
-  en: {
-    title: "Building the Era of Aerial Mobility",
-    subtitle: "HK UMB is a global Urban Air Mobility platform connecting cities through drone taxis and next-generation aerial transport.",
-    aboutTitle: "What is HK UMB?",
-    aboutText: "HK UMB (Urban Mobility Bridge) is an integrated aerial mobility platform designed to overcome the limitations of ground transportation. We build drone taxi networks, eVTOL operations, smart vertiports, and urban air routes as a unified infrastructure.",
-    coreTitle: "Core Domains",
-    c1t: "Urban Drone Taxi",
-    c1d: "Autonomous drone taxi services for commuting, airport transfers, and intra-city mobility.",
-    c2t: "Industrial & Port Connectivity",
-    c2d: "Aerial routes connecting ports, industrial zones, and logistics hubs for efficiency.",
-    c3t: "Emergency & Special Missions",
-    c3d: "Rapid-response air mobility for medical transport, disaster response, and public missions.",
-    c4t: "Intercity Air Routes",
-    c4d: "Nationwide aerial corridors starting from Ulsan, Busan, and metropolitan areas.",
-    visionTitle: "Vision",
-    visionText: "HK UMB aims to redefine urban structure by integrating aerial transportation into daily life, establishing national and global UMB standards."
-  },
-  ko: {
-    title: "하늘 교통의 시대를 만듭니다",
-    subtitle: "HK UMB는 드론 택시와 UMB을 중심으로 도시와 국가를 연결하는 하늘 교통 플랫폼입니다.",
-    aboutTitle: "HK UMB란?",
-    aboutText: "HK UMB(Urban Mobility Bridge)는 기존 도로 교통의 한계를 넘어 하늘을 새로운 이동 인프라로 전환하는 통합 UMB 플랫폼입니다.",
-    coreTitle: "핵심 영역",
-    c1t: "도심 드론 택시",
-    c1d: "출퇴근·공항 이동·도심 간 이동을 위한 자율비행 드론 택시.",
-    c2t: "산업·항만 연결",
-    c2d: "산업단지·항만·물류 거점을 공중 루트로 연결.",
-    c3t: "응급·재난 임무",
-    c3d: "응급 환자 이송 및 재난 대응을 위한 항공 네트워크.",
-    c4t: "도시 간 하늘 노선",
-    c4d: "울산·부산을 시작으로 전국 단위 UMB 노선 구축.",
-    visionTitle: "비전",
-    visionText: "HK UMB는 하늘 교통을 통해 도시 구조와 국가 경쟁력을 재편합니다."
-  },
-  ar: {
-    title: "نصنع عصر النقل الجوي",
-    subtitle: "HK UMB منصة عالمية للنقل الجوي الحضري تربط المدن عبر سيارات الأجرة الجوية.",
-    aboutTitle: "ما هو HK UMB؟",
-    aboutText: "HK UMB منصة متكاملة للنقل الجوي تهدف إلى تجاوز قيود النقل الأرضي وبناء بنية تحتية جوية حديثة.",
-    coreTitle: "المجالات الأساسية",
-    c1t: "سيارات الأجرة الجوية",
-    c1d: "خدمات نقل جوي ذاتي داخل المدن.",
-    c2t: "ربط الموانئ والصناعة",
-    c2d: "مسارات جوية للموانئ والمناطق الصناعية.",
-    c3t: "الطوارئ والمهام الخاصة",
-    c3d: "دعم طبي واستجابة للكوارث.",
-    c4t: "مسارات بين المدن",
-    c4d: "شبكة جوية وطنية بين المدن.",
-    visionTitle: "الرؤية",
-    visionText: "إعادة تشكيل المدن من خلال النقل الجوي."
-  },
-  zh: {
-    title: "打造空中交通新时代",
-    subtitle: "HK UMB 是连接城市的全球城市空中交通平台。",
-    aboutTitle: "什么是 HK UMB？",
-    aboutText: "HK UMB 是一个整合无人机出租车与城市空中交通的综合平台。",
-    coreTitle: "核心领域",
-    c1t: "城市无人机出租车",
-    c1d: "用于通勤和机场接送的空中出行方式。",
-    c2t: "产业与港口连接",
-    c2d: "连接港口和工业区的空中航线。",
-    c3t: "应急与特殊任务",
-    c3d: "医疗和灾害应急空中运输。",
-    c4t: "城市间航线",
-    c4d: "全国级城市空中走廊。",
-    visionTitle: "愿景",
-    visionText: "通过空中交通重塑城市结构。"
-  }
-};
+    <div id="kr" class="content-panel">
+        <div class="container">
+            <h2>01. 도심 항공 솔루션</h2>
+            <div class="uam-grid">
+                <div class="uam-card">
+                    <h3>차세대 eVTOL HK-1</h3>
+                    <p>혜공 형님의 철학이 담긴 무소음 전기 수직이착륙기. Figure AI 비행 알고리즘을 탑재하여 조종사 없는 완전 자율 비행을 실현합니다.</p>
+                </div>
+                <div class="uam-card">
+                    <h3>버티포트 네트워크</h3>
+                    <p>도심 빌딩 옥상을 잇는 HK-UMB 전용 이착륙장. HK-Fusion의 청정 에너지를 통해 단 5분 만에 급속 충전이 가능합니다.</p>
+                </div>
+                <div class="uam-card">
+                    <h3>스마트 에어 트래픽</h3>
+                    <p>도시 전체의 비행 경로를 AI가 실시간으로 최적화합니다. 출퇴근 시간 정체를 하늘에서 완전히 해소합니다.</p>
+                </div>
+            </div>
 
-function setLang(l) {
-  Object.keys(T[l]).forEach(id => {
-    document.getElementById(id).innerText = T[l][id];
-  });
-}
+            <div class="hud-display">
+                <div class="hud-item"><span class="val">2,450</span><span class="lbl">Active Flights</span></div>
+                <div class="hud-item"><span class="val">99.9%</span><span class="lbl">Safety Rate</span></div>
+                <div class="hud-item"><span class="val">0.0g</span><span class="lbl">CO2 Emission</span></div>
+                <div class="hud-item"><span class="val">5m</span><span class="lbl">Avg. Wait Time</span></div>
+            </div>
+        </div>
+    </div>
 
-// 자동 언어 감지
-const browserLang = navigator.language.startsWith("ar") ? "ar"
-  : navigator.language.startsWith("zh") ? "zh"
-  : navigator.language.startsWith("ko") ? "ko"
-  : "en";
+    <div id="cn" class="content-panel">
+        <div class="container">
+            <h2 style="font-family: 'Noto Sans SC';">01. 城市飞行解决方案</h2>
+            <div class="uam-grid">
+                <div class="uam-card">
+                    <h3>自主飞行出租车</h3>
+                    <p>HK-UMB 致力于打造高效的城市空中交通。通过全自动飞行系统，我们将城市通勤时间缩短 80%。</p>
+                </div>
+                <div class="uam-card">
+                    <h3>Figure AI 集成</h3>
+                    <p>每一架 HK-1 飞行器都配备了先进的 AI 大脑，能够感知所有障碍物并自主规划最优航线。</p>
+                </div>
+                <div class="uam-card">
+                    <h3>未来物流</h3>
+                    <p>除了客运，我们的货运无人机正在改变物流行业，实现城市内 15 分钟送达。</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-setLang(browserLang);
-</script>
+    <div id="ar" class="content-panel rtl">
+        <div class="container">
+            <h2>٠١. حلول النقل الجوي الحضري</h2>
+            <div class="uam-grid">
+                <div class="uam-card">
+                    <h3>تاكسي الجو HK-1</h3>
+                    <p>مركبات طائرة كهربائية بالكامل توفر وسيلة نقل آمنة وسريعة فوق ازدحام المدن، بقيادة ذكاء اصطناعي متقدم.</p>
+                </div>
+                <div class="uam-card">
+                    <h3>شبكة فيرتيبورت</h3>
+                    <p>محطات هبوط ذكية في مراكز المدن، توفر شحناً فائق السرعة وتجربة سفر فاخرة.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <footer>
+        <div class="container">
+            <div class="footer-logo">HK-<span>UMB</span></div>
+            <p style="color: #555;">Beyond the Roads. Across the Skies.</p>
+            <a href="mailto:info@hkumb.com" class="footer-contact">info@hkumb.com</a>
+            
+            <div style="margin-top: 40px;">
+                <span style="color: #444; margin: 0 15px;">Seoul Sky Control</span>
+                <span style="color: #444; margin: 0 15px;">Dubai Air-Hub</span>
+                <span style="color: #444; margin: 0 15px;">NY Vertiport</span>
+            </div>
+
+            <p class="footer-bottom">
+                &copy; 2026 HK-UMB MOBILITY SOLUTIONS. AUTHORIZED BY CHAIRMAN HYE-GONG. <br>
+                FLIGHT SYSTEMS ARCHITECTURE BY BINI. ALL CLEAR FOR TAKE-OFF.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // [1] Flight System Initialization
+        function initFlight() {
+            console.log("HK-UMB TRAFFIC CONTROL ONLINE. WELCOME HYE-GONG.");
+            // Hero text dynamic animation
+            const text = document.getElementById('hero-p');
+            text.style.opacity = '0';
+            setTimeout(() => {
+                text.style.transition = '2s';
+                text.style.opacity = '1';
+            }, 500);
+        }
+
+        // [2] Language & Content Management
+        function switchLang(lang, btn) {
+            // Update UI buttons
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Switch Panels
+            document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(lang).classList.add('active');
+
+            // RTL logic
+            if(lang === 'ar') document.body.classList.add('rtl');
+            else document.body.classList.remove('rtl');
+
+            // Update Dynamic Hero Title
+            const titles = {
+                en: "SKY TAXI HUB",
+                kr: "하늘길의 혁명",
+                cn: "空中出租车中心",
+                ar: "مركز التاكسي الجوي"
+            };
+            document.querySelector('.hero-title').innerText = titles[lang];
+        }
+
+        // [3] HUD Data Randomizer (For immersion)
+        setInterval(() => {
+            const flights = document.querySelector('.hud-item .val');
+            if(flights) {
+                const current = parseInt(flights.innerText.replace(',', ''));
+                const next = current + Math.floor(Math.random() * 5 - 2);
+                flights.innerText = next.toLocaleString();
+            }
+        }, 3000);
+    </script>
 </body>
 </html>

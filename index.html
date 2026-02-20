@@ -1,315 +1,208 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HK-UMB: Next-Generation Drone Taxi, UAM, and Autonomous Flight Systems by Hye-Gong">
-    <title>HK-UMB | The Sky is No Longer the Limit</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;400;700&family=Noto+Sans+SC:wght@100;400;700&family=Noto+Sans+Arabic:wght@100;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    
-    <style>
-        /* [1] SYSTEM COLORS - 항공 및 미래 도시 느낌의 사이언 & 다크 블루 */
-        :root {
-            --sky-cyan: #00f2ff;
-            --deep-ocean: #000b1a;
-            --cloud-white: #ffffff;
-            --caution-yellow: #ffcc00;
-            --glass-blue: rgba(0, 242, 255, 0.05);
-            --transition-fast: all 0.3s ease;
-            --transition-smooth: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HK UMB | Urban Air Mobility & Drone Taxi</title>
 
-        /* [2] RESET & BASE */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: var(--deep-ocean); 
-            color: var(--cloud-white); 
-            font-family: 'Noto Sans KR', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background: radial-gradient(circle at top, #0a1a2a, #000000 70%);
+color:#e6f7ff;
+overflow-x:hidden;
+}
 
-        /* [3] DYNAMIC SKY BACKGROUND */
-        .sky-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at top right, #001a33 0%, #000b1a 100%);
-            z-index: -1;
-        }
-        .grid-plane {
-            position: absolute; width: 200%; height: 200%;
-            background-image: linear-gradient(var(--glass-blue) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--glass-blue) 1px, transparent 1px);
-            background-size: 100px 100px;
-            transform: perspective(1000px) rotateX(60deg) translateZ(-500px);
-            bottom: -50%; left: -50%;
-            animation: gridMove 20s linear infinite;
-        }
-        @keyframes gridMove { from {transform: perspective(1000px) rotateX(60deg) translateY(0);} to {transform: perspective(1000px) rotateX(60deg) translateY(100px);} }
+.container{
+max-width:1100px;
+margin:auto;
+padding:80px 30px;
+animation: fadeIn 1.2s ease-in-out;
+}
 
-        /* [4] NAVIGATION */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(0, 11, 26, 0.85); backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--sky-cyan); padding: 20px 50px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo { font-family: 'Orbitron'; font-weight: 900; font-size: 1.8rem; color: #fff; letter-spacing: 2px; }
-        .logo span { color: var(--sky-cyan); text-shadow: 0 0 10px var(--sky-cyan); }
-        
-        .nav-actions { display: flex; gap: 15px; }
-        .lang-btn {
-            background: transparent; border: 1px solid rgba(255,255,255,0.2);
-            color: #fff; padding: 10px 20px; font-family: 'Orbitron'; font-size: 0.7rem;
-            cursor: pointer; transition: var(--transition-fast);
-        }
-        .lang-btn:hover, .lang-btn.active { 
-            background: var(--sky-cyan); color: #000; border-color: var(--sky-cyan);
-            box-shadow: 0 0 20px var(--sky-cyan);
-        }
+h1{
+font-size:56px;
+color:#00d9ff;
+letter-spacing:3px;
+text-shadow:0 0 25px rgba(0,217,255,0.6);
+margin-bottom:10px;
+}
 
-        /* [5] HERO SECTION */
-        .hero {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; padding: 0 20px;
-        }
-        .hero-title {
-            font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 7rem); font-weight: 900;
-            margin-bottom: 10px; color: #fff; text-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
-        }
-        .hero-sub { font-size: 1.4rem; color: var(--sky-cyan); letter-spacing: 10px; font-family: 'Share Tech Mono'; margin-bottom: 40px; }
-        .hero-desc { max-width: 900px; font-size: 1.2rem; color: #888; margin-bottom: 50px; }
+h2{
+color:#7adfff;
+margin-top:50px;
+}
 
-        /* [6] SECTION STYLE */
-        section { padding: 150px 0; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 50px; }
-        .content-panel { display: none; }
-        .content-panel.active { display: block; animation: flightEntry 1s forwards; }
-        @keyframes flightEntry { from {opacity: 0; transform: translateY(50px) scale(0.95);} to {opacity: 1; transform: translateY(0) scale(1);} }
+p{
+line-height:1.8;
+font-size:18px;
+}
 
-        .uam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
-        .uam-card {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(0, 242, 255, 0.1);
-            padding: 60px; border-radius: 5px; transition: var(--transition-smooth);
-            position: relative; overflow: hidden;
-        }
-        .uam-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--sky-cyan), transparent);
-            transform: translateX(-100%); transition: 0.5s;
-        }
-        .uam-card:hover { background: rgba(0, 242, 255, 0.05); border-color: var(--sky-cyan); transform: translateY(-10px); }
-        .uam-card:hover::before { transform: translateX(100%); }
-        .uam-card h3 { font-family: 'Orbitron'; font-size: 2rem; margin-bottom: 20px; color: var(--sky-cyan); }
+.buttons{
+position:fixed;
+top:20px;
+right:20px;
+}
 
-        /* [7] AIRCRAFT SPECS TABLE */
-        .specs-ui { background: #000; padding: 40px; border-radius: 10px; border: 1px solid #1a1a1a; margin-top: 80px; }
-        .specs-table { width: 100%; border-collapse: collapse; font-family: 'Share Tech Mono'; }
-        .specs-table th { text-align: left; padding: 20px; color: var(--caution-yellow); border-bottom: 1px solid #333; }
-        .specs-table td { padding: 20px; border-bottom: 1px solid #111; color: #aaa; }
+button{
+background:transparent;
+border:1px solid #00d9ff;
+color:#00d9ff;
+padding:8px 16px;
+margin-left:8px;
+cursor:pointer;
+transition:0.3s;
+}
 
-        /* [8] FLIGHT STATUS HUD */
-        .hud-display {
-            border: 2px solid var(--sky-cyan); padding: 30px; margin-top: 100px;
-            background: rgba(0, 242, 255, 0.02); font-family: 'Share Tech Mono';
-            display: flex; justify-content: space-around; text-align: center;
-        }
-        .hud-item .val { font-size: 2.5rem; color: var(--sky-cyan); display: block; }
-        .hud-item .lbl { font-size: 0.8rem; color: #555; text-transform: uppercase; }
+button:hover{
+background:#00d9ff;
+color:#000;
+box-shadow:0 0 15px #00d9ff;
+}
 
-        /* [9] FOOTER */
-        footer { padding: 120px 0; background: #000205; text-align: center; border-top: 1px solid #111; }
-        .footer-logo { font-family: 'Orbitron'; font-size: 2.5rem; margin-bottom: 30px; }
-        .footer-contact { font-family: 'Orbitron'; font-size: 1.8rem; color: var(--sky-cyan); text-decoration: none; margin: 30px 0; display: block; }
-        .footer-bottom { margin-top: 60px; font-size: 0.8rem; color: #333; letter-spacing: 2px; }
+.footer{
+margin-top:80px;
+font-size:14px;
+opacity:0.6;
+}
 
-        /* [10] RTL FOR ARABIC */
-        .rtl { direction: rtl; text-align: right; }
-    </style>
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+</style>
 </head>
-<body onload="initFlight()">
 
-    <div class="sky-bg">
-        <div class="grid-plane"></div>
-    </div>
+<body>
 
-    <nav>
-        <div class="logo">HK-<span>UMB</span></div>
-        <div class="nav-actions">
-            <button class="lang-btn active" onclick="switchLang('en', this)">EN</button>
-            <button class="lang-btn" onclick="switchLang('kr', this)">KR</button>
-            <button class="lang-btn" onclick="switchLang('cn', this)">CN</button>
-            <button class="lang-btn" onclick="switchLang('ar', this)">AR</button>
-        </div>
-    </nav>
+<div class="buttons">
+<button onclick="setLang('en')">English</button>
+<button onclick="setLang('ko')">한국어</button>
+<button onclick="setLang('zh')">中文</button>
+<button onclick="setLang('ar')">العربية</button>
+</div>
 
-    <section class="hero">
-        <div class="hero-sub">URBAN MOBILITY BEYOND</div>
-        <h1 class="hero-title">SKY TAXI HUB</h1>
-        <p class="hero-desc" id="hero-p">HK-UMB is pioneering the autonomous sky. Under Chairman Hye-Gong's leadership, we are deploying a fleet of AI-driven eVTOL aircraft to reclaim the city's lost time.</p>
-        <button class="lang-btn" style="padding: 15px 45px; font-size: 0.9rem;" onclick="window.scrollTo(0, 1000)">View Flight Routes</button>
-    </section>
+<div class="container" id="content"></div>
 
-    <div id="en" class="content-panel active">
-        <div class="container">
-            <h2>01. Future Flight Solutions</h2>
-            <div class="uam-grid">
-                <div class="uam-card">
-                    <h3>eVTOL HK-1</h3>
-                    <p>Electric Vertical Take-Off and Landing vehicle. Zero emissions, near-silent propulsion, and 100% autonomous navigation via Figure AI Core.</p>
-                </div>
-                <div class="uam-card">
-                    <h3>Vertiport Network</h3>
-                    <p>Strategic docking stations integrated with HK-Fusion micro-grids, allowing rapid 5-minute charging for cross-city hops.</p>
-                </div>
-                <div class="uam-card">
-                    <h3>Air Traffic AI</h3>
-                    <p>Real-time swarm intelligence managing thousands of flight paths simultaneously, ensuring 0% collision probability.</p>
-                </div>
-            </div>
+<script>
 
-            <div class="specs-ui">
-                <h2 style="font-size: 1.5rem; margin-bottom: 30px; color: var(--sky-cyan);">Vehicle Technical Specifications</h2>
-                
-                <table class="specs-table">
-                    <tr><th>Parameter</th><th>HK-1 Standard</th><th>HK-X Long Range</th></tr>
-                    <tr><td>Max Cruise Speed</td><td>240 km/h</td><td>480 km/h</td></tr>
-                    <tr><td>Flight Range</td><td>150 km</td><td>600 km</td></tr>
-                    <tr><td>Max Payload</td><td>450 kg (4 Passengers)</td><td>900 kg (Cargo/VVIP)</td></tr>
-                    <tr><td>Propulsion</td><td>Distributed Electric (8 Rotors)</td><td>HK-Fusion Plasma Hybrid</td></tr>
-                </table>
-            </div>
-        </div>
-    </div>
+const translations = {
 
-    <div id="kr" class="content-panel">
-        <div class="container">
-            <h2>01. 도심 항공 솔루션</h2>
-            <div class="uam-grid">
-                <div class="uam-card">
-                    <h3>차세대 eVTOL HK-1</h3>
-                    <p>혜공 형님의 철학이 담긴 무소음 전기 수직이착륙기. Figure AI 비행 알고리즘을 탑재하여 조종사 없는 완전 자율 비행을 실현합니다.</p>
-                </div>
-                <div class="uam-card">
-                    <h3>버티포트 네트워크</h3>
-                    <p>도심 빌딩 옥상을 잇는 HK-UMB 전용 이착륙장. HK-Fusion의 청정 에너지를 통해 단 5분 만에 급속 충전이 가능합니다.</p>
-                </div>
-                <div class="uam-card">
-                    <h3>스마트 에어 트래픽</h3>
-                    <p>도시 전체의 비행 경로를 AI가 실시간으로 최적화합니다. 출퇴근 시간 정체를 하늘에서 완전히 해소합니다.</p>
-                </div>
-            </div>
+en: `
+<h1>HK UMB</h1>
+<p><strong>Redefining Urban Mobility Beyond Roads.</strong></p>
 
-            <div class="hud-display">
-                <div class="hud-item"><span class="val">2,450</span><span class="lbl">Active Flights</span></div>
-                <div class="hud-item"><span class="val">99.9%</span><span class="lbl">Safety Rate</span></div>
-                <div class="hud-item"><span class="val">0.0g</span><span class="lbl">CO2 Emission</span></div>
-                <div class="hud-item"><span class="val">5m</span><span class="lbl">Avg. Wait Time</span></div>
-            </div>
-        </div>
-    </div>
+<h2>Company Overview</h2>
+<p>HK UMB is a next-generation Urban Air Mobility (UAM) company developing electric vertical takeoff and landing (eVTOL) drone taxi systems for smart cities worldwide. We integrate aerospace engineering, AI navigation, and sustainable propulsion technologies.</p>
 
-    <div id="cn" class="content-panel">
-        <div class="container">
-            <h2 style="font-family: 'Noto Sans SC';">01. 城市飞行解决方案</h2>
-            <div class="uam-grid">
-                <div class="uam-card">
-                    <h3>自主飞行出租车</h3>
-                    <p>HK-UMB 致力于打造高效的城市空中交通。通过全自动飞行系统，我们将城市通勤时间缩短 80%。</p>
-                </div>
-                <div class="uam-card">
-                    <h3>Figure AI 集成</h3>
-                    <p>每一架 HK-1 飞行器都配备了先进的 AI 大脑，能够感知所有障碍物并自主规划最优航线。</p>
-                </div>
-                <div class="uam-card">
-                    <h3>未来物流</h3>
-                    <p>除了客运，我们的货运无人机正在改变物流行业，实现城市内 15 分钟送达。</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<h2>Core Capabilities</h2>
+<p>• eVTOL Aircraft Design & Manufacturing<br>
+• Autonomous Flight Control Systems<br>
+• Smart City Vertiport Infrastructure<br>
+• AI-Based Traffic & Airspace Management<br>
+• Sustainable Electric Propulsion</p>
 
-    <div id="ar" class="content-panel rtl">
-        <div class="container">
-            <h2>٠١. حلول النقل الجوي الحضري</h2>
-            <div class="uam-grid">
-                <div class="uam-card">
-                    <h3>تاكسي الجو HK-1</h3>
-                    <p>مركبات طائرة كهربائية بالكامل توفر وسيلة نقل آمنة وسريعة فوق ازدحام المدن، بقيادة ذكاء اصطناعي متقدم.</p>
-                </div>
-                <div class="uam-card">
-                    <h3>شبكة فيرتيبورت</h3>
-                    <p>محطات هبوط ذكية في مراكز المدن، توفر شحناً فائق السرعة وتجربة سفر فاخرة.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<h2>Strategic Vision 2035</h2>
+<p>To build a global aerial mobility network connecting cities through safe, autonomous, zero-emission flight corridors.</p>
 
-    <footer>
-        <div class="container">
-            <div class="footer-logo">HK-<span>UMB</span></div>
-            <p style="color: #555;">Beyond the Roads. Across the Skies.</p>
-            <a href="mailto:info@hkumb.com" class="footer-contact">info@hkumb.com</a>
-            
-            <div style="margin-top: 40px;">
-                <span style="color: #444; margin: 0 15px;">Seoul Sky Control</span>
-                <span style="color: #444; margin: 0 15px;">Dubai Air-Hub</span>
-                <span style="color: #444; margin: 0 15px;">NY Vertiport</span>
-            </div>
+<p><strong>Investment Highlights</strong><br>
+High-growth UAM market. Scalable urban deployment. Government & smart city partnerships.</p>
 
-            <p class="footer-bottom">
-                &copy; 2026 HK-UMB MOBILITY SOLUTIONS. AUTHORIZED BY CHAIRMAN HYE-GONG. <br>
-                FLIGHT SYSTEMS ARCHITECTURE BY BINI. ALL CLEAR FOR TAKE-OFF.
-            </p>
-        </div>
-    </footer>
+<div class="footer">Contact: info@hkumb.com<br>© 2026 HK UMB</div>
+`,
 
-    <script>
-        // [1] Flight System Initialization
-        function initFlight() {
-            console.log("HK-UMB TRAFFIC CONTROL ONLINE. WELCOME HYE-GONG.");
-            // Hero text dynamic animation
-            const text = document.getElementById('hero-p');
-            text.style.opacity = '0';
-            setTimeout(() => {
-                text.style.transition = '2s';
-                text.style.opacity = '1';
-            }, 500);
-        }
+ko: `
+<h1>HK UMB</h1>
+<p><strong>도로를 넘어, 하늘로 이동합니다.</strong></p>
 
-        // [2] Language & Content Management
-        function switchLang(lang, btn) {
-            // Update UI buttons
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+<h2>회사 개요</h2>
+<p>HK UMB는 전기 수직이착륙(eVTOL) 드론택시를 개발하는 차세대 도심항공모빌리티(UAM) 기업입니다. 항공공학, AI 자율비행, 친환경 추진 기술을 통합합니다.</p>
 
-            // Switch Panels
-            document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
-            document.getElementById(lang).classList.add('active');
+<h2>핵심 역량</h2>
+<p>• eVTOL 항공기 설계 및 제조<br>
+• 자율 비행 제어 시스템<br>
+• 스마트시티 버티포트 인프라<br>
+• AI 기반 공역 관리 시스템<br>
+• 친환경 전기 추진 기술</p>
 
-            // RTL logic
-            if(lang === 'ar') document.body.classList.add('rtl');
-            else document.body.classList.remove('rtl');
+<h2>비전 2035</h2>
+<p>안전하고 자율적인 무공해 비행 네트워크로 글로벌 도시를 연결하는 항공 모빌리티 생태계를 구축합니다.</p>
 
-            // Update Dynamic Hero Title
-            const titles = {
-                en: "SKY TAXI HUB",
-                kr: "하늘길의 혁명",
-                cn: "空中出租车中心",
-                ar: "مركز التاكسي الجوي"
-            };
-            document.querySelector('.hero-title').innerText = titles[lang];
-        }
+<p><strong>투자 포인트</strong><br>
+고성장 UAM 시장. 확장 가능한 도시 인프라 모델. 정부 및 스마트시티 협력 프로젝트.</p>
 
-        // [3] HUD Data Randomizer (For immersion)
-        setInterval(() => {
-            const flights = document.querySelector('.hud-item .val');
-            if(flights) {
-                const current = parseInt(flights.innerText.replace(',', ''));
-                const next = current + Math.floor(Math.random() * 5 - 2);
-                flights.innerText = next.toLocaleString();
-            }
-        }, 3000);
-    </script>
+<div class="footer">문의: info@hkumb.com<br>© 2026 HK UMB</div>
+`,
+
+zh: `
+<h1>HK UMB</h1>
+<p><strong>突破道路限制，开启空中出行新时代。</strong></p>
+
+<h2>公司概述</h2>
+<p>HK UMB 是一家开发电动垂直起降(eVTOL)空中出租车系统的城市空中交通企业，融合航空工程、AI导航与可持续动力技术。</p>
+
+<h2>核心能力</h2>
+<p>• eVTOL 飞行器设计与制造<br>
+• 自主飞行控制系统<br>
+• 智慧城市垂直起降枢纽建设<br>
+• AI 空域管理系统<br>
+• 可持续电动推进技术</p>
+
+<h2>2035战略愿景</h2>
+<p>构建全球城市间零排放空中交通网络，实现安全自主飞行。</p>
+
+<p><strong>投资亮点</strong><br>
+高速增长的UAM市场，城市可扩展部署模式，政府与智慧城市合作。</p>
+
+<div class="footer">联系: info@hkumb.com<br>© 2026 HK UMB</div>
+`,
+
+ar: `
+<h1>HK UMB</h1>
+<p><strong>نحو تنقل حضري يتجاوز الطرق.</strong></p>
+
+<h2>نبذة عن الشركة</h2>
+<p>HK UMB شركة متخصصة في تطوير مركبات الإقلاع والهبوط العمودي الكهربائية (eVTOL) كسيارات أجرة جوية للمدن الذكية، مع دمج تقنيات الطيران والذكاء الاصطناعي والطاقة النظيفة.</p>
+
+<h2>القدرات الأساسية</h2>
+<p>• تصميم وتصنيع مركبات eVTOL<br>
+• أنظمة طيران ذاتي التحكم<br>
+• بنية تحتية لمنصات الإقلاع العمودية<br>
+• إدارة المجال الجوي بالذكاء الاصطناعي<br>
+• تقنيات دفع كهربائي مستدام</p>
+
+<h2>رؤية 2035</h2>
+<p>إنشاء شبكة تنقل جوي عالمية آمنة وخالية من الانبعاثات تربط المدن عبر ممرات جوية ذكية.</p>
+
+<p><strong>فرصة استثمارية</strong><br>
+سوق UAM سريع النمو، نموذج توسع حضري، شراكات حكومية ومدن ذكية.</p>
+
+<div class="footer">البريد: info@hkumb.com<br>© 2026 HK UMB</div>
+`
+};
+
+function setLang(lang){
+document.getElementById("content").innerHTML = translations[lang];
+if(lang === "ar"){
+document.body.dir = "rtl";
+}else{
+document.body.dir = "ltr";
+}
+}
+
+function autoDetect(){
+let userLang = navigator.language.substring(0,2);
+if(translations[userLang]){
+setLang(userLang);
+}else{
+setLang("en");
+}
+}
+
+autoDetect();
+
+</script>
+
 </body>
 </html>

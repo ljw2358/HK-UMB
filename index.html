@@ -3,133 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Protocol V23</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>HK WORLD BANK | Testnet Protocol</title>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { 
-            --gold: #f1c40f; --green: #00ff88; --blue: #3498db; 
-            --red: #ff4757; --bg: #000; --card: #121212; --border: #222;
-        }
+        :root { --gold: #f1c40f; --green: #00ff88; --blue: #3498db; --red: #ff4757; --bg: #000; --card: #151515; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
-        body { background: var(--bg); color: #fff; line-height: 1.5; overflow-x: hidden; }
+        body { background: var(--bg); color: #fff; line-height: 1.4; }
 
-        /* [1] 상단 언어 선택 헤더 */
-        .header-nav { 
-            position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.9); 
-            backdrop-filter: blur(10px); z-index: 10000; padding: 12px 20px;
-            display: flex; justify-content: flex-end; border-bottom: 1px solid var(--border);
-        }
-        #langSelect { 
-            background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); 
-            padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer;
-        }
+        /* 언어 선택기 고정 */
+        .top-nav { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.9); padding: 10px 20px; z-index: 1000; display: flex; justify-content: flex-end; border-bottom: 1px solid #222; }
+        #langSelect { background: #000; color: var(--gold); border: 1px solid var(--gold); padding: 5px; border-radius: 5px; font-size: 12px; }
 
-        .container { max-width: 500px; margin: 0 auto; padding: 70px 20px 40px; }
-        
+        .container { max-width: 480px; margin: 0 auto; padding: 60px 20px 30px; }
         header { text-align: center; padding: 20px 0; }
-        header h1 { color: var(--gold); font-size: 28px; font-weight: 900; letter-spacing: 2px; }
+        header h1 { color: var(--gold); font-size: 26px; font-weight: 900; }
 
-        /* [2] 메인 자산 및 실시간 대시보드 */
-        .main-card {
-            background: linear-gradient(145deg, #1e1e1e, #000);
-            border-radius: 30px; padding: 30px 20px; border: 1px solid #333;
-            text-align: center; margin-bottom: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-        }
-        .balance-val { font-size: 44px; font-weight: 900; margin-bottom: 5px; }
-        .gcv-badge { color: var(--green); border: 1px solid var(--green); padding: 5px 15px; border-radius: 20px; font-size: 12px; display: inline-block; margin-bottom: 25px; font-weight: bold; }
+        /* 메인 카드 및 실시간 이율 */
+        .main-card { background: #111; border-radius: 25px; padding: 25px; border: 1px solid #333; text-align: center; margin-bottom: 20px; }
+        .balance-val { font-size: 40px; font-weight: 800; margin-bottom: 5px; }
+        .gcv-badge { color: var(--green); border: 1px solid var(--green); padding: 4px 12px; border-radius: 20px; font-size: 11px; display: inline-block; margin-bottom: 20px; }
 
-        /* 실시간 이율 섹션 (요청하신 범위 적용) */
-        .live-rates { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-        .rate-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 20px; border: 1px solid var(--border); }
-        .rate-box span { display: block; font-size: 11px; color: #777; margin-bottom: 5px; font-weight: bold; }
-        .rate-box strong { font-size: 18px; color: var(--green); font-weight: 800; }
+        .rates-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .rate-item { background: #1a1a1a; padding: 12px; border-radius: 15px; border: 1px solid #222; }
+        .rate-item span { font-size: 10px; color: #888; display: block; margin-bottom: 5px; }
+        .rate-item strong { color: var(--green); font-size: 16px; }
 
-        /* 유동성풀 총액 표시 */
-        .lp-total-display {
-            background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green);
-            border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px;
-        }
-        .lp-total-display p { font-size: 12px; color: var(--green); font-weight: 900; margin-bottom: 5px; }
-        .lp-total-display h2 { font-size: 26px; color: #fff; font-weight: 900; }
+        .lp-total { background: rgba(0,255,136,0.1); border: 1px solid var(--green); border-radius: 15px; padding: 15px; }
+        .lp-total h2 { font-size: 22px; color: #fff; }
 
-        /* [3] 추가 버튼 섹션 (PI 수량, SWAP, LP 공급) */
-        .action-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
-        .action-btn { padding: 15px 5px; border-radius: 15px; text-align: center; font-weight: 900; font-size: 13px; cursor: pointer; border: none; }
-        .btn-white { background: #fff; color: #000; }
-        .btn-yellow { background: var(--gold); color: #000; }
-        .btn-green { background: #27ae60; color: #fff; }
+        /* 요청하신 3대 버튼 */
+        .action-btns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+        .btn-act { padding: 15px 0; border-radius: 12px; font-weight: 900; font-size: 12px; border: none; cursor: pointer; text-align: center; }
+        .btn-pi { background: #fff; color: #000; }
+        .btn-swap { background: var(--gold); color: #000; }
+        .btn-lp { background: #27ae60; color: #fff; }
 
-        /* [4] 메뉴 그리드 */
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
-        .menu-item { background: var(--card); padding: 20px 5px; border-radius: 20px; text-align: center; border: 1px solid var(--border); cursor: pointer; }
-        .menu-item i { font-size: 24px; display: block; margin-bottom: 10px; color: var(--gold); }
-        .menu-item span { font-size: 12px; font-weight: 700; color: #eee; }
+        /* 메뉴 그리드 */
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        .menu-item { background: var(--card); padding: 18px 5px; border-radius: 18px; text-align: center; border: 1px solid #222; cursor: pointer; }
+        .menu-item i { font-size: 22px; display: block; margin-bottom: 8px; color: var(--gold); }
+        .menu-item span { font-size: 12px; color: #ccc; font-weight: 600; }
 
-        /* [5] HK 양자 방패 */
-        .shield-section { background: #080808; border-radius: 20px; padding: 20px; margin-bottom: 25px; border: 1px solid #1a1a1a; }
-        .shield-title { color: #00d4ff; font-weight: 900; margin-bottom: 15px; font-size: 15px; }
-        .shield-list { list-style: none; font-size: 13px; color: #999; }
-        .shield-list li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        /* 양자 방패 & FAQ */
+        .shield-box { background: #0a0a0a; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #1a1a1a; }
+        .shield-t { color: #00d4ff; font-weight: bold; margin-bottom: 12px; font-size: 14px; }
+        .shield-l { list-style: none; font-size: 12px; color: #888; }
+        .shield-l li { margin-bottom: 6px; }
 
-        /* [6] 통합 FAQ (숨김 처리) */
-        .faq-wrap { background: #111; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 25px; }
-        .faq-q { padding: 15px; font-size: 14px; font-weight: 800; color: var(--gold); cursor: pointer; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
-        .faq-a { padding: 15px; font-size: 13px; color: #888; display: none; line-height: 1.6; background: #0a0a0a; }
+        .faq-box { background: #111; border-radius: 20px; border: 1px solid #222; overflow: hidden; margin-bottom: 20px; }
+        .faq-q { padding: 15px; font-size: 13px; font-weight: bold; color: var(--gold); cursor: pointer; display: flex; justify-content: space-between; border-bottom: 1px solid #222; }
+        .faq-a { padding: 15px; font-size: 12px; color: #888; display: none; background: #0a0a0a; }
 
-        /* [7] 버튼 및 SNS */
-        .action-stack { display: flex; flex-direction: column; gap: 10px; }
-        .btn-cs { background: var(--red); color: #fff; padding: 18px; border-radius: 15px; font-weight: 900; border: none; cursor: pointer; font-size: 16px; }
-        
-        .sns-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .btn-sns { padding: 15px; border-radius: 15px; text-align: center; font-weight: bold; text-decoration: none; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; }
-        .btn-yt { background: #ff0000; }
-        .btn-tk { background: #000; border: 1px solid #333; }
+        /* SNS & 하단 버튼 */
+        .sns-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .btn-sns { padding: 12px; border-radius: 12px; text-decoration: none; color: #fff; font-size: 12px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .yt { background: #ff0000; }
+        .tk { background: #000; border: 1px solid #333; }
+        .btn-cs { background: var(--red); color: #fff; width: 100%; padding: 18px; border-radius: 15px; font-weight: bold; border: none; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="header-nav">
-    <select id="langSelect" onchange="applyTranslation()">
+<nav class="top-nav">
+    <select id="langSelect" onchange="changeLanguage()">
         <option value="ko">한국어 🇰🇷</option>
         <option value="en">English 🇺🇸</option>
         <option value="zh">中文 🇨🇳</option>
-        <option value="hi">हिन्दी 🇮🇳</option>
-        <option value="ru">Русский 🇷🇺</option>
+        <option value="ja">日本語 🇯🇵</option>
         <option value="vi">Tiếng Việt 🇻🇳</option>
-        </select>
-</div>
+    </select>
+</nav>
 
 <div class="container">
-    <header>
-        <h1 id="t-title">HK WORLD BANK</h1>
-    </header>
+    <header><h1 id="t-title">HK WORLD BANK</h1></header>
 
     <div class="main-card">
-        <p id="t-ledger" style="color:#777; font-size:12px; margin-bottom:8px;">메인 자산 통합 원장</p>
-        <div class="balance-val">400.0212 <span style="font-size:20px; color:var(--gold);">Pi</span></div>
+        <p id="t-ledger" style="font-size:11px; color:#666; margin-bottom:5px;">메인 자산 통합 원장</p>
+        <div class="balance-val" id="user-balance">400.0212 <span style="font-size:18px; color:var(--gold);">Pi</span></div>
         <div class="gcv-badge">Value: $ 125,663,600 (GCV)</div>
         
-        <div class="live-rates">
-            <div class="rate-box">
-                <span id="t-stk">스테이킹 실시간 이자</span>
-                <strong id="stk-val">15.4 %</strong>
-            </div>
-            <div class="rate-box">
-                <span id="t-lp-apy">유동성풀 실시간 이율</span>
-                <strong id="lp-val">24.8 %</strong>
-            </div>
+        <div class="rates-row">
+            <div class="rate-item"><span id="t-stk">스테이킹 이자</span><strong id="stk-rate">12.55%</strong></div>
+            <div class="rate-item"><span id="t-lp-apy">유동성풀 이율</span><strong id="lp-rate">32.10%</strong></div>
         </div>
-
-        <div class="lp-total-display">
-            <p id="t-lp-tvl">유동성풀 전체금액 (TVL)</p>
+        <div class="lp-total">
+            <p id="t-lp-tvl" style="font-size:11px; color:var(--green); font-weight:bold;">유동성풀 전체금액 (TVL)</p>
             <h2 id="lp-amount">$ 88,410,819,601</h2>
         </div>
     </div>
 
-    <div class="action-grid">
-        <button class="action-btn btn-white" id="b1">PI 수량</button>
-        <button class="action-btn btn-yellow" id="b2">SWAP</button>
-        <button class="action-btn btn-green" id="b3">LP 공급</button>
+    <div class="action-btns">
+        <button class="btn-act btn-pi" onclick="connectWallet()" id="b-pi">PI 수량</button>
+        <button class="btn-act btn-swap" onclick="testPayment('Swap')" id="b-swap">SWAP</button>
+        <button class="btn-act btn-lp" onclick="testPayment('LP Deposit')" id="b-lp">LP 공급</button>
     </div>
 
     <div class="menu-grid">
@@ -141,73 +107,82 @@
         <div class="menu-item"><i class="fas fa-random"></i><span id="m6">스왑</span></div>
     </div>
 
-    <div class="shield-section">
-        <div class="shield-title" id="t-shield">🛡️ HK 양자 방패 가동 중</div>
-        <ul class="shield-list">
+    <div class="shield-box">
+        <div class="shield-t" id="t-shield">🛡️ HK 양자 방패 가동 중</div>
+        <ul class="shield-l">
             <li id="s1">● 양자 암호화 보안 적용</li>
             <li id="s2">● 자산 보호 프로토콜 가동</li>
             <li id="s3">● AI 실시간 위협 탐지 중</li>
         </ul>
     </div>
 
-    <div class="faq-wrap">
-        <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(0)"><span id="q1">Q. 이율 변동 기준이 무엇인가요?</span> <i class="fas fa-plus"></i></div>
-            <div class="faq-a" id="a1">글로벌 거래량과 풀 참여도에 따라 스테이킹은 12~20%, 유동성 풀은 15~50% 범위 내에서 실시간 조정됩니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(1)"><span id="q2">Q. 양자 방패 보안은 안전한가요?</span> <i class="fas fa-plus"></i></div>
-            <div class="faq-a" id="a2">최신 양자 암호화 기술을 적용하여 모든 해킹 시도로부터 귀하의 자산을 철저히 보호하고 있습니다.</div>
-        </div>
+    <div class="faq-box">
+        <div class="faq-q" onclick="toggleFaq(0)"><span id="q1">Q. 이율 변동 기준이 무엇인가요?</span> <i class="fas fa-plus"></i></div>
+        <div class="faq-a" id="a1">스테이킹(12~20%)과 유동성풀(15~50%) 이율은 시장 참여도에 따라 실시간 조정됩니다.</div>
     </div>
 
-    <div class="action-stack">
-        <button class="btn-cs" onclick="alert('Connecting AI Support...')"><span id="t-cs">글로벌 고객지원센터</span></button>
-        <div class="sns-grid">
-            <a href="#" class="btn-sns btn-yt"><i class="fab fa-youtube"></i> YOUTUBE</a>
-            <a href="#" class="btn-sns btn-tk"><i class="fab fa-tiktok"></i> TIKTOK</a>
-        </div>
+    <button class="btn-cs" onclick="alert('AI Support Connecting...')"><span id="t-cs">글로벌 고객지원센터</span></button>
+    
+    <div class="sns-row">
+        <a href="https://www.youtube.com/@Hyekong2025" class="btn-sns yt"><i class="fab fa-youtube"></i> @Hyekong2025</a>
+        <a href="https://www.tiktok.com/@hyekong2025" class="btn-sns tk"><i class="fab fa-tiktok"></i> @hyekong2025</a>
     </div>
 </div>
 
 <script>
-    const translations = {
-        ko: { title:"HK 월드 뱅크", ledger:"메인 자산 통합 원장", lp_tvl:"유동성풀 전체금액 (TVL)", stk:"스테이킹 실시간 이자", lp_apy:"유동성풀 실시간 이율", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"기본소득", m6:"스왑", shield:"🛡️ HK 양자 방패 가동 중", s1:"● 양자 암호화 보안 적용", s2:"● 자산 보호 프로토콜 가동", s3:"● AI 실시간 위협 탐지 중", cs:"글로벌 고객지원센터", q1:"Q. 이율 변동 기준이 무엇인가요?", a1:"글로벌 거래량에 따라 스테이킹 12~20%, 유동성풀 15~50% 사이에서 조정됩니다.", b1:"PI 수량", b2:"SWAP", b3:"LP 공급" },
-        en: { title:"HK WORLD BANK", ledger:"Main Asset Ledger", lp_tvl:"Total Value Locked (TVL)", stk:"Staking Live Interest", lp_apy:"LP Live APY", m1:"Transfer", m2:"Payment", m3:"Vault", m4:"Reward", m5:"UBI", m6:"Swap", shield:"🛡️ HK Quantum Shield Active", s1:"● Quantum Encryption Applied", s2:"● Asset Protection Active", s3:"● AI Real-time Detection", cs:"Global Support Center", q1:"Q. What is the interest rate basis?", a1:"Adjusted between 12-20% for staking and 15-50% for LP based on volume.", b1:"PI Amount", b2:"SWAP", b3:"LP Supply" }
+    // [1] Pi SDK 초기화 (테스트넷 환경)
+    const Pi = window.Pi;
+    Pi.init({ version: "2.0", sandbox: true }); // sandbox: true가 테스트 파이 모드
+
+    async function connectWallet() {
+        try {
+            const scopes = ['payments', 'username'];
+            const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
+            alert("연결 성공: " + auth.user.username);
+        } catch (err) { alert("연결 실패: " + err.message); }
+    }
+
+    async function testPayment(type) {
+        alert("테스트넷 결제를 요청합니다: " + type);
+        // 실제 결제 로직: Pi.createPayment(...) 호출 가능
+    }
+
+    function onIncompletePaymentFound(payment) { /* 미완료 결제 처리 */ }
+
+    // [2] 언어 데이터 (20개국 확장 가능)
+    const langLib = {
+        ko: { title:"HK 월드 뱅크", ledger:"메인 자산 통합 원장", stk:"스테이킹 이자", lp_apy:"유동성풀 이율", lp_tvl:"유동성풀 전체금액 (TVL)", b_pi:"PI 수량", b_swap:"SWAP", b_lp:"LP 공급", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"기본소득", m6:"스왑", shield:"🛡️ HK 양자 방패 가동 중", s1:"● 양자 암호화 보안 적용", s2:"● 자산 보호 프로토콜 가동", s3:"● AI 실시간 위협 탐지 중", q1:"Q. 이율 변동 기준이 무엇인가요?", a1:"스테이킹(12~20%)과 유동성풀(15~50%) 이율은 실시간 조정됩니다.", cs:"글로벌 고객지원센터" },
+        en: { title:"HK WORLD BANK", ledger:"Main Asset Ledger", stk:"Staking Int.", lp_apy:"LP APY", lp_tvl:"LP Total Value (TVL)", b_pi:"PI Amount", b_swap:"SWAP", b_lp:"LP Supply", m1:"Send", m2:"Pay", m3:"Vault", m4:"Reward", m5:"UBI", m6:"Swap", shield:"🛡️ HK Quantum Shield Active", s1:"● Quantum Encryption Applied", s2:"● Protection Protocol Active", s3:"● AI Threat Detection", q1:"Q. Interest rate basis?", a1:"Staking (12-20%) and LP (15-50%) rates are adjusted in real-time.", cs:"Global Support Center" }
     };
 
-    function applyTranslation() {
-        const lang = document.getElementById('langSelect').value;
-        const d = translations[lang] || translations['en'];
+    function changeLanguage() {
+        const key = document.getElementById('langSelect').value;
+        const d = langLib[key] || langLib['en'];
         
         document.getElementById('t-title').innerText = d.title;
         document.getElementById('t-ledger').innerText = d.ledger;
-        document.getElementById('t-lp-tvl').innerText = d.lp_tvl;
         document.getElementById('t-stk').innerText = d.stk;
         document.getElementById('t-lp-apy').innerText = d.lp_apy;
+        document.getElementById('t-lp-tvl').innerText = d.lp_tvl;
+        document.getElementById('b-pi').innerText = d.b_pi;
+        document.getElementById('b-swap').innerText = d.b_swap;
+        document.getElementById('b-lp').innerText = d.b_lp;
         document.getElementById('m1').innerText = d.m1; document.getElementById('m2').innerText = d.m2;
         document.getElementById('m3').innerText = d.m3; document.getElementById('m4').innerText = d.m4;
         document.getElementById('m5').innerText = d.m5; document.getElementById('m6').innerText = d.m6;
         document.getElementById('t-shield').innerText = d.shield;
         document.getElementById('s1').innerText = d.s1; document.getElementById('s2').innerText = d.s2; document.getElementById('s3').innerText = d.s3;
-        document.getElementById('t-cs').innerText = d.cs;
         document.getElementById('q1').innerText = d.q1; document.getElementById('a1').innerText = d.a1;
-        document.getElementById('b1').innerText = d.b1; document.getElementById('b2').innerText = d.b2; document.getElementById('b3').innerText = d.b3;
+        document.getElementById('t-cs').innerText = d.cs;
     }
 
-    // [실시간 데이터 시뮬레이션]
-    let lpTotal = 88410819601;
+    // [3] 실시간 수치 (이미지 요청 사항 적용)
+    let lpVal = 88410819601;
     setInterval(() => {
-        lpTotal += Math.floor(Math.random() * 500000);
-        document.getElementById('lp-amount').innerText = "$ " + lpTotal.toLocaleString();
-        
-        // 스테이킹 이자 (12~20%)
-        const sInt = (12 + (Math.random() * 8)).toFixed(2);
-        // 유동성풀 이율 (15~50%)
-        const lInt = (15 + (Math.random() * 35)).toFixed(2);
-        
-        document.getElementById('stk-val').innerText = sInt + " %";
-        document.getElementById('lp-val').innerText = lInt + " %";
+        lpVal += Math.floor(Math.random() * 300000);
+        document.getElementById('lp-amount').innerText = "$ " + lpVal.toLocaleString();
+        document.getElementById('stk-rate').innerText = (12 + (Math.random() * 8)).toFixed(2) + "%";
+        document.getElementById('lp-rate').innerText = (15 + (Math.random() * 35)).toFixed(2) + "%";
     }, 2000);
 
     function toggleFaq(idx) {
@@ -217,4 +192,3 @@
 </script>
 </body>
 </html>
-\

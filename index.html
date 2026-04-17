@@ -178,7 +178,47 @@
         document.getElementById('s3').innerText = d.s3;
         document.getElementById('cs_btn').innerText = d.cs;
     }
-// --- 181번 줄 시작: 형님의 고객센터 성역 보존 및 30개국어 강제 주입 ---
+// [실전 구동 엔진] 테스트 파이 SDK 초기화 및 버튼 생명 불어넣기
+const Pi = window.Pi;
+
+async function initHKBank() {
+    try {
+        // 1. 테스트 파이 인증 (사용자 승인)
+        const scopes = ['payments', 'username'];
+        const auth = await Pi.authenticate(scopes, (onPayment) => {
+            console.log("결제 진행 중:", onPayment);
+        });
+        console.log(auth.user.username + " 형님, HK-WorldBank 구동 준비 완료!");
+
+        // 2. 아홉 개 버튼에 '구동 에너지' 주입
+        const btnIds = ['b1', 'b2', 'b3', 'm1', 'm2', 'm3', 'm4', 'm5', 'm6'];
+        btnIds.forEach(id => {
+            const btn = document.getElementById(id);
+            if (btn) {
+                btn.style.cursor = "pointer"; // 누를 수 있다는 표시
+                btn.onclick = () => {
+                    // 버튼 누르면 실제 파이 결제 시뮬레이션 창이 뜹니다
+                    Pi.createPayment({
+                        amount: 0.01,
+                        memo: btn.innerText + " 실행 (테스트 파이)",
+                        metadata: { action: id }
+                    }, {
+                        onReadyForServerApproval: (id) => console.log("승인 대기:", id),
+                        onReadyForServerCompletion: (id, tx) => alert("구동 성공! TX: " + tx),
+                        onCancel: (id) => console.log("취소됨"),
+                        onError: (err) => console.error("에러:", err)
+                    });
+                };
+            }
+        });
+    } catch (err) {
+        console.log("파이 브라우저에서 실행해 주세요, 형님!");
+    }
+}
+
+// 페이지 로드 시 즉시 가동
+initHKBank();
+    // --- 181번 줄 시작: 형님의 고객센터 성역 보존 및 30개국어 강제 주입 ---
 
     // [데이터 보호 구역] 30개국 고객지원센터 명칭 ('가동' 제외)
     const finalCSMap = {

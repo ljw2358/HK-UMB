@@ -15,6 +15,11 @@
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+   .menu-item i { color: #FFD700 !important; font-size: 30px !important; } /* 아이콘 노란색 */
+.menu-item span { color: #e0e0e0 !important; } /* 글자 연하게 */
+.b-gold { background-color: #FFD700 !important; color: black !important; } /* 버튼 노란색 */
+.balance-val span { color: #FFD700 !important; } /* 파이 단위 노란색 */
+.btn-cs { color: #FFD700 !important; border-color: #FFD700 !important; } /* 밑에 긴 버튼 노란색 */
         :root { --gold: #f1c40f; --green: #00ff88; --bg: #000; --card: #121212; --border: #222; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; }
@@ -91,13 +96,13 @@
 
  <div class="btn-grid">
     <button class="btn-act b-white" id="b1">PI 수량</button>
-    <button class="btn-act b-gold" id="b2">DEX 스왑</button>
+  <button class="btn-act b-gold" id="b2" style="background-color: #FFD700 !important; color: black !important;">DEX 스왑</button>
     <button class="btn-act b-green" id="b3">LP 공급</button>
 </div>
 
 <div class="menu-grid">
     <div class="menu-item" id="m1"><i class="fas fa-paper-plane"></i><span id="m1_label">송금</span></div>
-    <div class="menu-item" id="m2"><i class="fas fa-shopping-cart"></i><span id="m2_label">결제</span></div>
+  <div class="menu-item" id="m2" onclick="initHKBank()"><i class="fas fa-shopping-cart" style="color: #FFD700 !important; font-size: 32px;"></i><span id="m2_label">결제</span></div  
     <div class="menu-item" id="m3"><i class="fas fa-vault"></i><span id="m3_label">예치</span></div>
     <div class="menu-item" id="m4"><i class="fas fa-award"></i><span id="m4_label">보상</span></div>
     <div class="menu-item" id="m5"><i class="fas fa-coins"></i><span id="m5_label">기본소득</span></div>
@@ -111,7 +116,7 @@
         <p id="s3">AI 실시간 자산 보호</p>
     </div>
 
-    <button class="btn-cs" id="cs_btn" onclick="initHKBank()">글로벌 AI 고객지원센터 가동</button>
+  <button class="btn-cs" id="cs_btn" onclick="initHKBank()" style="color: #FFD700 !important; border-color: #FFD700 !important;">글로벌 AI 고객지원센터 가동</button>  
    
     <div class="sns">
         <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="sns-link" style="background:#f00;"><i class="fab fa-youtube"></i> YouTube</a>

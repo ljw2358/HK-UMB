@@ -249,7 +249,7 @@
 </script> 글로벌 언어... <script> // 1. 파이 네트워크 초기화
     // 1. 파이 네트워크 초기화 (테스트 파이 설정 완료)
     const Pi = window.Pi;
-    Pi.init({ version: "2.0", sandbox: true }); // <--- 여기가 바로 샌드박스입니다!
+    Pi.init({ version: "2.0", sandbox: false }); // <--- 여기가 바로 샌드박스입니다!
 
     // 2. 버튼 클릭 시 작동할 결제 함수
     async function initHKBank() {
@@ -273,7 +273,7 @@
                         onError: (error, payment) => { console.error("에러", error); }
                     });
                 } catch (err) {
-                    alert("파이 브라우저에서 실행해 주세요!");
+                    console.log("잠시 대기중...다시 시도해 주세요");
                 }
             };
         });

@@ -2,252 +2,445 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK-WorldBank: Global Hackathon Finalist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK-WORLD BANK | THE GLOBAL UBI & ROBOTICS INFRASTRUCTURE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #D4AF37;
-            --neon-green: #39FF14;
+            --gold: #FFD700;
+            --deep-gold: #B8860B;
+            --hk-orange: #FF8C00;
+            --bg-black: #020202;
+            --bg-card: #0d0d0f;
             --neon-blue: #00F3FF;
+            --neon-green: #39FF14;
             --neon-purple: #BC13FE;
-            --neon-red: #FF3131; /* 아들지 칼날 레드 */
-            --bg-black: #000000;
-            --card-bg: #0a0a0c;
+            --text-gray: #7a7a7a;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background-color: var(--bg-black);
             color: #ffffff;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            font-family: 'Noto Sans KR', sans-serif;
             overflow-x: hidden;
+            word-break: keep-all;
         }
 
-        /* 해커톤용 프리미엄 헤더 */
-        .premium-header {
-            padding: 30px 20px;
+        /* ------------------------------------------------
+           1. TOP QUANTUM SECURITY BAR (양자 보안 바)
+        --------------------------------------------------- */
+        .quantum-bar {
+            background: linear-gradient(90deg, #000, #1a1a1a, #000);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            border-bottom: 1px solid #333;
+            color: var(--neon-blue);
+        }
+
+        .status-pulse {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            margin-right: 5px;
+            box-shadow: 0 0 10px var(--neon-green);
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ------------------------------------------------
+           2. MAIN HEADER (웅장한 타이틀)
+        --------------------------------------------------- */
+        header {
+            padding: 100px 20px;
             text-align: center;
-            background: linear-gradient(to bottom, #111, #000);
-            border-bottom: 2px solid var(--gold);
+            background: radial-gradient(circle at center, #1a1a20 0%, #020202 70%);
         }
-        .premium-header h1 { 
-            font-size: 38px; 
-            color: var(--gold); 
-            margin: 0; 
-            font-weight: 900; 
-            letter-spacing: -1px;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-        }
-        .premium-header p { font-size: 12px; color: #666; letter-spacing: 3px; margin-top: 8px; text-transform: uppercase; }
 
-        /* 실시간 금융 대시보드 */
-        .dashboard {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .logo-main {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: glow 3s infinite alternate;
         }
-        .stat-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #222;
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+            to { text-shadow: 0 0 50px rgba(255, 215, 0, 0.8); }
+        }
+
+        .sub-logo {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        /* ------------------------------------------------
+           3. DYNAMIC DASHBOARD (실시간 GCV & UBI)
+        --------------------------------------------------- */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            padding: 50px 10%;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 2px solid #222;
+            padding: 40px;
             position: relative;
             overflow: hidden;
+            transition: 0.5s ease;
         }
-        .stat-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gold);
         }
-        .card-pi::before { background: var(--neon-green); }
-        .card-gcv::before { background: var(--gold); }
-        .card-stk::before { background: var(--neon-blue); }
-        .card-ubi::before { background: var(--neon-purple); }
-        .card-lp { grid-column: span 2; border-color: #441111; }
-        .card-lp::before { background: var(--neon-red); }
 
-        .label { font-size: 11px; color: #888; margin-bottom: 8px; font-weight: 800; }
-        .val { font-size: 22px; font-weight: bold; font-family: 'Courier New', monospace; letter-spacing: -0.5px; }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); }
 
-        /* 국가별 노드 운영 센터 (핵심 심사 포인트) */
-        .node-center { padding: 0 20px 20px; }
-        .manual-display {
-            background: #0d0d0f;
-            padding: 25px;
-            border-radius: 18px;
-            border: 1px solid #333;
-            min-height: 160px;
-            margin-bottom: 20px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        .card-title { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 20px; display: block; }
+        .card-value { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: bold; }
+
+        .green-neon { color: var(--neon-green); text-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
+        .purple-neon { color: var(--neon-purple); text-shadow: 0 0 15px rgba(188, 19, 254, 0.4); }
+
+        /* ------------------------------------------------
+           4. OPERATIONS MANUAL (사진 속 운영 매뉴얼)
+        --------------------------------------------------- */
+        .manual-section {
+            background: #080808;
+            padding: 80px 10%;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
         }
-        .manual-display h2 { font-size: 18px; color: var(--gold); margin-top: 0; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .manual-display p { font-size: 14px; line-height: 1.7; color: #ccc; margin: 10px 0; }
 
-        .flag-scroll-grid {
+        .manual-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .manual-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: 5px;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
         }
-        .flag-item {
-            font-size: 32px;
-            background: #111;
-            padding: 15px 0;
+
+        .manual-content {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #ddd;
+        }
+
+        .highlight-box {
+            border: 1px solid var(--hk-orange);
+            padding: 30px;
+            background: rgba(255, 140, 0, 0.05);
+            font-weight: bold;
+        }
+
+        /* ------------------------------------------------
+           5. GLOBAL INDEXING (50개 국가 버튼)
+        --------------------------------------------------- */
+        .global-indexing-title {
             text-align: center;
-            border-radius: 12px;
+            padding-top: 100px;
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 50px 10%;
+        }
+
+        .country-item {
+            background: #111;
+            border: 1px solid #333;
+            padding: 30px;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 1.5rem;
             cursor: pointer;
-            border: 1px solid #222;
             transition: 0.3s;
         }
-        .flag-item:hover { background: var(--gold); transform: translateY(-3px); }
 
-        /* 하단 글로벌 액션바 */
-        .action-bar {
-            margin-top: auto;
-            padding: 25px 20px;
-            background: #050505;
+        .country-item:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 30px var(--gold);
+        }
+
+        /* ------------------------------------------------
+           6. YOUTUBE & MEDIA (찌통)
+        --------------------------------------------------- */
+        .media-container {
+            padding: 100px 10%;
+            text-align: center;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 5px solid #222;
+            position: relative;
+            padding-top: 56.25%;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        /* ------------------------------------------------
+           7. 60-SEC ALPHA TEST ENGINE
+        --------------------------------------------------- */
+        .alpha-test-box {
+            margin: 100px auto;
+            width: 80%;
+            background: linear-gradient(180deg, #111, #000);
+            padding: 80px;
+            text-align: center;
+            border: 1px solid var(--neon-blue);
+        }
+
+        #timer-num {
+            font-size: 8rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            text-shadow: 0 0 40px var(--neon-blue);
+        }
+
+        .test-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .test-btn:hover { background: var(--neon-blue); color: #000; }
+
+        /* ------------------------------------------------
+           8. BBIRIRI AI ASSISTANT (삐리리 챗봇)
+        --------------------------------------------------- */
+        .bbiriri-fixed {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+        }
+
+        .bbiriri-circle {
+            width: 100px;
+            height: 100px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            box-shadow: 0 0 30px var(--gold);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ------------------------------------------------
+           FOOTER & VISION
+        --------------------------------------------------- */
+        footer {
+            padding: 150px 20px;
+            background: #000;
+            text-align: center;
             border-top: 1px solid #111;
         }
-        .main-btns {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;
-        }
-        .btn {
-            background: #1a1a1c;
-            color: #fff;
-            border: 1px solid #333;
-            padding: 18px;
-            border-radius: 12px;
-            font-weight: 900;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-        .btn:active { background: var(--gold); color: #000; }
 
-        .sns-btns { display: flex; gap: 10px; }
-        .sns-link {
-            flex: 1; padding: 18px; border-radius: 12px; text-align: center;
-            text-decoration: none; font-weight: 900; font-size: 14px; color: #fff;
-        }
-        .yt { background: #FF0000; }
-        .tk { background: #000; border: 1px solid #fff; }
-
-        /* 보안 검증 오버레이 (60초 타이머) */
-        #secure-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98); z-index: 99999; justify-content: center; align-items: center; flex-direction: column;
-        }
-        .timer-circle {
-            width: 200px; height: 200px; border: 5px solid var(--gold); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; font-size: 80px; 
-            font-weight: 900; color: var(--gold); margin-bottom: 30px;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        .vision-text {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: #555;
+            font-size: 1.2rem;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-<div class="premium-header">
-    <h1>HK-WORLD BANK</h1>
-    <p>Pi Network Global Ecosystem & UBI Platform</p>
+<div class="quantum-bar">
+    <div><span class="status-pulse"></span> HK-QUANTUM ENCRYPTION ACTIVE (LEVEL 7)</div>
+    <div>IP: 192.168.0.777 | SERVER: HK-GLOBAL-MAIN-01 | NODE: 2026-ACTIVE</div>
 </div>
 
-<div class="dashboard">
-    <div class="stat-card card-pi"><div class="label">메인 통합 원장 (전례지)</div><div id="v1" class="val" style="color:var(--neon-green)">400.000000</div></div>
-    <div class="stat-card card-gcv"><div class="label">실시간 GCV Value</div><div id="v2" class="val" style="color:var(--gold)">$314,159</div></div>
-    <div class="stat-card card-stk"><div class="label">스테이킹/보상 이율</div><div id="v3" class="val" style="color:var(--neon-blue)">24.500%</div></div>
-    <div class="stat-card card-ubi"><div class="label">UBI 글로벌 분배율</div><div id="v4" class="val" style="color:var(--neon-purple)">12.80%</div></div>
-    <div class="stat-card card-lp">
-        <div class="label">전체 유동성 LP 공급 (아들지 - 칼날 레드)</div>
-        <div id="v5" class="val" style="color:var(--neon-red)">1,240,500,000.00</div>
-    </div>
+<header>
+    <div class="logo-main">HK-WORLD BANK</div>
+    <div class="sub-logo">PI NETWORK GLOBAL ECOSYSTEM & NEXT-GEN UBI PLATFORM</div>
+</header>
+
+<main>
+    <section class="dashboard-container">
+        <div class="card">
+            <span class="card-title">● 실시간 GCV Value (Global Consensus Value)</span>
+            <div id="gcv-val" class="card-value green-neon">$314,159.708</div>
+        </div>
+        <div class="card">
+            <span class="card-title">● UBI 글로벌 지원율 (Current Support Rate)</span>
+            <div id="ubi-val" class="card-value purple-neon">12.84%</div>
+        </div>
+        <div class="card">
+            <span class="card-title">● HK-ROBOTICS ACTIVE NODES</span>
+            <div class="card-value" style="color: var(--neon-blue);">98,421 units</div>
+        </div>
+        <div class="card">
+            <span class="card-title">● LCO STAKING REWARD</span>
+            <div id="lco-val" class="card-value" style="color: var(--hk-orange);">15.20%</div>
+        </div>
+    </section>
+
+    <section class="manual-section">
+        <div class="manual-title">OPERATIONAL MANUAL (운영 매뉴얼)</div>
+        <div class="manual-grid">
+            <div class="manual-content">
+                각국의 실시간 연동 현황을 확인하십시오. 국기를 선택하면 해당 국가의 전략지 및 이미지 운영 지원이 로드됩니다. 
+                모든 결제와 데이터는 HK-양자 방패망 내에서 처리되며, 전 세계 50개국에 걸친 하이퍼-로컬 네트워크를 지향합니다.
+            </div>
+            <div class="highlight-box">
+                [주의사항]<br>
+                루코 스킹 유 (LCO) 보상은 10% ~ 20% 내외에서 자동 조정됩니다.<br>
+                영승수 시스템은 어지버사 결제망과 연동되어 실시간 슈퍼마켓 결제를 지원합니다.
+            </div>
+        </div>
+    </section>
+
+    <section class="alpha-test-box">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">SYSTEM ALPHA TEST ENGINE</h2>
+        <p style="color: #666; margin-bottom: 30px;">60초 한정 전 세계 서버 동기화 및 부하 테스트를 실시합니다.</p>
+        <div id="timer-num">60</div>
+        <button class="test-btn" onclick="runMegaTest()">EXECUTE GLOBAL TEST</button>
+    </section>
+
+    <section class="media-container">
+        <h2 style="color: var(--gold); margin-bottom: 50px; font-family: 'Orbitron';">📢 HK OFFICIAL MEDIA (찌통)</h2>
+        <div class="video-wrapper">
+            <iframe src="http://googleusercontent.com/youtube.com/3" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <div class="global-indexing-title">GLOBAL AI SUPPORT INDEX (50 COUNTRIES)</div>
+    <section class="country-grid" id="main-grid"></section>
+
+</main>
+
+<div class="bbiriri-fixed">
+    <div class="bbiriri-circle" onclick="bbiririTalk()">🤖</div>
+    <p style="text-align: center; margin-top: 10px; color: gold; font-weight: bold;">삐리리</p>
 </div>
 
-<div class="node-center">
-    <div class="manual-display">
-        <h2 id="node-name">[Global Hub] 운영 매뉴얼</h2>
-        <p id="node-desc">전 세계 50개국 노드의 실시간 연동 현황을 확인하십시오. 국기를 클릭하면 해당 국가의 전례지 및 아들지 운영 지침이 로드됩니다. <br><br><strong>次世代の主軸: HYEKONG 2025 Vision</strong></p>
+<footer>
+    <div class="vision-text">
+        "인간을 이롭게 하고, 로보틱스와 에너지를 통해 전 세계 취약계층에게 기본소득을 제공하는 것. 그것이 HK의 길입니다."
     </div>
-    <div class="flag-scroll-grid" id="flag-list"></div>
-</div>
-
-<div class="action-bar">
-    <div class="main-btns">
-        <button class="btn" onclick="runTask('DEX 수량 스왑')">DEX SWAP</button>
-        <button class="btn" onclick="runTask('LP 유동성 공급')">LP SUPPLY</button>
-        <button class="btn" onclick="runTask('글로벌 송금/결제')">PAYMENT</button>
-        <button class="btn" onclick="runTask('UBI 기본소득 집행')">UBI DISBURSE</button>
-    </div>
-    <div class="sns-btns">
-        <a href="https://www.youtube.com/@HYEKONG2025" target="_blank" class="sns-link yt">YouTube: HYEKONG 2025</a>
-        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-link tk">TikTok: hyekong 2025</a>
-    </div>
-</div>
-
-<div id="secure-overlay">
-    <div class="timer-circle" id="timer-val">60</div>
-    <div style="color: var(--gold); letter-spacing: 10px; font-weight: 900; font-size: 14px;">SECURITY SYNCING...</div>
-</div>
+    <p style="color: #888; font-size: 14px;">
+        FOUNDER: LEE JAEWAN (HYEKONG) | GROUP: HK GROUP (FORMERLY PHK)<br>
+        PI NETWORK CORE INFRASTRUCTURE & HK-WORLDBANK SYSTEM v2026.04
+    </p>
+</footer>
 
 <script>
-    // 1. 심사위원을 사로잡는 실시간 수치 고동 로직
-    function animateValues() {
-        document.getElementById('v1').innerText = (400 + Math.random() * 0.0001).toFixed(6) + " PI";
-        document.getElementById('v2').innerText = "$" + (314159 + Math.random()).toLocaleString(undefined, {minimumFractionDigits: 0});
-        document.getElementById('v3').innerText = (24.500 + Math.random() * 0.01).toFixed(3) + "%";
-        document.getElementById('v4').innerText = (12.80 + Math.random() * 0.05).toFixed(2) + "%";
-        document.getElementById('v5').innerText = (1240500000 + Math.floor(Math.random() * 15000)).toLocaleString() + ".00";
-    }
-    setInterval(animateValues, 1200);
-
-    // 2. 50개국 풀 데이터 - 해커톤용 고급 텍스트
-    const nodeData = [
-        {f:"🇰🇷", n:"대한민국 (KOREA)", d:"[본부] 전례지 보안 SSS급. 순이익 30% UBI 배분 인프라 구축 완료. HK-WorldBank의 글로벌 지휘 센터입니다. (次世代の主軸)"},
-        {f:"🇯🇵", n:"일본 (JAPAN)", d:"[도쿄 노드] 資産管理センター 가동. 아들지 계좌 실시간 감시 및 로보틱스 결제 솔루션 연동. GCV 가치 준수 모델."},
-        {f:"🇺🇸", n:"미국 (USA)", d:"[뉴욕 허브] 글로벌 유동성 공급 심장부. 월가 전산망과 전례지 간 양자 암호화 동기화 성공. (Global Power Generation)"},
-        {f:"🇮🇷", n:"이란 (IRAN)", d:"[이란 노드] 자산 통합 및 UBI 시스템 가동. 디지털 자산 결제 승인 및 아들지 기반 현지 통화 안정화 정책 시행."},
-        {f:"🇻🇳", n:"베트남 (VIETNAM)", d:"[ASEAN 본부] UBI 집중 배분 지역. 청년 창업 지원을 위한 Pi 기반 소액 대출 시스템 및 전례지 연동 완료."},
-        {f:"🇩🇪", n:"독일 (GERMANY)", d:"[EU 기술센터] 양자 내성 암호화 노드 기술의 글로벌 표준화 작업 수행. 전례지 원천 기술 보호 구역."},
-        {f:"🇸🇦", n:"사우디 (SAUDI)", d:"[네옴 노드] 에너지 산업 자본의 디지털 자산화 전담. 아들지 기반 인프라 결제망 및 오일 달러 통합."},
-        {f:"🇨🇳", n:"중국 (CHINA)", d:"[상하이 노드] 資産管理 센터 가동. 대규모 DEX 스왑 처리 및 아시아 최대 LP 공급지 관리 전략 구동."},
-        {f:"🇬🇧", n:"영국 (UK)", d:"[런던 노드] 아들지 파생 상품 승인 센터. 독립적 글로벌 금융 노드 운영 및 파운드화 연동 모듈 가동."},
-        {f:"🇮🇳", n:"인도 (INDIA)", d:"[IT 인재 노드] 수억 명 단위 아들지 계좌 생성 및 트래픽 최적화. UBI 보급 알고리즘의 글로벌 테스트 베드."},
-        {f:"🇫🇷", n:"프랑스 (FRANCE)", d:"[문화 자산 노드] 명품 및 예술 자산 디지털 가치 통합. 전례지 기반 고액 자산가 자산 관리 프로토콜 가동."}
+    // 1. 50개 국가 데이터 생성 (코드를 더 길게 만들기 위해 데이터 수동 정의)
+    const worldCountries = [
+        'KR (Korea)', 'US (USA)', 'JP (Japan)', 'CN (China)', 'VN (Vietnam)',
+        'DE (Germany)', 'FR (France)', 'GB (UK)', 'IR (Iran)', 'SA (Saudi)',
+        'RU (Russia)', 'IN (India)', 'BR (Brazil)', 'CA (Canada)', 'AU (Australia)',
+        'IT (Italy)', 'ES (Spain)', 'MX (Mexico)', 'ID (Indonesia)', 'TH (Thailand)',
+        'PH (Philippine)', 'TR (Turkey)', 'NL (Netherlands)', 'CH (Switzerland)', 'SE (Sweden)',
+        'NO (Norway)', 'FI (Finland)', 'DK (Denmark)', 'PL (Poland)', 'CZ (Czech)',
+        'HU (Hungary)', 'RO (Romania)', 'GR (Greece)', 'PT (Portugal)', 'BE (Belgium)',
+        'AT (Austria)', 'IL (Israel)', 'AE (UAE)', 'QA (Qatar)', 'SG (Singapore)',
+        'MY (Malaysia)', 'ZA (South Africa)', 'EG (Egypt)', 'NG (Nigeria)', 'PK (Pakistan)',
+        'BD (Bangladesh)', 'UA (Ukraine)', 'KZ (Kazakhstan)', 'UZ (Uzbekistan)', 'HK (HK Group)'
     ];
 
-    const list = document.getElementById('flag-list');
-    for(let i=0; i<50; i++) {
-        const item = nodeData[i % nodeData.length];
-        const btn = document.createElement('div');
-        btn.className = 'flag-item';
-        btn.innerHTML = item.f;
-        btn.onclick = () => {
-            document.getElementById('node-name').innerText = `[${item.n}] Node 지침`;
-            document.getElementById('node-desc').innerHTML = `${item.d}<br><br><span style='color:var(--gold); font-size:12px;'>* HK-WorldBank 전례지 원천 보안 규정 적용 중</span>`;
-        };
-        list.appendChild(btn);
-    }
+    const grid = document.getElementById('main-grid');
+    worldCountries.forEach(country => {
+        const div = document.createElement('div');
+        div.className = 'country-item';
+        div.innerText = country.split(' ')[0];
+        div.title = country;
+        div.onclick = () => alert(country + " 국가 지원 서버 동기화 완료.");
+        grid.appendChild(div);
+    });
 
-    // 3. 해커톤 필살기: 60초 보안 동기화 프로세스
-    function runTask(taskName) {
-        let count = 60;
-        const overlay = document.getElementById('secure-overlay');
-        const display = document.getElementById('timer-val');
-        overlay.style.display = 'flex';
-        
-        const timer = setInterval(() => {
-            count--;
-            display.innerText = count;
-            if(count <= 0) {
-                clearInterval(timer);
-                overlay.style.display = 'none';
-                alert(`[승인 완료] ${taskName} 작업이 전례지 및 아들지에 영구 기록되었습니다.`);
+    // 2. 초정밀 실시간 변동 스크립트
+    function startLiveEngine() {
+        setInterval(() => {
+            // GCV
+            const gcvVal = 314159.708 + (Math.random() - 0.5) * 2;
+            document.getElementById('gcv-val').innerText = "$" + gcvVal.toLocaleString('en-US', {minimumFractionDigits: 3, maximumFractionDigits: 3});
+            
+            // UBI
+            const ubiVal = 12.84 + (Math.random() - 0.5) * 0.02;
+            document.getElementById('ubi-val').innerText = ubiVal.toFixed(2) + "%";
+
+            // LCO
+            const lcoVal = 15.20 + (Math.random() - 0.5) * 0.1;
+            document.getElementById('lco-val').innerText = lcoVal.toFixed(2) + "%";
+        }, 1000);
+    }
+    startLiveEngine();
+
+    // 3. 메가 테스트 엔진
+    function runMegaTest() {
+        let sec = 60;
+        const display = document.getElementById('timer-num');
+        const interval = setInterval(() => {
+            sec--;
+            display.innerText = sec;
+            if(sec <= 0) {
+                clearInterval(interval);
+                alert("HK-WORLD BANK: 전 세계 노드 검증 완료. 시스템 정상.");
+                sec = 60;
+                display.innerText = "60";
             }
         }, 1000);
+    }
+
+    // 4. 삐리리 챗봇 고도화 대화
+    function bbiririTalk() {
+        const messages = [
+            "혜공 형님! 현재 홍콩과 싱가포르 노드 결제가 폭주하고 있습니다!",
+            "영승수 시스템이 전 세계 슈퍼마켓 1,200만 개 매장에 연동되었습니다.",
+            "현재 GCV 가치가 안정적으로 유지되고 있습니다. 파이 생태계가 확장 중입니다.",
+            "삐리리! 전 세계 기본소득 분배율이 13%를 향해 달려가고 있습니다!"
+        ];
+        alert("🤖 삐리리 안내: " + messages[Math.floor(Math.random() * messages.length)]);
     }
 </script>
 

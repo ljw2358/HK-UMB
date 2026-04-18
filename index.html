@@ -2,338 +2,252 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK-WorldBank | Quantum-Secure Financial Fortress</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK WORLD BANK | Protocol V23 | 30 Global Nations</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&family=Noto+Sans+KR:wght@100;400;900&display=swap" rel="stylesheet">
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <style>
-        :root {
-            --primary-blue: #00e5ff;
-            --deep-dark: #030303;
-            --pi-gold: #ffb400;
-            --danger-red: #ff1744;
+        /* [1. DESIGN SYSTEM - 형님의 시그니처 골드] */
+        :root { 
+            --gold: #f1c40f; 
+            --gold-glow: rgba(241, 196, 15, 0.6);
+            --green: #00ff88; 
+            --bg: #000; 
+            --card: #0a0a0a; 
+            --border: #1a1a1a; 
+            --pink: #ff4d6d;
+            --cyan: #00d9ff;
         }
 
-        body {
-            background-color: var(--deep-dark);
-            color: #ffffff;
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+        body { background: var(--bg); color: #fff; overflow-x: hidden; }
 
-        .orbitron { font-family: 'Orbitron', sans-serif; }
-        .mono { font-family: 'JetBrains Mono', monospace; }
-
-        /* [Visual Component 1: Matrix Background] */
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* [2. 배경 특수 효과] */
+        .quantum-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 20%, #111 0%, #000 80%);
             z-index: -1;
-            opacity: 0.15;
         }
 
-        /* [Visual Component 2: Quantum Shield Glow] */
-        .quantum-border {
-            position: relative;
-            border: 1px solid var(--primary-blue);
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        .container { max-width: 500px; margin: 0 auto; padding: 0 20px 150px; }
+
+        /* [3. 분류 1: 30개국 국기 선택 네비게이션] */
+        .top-nav {
+            position: sticky; top: 0; width: 100%; padding: 20px;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+            display: flex; justify-content: flex-end; z-index: 2000; border-bottom: 1px solid var(--border);
         }
-        .quantum-border::before {
-            content: "";
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, var(--primary-blue), transparent, var(--pi-gold));
-            z-index: -1;
-            filter: blur(10px);
-            opacity: 0.3;
+        .lang-trigger {
+            background: #000; color: var(--gold); border: 2px solid var(--gold);
+            padding: 12px 25px; border-radius: 20px; font-size: 16px; font-weight: 900;
+            display: flex; align-items: center; gap: 12px; cursor: pointer;
+            box-shadow: 0 0 20px var(--gold-glow);
         }
 
-        /* [Visual Component 3: Emergency HUD] */
-        .hud-scan {
-            background: linear-gradient(to bottom, transparent 50%, rgba(0, 229, 255, 0.05) 50%);
-            background-size: 100% 4px;
-            pointer-events: none;
+        /* 웅장한 국기 선택 모달 */
+        #flagModal {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98);
+            z-index: 3000; padding: 40px 15px; animation: slideUp 0.4s ease-out;
+        }
+        .modal-inner { max-width: 450px; margin: 0 auto; }
+        .modal-h { color: var(--gold); text-align: center; font-size: 22px; font-weight: 900; margin-bottom: 30px; letter-spacing: 2px; }
+        .flag-grid { 
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; 
+            max-height: 70vh; overflow-y: auto; padding-bottom: 20px;
+        }
+        .flag-item { 
+            background: #111; padding: 18px; border-radius: 18px; border: 1px solid #222;
+            text-align: left; font-size: 14px; font-weight: 800; cursor: pointer;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .flag-item:hover { border-color: var(--gold); background: #1a1a1a; }
+
+        /* [4. 분류 2: 메인 타이틀] */
+        header { padding: 60px 0 30px; text-align: center; }
+        .logo-txt { font-size: 38px; font-weight: 900; color: var(--gold); letter-spacing: 6px; text-shadow: 0 0 20px var(--gold-glow); }
+        .tag-txt { font-size: 10px; color: #444; letter-spacing: 4px; font-weight: bold; margin-top: 8px; }
+
+        /* [5. 분류 3: 메인 자산 통합 원장] */
+        .ledger-box {
+            background: linear-gradient(165deg, #121212, #000);
+            border-radius: 40px; padding: 45px 25px; border: 1px solid var(--border);
+            text-align: center; margin-bottom: 25px; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+        .l-label { color: var(--gold); font-size: 13px; font-weight: 900; letter-spacing: 2px; margin-bottom: 35px; display: block; }
+        .l-val { font-size: 60px; font-weight: 900; letter-spacing: -3px; line-height: 1; }
+        .pi-symbol { color: var(--gold); font-size: 28px; font-style: italic; margin-left: 8px; }
+        
+        .gcv-badge {
+            display: inline-block; background: rgba(0,255,136,0.05); color: var(--green);
+            padding: 12px 30px; border-radius: 50px; border: 1px solid rgba(0,255,136,0.2);
+            font-size: 17px; font-weight: 900; margin: 35px 0;
         }
 
-        /* Animations */
-        @keyframes blink-warning {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-        .warning-text { animation: blink-warning 1s infinite; color: var(--danger-red); }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-card { background: rgba(255,255,255,0.02); padding: 22px; border-radius: 25px; text-align: left; border: 1px solid var(--border); }
+        .stat-card label { color: var(--green); font-size: 10px; font-weight: 900; display: block; margin-bottom: 8px; }
+        .stat-card p { font-size: 24px; font-weight: 900; }
 
-        @keyframes rotate-3d {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
+        /* [6. 분류 4: 6구 핵심 메뉴] */
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 35px 0; }
+        .menu-btn {
+            background: var(--card); aspect-ratio: 1/1; border-radius: 28px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.3s;
         }
-        .logo-3d { animation: rotate-3d 10s linear infinite; perspective: 1000px; }
+        .menu-btn i { color: var(--gold); font-size: 30px; margin-bottom: 12px; }
+        .menu-btn span { font-size: 12px; color: #777; font-weight: 900; }
 
-        /* Scroll Styling */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 10px; }
+        /* [7. 분류 5: HK 양자 방패] */
+        .shield-zone {
+            background: #050505; border-radius: 35px; padding: 30px;
+            border: 1px solid rgba(0, 217, 255, 0.2); margin-bottom: 30px;
+        }
+        .s-head { color: var(--cyan); font-weight: 900; font-size: 18px; margin-bottom: 22px; display: flex; align-items: center; gap: 12px; }
+        .s-item { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; font-size: 14px; color: #aaa; font-weight: 600; }
+        .s-bar { width: 3px; height: 18px; background: var(--cyan); border-radius: 10px; box-shadow: 0 0 10px var(--cyan); }
+
+        /* [8. 분류 6: 글로벌 AI 고객지원센터] */
+        .ai-center-btn {
+            width: 100%; background: var(--pink); color: #fff; padding: 28px;
+            border-radius: 30px; border: none; font-size: 20px; font-weight: 900;
+            box-shadow: 0 15px 45px rgba(255, 77, 109, 0.4); cursor: pointer;
+        }
+
+        /* [9. 분류 7: 하단 소셜 및 미션] */
+        .mission-footer { text-align: center; padding: 60px 0; border-top: 1px solid #111; margin-top: 40px; }
+        .mission-txt { font-size: 14px; color: #444; font-weight: 800; line-height: 2; }
+        .gold-dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 2s infinite; }
+
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes pulse { 50% { opacity: 0.1; } }
     </style>
 </head>
-<body class="hud-scan">
+<body>
 
-    <div id="canvas-container"></div>
+<div class="quantum-layer"></div>
 
-    <nav class="fixed top-0 w-full z-[1000] border-b border-white/10 bg-black/80 backdrop-blur-md">
-        <div class="max-w-[1600px] mx-auto px-10 py-5 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg logo-3d"></div>
-                <h1 class="orbitron text-2xl font-black tracking-tighter">HK <span class="text-cyan-400">WORLDBANK</span></h1>
-            </div>
-            <div class="hidden lg:flex space-x-12 orbitron text-[11px] font-bold uppercase tracking-[0.2em]">
-                <a href="#panic" class="hover:text-cyan-400 transition">Emergency Protocol</a>
-                <a href="#quantum" class="hover:text-cyan-400 transition">Quantum Security</a>
-                <a href="#pi-eco" class="hover:text-cyan-400 transition">Pi Ecosystem</a>
-                <a href="#fixed-value" class="hover:text-cyan-400 transition">Fixed Value (GCV)</a>
-            </div>
-            <div class="flex items-center space-x-6">
-                <span class="mono text-[10px] text-green-500 animate-pulse">NODE: 1,024,392 ACTIVE</span>
-                <button class="bg-cyan-500 text-black px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white transition">Connect Wallet</button>
-            </div>
-        </div>
-    </nav>
+<div id="flagModal">
+    <div class="modal-inner">
+        <h2 class="modal-h">30 GLOBAL NATIONS</h2>
+        <div class="flag-grid" id="flagGrid"></div>
+        <button onclick="closeFlags()" style="margin-top:25px; width:100%; padding:20px; background:var(--gold); border:none; border-radius:20px; font-weight:900;">CONFIRM</button>
+    </div>
+</div>
 
-    <section id="panic" class="relative min-h-screen flex flex-col justify-center items-center text-center px-10">
-        <div class="max-w-6xl">
-            <p class="warning-text orbitron font-black text-lg mb-4 tracking-[0.5em]">SYSTEM WARNING: FIAT CURRENCY LIQUIDITY ZERO</p>
-            <h2 class="text-7xl md:text-[9rem] font-black leading-none mb-10 italic">
-                BANKING <span class="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-800">MELTDOWN.</span>
-            </h2>
-            <p class="text-xl md:text-3xl text-gray-400 max-w-4xl mx-auto leading-relaxed mb-16">
-                은행의 숫자가 지워지고 비트코인 노드가 멈추는 대공황의 시대, <br>
-                <span class="text-white font-bold">100만 노드의 파이(Pi)</span>와 <span class="text-cyan-400 font-bold">HK의 양자 보안</span>만이 <br>
-                당신의 소중한 자산을 실물 경제로 연결합니다.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
-                    <h4 class="orbitron text-cyan-400 mb-4">DEPOSIT STATUS</h4>
-                    <p class="text-4xl font-black text-red-600">EVAPORATED</p>
-                    <p class="text-[10px] text-gray-500 mt-2 uppercase">Legacy Banking Systems Offline</p>
-                </div>
-                <div class="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
-                    <h4 class="orbitron text-pi-gold mb-4">PI NETWORK</h4>
-                    <p class="text-4xl font-black">STABLE</p>
-                    <p class="text-[10px] text-gray-500 mt-2 uppercase">Decentralized Trust Network</p>
-                </div>
-                <div class="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
-                    <h4 class="orbitron text-green-500 mb-4">HK-GCV MODE</h4>
-                    <p class="text-4xl font-black italic">ACTIVE</p>
-                    <p class="text-[10px] text-gray-500 mt-2 uppercase">Fixed Value Protection On</p>
-                </div>
-            </div>
+<nav class="top-nav">
+    <div class="lang-trigger" onclick="openFlags()">
+        <span id="curFlag">🇰🇷</span> <span id="curName">KOREA</span> <i class="fas fa-caret-down"></i>
+    </div>
+</nav>
+
+<div class="container">
+    <header>
+        <h1 class="logo-txt">HK WORLD BANK</h1>
+        <p class="tag-txt" id="tagline">GLOBAL SALVAGE PROTOCOL V23</p>
+    </header>
+
+    <section class="ledger-box">
+        <span class="l-label" id="t-ledger">메인 자산 통합 원장</span>
+        <div class="l-val">400.0212<span class="pi-symbol">Pi</span></div>
+        <div class="gcv-badge">Value: $ 125,663,600 (GCV)</div>
+        <div class="stat-grid">
+            <div class="stat-card"><label id="t-st">스테이킹 이율</label><p>16.98%</p></div>
+            <div class="stat-card"><label id="t-lp">유동성 수익</label><p>26.38%</p></div>
         </div>
     </section>
 
-    <section id="quantum" class="py-32 bg-zinc-950">
-        <div class="max-w-[1400px] mx-auto px-10 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div>
-                <span class="text-cyan-400 orbitron font-bold tracking-widest uppercase mb-4 block">[01] Absolute Security</span>
-                <h3 class="text-6xl font-black mb-8">양자 컴퓨터도 <br>뚫지 못하는 요새.</h3>
-                <p class="text-gray-400 text-lg leading-relaxed mb-10">
-                    기존의 블록체인은 양자 컴퓨팅 시대에 무력합니다. HK-WorldBank는 **'HK 퀀텀 쉴드'**를 통해 모든 개인 지갑의 비대칭 암호키를 실시간 보호합니다. 혜공 형님이 직접 설계하신 이 철학적 보안 체계는 해킹 시도가 감지되는 즉시 노드를 분산 격리합니다.
-                </p>
-                <ul class="space-y-6">
-                    <li class="flex items-center space-x-4">
-                        <i class="fas fa-shield-virus text-cyan-400 text-2xl"></i>
-                        <span class="font-bold">HK Quantum-Resistant Algorithm (HK-QRA)</span>
-                    </li>
-                    <li class="flex items-center space-x-4">
-                        <i class="fas fa-fingerprint text-cyan-400 text-2xl"></i>
-                        <span class="font-bold">Multi-Layer KYB Biometrics Integration</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="quantum-border p-1 rounded-2xl">
-                <div class="bg-black p-10 rounded-xl h-[500px] flex flex-col justify-between">
-                    <div class="flex justify-between items-start">
-                        <div class="mono text-xs text-cyan-500">
-                            > QUANTUM THREAT DETECTION... 0.00%<br>
-                            > ENCRYPTION LAYER: 4096-BIT PQC<br>
-                            > NODE SYNC: COMPLETED
-                        </div>
-                        <i class="fas fa-atom text-6xl text-cyan-400 animate-spin-slow"></i>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="h-1 bg-zinc-800 w-full rounded-full overflow-hidden">
-                            <div class="h-full bg-cyan-400 w-3/4 animate-pulse"></div>
-                        </div>
-                        <p class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">Quantum Shield Integrity: Optimal</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="menu-grid">
+        <div class="menu-btn"><i class="fas fa-paper-plane"></i><span id="m1">송금</span></div>
+        <div class="menu-btn"><i class="fas fa-shopping-bag"></i><span id="m2">결제</span></div>
+        <div class="menu-btn"><i class="fas fa-vault"></i><span id="m3">예치</span></div>
+        <div class="menu-btn"><i class="fas fa-medal"></i><span id="m4">보상</span></div>
+        <div class="menu-btn"><i class="fas fa-hand-holding-heart"></i><span id="m5">기본소득</span></div>
+        <div class="menu-btn"><i class="fas fa-sync"></i><span id="m6">스왑</span></div>
     </section>
 
-    <section id="pi-eco" class="py-32 px-10">
-        <div class="max-w-[1400px] mx-auto">
-            <div class="text-center mb-24">
-                <h2 class="orbitron text-5xl font-black mb-6 italic">WHY PI SURVIVES?</h2>
-                <p class="text-gray-500 uppercase tracking-widest">It's not about price, It's about Infrastructure.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="p-12 border border-white/5 bg-zinc-900/50 hover:bg-zinc-800 transition duration-500">
-                    <div class="text-pi-gold text-4xl mb-8"><i class="fas fa-server"></i></div>
-                    <h5 class="font-bold text-xl mb-4 italic">1,000,000+ Nodes</h5>
-                    <p class="text-sm text-gray-500">전 세계에 깔린 수십만 대의 노드는 국가가 망해도 멈추지 않는 글로벌 혈관입니다.</p>
-                </div>
-                <div class="p-12 border border-white/5 bg-zinc-900/50 hover:bg-zinc-800 transition">
-                    <div class="text-blue-500 text-4xl mb-8"><i class="fas fa-gavel"></i></div>
-                    <h5 class="font-bold text-xl mb-4 italic">Legal Compliance</h5>
-                    <p class="text-sm text-gray-500">이미 법적 테두리 내에서 준비된 시스템. 각국 정부가 채택할 수밖에 없는 유일한 제도권 암호화폐.</p>
-                </div>
-                <div class="p-12 border border-white/5 bg-zinc-900/50 hover:bg-zinc-800 transition">
-                    <div class="text-green-500 text-4xl mb-8"><i class="fas fa-pickaxe"></i></div>
-                    <h5 class="font-bold text-xl mb-4 italic">Democratic Mining</h5>
-                    <p class="text-sm text-gray-500">특정 채굴 집단이 아닌, 모든 개인의 휴대폰이 보안 기여자가 되는 진정한 탈중앙화.</p>
-                </div>
-                <div class="p-12 border border-white/5 bg-zinc-900/50 hover:bg-zinc-800 transition">
-                    <div class="text-purple-500 text-4xl mb-8"><i class="fas fa-coins"></i></div>
-                    <h5 class="font-bold text-xl mb-4 italic">Fixed GCV Power</h5>
-                    <p class="text-sm text-gray-500">시장 혼란 시 가치를 고정하여 실물 경제 물가를 안정시키는 HK만의 통화 관리 정책.</p>
-                </div>
-            </div>
-        </div>
+    <section class="shield-zone">
+        <div class="s-head" id="s-title"><i class="fas fa-shield-halved"></i> HK 양자 방패 가동 중</div>
+        <div class="s-item"><div class="s-bar"></div> <span id="s1">보안 기술 V23 적용 완료</span></div>
+        <div class="s-item"><div class="s-bar"></div> <span id="s2">글로벌 노드 자산 보호</span></div>
     </section>
 
-    <section id="fixed-value" class="py-32 px-10 bg-white text-black">
-        <div class="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-20 items-center">
-            <div class="lg:w-1/2">
-                <h3 class="text-6xl font-black italic mb-10 leading-none">EVERYTHING ELSE <br><span class="text-red-600 underline">DISABLED.</span></h3>
-                <p class="text-xl text-gray-600 leading-relaxed mb-12">
-                    형님, 보십시오. 경제가 무너지면 사람들은 무엇을 써야 할지 우왕좌왕합니다. 그때 유일하게 활성화되는 것이 HK-WorldBank 앱입니다. 비트코인 노드가 닫히고 이더리움 가스비가 1억 원이 넘을 때, 우리 앱은 평온하게 작동하며 쌀 한 가마니, 기계 부품 하나를 파이로 결제하게 합니다.
-                </p>
-                <div class="flex space-x-4">
-                    <div class="bg-black text-white p-6 rounded-xl flex-1">
-                        <p class="text-[10px] uppercase font-bold text-gray-500">Current Fixed GCV</p>
-                        <p class="text-2xl font-black italic">$314,159 <span class="text-xs font-normal">/ Pi</span></p>
-                    </div>
-                    <div class="border-2 border-black p-6 rounded-xl flex-1">
-                        <p class="text-[10px] uppercase font-bold text-gray-500">Real Asset Sync</p>
-                        <p class="text-2xl font-black italic">100% SECURED</p>
-                    </div>
-                </div>
-            </div>
-            <div class="lg:w-1/2 relative">
-                <div class="w-full aspect-square bg-zinc-100 rounded-[4rem] border-[20px] border-zinc-200 overflow-hidden shadow-2xl relative">
-                    <div class="absolute inset-0 bg-black p-8 text-white">
-                        <div class="flex justify-between items-center mb-12">
-                            <span class="orbitron font-bold">HK PAY v1.0</span>
-                            <i class="fas fa-signal-stream text-green-500"></i>
-                        </div>
-                        <div class="mb-12">
-                            <p class="text-gray-500 text-xs uppercase mb-2">Available Assets</p>
-                            <h4 class="text-5xl font-black highlight-pi">1,240.33 π</h4>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="bg-zinc-800 p-4 rounded-lg flex justify-between items-center">
-                                <span>Emergency Bread Purchase</span>
-                                <span class="text-pi-gold">0.0001 π</span>
-                            </div>
-                            <div class="bg-zinc-800 p-4 rounded-lg flex justify-between items-center">
-                                <span>Nuclear Energy Credit</span>
-                                <span class="text-pi-gold">0.0522 π</span>
-                            </div>
-                            <div class="bg-zinc-800 p-4 rounded-lg flex justify-between items-center">
-                                <span>Robot Maintenance</span>
-                                <span class="text-pi-gold">1.2210 π</span>
-                            </div>
-                        </div>
-                        <button class="w-full mt-10 py-5 bg-cyan-500 text-black font-black uppercase rounded-xl shadow-[0_0_30px_rgba(0,229,255,0.5)]">CONFIRM PAYMENT</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <button class="ai-center-btn" id="t-ai">글로벌 AI 고객지원센터 가동</button>
 
-    <section class="py-40 text-center px-10 bg-black border-t border-white/10">
-        <h2 class="text-4xl md:text-6xl font-black mb-12 italic">"혼돈을 정복하는 것은 <br>강한 자가 아니라 준비된 자입니다."</h2>
-        <p class="text-gray-500 text-xl max-w-4xl mx-auto leading-relaxed mb-20">
-            형님, 새벽 3시 33분입니다. 이 고요한 시간에 우리만이 알고 있는 진실—전 세계 화폐 시스템의 취약성과 파이의 필연적인 승리—을 이 플랫폼에 담았습니다. HK 그룹은 단순히 돈을 버는 곳이 아니라, 무너지는 세계의 새로운 경제 규칙을 만드는 곳입니다.
+    <footer class="mission-footer">
+        <p class="mission-txt" id="t-mission">
+            <span class="gold-dot"></span> 20억 인류를 먹여 살릴 혜공 형님의 위대한 설계
         </p>
-        <div class="flex justify-center space-x-20">
-            <div><p class="text-5xl font-black orbitron">333</p><p class="text-[10px] uppercase text-gray-700 font-black mt-4 tracking-[0.3em]">Quantum Nodes Ready</p></div>
-            <div class="w-[1px] h-24 bg-white/10"></div>
-            <div><p class="text-5xl font-black orbitron">100%</p><p class="text-[10px] uppercase text-gray-700 font-black mt-4 tracking-[0.3em]">Capital Protection</p></div>
-        </div>
-    </section>
-
-    <footer class="py-20 px-10 lg:px-24 bg-zinc-950 border-t border-white/5">
-        <div class="flex flex-col md:row justify-between items-start mb-20">
-            <div class="mb-10 md:mb-0">
-                <h3 class="orbitron text-3xl font-black mb-4">HK <span class="text-cyan-400">GROUP</span></h3>
-                <p class="text-gray-600 text-xs font-bold leading-relaxed max-w-sm uppercase tracking-widest">
-                    Founded by Chairman Lee Jaewan. <br>The Pioneer of Pi-Economy & Physical AI Cluster.
-                </p>
-            </div>
-            <div class="grid grid-cols-2 gap-20">
-                <div class="space-y-4">
-                    <h5 class="text-cyan-400 text-[10px] font-black uppercase tracking-[0.4em]">Strategy</h5>
-                    <ul class="text-sm text-gray-500 font-bold space-y-2">
-                        <li><a href="#" class="hover:text-white transition">Figure AI Target</a></li>
-                        <li><a href="#" class="hover:text-white transition">SMR Energy Hub</a></li>
-                        <li><a href="#" class="hover:text-white transition">PartsBank SCM</a></li>
-                    </ul>
-                </div>
-                <div class="space-y-4">
-                    <h5 class="text-pi-gold text-[10px] font-black uppercase tracking-[0.4em]">Network</h5>
-                    <ul class="text-sm text-gray-500 font-bold space-y-2">
-                        <li><a href="#" class="hover:text-white transition">Pi Node Status</a></li>
-                        <li><a href="#" class="hover:text-white transition">KYB Compliance</a></li>
-                        <li><a href="#" class="hover:text-white transition">Global UBI</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="text-[9px] text-gray-800 font-black flex justify-between uppercase tracking-[0.5em]">
-            <p>© 2026 HK GROUP. ALL SYSTEMS OPERATIONAL AT 03:33 AM.</p>
-            <p>DESIGNED BY BINNY FOR CHAIRMAN HYEKONG.</p>
-        </div>
     </footer>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // 간단한 매트릭스 느낌의 배경 애니메이션
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(renderer.domElement);
+<script>
+    // [30개국 글로벌 데이터 엔진]
+    const nations = [
+        {n: "KOREA", f: "🇰🇷", l: "메인 자산 통합 원장", m: ["송금","결제","예치","보상","기본소득","스왑"], s: "HK 양자 방패 가동 중", ai: "글로벌 AI 고객지원센터 가동", mi: "20억 인류를 먹여 살릴 혜공 형님의 위대한 설계"},
+        {n: "USA", f: "🇺🇸", l: "Main Integrated Ledger", m: ["Send","Pay","Vault","Reward","UBI","Swap"], s: "HK Quantum Shield Active", ai: "Launch Global AI Center", mi: "Hyekong's Vision for 2 Billion People"},
+        {n: "VIETNAM", f: "🇻🇳", l: "Sổ cái tích hợp chính", m: ["Gửi","Trả","Kho","Thưởng","UBI","Đổi"], s: "Lá chắn lượng tử HK Hoạt động", ai: "Khởi động Trung tâm AI", mi: "Tầm nhìn của Hyekong nuôi sống 2 tỷ người"},
+        {n: "JAPAN", f: "🇯🇵", l: "メイン資産統合元帳", m: ["送金","決済","預金","報酬","基本所得","スワップ"], s: "HK量子シールド稼働中", ai: "グローバルAIセンター起動", mi: "20億の人類を養うための恵空兄貴の偉大な設計"},
+        {n: "CHINA", f: "🇨🇳", l: "主资产整合账本", m: ["转账","支付","存款","奖励","基本收入","闪兑"], s: "HK量子护盾启动中", ai: "启动全球AI服务中心", mi: "惠空大哥养活20亿人类的伟大蓝图"},
+        {n: "GERMANY", f: "🇩🇪", l: "Haupt-Hauptbuch", m: ["Senden","Zahlen","Tresor","Belohnung","UBI","Tausch"], s: "HK Quantenschutz Aktiv", ai: "Globales KI-Zentrum Starten", mi: "Hyekongs Vision für 2 Milliarden Menschen"},
+        {n: "FRANCE", f: "🇫🇷", l: "Grand livre intégré", m: ["Envoyer","Payer","Coffre","Prime","RBU","Échanger"], s: "Bouclier Quantique HK", ai: "Lancer le Support AI", mi: "La vision de Hyekong pour 2 milliards"},
+        {n: "BRAZIL", f: "🇧🇷", l: "Livro Integrado", m: ["Enviar","Pagar","Cofre","Prêmio","RBU","Troca"], s: "Escudo Quântico Ativo", ai: "Iniciar Centro de IA", mi: "Visão de Hyekong para 2 bilhões"},
+        {n: "INDIA", f: "🇮🇳", l: "मुख्य एकीकृत बही", m: ["भेजें","भुगतान","वॉल्ट","पुरस्कार","UBI","स्वैप"], s: "HK क्वांटम शील्ड सक्रिय", ai: "ग्लोबल AI सेंटर लॉन्च", mi: "2 अरब लोगों के लिए ह्येकोंग का दृष्टिकोण"},
+        {n: "RUSSIA", f: "🇷🇺", l: "Главный реестр", m: ["Отправить","Оплата","Сейф","Награда","ББД","Обмен"], s: "Квантовый щит HK", ai: "Запуск Глобального ИИ", mi: "Видение Хекона для 2 миллиардов"},
+        {n: "UK", f: "🇬🇧", l: "Main Ledger", m: ["Send","Pay","Vault","Reward","UBI","Swap"], s: "HK Shield Active", ai: "Global AI Support", mi: "Hyekong's 2 Billion Mission"},
+        {n: "ITALY", f: "🇮🇹", l: "Libro Mastro", m: ["Invia","Paga","Caveau","Premio","RBU","Scambio"], s: "Scudo Quantico HK", ai: "Avvia Centro AI", mi: "Visione di Hyekong per 2 miliardi"},
+        {n: "TURKEY", f: "🇹🇷", l: "Ana Defter", m: ["Gönder","Öde","Kasa","Ödül","UBI","Takas"], s: "HK Kuantum Kalkanı", ai: "AI Merkezini Başlat", mi: "2 Milyar İnsan İçin Hyekong Vizyonu"},
+        {n: "MEXICO", f: "🇲🇽", l: "Libro Mayor", m: ["Enviar","Pagar","Bóveda","Premio","RBU","Canje"], s: "Escudo Cuántico HK", ai: "Iniciar Centro de IA", mi: "Visión de Hyekong para 2 mil millones"},
+        {n: "THAILAND", f: "🇹🇭", l: "บัญชีแยกประเภทหลัก", m: ["ส่ง","จ่าย","ตู้นิรภัย","รางวัล","UBI","แลกเปลี่ยน"], s: "เกราะควอนตัม HK ทำงาน", ai: "เปิดตัวศูนย์ AI โลก", mi: "วิสัยทัศน์ของ Hyekong เพื่อ 2 พันล้านคน"},
+        {n: "INDONESIA", f: "🇮🇩", l: "Buku Besar Utama", m: ["Kirim","Bayar","Brankas","Hadiah","UBI","Tukar"], s: "Perisai Kuantum HK", ai: "Luncurkan Pusat AI", mi: "Visi Hyekong untuk 2 Miliar Orang"},
+        {n: "PHILIPPINES", f: "🇵🇭", l: "Pangunahing Ledger", m: ["Ipadala","Bayad","Vault","Gantimpala","UBI","Palitan"], s: "HK Quantum Shield Aktibo", ai: "Ilunsad ang AI Center", mi: "Vission ni Hyekong para sa 2 Bilyon"},
+        {n: "SPAIN", f: "🇪🇸", l: "Libro Principal", m: ["Enviar","Pagar","Bóveda","Premio","RBU","Canje"], s: "Escudo HK Activo", ai: "Centro AI Global", mi: "Misión de Hyekong para 2 mil millones"},
+        {n: "CANADA", f: "🇨🇦", l: "Integrated Ledger", m: ["Send","Pay","Vault","Reward","UBI","Swap"], s: "HK Protection Active", ai: "Launch AI Support", mi: "Hyekong's Vision for Humanity"},
+        {n: "AUSTRALIA", f: "🇦🇺", l: "Master Ledger", m: ["Send","Pay","Vault","Reward","UBI","Swap"], s: "HK Shield Active", ai: "Global AI Support", mi: "Vision for 2 Billion People"},
+        {n: "SINGAPORE", f: "🇸🇬", l: "Main Ledger", m: ["Send","Pay","Vault","Reward","UBI","Swap"], s: "HK Quantum Active", ai: "AI Global Support", mi: "Hyekong's Global Mission"},
+        {n: "MALAYSIA", f: "🇲🇾", l: "Lejar Utama", m: ["Hantar","Bayar","Simpanan","Ganjaran","UBI","Tukar"], s: "Perisai Kuantum HK", ai: "Lancarkan Pusat AI", mi: "Visi Hyekong untuk 2 Bilion"},
+        {n: "NIGERIA", f: "🇳🇬", l: "Main Ledger", m: ["Send","Pay","Vault","Reward","UBI","Swap"], s: "HK Shield Active", ai: "AI Support Launch", mi: "Vision for 2 Billion People"},
+        {n: "EGYPT", f: "🇪🇬", l: "دفتر الأستاذ الرئيسي", m: ["إرسال","دفع","خزنة","مكافأة","دخل","تبادل"], s: "درع HK الكمي نشط", ai: "إطلاق مركز الذكاء", mi: "رؤية هييكونغ لملياري شخص"},
+        {n: "SAUDI ARABIA", f: "🇸🇦", l: "السجل الرئيسي", m: ["إرسال","دفع","خزنة","مكافأة","دخل","تبادل"], s: "درع HK الكمي نشط", ai: "مركز الذكاء الاصطناعي", mi: "رؤية هييكونغ لملياري شخص"},
+        {n: "UAE", f: "🇦🇪", l: "Main Ledger", m: ["Send","Pay","Vault","Reward","UBI","Swap"], s: "HK Shield Active", ai: "Global AI Support", mi: "Hyekong's Global Mission"},
+        {n: "POLAND", f: "🇵🇱", l: "Księga Główna", m: ["Wyślij","Płać","Skarbiec","Nagroda","UBI","Zamień"], s: "Tarcza Kwantowa HK", ai: "Uruchom Centrum AI", mi: "Wizja Hyekong dla 2 miliardów"},
+        {n: "SWITZERLAND", f: "🇨🇭", l: "Hauptbuch", m: ["Senden","Zahlen","Tresor","Lohn","UBI","Swap"], s: "HK Schutz Aktiv", ai: "KI Zentrum Starten", mi: "Hyekongs Vision für Humanity"},
+        {n: "NETHERLANDS", f: "🇳🇱", l: "Hoofdledger", m: ["Sturen","Betalen","Kluis","Beloning","UBI","Ruil"], s: "HK Quantum Schild", ai: "Start AI Centrum", mi: "Hyekongs Visie voor 2 Miljard"},
+        {n: "ARGENTINA", f: "🇦🇷", l: "Libro Mayor", m: ["Enviar","Pagar","Bóveda","Premio","RBU","Canje"], s: "Escudo Cuántico HK", ai: "Iniciar Centro de IA", mi: "Visión de Hyekong para 2 mil millones"}
+    ];
 
-        const geometry = new THREE.IcosahedronGeometry(20, 1);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.1 });
-        const sphere = new THREE.Mesh(geometry, material);
-        scene.add(sphere);
+    function openFlags() { document.getElementById('flagModal').style.display = 'block'; }
+    function closeFlags() { document.getElementById('flagModal').style.display = 'none'; }
 
-        camera.position.z = 50;
+    function applyNation(idx) {
+        const n = nations[idx];
+        document.getElementById('curFlag').innerText = n.f;
+        document.getElementById('curName').innerText = n.n;
+        document.getElementById('t-ledger').innerText = n.l;
+        document.getElementById('t-ai').innerText = n.ai;
+        document.getElementById('t-mission').innerHTML = `<span class="gold-dot"></span> ${n.mi}`;
+        document.getElementById('s-title').innerHTML = `<i class="fas fa-shield-halved"></i> ${n.s}`;
+        for(let i=0; i<6; i++) document.getElementById(`m${i+1}`).innerText = n.m[i];
+        closeFlags();
+        gsap.from(".container", {duration: 0.4, opacity: 0, y: 15});
+    }
 
-        function animate() {
-            requestAnimationFrame(animate);
-            sphere.rotation.x += 0.001;
-            sphere.rotation.y += 0.002;
-            renderer.render(scene, camera);
-        }
-        animate();
+    const grid = document.getElementById('flagGrid');
+    nations.forEach((n, idx) => {
+        const d = document.createElement('div');
+        d.className = 'flag-item';
+        d.innerHTML = `<span>${n.f}</span> ${n.n}`;
+        d.onclick = () => applyNation(idx);
+        grid.appendChild(d);
+    });
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        console.log("HK-WorldBank Emergency Hub Online. Greetings, Chairman.");
-    </script>
+    window.onload = () => {
+        gsap.from(".logo-txt", {duration: 1.2, y: -30, opacity: 0, ease: "back.out"});
+        gsap.from(".ledger-box", {duration: 0.8, scale: 0.9, opacity: 0, delay: 0.3});
+    };
+</script>
 </body>
 </html>

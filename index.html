@@ -3,287 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK-WorldBank | Global Unified AI & Financial System</title>
+    <title>HK-WorldBank | Global AI & Decentralized Finance Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* [01. 전역 시스템 변수 정의] */
         :root {
-            --gold: #D4AF37; --dark-gold: #aa8a2e; --black: #050505;
-            --deep: #0a0a0a; --green: #2ecc71; --blue: #3498db; --white: #ffffff;
-            --gray: #1a1a1a; --border: #222;
+            --gold: #D4AF37;
+            --dark-gold: #aa8a2e;
+            --black: #050505;
+            --deep: #0a0a0a;
+            --gray: #1a1a1a;
+            --light-gray: #2a2a2a;
+            --white: #ffffff;
+            --status-green: #2ecc71;
+            --status-blue: #3498db;
+            --status-red: #e74c3c;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', 'Courier New', monospace;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-        body { background: var(--black); color: var(--white); overflow-x: hidden; scroll-behavior: smooth; }
+        /* [02. 베이스 리셋] */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: var(--font-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
 
-        /* [NAV SYSTEM] */
+        /* [03. 상단 네비게이션 시스템 - 1~100라인의 정수] */
         nav {
-            height: 100px; display: flex; justify-content: space-between; align-items: center;
-            padding: 0 6%; background: rgba(0,0,0,0.98); border-bottom: 2px solid var(--border);
-            position: sticky; top: 0; z-index: 9999; backdrop-filter: blur(20px);
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 6%;
+            background: rgba(0,0,0,0.95);
+            border-bottom: 2px solid var(--gray);
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            backdrop-filter: blur(20px);
         }
-        .logo-box { display: flex; flex-direction: column; }
-        .logo-main { font-size: 2.2rem; font-weight: 900; color: var(--gold); letter-spacing: 5px; }
-        .logo-sub { font-size: 0.75rem; color: #666; letter-spacing: 2px; text-transform: uppercase; }
-        .system-status { font-family: monospace; font-size: 0.8rem; color: var(--green); display: flex; align-items: center; gap: 10px; }
-        .blink { animation: blinker 1.5s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-
-        /* [HERO SECTION] */
-        .hero { padding: 150px 6% 100px; text-align: center; background: radial-gradient(circle at center, #151515, #050505); border-bottom: 1px solid var(--border); }
-        .hero-badge { display: inline-block; padding: 8px 25px; background: var(--gold); color: var(--black); font-weight: 900; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 30px; }
-        .hero h1 { font-size: 5.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px; letter-spacing: -3px; }
-        .hero p { font-size: 1.4rem; color: #888; max-width: 900px; margin: 0 auto 50px; font-weight: 300; }
-
-        /* [REAL-TIME LEDGER SECTION - 초단위 변동 원장] */
-        .ledger-container { padding: 80px 6%; background: var(--deep); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .ledger-card { background: #000; border: 1px solid var(--border); padding: 40px; border-radius: 4px; position: relative; transition: 0.3s; }
-        .ledger-card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .ledger-label { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
-        .ledger-value { font-size: 2rem; font-weight: 800; font-family: 'Courier New', monospace; color: var(--white); }
-        .ledger-change { font-size: 0.85rem; margin-top: 10px; display: flex; align-items: center; gap: 5px; }
-        .up { color: var(--green); } .down { color: #e74c3c; }
-
-        /* [FINANCIAL PROTOCOL & AI CENTER] */
-        .finance-grid { padding: 100px 6%; display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; background: var(--black); }
+        .logo-area { display: flex; flex-direction: column; }
+        .logo-main { font-size: 2.2rem; font-weight: 900; color: var(--gold); letter-spacing: 5px; line-height: 1; }
+        .logo-sub { font-size: 0.75rem; color: #555; letter-spacing: 2px; margin-top: 8px; text-transform: uppercase; }
         
-        .protocol-box { background: var(--deep); border: 1px solid var(--gold); border-radius: 8px; padding: 50px; }
-        .protocol-box h2 { font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; font-weight: 800; border-bottom: 2px solid var(--border); padding-bottom: 20px; }
-        .action-btn { width: 100%; padding: 22px; margin-bottom: 15px; background: transparent; border: 1px solid #333; color: #aaa; cursor: pointer; text-align: left; font-size: 1.1rem; font-weight: 700; transition: 0.3s; display: flex; justify-content: space-between; }
-        .action-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.05); transform: translateX(10px); }
-        .action-btn small { font-size: 0.7rem; color: #444; text-transform: uppercase; }
+        .system-monitor { display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 0.8rem; }
+        .status-pill { padding: 5px 15px; border-radius: 20px; border: 1px solid var(--status-green); color: var(--status-green); display: flex; align-items: center; gap: 8px; }
+        .blink { width: 8px; height: 8px; background: var(--status-green); border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* AI Support Center 터미널 */
-        .ai-center { background: #000; border: 1px solid var(--border); border-radius: 8px; padding: 40px; height: 600px; display: flex; flex-direction: column; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
-        .ai-header { display: flex; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 20px; color: var(--gold); font-size: 0.9rem; font-weight: 900; }
-        #ai-output { flex-grow: 1; font-family: 'Courier New', monospace; color: var(--green); font-size: 0.95rem; overflow-y: auto; line-height: 1.8; padding-right: 10px; }
-        .ai-input-wrap { display: flex; margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px; }
-        .ai-input-wrap input { flex-grow: 1; background: #080808; border: 1px solid #333; padding: 20px; color: white; border-radius: 4px; font-size: 1rem; }
-        .ai-input-wrap button { padding: 0 40px; background: var(--gold); border: none; font-weight: 900; margin-left: 10px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
-        .ai-input-wrap button:hover { background: var(--white); }
+        /* [04. 히어로 섹션 - 비전 선언] */
+        .hero {
+            padding: 160px 6% 100px;
+            text-align: center;
+            background: radial-gradient(circle at center, #151515 0%, #050505 100%);
+            border-bottom: 1px solid var(--gray);
+        }
+        .hero-badge {
+            display: inline-block; padding: 10px 30px; background: var(--gold);
+            color: var(--black); font-weight: 900; border-radius: 2px;
+            font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 35px;
+        }
+        .hero h1 { 
+            font-size: 5.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 35px;
+            letter-spacing: -3px; background: linear-gradient(to bottom, #fff 30%, #555 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.5rem; color: #777; max-width: 1000px; margin: 0 auto 60px; font-weight: 300; }
 
-        /* [30 LANGUAGES GLOBAL PORTAL] */
-        .portal-section { padding: 120px 6%; background: var(--deep); }
-        .portal-title { text-align: center; margin-bottom: 80px; }
-        .portal-title h2 { font-size: 3.5rem; color: var(--gold); margin-bottom: 20px; }
+        /* [05. 실시간 금융 원장 모니터 - 초단위 변동] */
+        .ledger-grid {
+            padding: 80px 6%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            background: var(--deep);
+        }
+        .ledger-card {
+            background: #000; border: 1px solid var(--gray); padding: 40px 30px;
+            border-radius: 8px; position: relative; transition: 0.3s;
+        }
+        .ledger-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .ledger-label { font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .ledger-value { font-size: 2.2rem; font-weight: 800; color: var(--white); font-family: var(--font-mono); }
+        .ledger-change { font-size: 0.9rem; margin-top: 10px; font-weight: bold; }
+        .up { color: var(--status-green); }
+
+        /* [06. PI TEST-NET 금융 프로토콜 & AI 센터] */
+        .main-operations {
+            padding: 120px 6%;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            background: var(--black);
+        }
+
+        /* 금융 액션 패널 */
+        .protocol-panel {
+            background: var(--deep); border: 2px solid var(--gold);
+            border-radius: 12px; padding: 50px;
+        }
+        .protocol-panel h2 { font-size: 2.8rem; color: var(--gold); margin-bottom: 40px; font-weight: 900; border-bottom: 2px solid var(--gray); padding-bottom: 20px; }
+        .action-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .btn-action {
+            width: 100%; padding: 25px; background: transparent; border: 1px solid var(--light-gray);
+            color: #bbb; cursor: pointer; text-align: left; font-size: 1.2rem; font-weight: 800;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .btn-action:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.08); transform: translateX(15px); }
+        .btn-action span { font-size: 0.7rem; color: #444; background: #111; padding: 5px 10px; border-radius: 4px; }
+
+        /* AI 지원센터 터미널 */
+        .ai-terminal {
+            background: #000; border: 1px solid var(--gray); border-radius: 12px;
+            height: 650px; display: flex; flex-direction: column; overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+        }
+        .terminal-top { background: #111; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gray); }
+        .terminal-title { color: var(--gold); font-weight: 900; font-size: 0.9rem; letter-spacing: 2px; }
+        .terminal-body { flex-grow: 1; padding: 35px; overflow-y: auto; font-family: var(--font-mono); color: var(--status-green); font-size: 1rem; line-height: 1.8; }
+        .terminal-input-area { padding: 30px; background: #0a0a0a; border-top: 1px solid var(--gray); display: flex; gap: 15px; }
+        .terminal-input-area input { flex-grow: 1; background: #000; border: 1px solid #333; padding: 20px; color: white; border-radius: 6px; font-size: 1.1rem; }
+        .terminal-input-area button { padding: 0 45px; background: var(--gold); border: none; border-radius: 6px; font-weight: 900; cursor: pointer; transition: 0.3s; }
+        .terminal-input-area button:hover { background: var(--white); transform: scale(1.05); }
+
+        /* [07. 30개 국어 글로벌 포털 그리드] */
+        .global-portal { padding: 120px 6%; background: var(--deep); }
+        .section-header { text-align: center; margin-bottom: 100px; }
+        .section-header h2 { font-size: 4rem; color: var(--gold); margin-bottom: 25px; font-weight: 900; }
+        .section-header p { color: #555; font-size: 1.2rem; }
+
         .lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-        .lang-card { background: var(--black); border: 1px solid var(--border); padding: 50px 40px; border-radius: 4px; transition: 0.4s; position: relative; }
-        .lang-card:hover { border-color: var(--gold); transform: scale(1.03); background: #0a0a0f; }
-        .lang-card .flag { font-size: 2.5rem; margin-bottom: 25px; display: block; }
-        .lang-card h3 { color: var(--gold); font-size: 1.6rem; margin-bottom: 15px; }
-        .lang-card p { font-size: 1rem; color: #666; line-height: 1.7; }
+        .lang-card {
+            background: var(--black); border: 1px solid #151515; padding: 60px 45px;
+            border-radius: 4px; transition: 0.5s; position: relative; overflow: hidden;
+        }
+        .lang-card:hover { border-color: var(--gold); transform: translateY(-15px); background: #08080c; }
+        .lang-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 4px; background: var(--gold); transition: 0.5s; }
+        .lang-card:hover::after { width: 100%; }
+        .lang-flag { font-size: 3rem; margin-bottom: 30px; display: block; }
+        .lang-card h3 { color: var(--gold); font-size: 1.8rem; margin-bottom: 20px; }
+        .lang-card p { color: #666; font-size: 1.05rem; line-height: 1.8; }
 
-        /* [INFRA DATA TABLE] */
-        .infra-section { padding: 100px 6%; background: var(--black); }
-        .infra-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
-        .infra-table th { background: #111; padding: 25px; text-align: left; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; border-bottom: 2px solid var(--border); }
-        .infra-table td { padding: 22px; border-bottom: 1px solid var(--border); font-family: monospace; font-size: 0.9rem; color: #555; }
-        .status-dot { height: 10px; width: 10px; background: var(--green); border-radius: 50%; display: inline-block; margin-right: 10px; }
+        /* [08. 시스템 인프라 현황 테이블] */
+        .infra-monitoring { padding: 120px 6%; background: var(--black); }
+        .infra-table { width: 100%; border-collapse: collapse; margin-top: 50px; border: 1px solid var(--gray); }
+        .infra-table th { background: #0d0d0d; padding: 30px; text-align: left; color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; border-bottom: 2px solid var(--gray); }
+        .infra-table td { padding: 25px; border-bottom: 1px solid #111; font-family: var(--font-mono); color: #555; font-size: 0.95rem; }
+        .status-dot { height: 12px; width: 12px; background: var(--status-green); border-radius: 50%; display: inline-block; margin-right: 12px; box-shadow: 0 0 10px var(--status-green); }
 
-        /* [FOOTER] */
-        footer { padding: 120px 6% 60px; border-top: 1px solid var(--border); background: #000; text-align: center; }
-        .footer-logo { font-size: 2.5rem; font-weight: 900; color: var(--gold); margin-bottom: 40px; letter-spacing: 10px; }
-        .footer-info { color: #444; font-size: 0.95rem; line-height: 2.2; max-width: 900px; margin: 0 auto; }
+        /* [09. 경영 철학 섹션] */
+        .philosophy { padding: 150px 6%; background: linear-gradient(to bottom, #050505, #151515); text-align: center; }
+        .philosophy-box { max-width: 1000px; margin: 0 auto; }
+        .philosophy-box blockquote { font-size: 2.8rem; font-weight: 200; color: #ccc; font-style: italic; line-height: 1.4; margin-bottom: 50px; }
+        .philosophy-box cite { color: var(--gold); font-size: 1.4rem; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+        /* [10. 푸터 시스템] */
+        footer { padding: 120px 6% 60px; border-top: 1px solid var(--gray); background: #000; text-align: center; }
+        .footer-logo { font-size: 3rem; font-weight: 900; color: var(--gold); margin-bottom: 50px; letter-spacing: 12px; }
+        .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: left; max-width: 1200px; margin: 0 auto 80px; }
+        .footer-col h4 { color: var(--gold); margin-bottom: 30px; font-size: 1rem; letter-spacing: 2px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 15px; color: #555; font-size: 0.9rem; }
+        .copyright { padding-top: 60px; border-top: 1px solid #111; color: #333; font-size: 0.85rem; letter-spacing: 1px; }
 
-        @media (max-width: 1200px) { .finance-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 3.5rem; } }
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+        @media (max-width: 1400px) { .ledger-grid { grid-template-columns: 1fr 1fr; } .main-operations { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-box">
+        <div class="logo-area">
             <div class="logo-main">HK-WORLDBANK</div>
-            <div class="logo-sub">Justice & Common Sense Industrial Platform</div>
+            <div class="logo-sub">Global Industrial & Financial Ecosystem</div>
         </div>
-        <div class="system-status">
-            <span class="blink">●</span> PI TEST-NET: ACTIVE
-            <span style="margin-left: 20px; color: #444;">| NODE: HAEROEUM-01</span>
+        <div class="system-monitor">
+            <div class="status-pill"><div class="blink"></div> PI TEST-NET ACTIVE</div>
+            <div style="color: #444;">CLUSTER: HAEROEUM_HUB_01</div>
         </div>
     </nav>
 
     <header class="hero">
-        <div class="hero-badge">GLOBAL AI & DEFI CLUSTER</div>
-        <h1>Haeroeum <br>Unified Intelligence</h1>
-        <p>혜공(Hyekong) 형님의 정의로운 비전을 담아, 전 지구적 기본소득(UBI)과 <br>핵융합 에너지, 그리고 로보틱스 산업을 30개 국어로 연결합니다.</p>
+        <div class="hero-badge">OFFICIAL ENTERPRISE PLATFORM</div>
+        <h1>The Future of <br>Humanity & AI</h1>
+        <p>HK-WorldBank는 이재완(혜공) 회장님의 지휘 아래 로보틱스, 핵융합 에너지, 그리고 전 지구적 기본소득(UBI)의 새로운 패러다임을 구축합니다. 진실과 정의가 흐르는 기술의 중심지, 해오름 자치시입니다.</p>
+        <div style="margin-top: 50px;">
+            <a href="#portal" style="padding: 22px 60px; background: var(--gold); color: black; text-decoration: none; font-weight: 900; letter-spacing: 2px; border-radius: 4px;">SYSTEM ENTER</a>
+        </div>
     </header>
 
-    <section class="ledger-container">
+    <section class="ledger-grid">
         <div class="ledger-card">
-            <div class="ledger-label">HK-Liquidity Pool (LP)</div>
-            <div class="ledger-value" id="lp-val">1,240,580.42</div>
-            <div class="ledger-change up">▲ <span id="lp-up">12.04</span> PI (Real-time)</div>
+            <div class="ledger-label">Total Liquidity Pool (LP)</div>
+            <div class="ledger-value" id="val-lp">1,582,490.00</div>
+            <div class="ledger-change up">▲ <span id="change-lp">12.5</span> PI (SEC)</div>
         </div>
         <div class="ledger-card">
-            <div class="ledger-label">Staking Yield (APY)</div>
-            <div class="ledger-value" id="apy-val">12.85%</div>
-            <div class="ledger-change up">▲ <span id="apy-up">0.012</span>% (Variable)</div>
+            <div class="ledger-label">Current Staking APY</div>
+            <div class="ledger-value" id="val-apy">12.45%</div>
+            <div class="ledger-change up">▲ <span id="change-apy">0.01</span>% (VAR)</div>
         </div>
         <div class="ledger-card">
-            <div class="ledger-label">Current UBI Reserve</div>
-            <div class="ledger-value" id="ubi-val">842,105,300</div>
-            <div class="ledger-change up">▲ <span id="ubi-up">1,250</span> USD</div>
+            <div class="ledger-label">UBI Global Reserve</div>
+            <div class="ledger-value" id="val-ubi">942,880,105</div>
+            <div class="ledger-change up">▲ <span id="change-ubi">450</span> USD</div>
         </div>
         <div class="ledger-card">
-            <div class="ledger-label">Node Processing Speed</div>
-            <div class="ledger-value" id="node-val">0.0042ms</div>
+            <div class="ledger-label">Fusion Core Output</div>
+            <div class="ledger-value" id="val-fusion">1.42 GW</div>
             <div class="ledger-change up">▲ STABLE</div>
         </div>
     </section>
 
-    <section class="finance-grid">
-        <div class="protocol-box">
+    <section class="main-operations" id="ops">
+        <div class="protocol-panel">
             <h2>Financial Protocols</h2>
-            <button class="action-btn" onclick="runTx('송금')">Pi 송금 (Transfer) <small>Test-Net Verified</small></button>
-            <button class="action-btn" onclick="runTx('결재')">Pi 결재 (Payment) <small>Merchant API 2.0</small></button>
-            <button class="action-btn" onclick="runTx('예치')">Pi 예치 (Staking) <small>Fixed 12.5% + Alpha</small></button>
-            <button class="action-btn" onclick="runTx('보상')">Pi 보상 (Reward) <small>Daily Mining Sync</small></button>
-            <button class="action-btn" onclick="runTx('기본소득')">Pi 기본소득 (UBI) <small>Net Profit 30% Dist.</small></button>
-            <button class="action-btn" onclick="runTx('스왑')">Pi 스왑 (Swap) <small>HK-Bridge Active</small></button>
+            <div class="action-grid">
+                <button class="btn-action" onclick="triggerTx('송금')">Pi 송금 (Transfer) <span>TEST-NET VERIFIED</span></button>
+                <button class="btn-action" onclick="triggerTx('결재')">Pi 결재 (Payment) <span>QR_ENABLED</span></button>
+                <button class="btn-action" onclick="triggerTx('예치')">Pi 예치 (Staking) <span>APY 12.5% FIXED</span></button>
+                <button class="btn-action" onclick="triggerTx('보상')">Pi 보상 (Rewards) <span>DAILY_SYNC</span></button>
+                <button class="btn-action" onclick="triggerTx('기본소득')">Pi 기본소득 (UBI) <span>30% PROFIT SHARE</span></button>
+                <button class="btn-action" onclick="triggerTx('스왑')">Pi 스왑 (Swap) <span>HK_TOKEN_BRIDGE</span></button>
+            </div>
         </div>
 
-        <div class="ai-center" id="ai-section">
-            <div class="ai-header">
-                <span>GLOBAL AI CUSTOMER SUPPORT센터</span>
-                <span>STATUS: OPERATIONAL</span>
+        <div class="ai-terminal">
+            <div class="terminal-top">
+                <div class="terminal-title">GLOBAL AI CUSTOMER SUPPORT CENTER v9.0</div>
+                <div style="font-size: 0.7rem; color: #444;">ENCRYPTED: AES-256</div>
             </div>
-            <div id="ai-output">
-                > [SYSTEM] HK-WorldBank Global Node Initializing...<br>
-                > [SYSTEM] 30 Languages Intelligence Core: LOADED.<br>
-                > [SYSTEM] Chairman Hyekong's Strategic Directives: SYNCED.<br>
-                > [AI] 삐니가 형님의 시스템을 관리 중입니다. 무엇을 실행할까요?
+            <div class="terminal-body" id="ai-logs">
+                > [INIT] HK-AI Central Engine Booting...<br>
+                > [LANG] 30 Global Language Modules: ONLINE.<br>
+                > [SEC] Haeroeum Security Protocol Level 9: ACTIVE.<br>
+                > [STATUS] Monitoring Chairman Hyekong's Strategic Node...<br>
+                > [AI] 삐니 에이전트 대기 중. 형님, 시스템 명령을 입력하십시오.
             </div>
-            <div class="ai-input-wrap">
-                <input type="text" id="ai-input" placeholder="비즈니스 쿼리 또는 지원 요청 입력...">
-                <button onclick="aiProcess()">SEND</button>
+            <div class="terminal-input-area">
+                <input type="text" id="ai-user-input" placeholder="명령어 또는 문의 사항을 입력하세요...">
+                <button onclick="aiExecute()">COMMAND</button>
             </div>
         </div>
     </section>
 
-    <section class="portal-section" id="portal">
-        <div class="portal-title">
-            <h2>Global Language Portals</h2>
-            <p>전 세계 30개국 현지 AI 고객지원 노드 활성화</p>
+    <section class="global-portal" id="portal">
+        <div class="section-header">
+            <h2>Global Portals</h2>
+            <p>전 세계 30개국 현지 지원 시스템 실시간 가동</p>
         </div>
         <div class="lang-grid">
-            <div class="lang-card"><span class="flag">🇰🇷</span><h3>Korean</h3><p>로보틱스, 핵융합, 기본소득의 한국 거점.</p></div>
-            <div class="lang-card"><span class="flag">🇺🇸</span><h3>English</h3><p>Global standard for Physical AI and Finance.</p></div>
-            <div class="lang-card"><span class="flag">🇨🇳</span><h3>Chinese</h3><p>中国：引领机器人技术与核聚变能源的未来。</p></div>
-            <div class="lang-card"><span class="flag">🇯🇵</span><h3>Japanese</h3><p>日本：次世代ロボット工学とエネルギー革新。</p></div>
-            <div class="lang-card"><span class="flag">🇩🇪</span><h3>German</h3><p>Robotik- und Fusionszentrum Europa.</p></div>
-            <div class="lang-card"><span class="flag">🇫🇷</span><h3>French</h3><p>L'avenir de l'IA physique et du revenu de base.</p></div>
-            <div class="lang-card"><span class="flag">🇪🇸</span><h3>Spanish</h3><p>El futuro de la robótica y el UBI global.</p></div>
-            <div class="lang-card"><span class="flag">🇮🇹</span><h3>Italian</h3><p>Il futuro della robotica e dell'energia.</p></div>
-            <div class="lang-card"><span class="flag">🇷🇺</span><h3>Russian</h3><p>Будущее робототехники и ядерного синтеза.</p></div>
-            <div class="lang-card"><span class="flag">🇻🇳</span><h3>Vietnamese</h3><p>Tương lai của Robot và Năng lượng sạch.</p></div>
-            <div class="lang-card"><span class="flag">🇮🇳</span><h3>Hindi</h3><p>भारत: रोबोटिक्स और वैश्विक यूबीआई का भविष्य।</p></div>
-            <div class="lang-card"><span class="flag">🇦🇪</span><h3>Arabic</h3><p>الإمارات: طاقة المستقبل والروبوتات.</p></div>
-            <div class="lang-card"><span class="flag">🇹Ｈ</span><h3>Thai</h3><p>อนาคตของหุ่นยนต์และพลังงานนิวเคลียร์</p></div>
-            <div class="lang-card"><span class="flag">🇮🇩</span><h3>Indonesian</h3><p>Masa depan robotika dan energi terbarukan.</p></div>
-            <div class="lang-card"><span class="flag">🇵🇹</span><h3>Portuguese</h3><p>Brasil: O futuro da robótica e do UBI.</p></div>
-            <div class="lang-card"><span class="flag">🇹🇷</span><h3>Turkish</h3><p>Robotik ve nükleer füzyonun geleceği.</p></div>
-            <div class="lang-card"><span class="flag">🇵🇱</span><h3>Polish</h3><p>Przyszłość robotyki i energii.</p></div>
-            <div class="lang-card"><span class="flag">🇳🇱</span><h3>Dutch</h3><p>De toekomst van robotica en energie.</p></div>
-            <div class="lang-card"><span class="flag">🇸🇪</span><h3>Swedish</h3><p>Framtiden för robotik och global UBI.</p></div>
-            <div class="lang-card"><span class="flag">🇬🇷</span><h3>Greek</h3><p>Το μέλλον της ρομποτικής και της ενέργειας.</p></div>
-            <div class="lang-card"><span class="flag">🇮🇱</span><h3>Hebrew</h3><p>ישראל: העתיד של רובוטיקה ואנרגיה.</p></div>
-            <div class="lang-card"><span class="flag">🇨🇿</span><h3>Czech</h3><p>Budoucnost robotiky a jaderné fúze.</p></div>
-            <div class="lang-card"><span class="flag">🇭🇺</span><h3>Hungarian</h3><p>A robotika és az energia jövője.</p></div>
-            <div class="lang-card"><span class="flag">🇷🇴</span><h3>Romanian</h3><p>Viitorul roboticii și al energiei curate.</p></div>
-            <div class="lang-card"><span class="flag">🇺🇦</span><h3>Ukrainian</h3><p>Майбутнє робототехніки та енергетики.</p></div>
-            <div class="lang-card"><span class="flag">🇲🇾</span><h3>Malay</h3><p>Masa depan robotik dan tenaga nuklear.</p></div>
-            <div class="lang-card"><span class="flag">🇵Ｈ</span><h3>Filipino</h3><p>Pilipinas: Ang hinaharap ng robotika.</p></div>
-            <div class="lang-card"><span class="flag">🇫Ｉ</span><h3>Finnish</h3><p>Tulevaisuuden robotiikka ja energia.</p></div>
-            <div class="lang-card"><span class="flag">🇳Ｏ</span><h3>Norwegian</h3><p>Fremtidens robotikk og globale løsninger.</p></div>
-            <div class="lang-card"><span class="flag">🇩🇰</span><h3>Danish</h3><p>Fremtidens robotteknologi og energi.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇰🇷</span><h3>Korean</h3><p>대한민국: 로보틱스, 핵융합, 기본소득의 글로벌 심장부.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇺🇸</span><h3>English</h3><p>Global Standard: Pioneering Physical AI and DeFi infrastructure.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇨🇳</span><h3>Chinese</h3><p>中国：引领机器人技术与能源革命的未来。</p></div>
+            <div class="lang-card"><span class="lang-flag">🇯🇵</span><h3>Japanese</h3><p>日本：次世代ロボット工学と次世代エネルギーの拠点。</p></div>
+            <div class="lang-card"><span class="lang-flag">🇩🇪</span><h3>German</h3><p>Deutschland: Spitzenreiter in Robotik und Fusionsenergie.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇫🇷</span><h3>French</h3><p>France: L'avenir de l'intelligence artificielle physique.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇪🇸</span><h3>Spanish</h3><p>España: El futuro de la robótica y el UBI global.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇮🇹</span><h3>Italian</h3><p>Italia: Il futuro della tecnologia robotica e dell'energia.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇷🇺</span><h3>Russian</h3><p>Россия: Будущее робототехники и ядерного синтеза.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇻🇳</span><h3>Vietnamese</h3><p>Việt Nam: Tương lai của Robot và Năng lượng sạch.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇮🇳</span><h3>Hindi</h3><p>भारत: रोबोटिक्स और वैश्विक यूबीआई का भविष्य।</p></div>
+            <div class="lang-card"><span class="lang-flag">🇦🇪</span><h3>Arabic</h3><p>الإمارات: طاقة المستقبل وحلول الروبوتات العالمية.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇹Ｈ</span><h3>Thai</h3><p>อนาคตของหุ่นยนต์และพลังงานนิว킬리어ฟิวชัน</p></div>
+            <div class="lang-card"><span class="lang-flag">🇮🇩</span><h3>Indonesian</h3><p>Masa depan robotika dan energi terbarukan.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇵🇹</span><h3>Portuguese</h3><p>Brasil: O futuro da robótica e do rendimento básico.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇹🇷</span><h3>Turkish</h3><p>Türkiye: Robotik ve nükleer füzyon enerjisinin geleceği.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇵🇱</span><h3>Polish</h3><p>Polska: Przyszłość robotyki i technologii energii.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇳🇱</span><h3>Dutch</h3><p>Nederland: De toekomst van robotica en energie.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇸🇪</span><h3>Swedish</h3><p>Sverige: Framtiden för robotik och global UBI.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇬🇷</span><h3>Greek</h3><p>Ελλάδα: Το μέλλον της ρομποτικής και της ενέργειας.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇮🇱</span><h3>Hebrew</h3><p>ישראל: העתיד של רובוטיקה ואנרגיה גרעינית.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇨🇿</span><h3>Czech</h3><p>Česko: Budoucnost robotiky a jaderné fúze.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇭🇺</span><h3>Hungarian</h3><p>Magyarország: A robotika és az energia jövője.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇷🇴</span><h3>Romanian</h3><p>Viitorul roboticii și al energiei curate.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇺🇦</span><h3>Ukrainian</h3><p>Україна: Майбутнє робототехніки та енергетики.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇲🇾</span><h3>Malay</h3><p>Malaysia: Masa depan robotik dan tenaga nuklear.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇵Ｈ</span><h3>Filipino</h3><p>Pilipinas: Ang hinaharap ng robotika at UBI.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇫Ｉ</span><h3>Finnish</h3><p>Suomi: Robotiikan ja energiantuotannon tulevaisuus.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇳Ｏ</span><h3>Norwegian</h3><p>Norge: Fremtidens robotikk og globale løsninger.</p></div>
+            <div class="lang-card"><span class="lang-flag">🇩🇰</span><h3>Danish</h3><p>Danmark: Fremtidens robotteknologi og energi.</p></div>
         </div>
     </section>
 
-    <section class="infra-section">
-        <h2 style="color: var(--gold); font-size: 2rem; letter-spacing: 2px;">Global Cluster Infrastructure</h2>
+    <section class="infra-monitoring">
+        <h2 style="color: var(--gold); font-size: 2.5rem; letter-spacing: 2px;">Global Cluster Infrastructure</h2>
         <table class="infra-table">
             <thead>
-                <tr><th>NODE_ID</th><th>STRATEGIC_REGION</th><th>LOAD_AVG</th><th>LATENCY</th><th>STATUS</th></tr>
+                <tr><th>NODE_ID</th><th>LOCATION_HUB</th><th>LOAD</th><th>LATENCY</th><th>STATUS</th></tr>
             </thead>
-            <tbody id="infra-body">
-                <tr><td>HK-ULSAN-G1</td><td>Ulsan AI Hub</td><td>64.2%</td><td>0.001ms</td><td><span class="status-dot"></span>OPTIMAL</td></tr>
-                <tr><td>HK-GYEONGJU-F1</td><td>Gyeongju Fusion Core</td><td>42.8%</td><td>0.003ms</td><td><span class="status-dot"></span>OPTIMAL</td></tr>
-                <tr><td>HK-POHANG-M1</td><td>Pohang Material Lab</td><td>51.4%</td><td>0.004ms</td><td><span class="status-dot"></span>STABLE</td></tr>
-                <tr><td>HK-GLOBAL-LP-01</td><td>Pi Test-Net Bridge</td><td>15.2%</td><td>12ms</td><td><span class="status-dot" style="background:var(--blue)"></span>SYNCING</td></tr>
+            <tbody id="infra-data">
+                <tr><td>HK-ULSAN-01</td><td>Haeroeum Alpha (Ulsan)</td><td>68.4%</td><td>0.001ms</td><td><span class="status-dot"></span>OPTIMAL</td></tr>
+                <tr><td>HK-GYEONGJU-01</td><td>Haeroeum Beta (Gyeongju)</td><td>41.2%</td><td>0.003ms</td><td><span class="status-dot"></span>OPTIMAL</td></tr>
+                <tr><td>HK-POHANG-01</td><td>Haeroeum Gamma (Pohang)</td><td>53.9%</td><td>0.005ms</td><td><span class="status-dot"></span>STABLE</td></tr>
+                <tr><td>HK-GLOBAL-PI-BRIDGE</td><td>Main-Net Relay Node</td><td>12.5%</td><td>15ms</td><td><span class="status-dot" style="background:var(--status-blue)"></span>SYNCING</td></tr>
             </tbody>
         </table>
     </section>
 
+    <section class="philosophy">
+        <div class="philosophy-box">
+            <blockquote>"우리의 기술은 정직한 땀방울에서 시작되어, 정의로운 분배(UBI)로 완성될 것입니다."</blockquote>
+            <cite>— Founder & Chairman, Lee Jaewan (Hyekong)</cite>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-logo">HK-WORLDBANK</div>
-        <div class="footer-info">
-            에이치케이월드뱅크 주식회사 | 대표이사 이재완 (Hyekong) <br>
-            울산·경주·포항 해오름 연합 AI 산업 클러스터 거점 <br>
-            Pi Network Test-Net 기반 금융 기술 검증 시스템 v8.0 <br>
-            진실(Truth), 정직(Honesty), 상식(Common Sense), 정의(Justice) <br>
-            © 2026 HK-WorldBank. All rights reserved.
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Core Industries</h4>
+                <ul>
+                    <li>Physical AI & Robotics</li>
+                    <li>Nuclear Fusion Energy</li>
+                    <li>Space Infrastructure</li>
+                    <li>PartsBank Supply Chain</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Global HQ</h4>
+                <ul>
+                    <li>Haeroeum AI Cluster</li>
+                    <li>Ulsan-Gyeongju-Pohang Belt</li>
+                    <li>South Korea / Global Access</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Ecosystem</h4>
+                <ul>
+                    <li>HK-WorldBank App (Pi)</li>
+                    <li>Global UBI Fund</li>
+                    <li>PHK Ventures</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Compliance</h4>
+                <ul>
+                    <li>KYC/KYB Verification</li>
+                    <li>Anti-Money Laundering</li>
+                    <li>Justice Protocol</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            에이치케이월드뱅크 주식회사 | 대표이사 이재완 (혜공) | © 2026 HK-WorldBank. All rights reserved.<br>
+            Philosophy: Truth, Honesty, Common Sense, Justice.
         </div>
     </footer>
 
     <script>
-        // [1. 원장 데이터 초단위 갱신 로직]
-        function updateLedger() {
-            const lpVal = (1240580 + Math.random() * 500).toLocaleString('en-US', {minimumFractionDigits: 2});
-            const apyVal = (12.5 + Math.random()).toFixed(2);
-            const ubiVal = (842105300 + Math.floor(Math.random() * 5000)).toLocaleString('en-US');
+        // [1. 실시간 금융 원장 변동 로직]
+        function updateFinance() {
+            const lpVal = (1582490 + Math.random() * 800).toLocaleString('en-US', {minimumFractionDigits: 2});
+            const apyVal = (12.4 + Math.random() * 0.2).toFixed(2);
+            const ubiVal = (942880105 + Math.floor(Math.random() * 4000)).toLocaleString('en-US');
             
-            document.getElementById('lp-val').innerText = lpVal;
-            document.getElementById('apy-val').innerText = apyVal + "%";
-            document.getElementById('ubi-val').innerText = ubiVal;
+            document.getElementById('val-lp').innerText = lpVal;
+            document.getElementById('val-apy').innerText = apyVal + "%";
+            document.getElementById('val-ubi').innerText = ubiVal;
             
-            document.getElementById('lp-up').innerText = (Math.random() * 20).toFixed(2);
-            document.getElementById('apy-up').innerText = (Math.random() * 0.02).toFixed(3);
-            document.getElementById('ubi-up').innerText = Math.floor(Math.random() * 200).toLocaleString();
+            document.getElementById('change-lp').innerText = (Math.random() * 30).toFixed(2);
+            document.getElementById('change-apy').innerText = (Math.random() * 0.03).toFixed(3);
+            document.getElementById('change-ubi').innerText = Math.floor(Math.random() * 300);
         }
-        setInterval(updateLedger, 1000);
+        setInterval(updateFinance, 1000);
 
-        // [2. Pi Test-Net 금융 프로토콜 시뮬레이션]
-        function runTx(type) {
-            const output = document.getElementById('ai-output');
+        // [2. Pi Test-Net 금융 트랜잭션 시뮬레이션]
+        function triggerTx(type) {
+            const logs = document.getElementById('ai-logs');
             const ts = new Date().toLocaleTimeString();
-            const txId = 'tx_' + Math.random().toString(36).substr(2, 16);
+            const txHash = 'tx_pi_0x' + Math.random().toString(16).substr(2, 32);
             
-            output.innerHTML += `<br><span style="color:var(--white)">> [${ts}] REQUEST: ${type} 프로토콜 실행...</span>`;
-            output.innerHTML += `<br>> [${ts}] PI TEST-NET NODE 가동: 트랜잭션 검증 중...`;
+            logs.innerHTML += `<br><span style="color:#fff">> [${ts}] REQUEST: ${type} 명령 승인 중...</span>`;
+            logs.innerHTML += `<br>> [${ts}] PI TEST-NET NODE 가동: 보안 프로토콜 확인... [OK]`;
             
             setTimeout(() => {
-                output.innerHTML += `<br>> [${ts}] <span style="color:var(--gold)">SUCCESS: ${type} 완료. ID: ${txId}</span>`;
-                output.scrollTop = output.scrollHeight;
+                logs.innerHTML += `<br>> [${ts}] <span style="color:var(--gold)">SUCCESS: ${type} 완료. HASH: ${txHash.substring(0,25)}...</span>`;
+                logs.scrollTop = logs.scrollHeight;
             }, 800);
         }
 
-        // [3. AI 지원센터 실시간 대화/명령 처리]
-        function aiProcess() {
-            const input = document.getElementById('ai-input');
-            const output = document.getElementById('ai-output');
+        // [3. AI 지원센터 실시간 대화 및 명령 실행]
+        function aiExecute() {
+            const input = document.getElementById('ai-user-input');
+            const logs = document.getElementById('ai-logs');
             if(!input.value) return;
 
             const ts = new Date().toLocaleTimeString();
-            output.innerHTML += `<br><span style="color:var(--gold)">> [USER] ${input.value}</span>`;
+            logs.innerHTML += `<br><span style="color:var(--gold)">> [USER] ${input.value}</span>`;
             
-            // AI 응답 로직 (형님 맞춤형)
             setTimeout(() => {
-                let response = `형님, '${input.value}' 요청을 확인했습니다. 현재 30개 국어 글로벌 노드에 즉시 반영 중입니다. 정의로운 금융 시스템이 차질 없이 구동되고 있습니다.`;
+                let response = `형님, '${input.value}'에 대한 전 지구적 분석이 완료되었습니다. 30개 국어 로컬 서버에 즉시 업데이트를 지시했습니다.`;
                 if(input.value.includes('인수') || input.value.includes('Figure')) {
-                    response = `형님, Figure AI 인수 전략 시나리오를 가동합니다. 울산·경주 인프라 연동 테스트를 시작합니다.`;
+                    response = `형님, Figure AI 인수용 법인 신용 보강 프로세스를 가동합니다. 울산·경주 인프라 실사 준비 완료.`;
                 }
-                output.innerHTML += `<br>> [AI] ${response}`;
-                output.scrollTop = output.scrollHeight;
+                logs.innerHTML += `<br>> [AI] ${response}`;
+                logs.scrollTop = logs.scrollHeight;
             }, 1000);
             
             input.value = '';
         }
 
-        // 초기화 로그
-        console.log("HK-WorldBank Global Enterprise System v8.0 Booted Successfully.");
-        console.log("Philosophy: Truth, Honesty, Common Sense, Justice.");
+        console.log("HK-WorldBank Global Enterprise Index v9.0 Booted.");
+        console.log("Welcome, Chairman Hyekong.");
     </script>
 </body>
 </html>

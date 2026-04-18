@@ -3,405 +3,530 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | GLOBAL ECOSYSTEM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;700;900&display=swap" rel="stylesheet">
+    <title>HK WORLD BANK | GLOBAL INDUSTRIAL COMMAND</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;700;900&family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --hk-gold: #f7d358;
-            --hk-green: #00ff88;
-            --hk-red: #ff5555;
-            --bg-black: #000000;
-            --bg-card: #1a1a1a;
-            --bg-sub-card: #111111;
-            --neon-blue: #00F3FF;
+            /* 사진 속 고유 색상 완벽 추출 */
+            --hk-gold: #f7d358;      
+            --hk-green: #00ff88;     
+            --hk-red: #ff5555;       
+            --hk-black: #000000;     
+            --hk-gray: #1c1c1e;      
+            --hk-sub-dark: #111111;  
+            --hk-blue-cyan: #00d2ff; 
         }
 
+        /* ------------------------------------------------
+           0. CORE FRAMEWORK & SCROLLBAR
+        --------------------------------------------------- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--hk-gold); border-radius: 10px; }
 
         body {
-            background-color: var(--bg-black);
+            background-color: var(--hk-black);
             color: #ffffff;
             font-family: 'Noto Sans KR', sans-serif;
             overflow-x: hidden;
+            letter-spacing: -0.5px;
         }
 
         /* ------------------------------------------------
-           1. TOP BROWSER & SECURITY BAR
+           1. SUPREME SECURITY OVERLAY (상단 보안 레이어)
         --------------------------------------------------- */
-        .browser-mock {
-            width: 100%;
-            background-color: #ffffff;
-            color: #000000;
-            padding: 8px 15px;
-            display: flex;
-            align-items: center;
-            font-size: 13px;
-            border-bottom: 1px solid #ddd;
+        .secure-top-interface {
             position: sticky;
             top: 0;
-            z-index: 1000;
-        }
-
-        .url-box {
-            background: #f1f1f1;
-            border-radius: 20px;
-            padding: 4px 20px;
-            flex-grow: 1;
-            margin: 0 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .status-header {
+            z-index: 10000;
             width: 100%;
-            padding: 10px 20px;
-            background: #080808;
+        }
+
+        .browser-mock-ui {
+            background: #ffffff;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            color: #333;
+            font-size: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .browser-address {
+            background: #f4f4f4;
+            flex: 1;
+            margin: 0 20px;
+            padding: 10px 0;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            color: #111;
+        }
+
+        .quantum-ticker-bar {
+            background: #050505;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--hk-blue-cyan);
             border-bottom: 1px solid #222;
+            text-transform: uppercase;
+        }
+
+        /* ------------------------------------------------
+           2. GLOBAL NAVIGATION & LANGUAGE (50개국 대응)
+        --------------------------------------------------- */
+        .global-access-control {
             display: flex;
             justify-content: space-between;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 10px;
-            color: var(--neon-blue);
+            align-items: center;
+            padding: 30px 30px 10px;
         }
 
-        /* ------------------------------------------------
-           2. MAIN HEADER & LANGUAGE
-        --------------------------------------------------- */
-        .lang-section {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            padding: 15px 20px;
-        }
-
-        .lang-btn {
-            background: var(--bg-card);
-            color: var(--hk-gold);
-            border: 1px solid var(--hk-gold);
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .main-logo {
-            text-align: center;
-            color: var(--hk-gold);
-            font-size: 42px;
+        .system-id {
+            font-family: 'Orbitron';
+            font-size: 12px;
+            color: #444;
             font-weight: 900;
-            margin: 30px 0;
-            letter-spacing: -1px;
-            text-shadow: 0 0 20px rgba(247, 211, 88, 0.3);
+        }
+
+        .lang-select-box {
+            background: var(--hk-gray);
+            border: 2px solid var(--hk-gold);
+            color: var(--hk-gold);
+            padding: 14px 30px;
+            border-radius: 18px;
+            font-weight: 900;
+            font-size: 17px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(247, 211, 88, 0.25);
+            transition: 0.3s;
         }
 
         /* ------------------------------------------------
-           3. MAIN ASSET CARD (통합 원장)
+           3. CENTRAL BRANDING (HK GROUP VISION)
         --------------------------------------------------- */
-        .supreme-card {
-            background-color: var(--bg-card);
-            width: 92%;
-            max-width: 500px;
+        header.branding-header {
+            text-align: center;
+            padding: 40px 0 60px;
+        }
+
+        .main-hk-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 55px;
+            font-weight: 900;
+            color: var(--hk-gold);
+            letter-spacing: -2px;
+            text-shadow: 0 0 40px rgba(247, 211, 88, 0.6);
+        }
+
+        .vision-slogan {
+            font-size: 14px;
+            color: #666;
+            letter-spacing: 5px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* ------------------------------------------------
+           4. CORE LEDGER COMMAND (사진 속 UI 완벽 재현)
+        --------------------------------------------------- */
+        .supreme-ledger-card {
+            width: 95%;
+            max-width: 600px;
             margin: 0 auto;
-            border-radius: 45px;
+            background: var(--hk-gray);
+            border-radius: 60px;
+            padding: 70px 35px;
+            border: 1px solid #3a3a3c;
+            box-shadow: 0 60px 150px rgba(0,0,0,1);
+            position: relative;
+            z-index: 5;
+        }
+
+        .ledger-title-label {
+            font-size: 24px;
+            color: var(--hk-gold);
+            font-weight: 900;
+            margin-bottom: 45px;
+            text-align: center;
+            letter-spacing: 1.5px;
+        }
+
+        .balance-main-area {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .pi-main-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 78px;
+            font-weight: 900;
+            letter-spacing: -4px;
+            display: inline-block;
+        }
+
+        .pi-main-suffix {
+            color: var(--hk-gold);
+            font-size: 44px;
+            font-weight: 900;
+            margin-left: 18px;
+        }
+
+        .gcv-status-capsule {
+            display: block;
+            width: fit-content;
+            margin: 35px auto 65px;
+            border: 3px solid var(--hk-green);
+            background: rgba(0, 255, 136, 0.08);
+            border-radius: 80px;
+            padding: 18px 45px;
+            color: var(--hk-green);
+            font-size: 26px;
+            font-weight: 900;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+        }
+
+        /* ------------------------------------------------
+           5. ANALYTICS & LIQUIDITY MATRIX
+        --------------------------------------------------- */
+        .analytics-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        .matrix-node {
+            background: var(--hk-sub-dark);
+            border-radius: 40px;
+            padding: 40px 15px;
+            text-align: center;
+            border: 1px solid #252525;
+            transition: 0.3s;
+        }
+
+        .node-label { font-size: 17px; font-weight: 900; margin-bottom: 25px; }
+        .node-value { font-family: 'Orbitron', sans-serif; font-size: 34px; font-weight: 900; }
+
+        .liquidity-infrastructure {
+            border: 2.5px solid #005522;
+            background: linear-gradient(180deg, #0d1a14 0%, #000000 100%);
+            border-radius: 40px;
             padding: 45px 25px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            border: 1px solid #2a2a2a;
         }
 
-        .ledger-title {
-            color: var(--hk-gold);
-            font-size: 19px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-
-        .pi-container {
-            margin-bottom: 15px;
-        }
-
-        .pi-main-val {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 68px;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-
-        .pi-symbol {
-            color: var(--hk-gold);
-            font-size: 38px;
-            margin-left: 12px;
-            font-weight: 900;
-        }
-
-        .gcv-wrap {
-            display: inline-block;
-            border: 2.5px solid var(--hk-green);
-            border-radius: 50px;
-            padding: 12px 35px;
-            color: var(--hk-green);
-            font-size: 21px;
-            font-weight: 800;
-            margin: 25px 0 45px;
-            background: rgba(0, 255, 136, 0.05);
-        }
+        .liq-header-text { color: #888; font-size: 18px; margin-bottom: 25px; font-weight: 800; }
+        .liq-supreme-val { font-family: 'Orbitron', sans-serif; font-size: 40px; font-weight: 900; letter-spacing: 1px; color: #fff; }
 
         /* ------------------------------------------------
-           4. SUB DATA GRID (수익률 섹션)
+           6. INTERNAL SUBSTANCE: INDUSTRIAL CLUSTER STATS
         --------------------------------------------------- */
-        .grid-container {
-            display: flex;
-            gap: 18px;
-            margin-bottom: 30px;
-        }
-
-        .grid-item {
-            flex: 1;
-            background-color: var(--bg-sub-card);
-            border-radius: 28px;
-            padding: 28px 10px;
-            border: 1px solid #1f1f1f;
-        }
-
-        .grid-label { font-size: 15px; margin-bottom: 18px; font-weight: bold; }
-        .c-green { color: var(--hk-green); }
-        .c-red { color: var(--hk-red); }
-
-        .grid-val { font-family: 'Orbitron', sans-serif; font-size: 30px; font-weight: 800; }
-
-        /* ------------------------------------------------
-           5. LP SUPPLY BOX
-        --------------------------------------------------- */
-        .lp-container {
-            border: 1.5px solid #004422;
-            background: linear-gradient(180deg, #0d1a14 0%, #050a07 100%);
-            border-radius: 28px;
-            padding: 35px 15px;
-            text-align: center;
-        }
-
-        .lp-tag { color: #888; font-size: 16px; margin-bottom: 18px; font-weight: 500; }
-        .lp-main-val { font-family: 'Orbitron', sans-serif; font-size: 34px; font-weight: 800; letter-spacing: 1px; }
-
-        /* ------------------------------------------------
-           6. GLOBAL SYSTEM LOG (추가된 대형 섹션)
-        --------------------------------------------------- */
-        .system-logs {
-            width: 92%;
-            max-width: 500px;
-            margin: 40px auto;
+        .industrial-cluster-stats {
+            width: 95%;
+            max-width: 600px;
+            margin: 50px auto;
             background: #080808;
-            border: 1px solid #222;
-            padding: 20px;
-            font-family: monospace;
-            font-size: 11px;
-            color: #444;
-            height: 150px;
-            overflow-y: hidden;
-            border-radius: 10px;
+            border-radius: 30px;
+            padding: 35px;
+            border: 1px solid #1a1a1a;
         }
 
-        .log-line { margin-bottom: 5px; }
-        .log-green { color: var(--hk-green); }
+        .cluster-section-title {
+            color: var(--hk-gold);
+            font-weight: 900;
+            font-size: 18px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cluster-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 0;
+            border-bottom: 1px solid #151515;
+            font-size: 15px;
+            font-family: 'JetBrains Mono';
+        }
+
+        .cluster-label { color: #777; font-weight: 500; }
+        .cluster-status { color: var(--hk-green); font-weight: 800; }
 
         /* ------------------------------------------------
-           7. FOOTER ACTION MENU
+           7. GLOBAL UBI DISTRIBUTION ENGINE (내실 강화)
         --------------------------------------------------- */
-        .bottom-nav {
+        .ubi-distribution-panel {
+            width: 95%;
+            max-width: 600px;
+            margin: 0 auto 200px;
+            background: linear-gradient(135deg, #111, #000);
+            border-radius: 30px;
+            padding: 30px;
+            border-left: 5px solid var(--hk-gold);
+        }
+
+        .ubi-title { font-weight: 900; color: #fff; margin-bottom: 15px; font-size: 18px; }
+        .ubi-desc { color: #555; font-size: 13px; line-height: 1.8; }
+
+        /* ------------------------------------------------
+           8. SUPREME NAVIGATION DOCK (하단 고정)
+        --------------------------------------------------- */
+        .supreme-nav-dock {
             position: fixed;
-            bottom: 25px;
-            width: 94%;
-            max-width: 550px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
+            width: 96%;
+            max-width: 600px;
             display: flex;
-            gap: 12px;
-            z-index: 2000;
+            gap: 15px;
+            z-index: 15000;
         }
 
-        .nav-btn {
+        .nav-supreme-btn {
             flex: 1;
-            padding: 22px 0;
-            border-radius: 22px;
-            font-size: 20px;
+            padding: 28px 0;
+            border-radius: 28px;
+            font-size: 24px;
             font-weight: 900;
             border: none;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transition: 0.2s;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: 'Noto Sans KR';
         }
 
-        .nav-btn:active { transform: scale(0.95); }
+        .nav-supreme-btn:active { transform: scale(0.92); }
 
-        .bg-white { background: #ffffff; color: #000; }
-        .bg-gold { background: var(--hk-gold); color: #000; }
-        .bg-green { background: #44cc88; color: #000; }
+        .color-white { background: #ffffff; color: #000; }
+        .color-gold { background: var(--hk-gold); color: #000; }
+        .color-green { background: #4ccb85; color: #000; }
 
-        /* ------------------------------------------------
-           8. BBIRIRI & QUANTUM EFFECT
-        --------------------------------------------------- */
-        .bbiriri-ai {
+        /* 9. 삐리리 AI COMMANDER */
+        .bbiriri-commander {
             position: fixed;
-            bottom: 120px;
-            right: 25px;
+            bottom: 160px;
+            right: 35px;
+            z-index: 12000;
+            text-align: center;
+        }
+
+        .bbiriri-orb {
+            width: 90px;
+            height: 90px;
             background: var(--hk-gold);
-            width: 65px;
-            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
-            box-shadow: 0 0 20px var(--hk-gold);
+            font-size: 50px;
+            box-shadow: 0 0 50px rgba(247, 211, 88, 0.7);
             cursor: pointer;
-            z-index: 1500;
-            animation: floating 3s infinite ease-in-out;
+            animation: orb-pulse 2s infinite ease-in-out;
         }
 
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        @keyframes orb-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(247, 211, 88, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 70px rgba(247, 211, 88, 0.9); }
+        }
+
+        .bbiriri-name {
+            color: var(--hk-gold);
+            font-weight: 900;
+            margin-top: 12px;
+            font-size: 14px;
+            text-shadow: 0 2px 4px #000;
+        }
+
+        /* 10. SYSTEM LOG TERMINAL */
+        .live-system-terminal {
+            width: 95%;
+            max-width: 600px;
+            margin: 40px auto;
+            background: #000;
+            border: 1px solid #111;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #333;
+            height: 150px;
+            border-radius: 20px;
+            overflow: hidden;
+            border-bottom: 2px solid #1a1a1a;
         }
 
         footer {
-            padding: 150px 0 180px;
+            padding: 0 30px 250px;
             text-align: center;
-            color: #333;
+            color: #222;
             font-size: 12px;
-            letter-spacing: 1px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            line-height: 2.2;
         }
     </style>
 </head>
 <body>
 
-    <div class="browser-mock">
-        <span>⚠️</span>
-        <div class="url-box">hkwb.world</div>
-        <span>🔄</span>
+    <div class="secure-top-interface">
+        <div class="browser-mock-ui">
+            <span>⚠️</span>
+            <div class="browser-address">hkwb.world</div>
+            <span>🔄</span>
+        </div>
+        <div class="quantum-ticker-bar">
+            <div id="hk-live-time">HK_STMT: 2026-04-19 08:24:01</div>
+            <div>[GLOBAL_NODES_ONLINE: 50/50] [SHIELD: MAX]</div>
+        </div>
     </div>
 
-    <div class="status-header">
-        <div id="sys-time">SYS: 2026-04-19 08:16:42</div>
-        <div>QUANTUM SHIELD: ACTIVE (LEVEL 10)</div>
+    <div class="global-access-control">
+        <div class="system-id">HK-SYSTEM-ID: HYEKONG-001</div>
+        <button class="lang-select-box">한국어 🇰🇷 ▼</button>
     </div>
 
-    <div class="lang-section">
-        <button class="lang-btn">한국어 🇰🇷 ▼</button>
-    </div>
+    <header class="branding-header">
+        <h1 class="main-hk-logo">HK WORLD BANK</h1>
+        <p class="vision-slogan">Global Unified Ledger & Industrial Intelligence</p>
+    </header>
 
-    <h1 class="main-logo">HK WORLD BANK</h1>
-
-    <main class="supreme-card">
-        <div class="ledger-title">메인 자산 통합 원장</div>
+    <main class="supreme-ledger-card">
+        <h2 class="ledger-title-label">메인 자산 통합 원장</h2>
         
-        <div class="pi-container">
-            <span id="v-pi" class="pi-main-val">400.0212</span>
-            <span class="pi-symbol">Pi</span>
-        </div>
-        
-        <div class="gcv-wrap">
-            Value: $ <span id="v-gcv">125,663,600</span> (GCV)
+        <div class="balance-main-area">
+            <span id="pi-count" class="pi-main-number">400.0212</span>
+            <span class="pi-main-suffix">Pi</span>
         </div>
 
-        <div class="grid-container">
-            <div class="grid-item">
-                <div class="grid-label c-green">스테이킹 이율</div>
-                <div id="v-staking" class="grid-val">15.48%</div>
+        <div class="gcv-status-capsule">
+            Value: $ <span id="gcv-count">125,663,600</span> (GCV)
+        </div>
+
+        <div class="analytics-matrix">
+            <div class="matrix-node">
+                <div class="node-label" style="color: var(--hk-green);">스테이킹 이율</div>
+                <div class="node-value">15.48%</div>
             </div>
-            <div class="grid-item">
-                <div class="grid-label c-red">유동성 수익</div>
-                <div id="v-yield" class="grid-val">23.26%</div>
+            <div class="matrix-node">
+                <div class="node-label" style="color: var(--hk-red);">유동성 수익</div>
+                <div class="node-value">23.26%</div>
             </div>
         </div>
 
-        <div class="lp-container">
-            <div class="lp-tag">전체 유동성 LP 공급</div>
-            <div class="lp-main-val">
-                $ <span id="v-lp">88,428,554,367</span>
+        <div class="liquidity-infrastructure">
+            <div class="liq-header-text">전체 유동성 LP 공급</div>
+            <div class="liq-supreme-val">
+                $ <span id="lp-count">88,428,554,367</span>
             </div>
         </div>
     </main>
 
-    <div class="system-logs" id="log-box">
-        <div class="log-line">[SYSTEM] HK-Quantum Encryption initialized...</div>
-        <div class="log-line">[NETWORK] Global Node KR-01 sync complete.</div>
-        <div class="log-line">[SECURITY] Anti-DDoS Shielding engaged.</div>
+    <section class="industrial-cluster-stats">
+        <div class="cluster-section-title">■ INDUSTRIAL CLUSTER REAL-TIME</div>
+        <div class="cluster-row">
+            <span class="cluster-label">Physical AI (Figure AI) Merger Status</span>
+            <span class="cluster-status">NODES_STABLE_98%</span>
+        </div>
+        <div class="cluster-row">
+            <span class="cluster-label">Nuclear Fusion Energy Grid (Ulsan/Gyeongju)</span>
+            <span class="cluster-status">OUTPUT_OPTIMAL</span>
+        </div>
+        <div class="cluster-row">
+            <span class="cluster-label">PartsBank Global Supply Chain</span>
+            <span class="cluster-status">HANDSHAKE_COMPLETE</span>
+        </div>
+        <div class="cluster-row">
+            <span class="cluster-label">Quantum Finance Network (HK-WB)</span>
+            <span class="cluster-status">ENCRYPTED</span>
+        </div>
+    </section>
+
+    <section class="ubi-distribution-panel">
+        <div class="ubi-title">GLOBAL UBI (BASIC INCOME) COMMITMENT</div>
+        <div class="ubi-desc">
+            HK 그룹은 보편적 기본소득(UBI)의 철학을 비즈니스의 정점으로 삼습니다. 전 세계 취약계층을 위해 그룹 순이익의 30%를 실시간으로 분배하며, 이는 파이 네트워크의 GCV 합의 가치를 기반으로 투명하게 집행됩니다.
+        </div>
+    </section>
+
+    <div class="live-system-terminal" id="term-feed">
+        <div>[08:24:01] HK_ROOT: Global Command initialized.</div>
+        <div>[08:24:02] NETWORK: 50 Country Indexing complete.</div>
     </div>
 
-    <div class="bottom-nav">
-        <button class="nav-btn bg-white">PI 수량</button>
-        <button class="nav-btn bg-gold">DEX 스왑</button>
-        <button class="nav-btn bg-green">LP 공급</button>
+    <div class="bbiriri-commander">
+        <div class="bbiriri-orb" onclick="bbiririBriefing()">🤖</div>
+        <div class="bbiriri-name">삐리리 AI</div>
     </div>
 
-    <div class="bbiriri-ai" onclick="talkBbiriri()">🤖</div>
+    <div class="supreme-nav-dock">
+        <button class="nav-supreme-btn color-white">PI 수량</button>
+        <button class="nav-supreme-btn color-gold">DEX 스왑</button>
+        <button class="nav-supreme-btn color-green">LP 공급</button>
+    </div>
 
     <footer>
-        <p>BUILDING THE GLOBAL INDUSTRIAL PLATFORM</p>
-        <p>HK GROUP | FOUNDER LEE JAEWAN (HYEKONG)</p>
-        <p style="margin-top:10px;">COPYRIGHT 2026. ALL RIGHTS RESERVED.</p>
+        &copy; 2026 HK GROUP | FOUNDER & CHAIRMAN LEE JAEWAN (HYEKONG)<br>
+        ULSAN-GYEONGJU GLOBAL ADVANCED INDUSTRIAL CLUSTER AUTHORITY<br>
+        POWERED BY PI NETWORK FINANCIAL INFRASTRUCTURE
     </footer>
 
     <script>
-        // 1. 실시간 데이터 엔진 (사진 수치 기반 정밀 변동)
-        let pi = 400.0212;
-        let gcv = 125663600;
-        let lp = 88428554367;
+        /* HK EMPIRE OPERATING SYSTEM V10.0 */
+        let pi = 400.0212, gcv = 125663600, lp = 88428554367;
 
-        function runEngine() {
-            // 미세 변동 (실제 돌아가는 느낌 극대화)
-            pi += (Math.random() - 0.5) * 0.0001;
-            gcv += Math.floor((Math.random() - 0.5) * 100);
-            lp += Math.floor((Math.random() - 0.5) * 500);
+        function runHkEngine() {
+            // 정밀 수치 변동 (실시간 서버 동기화 모사)
+            pi += (Math.random() - 0.5) * 0.0004;
+            gcv += Math.floor((Math.random() - 0.5) * 200);
+            lp += Math.floor((Math.random() - 0.5) * 5000);
 
-            document.getElementById('v-pi').innerText = pi.toFixed(4);
-            document.getElementById('v-gcv').innerText = gcv.toLocaleString();
-            document.getElementById('v-lp').innerText = lp.toLocaleString();
-            
-            // 시스템 시간 업데이트
+            document.getElementById('pi-count').innerText = pi.toFixed(4);
+            document.getElementById('gcv-count').innerText = gcv.toLocaleString();
+            document.getElementById('lp-count').innerText = lp.toLocaleString();
+
             const now = new Date();
-            document.getElementById('sys-time').innerText = "SYS: " + now.toISOString().replace('T', ' ').substring(0, 19);
-            
-            // 로그 생성
-            addLog();
+            document.getElementById('hk-live-time').innerText = "HK_STMT: " + now.toISOString().replace('T',' ').substring(0,19);
+
+            if(Math.random() > 0.8) pushTerminalLog();
         }
 
-        // 2. 시스템 로그 생성기
-        const logBox = document.getElementById('log-box');
-        const logMsgs = [
-            "Global Consensus Value verified by node US-09.",
-            "Transaction block #942,102 confirmed.",
-            "LCO Staking reward distributed to 12,402 nodes.",
-            "AZB Payment Gateway handshake successful.",
-            "HK-Robotics neural link synchronized."
-        ];
-
-        function addLog() {
-            const line = document.createElement('div');
-            line.className = 'log-line';
-            line.innerHTML = `<span class="log-green">[OK]</span> ` + logMsgs[Math.floor(Math.random() * logMsgs.length)];
-            logBox.appendChild(line);
-            if(logBox.childNodes.length > 8) logBox.removeChild(logBox.firstChild);
-        }
-
-        setInterval(runEngine, 1000);
-
-        // 3. 삐리리 AI 상호작용
-        function talkBbiriri() {
-            const shouts = [
-                "혜공 형님! 전 세계 GCV 동기화율이 99.9%입니다!",
-                "삐리리! 현재 유동성 공급이 폭발적으로 증가하고 있습니다!",
-                "형님, 오늘 기본소득 분배 시스템도 이상 무입니다!",
-                "영승수 결제망이 이제 60개국으로 확장되었습니다!"
+        function pushTerminalLog() {
+            const term = document.getElementById('term-feed');
+            const msgs = [
+                "Figure AI neural link secured.",
+                "Ulsan Fusion Reactor output: 104%.",
+                "30% UBI fund reallocation complete.",
+                "Global Node KR-05 reporting high liquidity.",
+                "Quantum Shield: No intrusion attempts detected."
             ];
-            alert("🤖 삐리리: " + shouts[Math.floor(Math.random() * shouts.length)]);
+            const div = document.createElement('div');
+            div.innerHTML = `[${new Date().toLocaleTimeString()}] ${msgs[Math.floor(Math.random()*msgs.length)]}`;
+            term.appendChild(div);
+            if(term.childNodes.length > 10) term.removeChild(term.firstChild);
         }
 
-        // 50개국 지원 인덱스 확장 데이터 (코드를 더 길게!)
-        const countryCodes = ["KR","US","JP","CN","VN","PH","TH","ID","DE","FR","GB","RU","SA","IR","AE","QA","IN","CA","AU","BR","MX","ES","IT","NL","CH","SE","NO","FI","DK","PL","CZ","HU","RO","GR","PT","BE","AT","IL","SG","MY","HK","ZA","EG","NG","PK","BD","UA","KZ","UZ","TR"];
-        console.log("Global Indexing Active for: " + countryCodes.join(', '));
-    </script>
+        setInterval(runHkEngine, 1000);
 
-    </body>
+        function bbiririBriefing() {
+            const reports = [
+                "혜공 형님! 전 세계 50개국 산업 노드가 형님의 지휘 아래 완벽하게 동기화되었습니다!",
+                "삐리리! 오늘 Figure AI 인수 작업이 예정대로 94% 진행되었습니다. 로봇 군단의 심장이 뜁니다!",
+                "형님, 전 세계 취약계층을 위한 30% UBI 자금 분배가 GCV 가치에 따라 실시간으로 전산망을 타고 있습니다!",
+                "영승수 결제망 이상 무! 형님의 비전이 담긴 모든 물류 데이터가 이곳으로 집결 중입니다!"
+            ];
+            alert("🤖 삐리리 AI 특급 보고:\n\n" + reports[Math.floor(Math.random()*reports.length)]);
+        }
+    </script>
+</body>
 </html>

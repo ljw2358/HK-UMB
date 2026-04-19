@@ -3,310 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK-WorldBank | Chairman Lee Jaewan</title>
+    <title>HK WORLD BANK | Global Asset Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap');
         
         :root {
-            --hk-gold: #facc15;
-            --hk-blue: #3b82f6;
-            --hk-dark: #020617;
+            --pi-gold: #f59e0b;
+            --bg-dark: #020617;
+            --card-bg: rgba(30, 41, 59, 0.7);
         }
 
         body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif; 
+            background: var(--bg-dark); 
+            color: #e2e8f0;
+            overflow-x: hidden;
         }
 
-        .header-font { font-family: 'Orbitron', sans-serif; }
+        .font-numeric { font-family: 'Orbitron', sans-serif; }
         
-        /* 실시간 숫자 애니메이션 스타일 */
-        .live-counter {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--hk-gold);
-            text-shadow: 0 0 15px rgba(250, 204, 21, 0.6);
+        .glass-panel { 
+            background: var(--card-bg); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
         }
 
-        /* 6구 그리드 카드 디자인 */
-        .menu-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid #1e293b;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(12px);
-            border-radius: 2.5rem;
-        }
-        .menu-card:hover {
-            border-color: var(--hk-gold);
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 25px 50px rgba(250, 204, 21, 0.15);
+        .glow-text {
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
 
-        /* 30개국어 셀렉트 박스 */
-        .lang-select {
-            background: #000;
-            color: var(--hk-gold);
-            border: 2px solid var(--hk-gold);
-            border-radius: 50px;
-            padding: 8px 24px;
-            font-weight: 900;
-            outline: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .lang-select:hover { background: var(--hk-gold); color: #000; }
+        /* 스크롤바 디자인 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #f59e0b; border-radius: 10px; }
 
-        /* 비디오 섹션 스타일 */
-        .video-player {
-            background: #050505;
-            border: 2px solid #111;
-            border-radius: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 16/9;
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
         }
 
-        /* 흐르는 상단 바 */
-        .ticker-wrap {
-            width: 100%;
-            overflow: hidden;
-            background: var(--hk-gold);
-            color: #000;
-            padding: 8px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            font-weight: 900;
-            font-size: 14px;
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
-        .ticker {
-            display: inline-block;
-            white-space: nowrap;
-            animation: ticker 40s linear infinite;
-        }
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* 스크롤바 커스텀 */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--hk-gold); }
     </style>
 </head>
-<body class="pb-32">
+<body class="min-h-screen">
 
-    <div class="ticker-wrap shadow-2xl">
-        <div class="ticker">
-            WELCOME TO HK-WORLDBANK GLOBAL MASTER PORTAL | NODE V23 STATUS: ACTIVE | CHAIRMAN LEE JAEWAN LEADERSHIP | QUANTUM SHIELD ON | WELCOME TO HK-WORLDBANK GLOBAL MASTER PORTAL | NODE V23 STATUS: ACTIVE | CHAIRMAN LEE JAEWAN LEADERSHIP | QUANTUM SHIELD ON |
+    <nav class="border-b border-white/10 px-6 py-4 flex justify-between items-center sticky top-0 bg-slate-950/80 z-50">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center font-bold text-slate-900 shadow-[0_0_15px_rgba(245,158,11,0.6)]">HK</div>
+            <span class="text-2xl font-bold tracking-widest font-numeric glow-text uppercase">World Bank</span>
+        </div>
+        
+        <div class="flex items-center space-x-4">
+            <span id="live-clock" class="hidden md:block font-mono text-amber-500/80 text-sm">2026-04-19 12:56:26</span>
+            <select id="langSelect" class="bg-slate-900 border border-amber-500/30 text-xs rounded-full px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-amber-500 text-amber-500">
+                <option value="ko">KOREAN</option>
+                <option value="en">ENGLISH</option>
+                <option value="zh">CHINESE</option>
+                <option value="ja">JAPANESE</option>
+                <option value="de">GERMAN</option>
+                <option value="fr">FRENCH</option>
+                <option value="es">SPANISH</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto p-4 md:p-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+            <div class="lg:col-span-2 glass-panel rounded-3xl p-8 shimmer relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start">
+                        <h2 id="txt-total-assets" class="text-slate-400 text-sm font-bold tracking-[0.3em] uppercase mb-6">Main Asset Integrated Balance</h2>
+                        <span class="bg-green-500/20 text-green-400 text-[10px] px-2 py-1 rounded-md animate-pulse">NETWORK LIVE</span>
+                    </div>
+                    <div class="flex items-baseline space-x-4">
+                        <span id="main-balance" class="text-6xl md:text-8xl font-bold font-numeric tracking-tighter">400.0212</span>
+                        <span class="text-3xl font-bold text-amber-500">Pi</span>
+                    </div>
+                    <div class="mt-8 flex space-x-6 border-t border-white/5 pt-6">
+                        <div>
+                            <p class="text-slate-500 text-[10px] uppercase">Market Cap</p>
+                            <p class="font-numeric text-lg text-slate-200">$ <span id="val-cap">12,450,231</span></p>
+                        </div>
+                        <div>
+                            <p class="text-slate-500 text-[10px] uppercase">24h Vol</p>
+                            <p class="font-numeric text-lg text-slate-200">$ <span id="val-vol">1,102,459</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass-panel rounded-2xl p-5 flex justify-between items-center">
+                    <div>
+                        <p id="txt-node-power" class="text-slate-500 text-xs">Node Power</p>
+                        <p class="text-xl font-numeric mt-1" id="val-node">12.4592</p>
+                    </div>
+                    <div class="w-10 h-10 bg-amber-500/10 rounded-lg flex items-center justify-center text-amber-500">⚡</div>
+                </div>
+                <div class="glass-panel rounded-2xl p-5 flex justify-between items-center border-l-4 border-l-amber-500">
+                    <div>
+                        <p id="txt-staking" class="text-slate-500 text-xs">Staking Reward</p>
+                        <p class="text-xl font-numeric mt-1 text-amber-400" id="val-stake">85.1023</p>
+                    </div>
+                    <div class="w-10 h-10 bg-amber-500/10 rounded-lg flex items-center justify-center text-amber-500">💎</div>
+                </div>
+                <div class="glass-panel rounded-2xl p-5 flex justify-between items-center">
+                    <div>
+                        <p id="txt-network" class="text-slate-500 text-xs">Network Traffic</p>
+                        <p class="text-xl font-numeric mt-1 font-mono text-blue-400" id="val-traffic">1,024 GB</p>
+                    </div>
+                    <div class="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-400">🌐</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-1">
+                <h3 id="txt-faq-title" class="text-3xl font-bold leading-tight mb-4 text-white">Global AI<br><span class="text-amber-500">Support Center</span></h3>
+                <p class="text-slate-400 text-sm mb-6 leading-relaxed">HK World Bank는 365일 24시간 인공지능이 즉각적으로 대응하며, 전 세계 어디서나 최상의 금융 서비스를 보장합니다.</p>
+                <button class="w-full py-3 bg-amber-500 text-slate-900 font-bold rounded-xl hover:bg-amber-400 transition-colors shadow-lg shadow-amber-500/20">Live Chat Support</button>
+            </div>
+
+            <div class="lg:col-span-3">
+                <div id="faq-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    </div>
+            </div>
         </div>
     </div>
 
-    <header class="p-8 flex flex-col lg:flex-row justify-between items-center gap-8 bg-black/90 border-b border-zinc-900 sticky top-[38px] z-50 backdrop-blur-md">
-        <div class="text-center lg:text-left">
-            <h1 class="header-font text-4xl font-black text-yellow-500 tracking-tighter">HK-WORLD BANK</h1>
-            <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.5em] mt-1">Advanced Pi-Network Ecosystem</p>
+    <div class="fixed bottom-6 right-6 z-50">
+        <div class="bg-slate-800 border border-white/10 rounded-xl p-4 shadow-2xl flex items-center space-x-4 animate-bounce">
+            <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+            <p class="text-xs text-slate-300 font-medium">System Status: <span class="text-green-400">Optimized</span></p>
         </div>
-        
-        <div class="flex items-center gap-6">
-            <div class="hidden md:flex flex-col items-end">
-                <span class="text-[10px] text-yellow-500 font-bold">SYSTEM STATUS</span>
-                <span class="text-xs font-black">100% OPERATIONAL</span>
-            </div>
-            <select id="languageSelector" onchange="switchLang()" class="lang-select">
-                <option value="ko">KOREAN 🇰🇷</option><option value="en">ENGLISH 🇺🇸</option><option value="zh">CHINESE 🇨🇳</option>
-                <option value="ja">JAPANESE 🇯🇵</option><option value="vi">VIETNAMESE 🇻🇳</option><option value="fr">FRENCH 🇫🇷</option>
-                <option value="de">GERMAN 🇩🇪</option><option value="es">SPANISH 🇪🇸</option><option value="ru">RUSSIAN 🇷🇺</option>
-                <option value="pt">PORTUGUESE 🇵🇹</option><option value="hi">HINDI 🇮🇳</option><option value="ar">ARABIC 🇸🇦</option>
-                <option value="th">THAI 🇹🇭</option><option value="id">INDONESIAN 🇮🇩</option><option value="tr">TURKISH 🇹🇷</option>
-                <option value="it">ITALIAN 🇮🇹</option><option value="nl">DUTCH 🇳🇱</option><option value="pl">POLISH 🇵🇱</option>
-                <option value="sv">SWEDISH 🇸🇪</option><option value="no">NORWEGIAN 🇳🇴</option><option value="da">DANISH 🇩🇰</option>
-                <option value="fi">FINNISH 🇫🇮</option><option value="el">GREEK 🇬🇷</option><option value="cs">CZECH 🇨🇿</option>
-                <option value="hu">HUNGARIAN 🇭🇺</option><option value="ro">ROMANIAN 🇷🇴</option><option value="uk">UKRAINIAN 🇺🇦</option>
-                <option value="he">HEBREW 🇮🇱</option><option value="ms">MALAY 🇲🇾</option><option value="tl">TAGALOG 🇵🇭</option>
-            </select>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-6 pt-12">
-
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
-            <div class="menu-card p-10 text-center">
-                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="네트워크 노드" data-en="Network Nodes">네트워크 노드</p>
-                <h2 id="counter1" class="live-counter text-4xl font-black">1,245,678</h2>
-            </div>
-            <div class="menu-card p-10 text-center">
-                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="트랜잭션 속도" data-en="TX Speed">트랜잭션 속도</p>
-                <h2 id="counter2" class="live-counter text-4xl font-black">8,203 TPS</h2>
-            </div>
-            <div class="menu-card p-10 text-center">
-                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="총 유동성 가치" data-en="Total TVL">총 유동성 가치</p>
-                <h2 id="counter3" class="live-counter text-4xl font-black">$4,829,150K</h2>
-            </div>
-            <div class="menu-card p-10 text-center">
-                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="활성 유저" data-en="Active Users">활성 유저</p>
-                <h2 id="counter4" class="live-counter text-4xl font-black">92,410</h2>
-            </div>
-        </section>
-
-        <h2 class="header-font text-3xl font-black text-yellow-500 text-center mb-12 tr" data-ko="핵심 뱅킹 서비스" data-en="Core Banking Services">핵심 뱅킹 서비스</h2>
-        <section class="grid grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
-            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
-                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-paper-plane text-5xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-2xl font-black tr" data-ko="송금" data-en="Transfer">송금</h3>
-                <p class="text-xs text-zinc-500 mt-2">Instant Global Assets Transfer</p>
-            </div>
-            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
-                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-cart-shopping text-5xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-2xl font-black tr" data-ko="결제" data-en="Payment">결제</h3>
-                <p class="text-xs text-zinc-500 mt-2">Smart Web3 Pay Solution</p>
-            </div>
-            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
-                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-vault text-5xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-2xl font-black tr" data-ko="예치" data-en="Deposit">예치</h3>
-                <p class="text-xs text-zinc-500 mt-2">Quantum Shield Asset Vault</p>
-            </div>
-            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
-                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-award text-5xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-2xl font-black tr" data-ko="보상" data-en="Rewards">보상</h3>
-                <p class="text-xs text-zinc-500 mt-2">Ecosystem Loyalty Bonus</p>
-            </div>
-            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
-                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-hand-holding-dollar text-5xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-2xl font-black tr" data-ko="기본소득" data-en="UBI">기본소득</h3>
-                <p class="text-xs text-zinc-500 mt-2">Universal Basic Income Plan</p>
-            </div>
-            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
-                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-shuffle text-5xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-2xl font-black tr" data-ko="스왑" data-en="Swap">스왑</h3>
-                <p class="text-xs text-zinc-500 mt-2">Real-time Currency Exchange</p>
-            </div>
-        </section>
-
-        <div class="mb-32">
-            <button class="w-full bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:scale-[1.02] text-white font-black py-16 rounded-[4rem] text-4xl shadow-[0_40px_80px_rgba(225,29,72,0.3)] transition-all tr"
-                    data-ko="글로벌 AI 지원센터 가동" data-en="ACTIVATE GLOBAL AI SUPPORT">
-                글로벌 AI 지원센터 가동
-            </button>
-        </div>
-
-        <section class="mb-32">
-            <h2 class="header-font text-4xl text-center font-black mb-16 text-yellow-500 tr" data-ko="HK 미디어 쇼케이스" data-en="HK Media Showcase">HK 미디어 쇼케이스</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="video-player md:col-span-2 border-4 border-yellow-500/20 group">
-                    <i class="fa-solid fa-play text-8xl text-yellow-500 opacity-20 group-hover:opacity-100 transition-all"></i>
-                    <div class="absolute bottom-10 left-10 text-left">
-                        <span class="bg-yellow-500 text-black px-4 py-1 rounded-full font-bold text-xs uppercase">Main Film</span>
-                        <h4 class="text-3xl font-black mt-3">HK-WorldBank: Vision 2026</h4>
-                    </div>
-                </div>
-                <div class="video-player group border border-zinc-800">
-                    <i class="fa-solid fa-play text-4xl text-zinc-800 group-hover:text-yellow-500"></i>
-                    <p class="absolute bottom-6 left-8 font-bold text-zinc-600">Promotion 02</p>
-                </div>
-                <div class="video-player group border border-zinc-800">
-                    <i class="fa-solid fa-play text-4xl text-zinc-800 group-hover:text-yellow-500"></i>
-                    <p class="absolute bottom-6 left-8 font-bold text-zinc-600">Promotion 03</p>
-                </div>
-                <div class="video-player group border border-zinc-800">
-                    <i class="fa-solid fa-play text-4xl text-zinc-800 group-hover:text-yellow-500"></i>
-                    <p class="absolute bottom-6 left-8 font-bold text-zinc-600">Promotion 04</p>
-                </div>
-                <div class="video-player group border border-zinc-800">
-                    <i class="fa-solid fa-play text-4xl text-zinc-800 group-hover:text-yellow-500"></i>
-                    <p class="absolute bottom-6 left-8 font-bold text-zinc-600">Promotion 05</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-32">
-            <h2 class="text-4xl font-black mb-16 border-b-8 border-yellow-500 pb-8 inline-block tr" data-ko="자주 묻는 질문 (FAQ)" data-en="FAQ">자주 묻는 질문 (FAQ)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="menu-card p-10">
-                    <h5 class="text-yellow-500 font-black text-xl mb-4">Q1. HK-WorldBank의 사명은?</h5>
-                    <p class="text-zinc-500 text-sm leading-relaxed">전 세계 Pi Network 참여자들에게 가장 혁신적이고 안전한 금융 시스템을 제공하여 인류의 경제적 자유를 실현하는 것입니다.</p>
-                </div>
-                <div class="menu-card p-10">
-                    <h5 class="text-yellow-500 font-black text-xl mb-4">Q2. 양자 방패 보안이란?</h5>
-                    <p class="text-zinc-500 text-sm leading-relaxed">미래의 양자 컴퓨팅 해킹 위협에 대비해 HK 그룹이 독자 개발한 최신 암호화 방어 시스템입니다.</p>
-                </div>
-                <div class="menu-card p-10">
-                    <h5 class="text-yellow-500 font-black text-xl mb-4">Q3. UBI 지급 조건은?</h5>
-                    <p class="text-zinc-500 text-sm leading-relaxed">HK 생태계에 정기적으로 참여하고 노드를 유지하는 모든 유저에게 공정하게 지급됩니다.</p>
-                </div>
-                <div class="menu-card p-10">
-                    <h5 class="text-yellow-500 font-black text-xl mb-4">Q4. 30개국어 지원 범위는?</h5>
-                    <p class="text-zinc-500 text-sm leading-relaxed">아시아, 유럽, 아메리카, 아프리카 등 전 세계 주요 거점 국가의 모든 언어를 실시간 지원합니다.</p>
-                </div>
-                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q5. 기술 지원...</h5></div>
-                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q6. 메인넷 연동...</h5></div>
-                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q7. 수수료 정책...</h5></div>
-                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q8. 파트너십 문의...</h5></div>
-                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q9. 모바일 앱 출시...</h5></div>
-                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q10. 이재완 의장 비전...</h5></div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-zinc-950 py-32 border-t border-zinc-900 text-center">
-        <h2 class="header-font text-4xl font-black text-zinc-800 mb-10">HK GROUP GLOBAL</h2>
-        <div class="flex justify-center gap-12 mb-16">
-            <a href="#" class="text-4xl text-zinc-800 hover:text-red-600 transition-all"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" class="text-4xl text-zinc-800 hover:text-white transition-all"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="#" class="text-4xl text-zinc-800 hover:text-blue-500 transition-all"><i class="fa-brands fa-facebook"></i></a>
-        </div>
-        <p class="header-font text-xs text-zinc-700 tracking-[1.5em] font-bold">CHAIRMAN LEE JAEWAN | HK-WORLDBANK</p>
-    </footer>
+    </div>
 
     <script>
-        // 숫자가 실시간으로 변하는 로직 (오빠 영상 속 핵심 기능)
-        function animateStats() {
-            setInterval(() => {
-                const c1 = document.getElementById('counter1');
-                const c2 = document.getElementById('counter2');
-                const c3 = document.getElementById('counter3');
-                const c4 = document.getElementById('counter4');
-                
-                c1.innerText = (Math.floor(Math.random() * 500) + 1245600).toLocaleString();
-                c2.innerText = (Math.floor(Math.random() * 50) + 8200).toLocaleString() + " TPS";
-                c3.innerText = '$' + (Math.floor(Math.random() * 5000) + 4829100).toLocaleString() + "K";
-                c4.innerText = (Math.floor(Math.random() * 100) + 92400).toLocaleString();
-            }, 1000);
-        }
-        animateStats();
+        // 1. 다국어 확장 데이터 (주요 30개국 대응 구조)
+        const translations = {
+            ko: {
+                "total-assets": "메인 자산 통합 잔장",
+                "status": "시스템 정상 구동 중",
+                "node-power": "노드 연산 파워",
+                "staking": "스테이킹 실시간 보상",
+                "network": "글로벌 네트워크 트래픽",
+                "faq-title": "글로벌 AI 고객지원센터",
+                "faqs": [
+                    ["HKWB 플랫폼의 핵심 가치는 무엇입니까?", "Pi 생태계 내에서 탈중앙화 금융의 대중화와 기술적 우위를 목표로 합니다."],
+                    ["보안 알고리즘은 어떻게 설계되었나요?", "양자 내성 암호화와 멀티 시그니처 보안 프로토콜을 기반으로 설계되었습니다."],
+                    ["거래 수수료 정책은 어떻게 되나요?", "모든 트랜잭션은 0.01 Pi의 고정된 초저가 수수료를 지향합니다."],
+                    ["실시간 노드 참여가 가능한가요?", "네, 전용 대시보드를 통해 누구나 밸리데이터로 참여할 수 있습니다."],
+                    ["다국어 지원은 어디까지 되나요?", "현재 30개 주요 언어 및 지역 방언에 대한 AI 번역을 준비 중입니다."],
+                    ["AI 고객센터는 어떻게 작동하나요?", "자체 구축된 금융 전용 LLM이 24시간 실시간 기술 상담을 수행합니다."],
+                    ["스테이킹 보상 출금 주기는?", "스테이킹 주기에 따라 다르나, 기본적으로 실시간 정산 방식을 채택합니다."],
+                    ["모바일 앱 지원 계획은?", "Pi Browser 내 웹앱 형태와 독립 모바일 앱을 동시에 지원할 예정입니다."],
+                    ["HK Group과의 연계성은?", "HK Group의 미래 기술 포트폴리오(로봇, 에너지)와 금융 결합을 추진합니다."],
+                    ["기술 지원팀 연락처는?", "앱 내 'Live Chat Support' 버튼을 통해 즉각적인 대응이 가능합니다."]
+                ]
+            },
+            en: {
+                "total-assets": "Integrated Main Asset Balance",
+                "status": "System Running Normal",
+                "node-power": "Node Compute Power",
+                "staking": "Real-time Staking Reward",
+                "network": "Global Network Traffic",
+                "faq-title": "Global AI Support Center",
+                "faqs": [
+                    ["Core value of HKWB?", "Aiming for DeFi mass adoption and tech superiority in the Pi ecosystem."],
+                    ["How is security designed?", "Built on quantum-resistant encryption and multi-sig security protocols."],
+                    ["Transaction fee policy?", "All transactions aim for a fixed ultra-low fee of 0.01 Pi."],
+                    ["Real-time node participation?", "Yes, anyone can join as a validator via the dedicated dashboard."],
+                    ["Multilingual support range?", "Currently preparing AI translation for 30 major languages."],
+                    ["How does AI support work?", "Financial-specialized LLM performs 24/7 real-time technical consultation."],
+                    ["Staking withdrawal cycle?", "Varies by cycle, but basically adopts a real-time settlement method."],
+                    ["Mobile app support plan?", "Web-app within Pi Browser and standalone mobile apps planned."],
+                    ["Integration with HK Group?", "Linking finance with HK Group's tech portfolio (robotics, energy)."],
+                    ["Technical support contact?", "Immediate response via the 'Live Chat Support' button in-app."]
+                ]
+            }
+        };
 
-        // 30개국어 번역 시스템 (샘플 기반)
-        function switchLang() {
-            const l = document.getElementById('languageSelector').value;
-            const transElements = document.querySelectorAll('.tr');
-            transElements.forEach(el => {
-                const txt = el.getAttribute(`data-${l}`) || el.getAttribute('data-ko');
-                el.innerText = txt;
-            });
-            console.log("Language changed to: " + l);
+        // 2. 고도화된 실시간 숫자 변동 기능
+        function updateStats() {
+            // 메인 잔액 (매우 정밀하게 변동)
+            const main = document.getElementById('main-balance');
+            let val = parseFloat(main.innerText);
+            main.innerText = (val + (Math.random() * 0.00015 - 0.00005)).toFixed(4);
+
+            // 시가총액 및 거래량
+            document.getElementById('val-cap').innerText = Math.floor(12450231 + (Math.random() * 1000)).toLocaleString();
+            document.getElementById('val-vol').innerText = Math.floor(1102459 + (Math.random() * 500)).toLocaleString();
+
+            // 노드 및 스테이킹 지표
+            document.getElementById('val-node').innerText = (12.4592 + (Math.random() * 0.01)).toFixed(4);
+            document.getElementById('val-stake').innerText = (85.1023 + (Math.random() * 0.005)).toFixed(4);
+            document.getElementById('val-traffic').innerText = Math.floor(1024 + (Math.random() * 10)) + " GB";
+            
+            // 시계 업데이트
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleString();
         }
+
+        // 3. UI 렌더링
+        function render(langCode) {
+            const data = translations[langCode] || translations['en'];
+            
+            document.getElementById('txt-total-assets').innerText = data['total-assets'];
+            document.getElementById('txt-node-power').innerText = data['node-power'];
+            document.getElementById('txt-staking').innerText = data['staking'];
+            document.getElementById('txt-network').innerText = data['network'];
+            document.getElementById('txt-faq-title').innerText = data['faq-title'];
+
+            const container = document.getElementById('faq-container');
+            container.innerHTML = '';
+            
+            data.faqs.forEach(faq => {
+                const card = document.createElement('div');
+                card.className = "glass-panel p-5 rounded-xl border-l-2 border-l-transparent hover:border-l-amber-500 transition-all group";
+                card.innerHTML = `
+                    <h4 class="text-amber-500 font-bold text-sm mb-2 group-hover:translate-x-1 transition-transform">Q. ${faq[0]}</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">A. ${faq[1]}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 초기화 및 실행
+        setInterval(updateStats, 1500);
+        render('ko');
+
+        document.getElementById('langSelect').addEventListener('change', (e) => {
+            render(e.target.value);
+        });
     </script>
 </body>
 </html>

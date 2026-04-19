@@ -1,196 +1,233 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - FULL INTERFACE</title>
+    <title>HK WORLD BANK | GLOBAL CORE SYSTEM</title>
     <style>
-        /* 영상의 느낌을 그대로 살린 투박하고 강력한 블랙 테마 */
+        /* 혜공 형님의 영상을 기반으로 한 초고중량 다크 인터페이스 */
         body { 
             background-color: #000000; 
             color: #ffffff; 
             font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; 
             margin: 0; 
             padding: 0; 
-            overflow-x: hidden;
+            letter-spacing: -0.5px;
         }
 
-        /* 최상단 헤더 */
-        .top-header { 
-            padding: 25px 20px; 
-            font-size: 28px; 
-            font-weight: 900; 
-            font-style: italic; 
-            letter-spacing: -1px;
-            border-bottom: 1px solid #222;
+        /* [1] 헤더 - HK WORLD BANK */
+        .system-header {
+            padding: 40px 25px;
+            font-size: 36px;
+            font-weight: 900;
+            font-style: italic;
+            border-bottom: 3px solid #111;
+            background: linear-gradient(to right, #000, #0a0a0a);
         }
 
-        /* 메인 대시보드 컨테이너 */
-        .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .main-wrapper { max-width: 1200px; margin: 0 auto; padding: 30px; }
 
-        /* 자산 표시부 */
-        .asset-box { 
-            text-align: center; 
-            padding: 60px 0; 
-            border-bottom: 1px solid #1a1a1a;
-            margin-bottom: 30px;
-        }
-        .asset-label { font-size: 14px; color: #888; letter-spacing: 2px; margin-bottom: 15px; }
-        .asset-value { font-size: 72px; font-weight: bold; margin: 10px 0; }
-        .asset-unit { font-size: 24px; color: #fff; margin-left: 10px; }
-
-        /* 하단 3열 데이터 그리드 */
-        .data-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 20px; 
-            margin-bottom: 50px;
-        }
-        .data-card { 
-            background: #0a0a0a; 
-            padding: 25px; 
-            border: 1px solid #222; 
-            border-radius: 4px;
+        /* [2] 메인 자산 센터 */
+        .asset-display {
             text-align: center;
-        }
-        .data-label { font-size: 12px; color: #666; margin-bottom: 10px; }
-        .data-number { font-size: 20px; font-weight: bold; color: #eee; }
-
-        /* 실시간 거래 로그 (내용을 더 길게 보이기 위한 장치) */
-        .log-section {
-            background: #050505;
-            padding: 20px;
-            border: 1px solid #111;
-            font-family: monospace;
-            font-size: 12px;
-            color: #00ff00;
-            height: 150px;
-            overflow-y: hidden;
+            padding: 100px 0;
+            border-bottom: 1px solid #151515;
             margin-bottom: 50px;
-            border-radius: 4px;
         }
-        .log-line { margin-bottom: 5px; opacity: 0.8; }
+        .asset-label { 
+            font-size: 16px; 
+            color: #555; 
+            font-weight: bold; 
+            letter-spacing: 5px; 
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .asset-number {
+            font-size: 95px;
+            font-weight: 900;
+            letter-spacing: -4px;
+            margin: 0;
+            display: inline-block;
+        }
+        .asset-pi { font-size: 35px; margin-left: 15px; color: #fff; vertical-align: bottom; margin-bottom: 15px; display: inline-block; }
 
-        /* 글로벌 AI 고객지원센터 FAQ (확장판) */
-        .faq-section { margin-top: 60px; padding-bottom: 100px; }
-        .faq-title { 
-            font-size: 22px; 
-            font-weight: bold; 
-            margin-bottom: 30px; 
-            color: #fff;
-            padding-left: 10px;
-            border-left: 4px solid #fff;
+        /* [3] 실시간 지표 3열 그리드 */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
         }
-        .faq-item { 
-            margin-bottom: 15px; 
-            background: #0f0f0f; 
-            border: 1px solid #222; 
-            border-radius: 8px;
+        .info-box {
+            background: #050505;
+            border: 1px solid #1a1a1a;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 2px;
+        }
+        .info-title { font-size: 13px; color: #444; margin-bottom: 15px; font-weight: bold; text-transform: uppercase; }
+        .info-value { font-size: 24px; font-weight: bold; color: #bbb; font-family: monospace; }
+
+        /* [4] 실시간 시스템 터미널 (스크롤 압박용) */
+        .terminal-container {
+            background: #020202;
+            border: 1px solid #111;
+            padding: 25px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #33ff33;
+            height: 200px;
             overflow: hidden;
+            margin-bottom: 60px;
+            line-height: 1.8;
+            border-radius: 5px;
+            box-shadow: inset 0 0 20px #000;
         }
-        details summary { 
-            padding: 20px; 
-            font-size: 15px; 
-            font-weight: bold; 
-            cursor: pointer; 
+
+        /* [5] 글로벌 AI 고객지원센터 (형님의 10대 FAQ) */
+        .faq-wrap { margin-bottom: 100px; }
+        .faq-main-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #fff;
+            display: inline-block;
+        }
+        .faq-list { display: flex; flex-direction: column; gap: 15px; }
+        .faq-card {
+            background: #080808;
+            border: 1px solid #111;
+        }
+        details summary {
+            padding: 25px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
             list-style: none;
+            outline: none;
             display: flex;
             justify-content: space-between;
         }
-        details summary:after { content: '+'; color: #888; }
-        details[open] summary:after { content: '-'; }
-        .faq-content { 
-            padding: 0 20px 20px 20px; 
-            font-size: 14px; 
-            color: #aaa; 
-            line-height: 1.6; 
-            border-top: 1px solid #1a1a1a;
-            padding-top: 15px;
+        details summary:hover { background: #111; }
+        details[open] summary { border-bottom: 1px solid #1a1a1a; }
+        .faq-body {
+            padding: 25px;
+            font-size: 15px;
+            color: #888;
+            line-height: 1.8;
+            background: #050505;
         }
 
-        /* 언어 선택기 (30개국을 위해 크게 배치) */
-        .lang-footer {
-            background: #0a0a0a;
-            padding: 40px 20px;
-            border-top: 1px solid #222;
-            text-align: center;
+        /* [6] 30개국 언어 선택 대형 패널 */
+        .language-vault {
+            background: #030303;
+            padding: 60px 20px;
+            border-top: 1px solid #111;
         }
-        .lang-grid {
+        .vault-title { text-align: center; color: #333; font-size: 12px; letter-spacing: 3px; margin-bottom: 40px; }
+        .lang-btns-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            max-width: 1000px;
-            margin: 20px auto;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            max-width: 1100px;
+            margin: 0 auto;
         }
-        .lang-btn {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            color: #ccc;
-            padding: 8px;
-            font-size: 11px;
+        .l-btn {
+            background: #000;
+            border: 1px solid #222;
+            color: #555;
+            padding: 15px;
+            font-size: 12px;
             cursor: pointer;
-            border-radius: 4px;
+            text-align: left;
+            transition: 0.3s;
         }
-        .lang-btn:hover { background: #333; color: #fff; }
-        .lang-btn.active { border-color: #fff; color: #fff; font-weight: bold; }
+        .l-btn:hover { border-color: #fff; color: #fff; }
+        .l-btn.on { border-color: #fff; color: #fff; background: #111; font-weight: bold; }
 
+        /* 하단 푸터 */
+        footer {
+            padding: 50px;
+            text-align: center;
+            color: #222;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="top-header italic">HK WORLD BANK</div>
+    <header class="system-header">HK WORLD BANK</header>
 
-    <div class="container">
-        <div class="asset-box">
-            <div class="asset-label" id="txt-main-title">MAIN ASSET INTEGRATED BALANCE</div>
-            <div class="asset-value">
-                <span id="main-num">400.0212</span><span class="asset-unit">Pi</span>
+    <div class="main-wrapper">
+        <section class="asset-display">
+            <div class="asset-label" id="txt-m-balance">Main Asset Integrated Balance</div>
+            <div class="asset-number">
+                <span id="live-main">400.0212</span><span class="asset-pi">Pi</span>
             </div>
-            <div style="font-size: 12px; color: #00ff00; margin-top: 10px;" id="txt-sync">● LIVE NETWORK SYNCING...</div>
+            <div style="color: #00ff00; font-size: 12px; margin-top: 25px; font-family: monospace;" id="txt-status">
+                ● [GLOBAL_SERVER_CONNECTED] - SYNC_LIVE_DATA_STREAMING...
+            </div>
+        </section>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <div class="info-title" id="txt-node">Node Power</div>
+                <div class="info-value" id="live-node">12.4592</div>
+            </div>
+            <div class="info-box">
+                <div class="info-title" id="txt-staking">Staking Reward</div>
+                <div class="info-value" id="live-stake">85.1023</div>
+            </div>
+            <div class="info-box">
+                <div class="info-title" id="txt-traffic">Network Traffic</div>
+                <div class="info-value" id="live-traffic">1024 GB</div>
+            </div>
         </div>
 
-        <div class="data-grid">
-            <div class="data-card">
-                <div class="data-label" id="txt-node">NODE POWER</div>
-                <div class="data-number" id="node-val">12.4592</div>
-            </div>
-            <div class="data-card">
-                <div class="data-label" id="txt-staking">STAKING REWARD</div>
-                <div class="data-number" id="stake-val">85.1023</div>
-            </div>
-            <div class="data-card">
-                <div class="data-label" id="txt-traffic">NETWORK TRAFFIC</div>
-                <div class="data-number" id="traffic-val">1024 GB</div>
-            </div>
-        </div>
+        <div class="terminal-container" id="term-box"></div>
 
-        <div class="log-section" id="log-container">
-            </div>
-
-        <div class="faq-section">
-            <div class="faq-title" id="txt-faq-title">GLOBAL AI CUSTOMER SUPPORT CENTER (FAQ)</div>
-            <div id="faq-list">
+        <section class="faq-wrap">
+            <div class="faq-main-title" id="txt-faq-head">Global AI Support Center FAQ</div>
+            <div class="faq-list" id="faq-inject">
                 </div>
-        </div>
+        </section>
     </div>
 
-    <div class="lang-footer">
-        <div style="font-size: 12px; color: #555; margin-bottom: 15px;">SELECT LANGUAGE (30 COUNTRIES SUPPORTED)</div>
-        <div class="lang-grid" id="lang-grid">
+    <div class="language-vault">
+        <div class="vault-title">HK WORLD BANK MULTI-LANGUAGE DEPLOYMENT (30 COUNTRIES)</div>
+        <div class="lang-btns-grid" id="lang-btns">
             </div>
     </div>
+
+    <footer>
+        &copy; 2026 HK GROUP - ALL RIGHTS RESERVED. GLOBAL ASSET MANAGEMENT SYSTEM V4.0
+    </footer>
 
     <script>
-        // 1. 30개국 언어 지원 데이터 (핵심 샘플)
-        const langData = {
+        // 1. 30개국 언어 리스트 및 한국어/영어 핵심 데이터
+        const countries = [
+            {id:'ko', n:'KOREAN (한국어)'}, {id:'en', n:'ENGLISH'}, {id:'zh', n:'CHINESE (中文)'},
+            {id:'ja', n:'JAPANESE (日本語)'}, {id:'vi', n:'VIETNAMESE (Tiếng Việt)'}, {id:'de', n:'GERMAN (Deutsch)'},
+            {id:'fr', n:'FRENCH (Français)'}, {id:'es', n:'SPANISH (Español)'}, {id:'th', n:'THAI (ไทย)'},
+            {id:'id', n:'INDONESIAN (Bahasa)'}, {id:'pt', n:'PORTUGUESE (Português)'}, {id:'ru', n:'RUSSIAN (Русский)'},
+            {id:'ar', n:'ARABIC (العربية)'}, {id:'hi', n:'HINDI (हिन्दी)'}, {id:'tr', n:'TURKISH (Türkçe)'},
+            {id:'it', n:'ITALIAN (Italiano)'}, {id:'nl', n:'DUTCH (Nederlands)'}, {id:'pl', n:'POLISH (Polski)'},
+            {id:'sv', n:'SWEDISH (Svenska)'}, {id:'el', n:'GREEK (Ελληνικά)'}, {id:'he', n:'HEBREW (עברית)'},
+            {id:'ro', n:'ROMANIAN (Română)'}, {id:'hu', n:'HUNGARIAN (Magyar)'}, {id:'cs', n:'CZECH (Čeština)'},
+            {id:'da', n:'DANISH (Dansk)'}, {id:'fi', n:'FINNISH (Suomi)'}, {id:'no', n:'NORWEGIAN (Norsk)'},
+            {id:'sk', n:'SLOVAK (Slovenčina)'}, {id:'uk', n:'UKRAINIAN (Українська)'}, {id:'ms', n:'MALAY (Bahasa Melayu)'}
+        ];
+
+        const dict = {
             ko: {
-                mainTitle: "메인 자산 통합 잔장",
-                sync: "● 라이브 네트워크 동기화 중...",
+                bal: "메인 자산 통합 잔장",
+                stat: "● [글로벌 서버 연결됨] - 라이브 데이터 스트리밍 중...",
                 node: "노드 연산 파워",
-                staking: "스테이킹 보상",
+                stake: "스테이킹 보상",
                 traffic: "네트워크 트래픽",
-                faqHead: "글로벌 AI 고객지원센터 FAQ",
+                faqTitle: "글로벌 AI 고객지원센터 FAQ",
                 faqs: [
                     ["HKWB는 무엇인가요?", "HK World Bank는 Pi 생태계를 위한 차세대 Web3 금융 플랫폼입니다."],
                     ["보안은 안전한가요?", "군사급 암호화와 분산형 노드 보안 시스템을 적용하고 있습니다."],
@@ -205,100 +242,89 @@
                 ]
             },
             en: {
-                mainTitle: "MAIN ASSET INTEGRATED BALANCE",
-                sync: "● LIVE NETWORK SYNCING...",
-                node: "NODE COMPUTE POWER",
-                staking: "STAKING REWARD",
-                traffic: "NETWORK TRAFFIC",
-                faqHead: "GLOBAL AI SUPPORT CENTER FAQ",
+                bal: "Main Asset Integrated Balance",
+                stat: "● [GLOBAL_SERVER_CONNECTED] - SYNC_LIVE_DATA_STREAMING...",
+                node: "Node Power",
+                stake: "Staking Reward",
+                traffic: "Network Traffic",
+                faqTitle: "Global AI Support Center FAQ",
                 faqs: [
-                    ["What is HKWB?", "HK World Bank is a next-gen Web3 financial platform for the Pi ecosystem."],
-                    ["Is it secure?", "We use military-grade encryption and node security."],
+                    ["What is HKWB?", "HK World Bank is a Web3 financial platform for the Pi ecosystem."],
+                    ["Is it secure?", "Military-grade encryption and node security applied."],
                     ["Fees?", "Transaction fees are fixed at 0.01 Pi."],
                     ["How to join?", "Connect via Pi Browser wallet instantly."],
-                    ["Withdrawals?", "Verified node users have real-time withdrawal access."],
-                    ["Staking?", "Flexible policies allow changes anytime."],
-                    ["24/7 AI?", "Yes, 24/7 real-time global support."],
-                    ["Languages?", "Supporting 30 major global languages."],
-                    ["Mainnet?", "Syncs with Pi Network's mainnet roadmap."],
-                    ["Contact?", "1:1 tech support via in-app AI chatbot."]
+                    ["Withdrawals?", "Verified node users have real-time access."],
+                    ["Staking?", "Flexible policies allow easy modifications."],
+                    ["24/7 AI?", "AI provides real-time global responses."],
+                    ["Languages?", "Fully supporting 30+ major languages."],
+                    ["Mainnet?", "In sync with Pi Network's mainnet roadmap."],
+                    ["Contact?", "1:1 technical support via AI chatbot."]
                 ]
             }
-            // ... 나머지 언어들도 동일 구조로 추가 가능
         };
 
-        const languages = [
-            {code: 'ko', name: '한국어'}, {code: 'en', name: 'English'}, {code: 'zh', name: '中文'},
-            {code: 'ja', name: '日本語'}, {code: 'vi', name: 'Tiếng Việt'}, {code: 'de', name: 'Deutsch'},
-            {code: 'fr', name: 'Français'}, {code: 'es', name: 'Español'}, {code: 'th', name: 'ไทย'},
-            {code: 'id', name: 'Bahasa'}, {code: 'pt', name: 'Português'}, {code: 'ru', name: 'Русский'},
-            {code: 'ar', name: 'العربية'}, {code: 'hi', name: 'हिन्दी'}, {code: 'tr', name: 'Türkçe'}
-            // 30개국까지 리스트업 가능
-        ];
-
-        // 2. 초기 렌더링
-        function init() {
-            renderLang('ko');
+        // 2. 초기 렌더링 시스템
+        function masterInit() {
+            setLang('ko');
             
-            // 언어 버튼 생성
-            const grid = document.getElementById('lang-grid');
-            languages.forEach(l => {
-                const btn = document.createElement('button');
-                btn.className = 'lang-btn';
-                btn.innerText = l.name;
-                btn.onclick = () => renderLang(l.code);
-                grid.appendChild(btn);
+            const btnContainer = document.getElementById('lang-btns');
+            countries.forEach(c => {
+                const b = document.createElement('button');
+                b.className = 'l-btn';
+                b.innerText = c.n;
+                b.onclick = () => setLang(c.id);
+                btnContainer.appendChild(b);
             });
 
-            // 실시간 숫자 변동 시작
-            setInterval(updateNumbers, 800);
-            setInterval(addLog, 2000);
+            setInterval(updateNumbers, 500); // 0.5초마다 숫자 변동 (매우 빠름)
+            setInterval(pushLog, 1200); // 1.2초마다 로그 생성
         }
 
-        function renderLang(code) {
-            const d = langData[code] || langData['en'];
-            document.getElementById('txt-main-title').innerText = d.mainTitle;
-            document.getElementById('txt-sync').innerText = d.sync;
-            document.getElementById('txt-node').innerText = d.node;
-            document.getElementById('txt-staking').innerText = d.staking;
-            document.getElementById('txt-traffic').innerText = d.traffic;
-            document.getElementById('txt-faq-title').innerText = d.faqHead;
+        function setLang(id) {
+            const data = dict[id] || dict['en'];
+            document.getElementById('txt-m-balance').innerText = data.bal;
+            document.getElementById('txt-status').innerText = data.stat;
+            document.getElementById('txt-node').innerText = data.node;
+            document.getElementById('txt-staking').innerText = data.stake;
+            document.getElementById('txt-traffic').innerText = data.traffic;
+            document.getElementById('txt-faq-head').innerText = data.faqTitle;
 
-            const list = document.getElementById('faq-list');
-            list.innerHTML = '';
-            d.faqs.forEach(f => {
-                const item = document.createElement('div');
-                item.className = 'faq-item';
-                item.innerHTML = `<details><summary>${f[0]}</summary><div class="faq-content">${f[1]}</div></details>`;
-                list.appendChild(item);
+            const faqBox = document.getElementById('faq-inject');
+            faqBox.innerHTML = '';
+            data.faqs.forEach(f => {
+                const card = document.createElement('div');
+                card.className = 'faq-card';
+                card.innerHTML = `<details><summary>${f[0]}</summary><div class="faq-body">A. ${f[1]}</div></details>`;
+                faqBox.appendChild(card);
             });
         }
 
-        // 3. 실시간 숫자 변동 로직
+        // 3. 실시간 변동 로직
         function updateNumbers() {
-            const main = document.getElementById('main-num');
-            let mVal = parseFloat(main.innerText);
-            main.innerText = (mVal + (Math.random() * 0.0002 - 0.00008)).toFixed(4);
+            const mainNum = document.getElementById('live-main');
+            let val = parseFloat(mainNum.innerText);
+            mainNum.innerText = (val + (Math.random() * 0.0003 - 0.0001)).toFixed(4);
 
-            document.getElementById('node-val').innerText = (12.4592 + (Math.random() * 0.01)).toFixed(4);
-            document.getElementById('stake-val').innerText = (85.1023 + (Math.random() * 0.005)).toFixed(4);
-            document.getElementById('traffic-val').innerText = Math.floor(1024 + (Math.random() * 50)) + " GB";
+            document.getElementById('live-node').innerText = (12.4592 + (Math.random() * 0.02)).toFixed(4);
+            document.getElementById('live-stake').innerText = (85.1023 + (Math.random() * 0.01)).toFixed(4);
+            document.getElementById('live-traffic').innerText = (1024 + Math.floor(Math.random() * 30)) + " GB";
         }
 
-        // 4. 가짜 로그 생성 (시스템 활성도 연출)
-        function addLog() {
-            const logBox = document.getElementById('log-container');
-            const time = new Date().toLocaleTimeString();
-            const actions = ["[INFO] Node Synced", "[DB] Ledger Updated", "[AUTH] Wallet Verified", "[NET] Traffic Optimized"];
-            const action = actions[Math.floor(Math.random() * actions.length)];
-            const line = document.createElement('div');
-            line.className = 'log-line';
-            line.innerText = `> ${time} : ${action} ... OK`;
-            logBox.prepend(line);
-            if(logBox.childNodes.length > 8) logBox.removeChild(logBox.lastChild);
+        // 4. 터미널 로그 시스템
+        function pushLog() {
+            const t = document.getElementById('term-box');
+            const logs = [
+                "BLOCKCHAIN_VERIFY_SUCCESS", "ENCRYPTION_LAYER_STABLE", "NODE_049_HEARTBEAT_OK",
+                "WALLET_AUTH_ENFORCED", "LIQUIDITY_POOL_SYNCED", "SECURITY_PROTOCOL_V4_RUNNING",
+                "AI_ASSISTANT_REPLICA_READY", "TRANSACTION_FEE_OPTIMIZED"
+            ];
+            const newLine = document.createElement('div');
+            newLine.innerText = `>> [${new Date().toLocaleTimeString()}] ${logs[Math.floor(Math.random()*logs.length)]}`;
+            t.prepend(newLine);
+            if(t.childNodes.length > 10) t.removeChild(t.lastChild);
         }
 
-        window.onload = init;
+        window.onload = masterInit;
     </script>
 </body>
 </html>

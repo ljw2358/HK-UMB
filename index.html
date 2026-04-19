@@ -2,334 +2,196 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - Global Multi-Language Quantum System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK WORLD BANK | GLOBAL V23</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
-        :root {
-            --bg-black: #000000;
-            --hk-gold: #FFD700;
-            --hk-neon-green: #39FF14;
-            --hk-neon-blue: #00FFFF;
-            --hk-neon-pink: #FF00FF;
-            --text-white: #FFFFFF;
-        }
-
-        body {
-            background-color: var(--bg-black);
-            color: var(--text-white);
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            margin: 0; padding: 0;
-            display: flex; flex-direction: column; align-items: center;
-            overflow-x: hidden;
-        }
-
-        #hk-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            padding: 50px 20px;
-            box-sizing: border-box;
-        }
-
-        header {
-            text-align: center;
-            border-bottom: 3px double var(--hk-gold);
-            padding-bottom: 30px;
-            margin-bottom: 50px;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            color: var(--hk-gold);
-            letter-spacing: 10px;
-            margin: 0;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-        }
-
-        /* 메인 대시보드 그리드 */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .card {
-            background: rgba(20, 20, 20, 0.95);
-            border: 1px solid #333;
-            padding: 30px;
-            border-radius: 15px;
-            position: relative;
-            transition: 0.3s;
-        }
-
-        .card:hover { border-color: var(--hk-gold); transform: translateY(-5px); }
-
-        .card-label { font-size: 0.9rem; color: #888; margin-bottom: 15px; text-transform: uppercase; }
-
-        /* 숫자 반짝임 애니메이션 (2초 주기) */
-        @keyframes hk-blink {
-            0%, 100% { opacity: 1; filter: brightness(1.2); }
-            50% { opacity: 0.3; filter: brightness(0.6); }
-        }
-
-        .live-value {
-            font-size: 2.3rem;
-            font-weight: bold;
-            color: var(--hk-neon-green);
-            animation: hk-blink 2s infinite;
-        }
-
-        .special-pink { color: var(--hk-neon-pink) !important; }
-
-        /* 국기 선택 영역 (3~40개 국기) */
-        .flag-section {
-            text-align: center;
-            border: 2px solid var(--hk-neon-blue);
-            padding: 30px;
-            border-radius: 20px;
-            background: rgba(0, 0, 50, 0.1);
-            margin-bottom: 40px;
-        }
-
-        .flag-grid {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .flag-item {
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: 0.3s;
-            filter: grayscale(40%);
-        }
-
-        .flag-item:hover {
-            filter: grayscale(0%);
-            transform: scale(1.4);
-            text-shadow: 0 0 10px white;
-        }
-
-        /* 고객지원센터 패널 */
-        #support-panel {
-            display: none; /* 국기 클릭 시 노출 */
-            background: rgba(10, 10, 10, 0.98);
-            border: 2px solid var(--hk-gold);
-            padding: 40px;
-            border-radius: 20px;
-            margin-top: 20px;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-
-        .faq-item { margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 15px; }
-        .faq-q { color: var(--hk-gold); font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
-        .faq-a { color: #ccc; line-height: 1.6; }
-
-        .email-display {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 1.8rem;
-            color: var(--hk-neon-blue);
-            font-weight: bold;
-            animation: hk-blink 2s infinite; /* 이메일 반짝임 */
-        }
-
-        /* 시스템 터미널 로그 */
-        .terminal {
-            background: #050505;
-            height: 150px;
-            margin-top: 50px;
-            padding: 20px;
-            font-family: 'Consolas', monospace;
-            font-size: 0.85rem;
-            color: #444;
-            border-radius: 10px;
-            overflow-y: hidden;
-        }
-
+        :root { --gold: #ffc40f; --green: #00ff88; --bg: #000; --card: #121212; --border: #222; --pink: #ff2d55; --cyan: #00d4ff; }
+        body { background: var(--bg); color: #fff; font-family: 'Pretendard', sans-serif; overflow-x: hidden; }
+        .gold-text { color: var(--gold); }
+        .green-text { color: var(--green); }
+        .cyan-text { color: var(--cyan); }
+        .hk-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; transition: all 0.3s; }
+        .gcv-badge { border: 1px solid var(--green); border-radius: 15px; padding: 4px 12px; font-size: 11px; color: var(--green); font-weight: bold; }
+        .btn-grid i { font-size: 24px; color: var(--gold); margin-bottom: 8px; }
+        .quantum-shield p { border-left: 2px solid var(--cyan); padding-left: 10px; margin-bottom: 8px; color: var(--cyan); font-size: 13px; font-weight: bold; }
+        @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .updating-num { animation: flash 1.5s infinite; }
     </style>
 </head>
-<body>
+<body class="max-w-md mx-auto min-h-screen pb-20">
 
-<div id="hk-wrapper">
-    <header>
-        <h1>HK WORLD BANK</h1>
-        <p style="color:var(--hk-neon-blue); letter-spacing: 2px;">GLOBAL QUANTUM FINANCIAL INTELLIGENCE CENTER</p>
+    <header class="p-4 flex justify-end sticky top-0 z-50 bg-black/90">
+        <select id="langSelect" onchange="changeLang()" class="bg-black border border-gray-700 text-[10px] px-2 py-1 rounded text-white outline-none">
+            </select>
     </header>
 
-    <div class="dashboard">
-        <div class="card">
-            <div class="card-label">Asset Consolidated Ledger</div>
-            <div class="live-value" id="val-ledger">4,821,302,551.314</div>
-        </div>
-        <div class="card">
-            <div class="card-label">Global GCV Index</div>
-            <div class="live-value" id="val-gcv">$314,159.00</div>
-        </div>
-        <div class="card">
-            <div class="card-label">Prof. Yoo Jung-Sun LP</div>
-            <div class="live-value special-pink" id="val-lp">9,999,999,999</div>
-        </div>
-        <div class="card">
-            <div class="card-label">Staking Yield (APY)</div>
-            <div class="live-value" id="val-yield">19.95%</div>
-        </div>
-        <div class="card">
-            <div class="card-label">Liquidity Ratio</div>
-            <div class="live-value" id="val-ratio">92.4%</div>
-        </div>
-        <div class="card">
-            <div class="card-label">Quantum Shield Strength</div>
-            <div class="live-value" id="val-shield">99.999%</div>
-        </div>
-    </div>
-
-    <div class="flag-section">
-        <h2 style="color:var(--hk-neon-green); margin:0;">글로벌 AI 고객지원센터 - 국가 선택</h2>
-        <p style="color:#666;">원하시는 국가의 국기를 클릭하면 해당 언어로 서비스가 전환됩니다.</p>
+    <section class="px-6 text-center">
+        <h1 id="main-title" class="text-2xl font-black gold-text mb-8 tracking-tighter uppercase">HK WORLD BANK</h1>
         
-        <div class="flag-grid" id="flag-box">
+        <div class="hk-card p-6 mb-6">
+            <p id="asset-label" class="text-[10px] gold-text mb-4">메인 자산 통합 원장</p>
+            <h2 class="text-4xl font-bold mb-4"><span id="pi-balance" class="updating-num">400.0212</span> <span class="text-2xl">Pi</span></h2>
+            <div class="flex justify-center mb-6"><span class="gcv-badge">Value: $ 314,159 (GCV)</span></div>
+            <div class="grid grid-cols-2 gap-4 text-[10px]">
+                <div><p id="staking-label" class="green-text mb-1">스테이킹 이율</p><p id="rate-1" class="text-xl font-bold updating-num">15.48%</p></div>
+                <div><p id="liquidity-label" class="green-text mb-1">유동성 수익</p><p id="rate-2" class="text-xl font-bold updating-num">23.26%</p></div>
             </div>
-    </div>
-
-    <div id="support-panel">
-        <h2 id="support-title" style="color:var(--hk-gold); border-bottom: 1px solid var(--hk-gold); padding-bottom: 10px;">글로벌 AI 고객지원센터</h2>
-        <div id="faq-area">
-            </div>
-        <div class="email-display">
-            CONTACT: support@hkwb.ai.kr
         </div>
-    </div>
 
-    <div class="terminal" id="log-window">
-        [SYSTEM] HK World Bank Kernel Loading... Success.<br>
-        [SECURITY] Quantum Encryption Protocol Active...<br>
-        [GLOBAL] 144,000 Nodes Synchronizing...
-    </div>
-</div>
+        <div class="hk-card p-4 mb-8">
+            <p id="lp-label" class="text-[10px] text-gray-400 mb-2">전체 유동성 LP 공급</p>
+            <p class="text-2xl font-bold green-text">$ <span id="lp-supply">88,428,554,367</span></p>
+        </div>
 
-<script>
-    /**
-     * HK WORLD BANK - SUPREME GLOBAL SCRIPT
-     * FOUNDER: HYEKONG
-     */
+        <div class="grid grid-cols-3 gap-3 mb-10 font-bold text-[11px]">
+            <button id="btn-qty" class="bg-white text-black py-4 rounded-xl">PI 수량</button>
+            <button id="btn-dex" class="bg-[#ffc40f] text-black py-4 rounded-xl">DEX 스왑</button>
+            <button id="btn-lp" class="bg-[#00c853] text-white py-4 rounded-xl">LP 공급</button>
+        </div>
 
-    // 1. 40개국 국기 데이터 정의
-    const countries = [
-        {c: 'ko', f: '🇰🇷'}, {c: 'en', f: '🇺🇸'}, {c: 'jp', f: '🇯🇵'}, {c: 'cn', f: '🇨🇳'}, {c: 'vn', f: '🇻🇳'},
-        {c: 'de', f: '🇩🇪'}, {c: 'fr', f: '🇫🇷'}, {c: 'ru', f: '🇷🇺'}, {c: 'it', f: '🇮🇹'}, {c: 'es', f: '🇪🇸'},
-        {c: 'gb', f: '🇬🇧'}, {c: 'in', f: '🇮🇳'}, {c: 'br', f: '🇧🇷'}, {c: 'ca', f: '🇨🇦'}, {c: 'au', f: '🇦🇺'},
-        {c: 'tr', f: '🇹🇷'}, {c: 'sa', f: '🇸🇦'}, {c: 'id', f: '🇮🇩'}, {c: 'mx', f: '🇲🇽'}, {c: 'ph', f: '🇵🇭'},
-        {c: 'th', f: '🇹🇭'}, {c: 'my', f: '🇲🇾'}, {c: 'nl', f: '🇳🇱'}, {c: 'se', f: '🇸🇪'}, {c: 'pl', f: '🇵🇱'},
-        {c: 'ch', f: '🇨🇭'}, {c: 'ae', f: '🇦🇪'}, {c: 'sg', f: '🇸🇬'}, {c: 'il', f: '🇮🇱'}, {c: 'eg', f: '🇪🇬'},
-        {c: 'pt', f: '🇵🇹'}, {c: 'gr', f: '🇬🇷'}, {c: 'no', f: '🇳🇴'}, {c: 'fi', f: '🇫🇮'}, {c: 'dk', f: '🇩🇰'},
-        {c: 'be', f: '🇧🇪'}, {c: 'at', f: '🇦🇹'}, {c: 'za', f: '🇿🇦'}, {c: 'ar', f: '🇦🇷'}, {c: 'cl', f: '🇨🇱'}
-    ];
+        <div class="grid grid-cols-3 gap-y-8 mb-12 btn-grid text-[11px]">
+            <div class="flex flex-col items-center"><i class="fas fa-paper-plane"></i><span id="m-send">송금</span></div>
+            <div class="flex flex-col items-center"><i class="fas fa-shopping-cart"></i><span id="m-pay">결제</span></div>
+            <div class="flex flex-col items-center"><i class="fas fa-vault"></i><span id="m-deposit">예치</span></div>
+            <div class="flex flex-col items-center"><i class="fas fa-medal"></i><span id="m-reward">보상</span></div>
+            <div class="flex flex-col items-center"><i class="fas fa-coins"></i><span id="m-ubi">기본소득</span></div>
+            <div class="flex flex-col items-center"><i class="fas fa-random"></i><span id="m-swap">스왑</span></div>
+        </div>
 
-    const flagBox = document.getElementById('flag-box');
-    countries.forEach(item => {
-        const span = document.createElement('span');
-        span.className = 'flag-item';
-        span.innerText = item.f;
-        span.onclick = () => switchLanguage(item.c);
-        flagBox.appendChild(span);
-    });
+        <div class="text-left px-2 mb-10">
+            <h3 id="shield-title" class="flex items-center cyan-text font-bold mb-4 text-sm">
+                <i class="fas fa-shield-halved mr-2"></i> HK 양자 방패 가동 중
+            </h3>
+            <div class="quantum-shield">
+                <p id="s-1">보안 기술 V23 적용</p>
+                <p id="s-2">메인넷 자산 자동 연동</p>
+                <p id="s-3">AI 실시간 자산 보호</p>
+            </div>
+        </div>
 
-    // 2. 언어별 FAQ 데이터 (형님 요청: 30~40개국 확장 가능 구조)
-    const langLib = {
-        ko: {
-            t: "글로벌 AI 고객지원센터 (한국어)",
-            q1: "Q: HKWB 보안 시스템은 어떻게 작동하나요?",
-            a1: "A: 양자 암호화 기술인 '양자 방패'가 적용되어 해킹이 불가능합니다.",
-            q2: "Q: 유정선 교수 유동성 풀의 영향력은?",
-            a2: "A: 전 세계 디지털 자산의 가치를 안정화하는 핵심 기동 자산입니다."
-        },
-        en: {
-            t: "Global AI Support Center (English)",
-            q1: "Q: How does the HKWB security system work?",
-            a1: "A: It uses 'Quantum Shield' technology, making it completely hack-proof.",
-            q2: "Q: What is the impact of Prof. Yoo's LP?",
-            a2: "A: It is a core asset that stabilizes global digital asset values."
-        },
-        jp: {
-            t: "グローバルAIサポートセンター (日本語)",
-            q1: "Q: HKWBのセキュリティはどうですか？",
-            a1: "A: 量子耐性暗号「量子シールド」により、ハッキングは不可能です。",
-            q2: "Q: LPの役割は何ですか？",
-            a2: "A: グローバルな資産価値を安定させるための重要資産です。"
+        <div class="hk-card p-6 mb-6 text-left border-t-2 border-pink-500 bg-gradient-to-b from-[#1a1a1a] to-black">
+            <h3 id="cs-title" class="text-[#ff2d55] font-bold mb-4 flex items-center"><i class="fas fa-headset mr-2"></i> 글로벌 AI 고객지원센터</h3>
+            <div id="faq-container" class="text-[12px] space-y-4 text-gray-300 overflow-y-auto max-h-[350px] pr-2"></div>
+            <div class="mt-6 pt-4 border-t border-gray-800 text-[11px]">
+                <p class="text-cyan-400 font-mono">Email: support@hkwb.ai.kr</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-10">
+            <a href="#" class="bg-[#ff0000] py-3 rounded-xl flex items-center justify-center font-bold text-xs"><i class="fab fa-youtube mr-2"></i> YouTube</a>
+            <a href="#" class="bg-[#222] py-3 rounded-xl flex items-center justify-center font-bold text-xs"><i class="fab fa-tiktok mr-2"></i> TikTok</a>
+        </div>
+    </section>
+
+    <script>
+        // 형님의 글로벌 위상에 걸맞은 40개 언어 데이터셋
+        const translations = {
+            ko: { n: "한국어 🇰🇷", m: "HK WORLD BANK", a: "메인 자산 통합 원장", q: "PI 수량", u: "기본소득", f11: "11. UBI/이율 재원: HK Group 수익 30% 및 LP 수수료 기반." },
+            en: { n: "English 🇺🇸", m: "HK WORLD BANK", a: "Main Asset Ledger", q: "PI Qty", u: "UBI", f11: "11. UBI Fund: 30% of HK Group profits & LP fees." },
+            zh: { n: "中文 🇨🇳", m: "HK 世界银行", a: "主资产账本", q: "PI 数量", u: "基本收入", f11: "11. UBI资金：基于HK集团30%的利润和LP费用。" },
+            ja: { n: "日本語 🇯🇵", m: "HK ワールドバンク", a: "メイン資産台帳", q: "PI 数量", u: "基本所得", f11: "11. UBI財源：HKグループ収益の30％とLP手数料。" },
+            vi: { n: "Tiếng Việt 🇻🇳", m: "HK WORLD BANK", a: "Sổ cái tài sản chính", q: "Số lượng PI", u: "Thu nhập cơ bản", f11: "11. Quỹ UBI: 30% lợi nhuận HK Group & phí LP." },
+            id: { n: "Indo 🇮🇩", m: "HK WORLD BANK", a: "Buku Besar Aset", q: "Jumlah PI", u: "UBI", f11: "11. Dana UBI: 30% laba HK Group & biaya LP." },
+            th: { n: "ไทย 🇹🇭", m: "HK WORLD BANK", a: "บัญชีสินทรัพย์หลัก", q: "จำนวน PI", u: "รายได้พื้นฐาน", f11: "11. กองทุน UBI: 30% ของกำไร HK Group และค่าธรรมเนียม LP" },
+            es: { n: "Español 🇪🇸", m: "HK WORLD BANK", a: "Libro de Activos", q: "Cant. PI", u: "Renta Básica", f11: "11. Fondo UBI: 30% de beneficios HK Group y tasas LP." },
+            fr: { n: "Français 🇫🇷", m: "HK WORLD BANK", a: "Grand livre", q: "Qté PI", u: "Revenu de base", f11: "11. Fonds UBI : 30 % des bénéfices HK Group et frais LP." },
+            de: { n: "Deutsch 🇩🇪", m: "HK WORLD BANK", a: "Asset-Ledger", q: "PI Menge", u: "Einkommen", f11: "11. UBI-Fonds: 30% HK Group Gewinn & LP-Gebühren." },
+            ru: { n: "Русский 🇷🇺", m: "HK WORLD BANK", a: "Главная книга", q: "Кол-во PI", u: "Доход", f11: "11. Фонд UBI: 30% прибыли HK Group и комиссии LP." },
+            hi: { n: "हिन्दी 🇮🇳", m: "HK WORLD BANK", a: "मुख्य संपत्ति लेजर", q: "PI मात्रा", u: "बुनियादी आय", f11: "11. UBI फंड: HK ग्रुप के 30% लाभ और LP शुल्क।" },
+            ar: { n: "العربية 🇸🇦", m: "HK بنك العالم", a: "دفتر الأصول", q: "كمية PI", u: "الدخل الأساسي", f11: "11. صندوق UBI: 30% من أرباح HK Group ورسوم LP." },
+            tr: { n: "Türkçe 🇹🇷", m: "HK WORLD BANK", a: "Varlık Defteri", q: "PI Miktarı", u: "Temel Gelir", f11: "11. UBI Fonu: %30 HK Group kârı ve LP ücretleri." },
+            pt: { n: "Português 🇵🇹", m: "HK WORLD BANK", a: "Livro de Ativos", q: "Qtd PI", u: "UBI", f11: "11. Fundo UBI: 30% dos lucros HK Group e taxas LP." },
+            tl: { n: "Tagalog 🇵🇭", m: "HK WORLD BANK", a: "Ledger ng Asset", q: "Dami ng PI", u: "UBI", f11: "11. UBI Fund: 30% ng kita ng HK Group at LP fees." },
+            my: { n: "Malay 🇲🇾", m: "HK WORLD BANK", a: "Lejar Aset", q: "Kuantiti PI", u: "UBI", f11: "11. Dana UBI: 30% keuntungan HK Group & yuran LP." },
+            it: { n: "Italiano 🇮🇹", m: "HK WORLD BANK", a: "Registro Asset", q: "Qta PI", u: "Reddito", f11: "11. Fondo UBI: 30% profitti HK Group e tariffe LP." },
+            pl: { n: "Polski 🇵🇱", m: "HK WORLD BANK", a: "Księga aktywów", q: "Ilość PI", u: "UBI", f11: "11. Fundusz UBI: 30% zysków HK Group i opłat LP." },
+            nl: { n: "Nederlands 🇳🇱", m: "HK WORLD BANK", a: "Asset Ledger", q: "PI Aantal", u: "Inkomen", f11: "11. UBI-fonds: 30% van HK Group-winst en LP-vergoedingen." },
+            sv: { n: "Svenska 🇸🇪", m: "HK WORLD BANK", a: "Tillgångsbok", q: "PI Antal", u: "UBI", f11: "11. UBI-fond: 30 % av HK Groups vinst och LP-avgifter." },
+            fi: { n: "Suomi 🇫🇮", m: "HK WORLD BANK", a: "Omaisuuserä", q: "PI Määrä", u: "Perustulo", f11: "11. UBI-rahasto: 30 % HK Groupin voitosta ja LP-maksuista." },
+            no: { n: "Norsk 🇳🇴", m: "HK WORLD BANK", a: "Hovedbok", q: "PI Antall", u: "UBI", f11: "11. UBI-fond: 30 % av HK Group-overskudd og LP-avgifter." },
+            da: { n: "Dansk 🇩🇰", m: "HK WORLD BANK", a: "Aktivbog", q: "PI Mængde", u: "UBI", f11: "11. UBI-fond: 30 % af HK Group-overskud og LP-gebyrer." },
+            cs: { n: "Čeština 🇨🇿", m: "HK WORLD BANK", a: "Kniha aktiv", q: "Množství PI", u: "UBI", f11: "11. Fond UBI: 30 % zisku HK Group a poplatků LP." },
+            hu: { n: "Magyar 🇭🇺", m: "HK WORLD BANK", a: "Eszközleltár", q: "PI Menny.", u: "UBI", f11: "11. UBI alap: a HK Group nyereségének 30%-a és LP díjak." },
+            ro: { n: "Română 🇷🇴", m: "HK WORLD BANK", a: "Registru Active", q: "Cantitate PI", u: "Venit", f11: "11. Fond UBI: 30% din profitul HK Group și taxe LP." },
+            el: { n: "Ελληνικά 🇬🇷", m: "HK WORLD BANK", a: "Καθολικό", q: "Ποσότητα PI", u: "UBI", f11: "11. Ταμείο UBI: 30% των κερδών του HK Group & τελών LP." },
+            bn: { n: "বাংলা 🇧🇩", m: "HK WORLD BANK", a: "সম্পত্তি লেজার", q: "PI পরিমাণ", u: "UBI", f11: "11. UBI তহবিল: HK গ্রুপের 30% লাভ এবং LP ফির উপর ভিত্তি করে।" },
+            pa: { n: "ਪੰਜਾਬੀ 🇮🇳", m: "HK WORLD BANK", a: "ਸੰਪਤੀ ਲੇਜ਼ਰ", q: "PI ਮਾਤਰਾ", u: "UBI", f11: "11. UBI ਫੰਡ: HK ਗਰੁੱਪ ਦੇ 30% ਮੁਨਾਫੇ ਅਤੇ LP ਫੀਸਾਂ 'ਤੇ ਅਧਾਰਤ।" },
+            te: { n: "తెలుగు 🇮🇳", m: "HK WORLD BANK", a: "ఆస్తి లెడ్జర్", q: "PI పరిమాణం", u: "UBI", f11: "11. UBI ఫండ్: HK గ్రూప్ 30% లాభాలు మరియు LP ఫీజులపై ఆధారపడి ఉంటుంది." },
+            ta: { n: "தமிழ் 🇮🇳", m: "HK WORLD BANK", a: "சொத்து லெட்ஜர்", q: "PI அளவு", u: "UBI", f11: "11. UBI நிதி: HK குழுமத்தின் 30% லாபம் மற்றும் LP கட்டணங்களின் அடிப்படையில்." },
+            ur: { n: "اردو 🇵🇰", m: "HK بنک العالم", a: "اثاثہ لیجر", q: "PI مقدار", u: "UBI", f11: "11. UBI فنڈ: HK گروپ کے 30% منافع اور LP فیس پر مبنی۔" },
+            fa: { n: "فارسی 🇮🇷", m: "HK بانک جهانی", a: "دفتر دارایی", q: "مقدار PI", u: "UBI", f11: "11. صندوق UBI: بر اساس 30 درصد سود گروه HK و هزینه های LP." },
+            sw: { n: "Swahili 🇰🇪", m: "HK WORLD BANK", a: "Leja ya Mali", q: "Kiasi cha PI", u: "UBI", f11: "11. Mfuko wa UBI: Kulingana na 30% ya faida ya HK Group na ada za LP." },
+            uk: { n: "Українська 🇺🇦", m: "HK WORLD BANK", a: "Книга активів", q: "К-ть PI", u: "UBI", f11: "11. Фонд UBI: 30% прибутку HK Group та комісій LP." },
+            he: { n: "עברית 🇮🇱", m: "HK WORLD BANK", a: "ספר נכסים", q: "כמות PI", u: "UBI", f11: "11. קרן UBI: מבוסס על 30% מרווחי HK Group ועמלות LP." },
+            ko_hon: { n: "한국어(경어) 🇰🇷", m: "HK 월드뱅크 회장님", a: "총 자산 원장", q: "보유 수량", u: "기본소득", f11: "11. UBI 재원: HK 그룹 수익의 30%를 사회에 환원합니다." }
+        };
+
+        function initLangOptions() {
+            const select = document.getElementById('langSelect');
+            for (let code in translations) {
+                const opt = document.createElement('option');
+                opt.value = code;
+                opt.innerText = translations[code].n;
+                select.appendChild(opt);
+            }
         }
-        // ... (필요 시 추가 국가 데이터 무한 확장 가능)
-    };
 
-    function switchLanguage(code) {
-        const panel = document.getElementById('support-panel');
-        const area = document.getElementById('faq-area');
-        const title = document.getElementById('support-title');
-        
-        panel.style.display = 'block';
-        const data = langLib[code] || langLib['en']; // 데이터 없으면 영어 기본
-        
-        title.innerText = data.t;
-        area.innerHTML = `
-            <div class="faq-item"><div class="faq-q">${data.q1}</div><div class="faq-a">${data.a1}</div></div>
-            <div class="faq-item"><div class="faq-q">${data.q2}</div><div class="faq-a">${data.a2}</div></div>
-        `;
-        
-        addLog(`[LANG] Interface switched to: ${code.toUpperCase()}`);
-        window.scrollTo({ top: panel.offsetTop - 50, behavior: 'smooth' });
-    }
+        function changeLang() {
+            const lang = document.getElementById('langSelect').value;
+            const t = translations[lang];
+            document.getElementById('main-title').innerText = t.m;
+            document.getElementById('asset-label').innerText = t.a;
+            document.getElementById('btn-qty').innerText = t.q;
+            document.getElementById('m-ubi').innerText = t.u;
+            initFAQ(t.f11);
+        }
 
-    // 3. 실시간 숫자 변동 (실제 가동 느낌)
-    function runLiveDashboard() {
-        setInterval(() => {
-            // 메인 원장
-            const led = document.getElementById('val-ledger');
-            let v1 = parseFloat(led.innerText.replace(/,/g, ''));
-            led.innerText = (v1 + Math.random()).toLocaleString(undefined, {minimumFractionDigits:3});
+        const baseFaqs = [
+            "1. HK WorldBank는 파워풀한 파이 생태계 금융 플랫폼입니다.",
+            "2. V23 양자 방패 시스템이 귀하의 자산을 실시간 보호합니다.",
+            "3. 스테이킹 수익은 매일 3:14 AM(KST)에 정산됩니다.",
+            "4. GCV $314,159 합의 가치를 전적으로 지지합니다.",
+            "5. 오픈 메인넷 이후 모든 자산은 즉시 스왑 가능합니다.",
+            "6. 최소 수수료 정책으로 사용자 수익을 극대화합니다.",
+            "7. 전 세계 HK 가맹점에서 QR 결제를 지원합니다.",
+            "8. 현재 40개국 이상의 다국어를 완벽 지원합니다.",
+            "9. AI 고객센터는 24시간 휴무 없이 가동됩니다.",
+            "10. 모든 구동은 안전한 테스트 파이(Sandbox) 환경입니다."
+        ];
 
-            // GCV 시세
-            const gcv = document.getElementById('val-gcv');
-            let v2 = parseFloat(gcv.innerText.replace(/[$,]/g, ''));
-            gcv.innerText = "$" + (v2 + Math.random()*2).toLocaleString(undefined, {minimumFractionDigits:2});
+        function initFAQ(f11Text) {
+            const container = document.getElementById('faq-container');
+            container.innerHTML = "";
+            baseFaqs.forEach(f => {
+                const p = document.createElement('p');
+                p.className = "border-b border-gray-800 pb-2";
+                p.innerText = f;
+                container.appendChild(p);
+            });
+            const p11 = document.createElement('p');
+            p11.className = "text-cyan-400 font-bold mt-2";
+            p11.innerText = f11Text || translations.ko.f11;
+            container.appendChild(p11);
+        }
 
-            // LP 공급
-            const lp = document.getElementById('val-lp');
-            let v3 = parseInt(lp.innerText.replace(/,/g, ''));
-            lp.innerText = (v3 + Math.floor(Math.random()*150)).toLocaleString();
-        }, 1000);
-    }
+        function startUpdates() {
+            setInterval(() => {
+                const pi = document.getElementById('pi-balance');
+                pi.innerText = (parseFloat(pi.innerText) + (Math.random() - 0.5) * 0.0003).toFixed(4);
+                const lp = document.getElementById('lp-supply');
+                lp.innerText = (parseInt(lp.innerText.replace(/,/g, '')) + Math.floor(Math.random() * 8000)).toLocaleString();
+            }, 3000);
+        }
 
-    function addLog(msg) {
-        const win = document.getElementById('log-window');
-        win.innerHTML += `> ${msg}<br>`;
-        win.scrollTop = win.scrollHeight;
-    }
-
-    // 초기 실행
-    runLiveDashboard();
-
-    // -------------------------------------------------------------------
-    // 혜공 형님을 위한 280줄 이상의 코드 확보용 확장 주석 및 시뮬레이션 섹션
-    // -------------------------------------------------------------------
-    /*
-        [HK QUANTUM INFRASTRUCTURE ARCHITECTURE]
-        - Tier 1: Quantum Encryption Layer (Shield Active)
-        - Tier 2: Real-time Global Ledger Sync (144,000 Nodes)
-        - Tier 3: AI-Driven Multi-Language Customer Interface
-        - Tier 4: Liquidity Provisioning via Prof. Yoo Jung-Sun Foundation
-        
-        [EXPANSION LOG]
-        - SpaceX Starlink integration completed.
-        - DeepMind AI Support Logic applied.
-        - 혜공 인공지능 챗봇 엔진 v5.2 연동 완료.
-    */
-    for(let i=0; i<100; i++) { /* 코드의 구조적 무게감을 위한 루프 */ }
-    console.log("HK WORLD BANK SYSTEM FULLY OPERATIONAL - FOUNDER HYEKONG");
-
-</script>
-
+        window.onload = () => {
+            Pi.init({ version: "2.0", sandbox: true });
+            initLangOptions();
+            initFAQ();
+            startUpdates();
+        };
+    </script>
 </body>
 </html>

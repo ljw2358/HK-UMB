@@ -95,7 +95,11 @@
         <button class="m-btn" id="b2" style="background:var(--gold);" onclick="runEngine('SWAP', 5.5)">DEX 스왑</button>
         <button class="m-btn" id="b3" style="background:#28a745; color:white;" onclick="runEngine('LP', 10.2)">LP 공급</button>
     </div>
-
+<div style="text-align: center; margin: 20px auto; width: 90%;">
+  <button onclick="loginWithPi()" style="width: 100%; padding: 18px; background: linear-gradient(45deg, #673ab7, #9c27b0); color: white; border: none; border-radius: 15px; cursor: pointer; font-weight: bold; font-size: 20px; box-shadow: 0 0 15px rgba(156, 39, 176, 0.6);">
+    HKWB 로그인 (Pi Network)
+  </button>
+</div>
     <div class="icon-grid">
         <div class="icon-card" onclick="runEngine('SEND', 1.0)">🚀<span class="icon-txt" id="m1">송금</span></div>
         <div class="icon-card" onclick="runEngine('PAY', 2.0)">🛒<span class="icon-txt" id="m2">결제</span></div>
@@ -224,9 +228,5 @@ async function loginWithPi() {
     alert("로그인 중 오류가 발생했습니다.");
   }
 }
-<div style="text-align: center; margin: 40px 0;">
-  <button onclick="loginWithPi()" style="padding: 15px 35px; background-color: #673ab7; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 22px; box-shadow: 0 4px 15px rgba(103, 58, 183, 0.4);">
-    HKWB 로그인
-  </button>
-</div>
+
 </html>

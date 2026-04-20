@@ -16,15 +16,16 @@
         #langSelect { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
         header { text-align: center; margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 20px; }
-        .title { font-size: 2.2rem; font-weight: 900; color: var(--gold); margin: 0; }
+        .title { font-size: 2.2rem; font-weight: 900; color: var(--gold); margin: 0; text-shadow: 0 0 15px rgba(255,215,0,0.6); }
         #txt-ledger { font-weight: bold; margin-top: 15px; font-size: 1.1rem; color: var(--neon-st); }
        
         .pi-display { font-size: 2.5rem; font-weight: bold; margin: 10px 0; color: #fff; }
-        .val-box { background: rgba(57, 255, 20, 0.1); color: var(--neon-green); padding: 8px 20px; border: 1px solid var(--neon-green); border-radius: 50px; display: inline-block; font-weight: bold; }
+        .val-box { background: rgba(57, 255, 20, 0.1); color: var(--neon-green); padding: 8px 20px; border: 1px solid var(--neon-green); border-radius: 50px; display: inline-block; font-weight: bold; font-size: 1rem; }
 
         /* HKWB Token Info */
-        .token-info { background: #1a1a1a; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--neon-blue); }
-        .token-supply { color: var(--neon-blue); font-weight: bold; font-size: 1.2rem; }
+        .token-info { background: #1a1a1a; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--neon-blue); text-align: center; }
+        .token-supply { color: var(--neon-blue); font-weight: bold; font-size: 1.3rem; margin: 5px 0; }
+        #txt-hkwb-label { color: #ccc; font-size: 0.9rem; }
 
         .rate-grid { display: flex; gap: 10px; margin-bottom: 15px; }
         .rate-card { flex: 1; background: var(--card); border-radius: 20px; padding: 15px; text-align: center; border: 1px solid #333; }
@@ -32,18 +33,31 @@
         .lp-total-box { border: 2px solid var(--neon-green); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; background: rgba(57, 255, 20, 0.05); }
 
         .main-btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .m-btn { padding: 15px 5px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
+        .m-btn { padding: 15px 5px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+        .m-btn:active { transform: scale(0.95); }
 
         .icon-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .icon-card { background: var(--card); padding: 18px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; }
+        .icon-card { background: var(--card); padding: 18px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
+        .icon-card:active { transform: scale(0.9); border-color: var(--gold); }
+        .icon-card span { display: block; margin-top: 5px; font-size: 0.8rem; color: #ccc; }
 
         .center-btn { width: 100%; background: linear-gradient(45deg, #ff4d6d, #ff758c); color: white; padding: 18px; border-radius: 15px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
        
-        .faq-section { display: none; background: #0a0a0a; border-radius: 20px; padding: 20px; border: 1px solid #444; margin-top: 20px; }
+        .faq-section { display: none; background: #0a0a0a; border-radius: 20px; padding: 20px; border: 1px solid #444; margin-top: 20px; margin-bottom: 30px; }
         .faq-q { color: var(--gold); font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
         .faq-a { color: #ccc; font-size: 0.8rem; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
 
-        #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 60px; height: 60px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 2999; color: white; }
+        #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 60px; height: 60px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 2999; color: white; font-size: 1.2rem; }
+        
+        #chat-window { display: none; position: fixed; bottom: 100px; right: 20px; width: 300px; height: 400px; background: var(--card); border: 2px solid var(--neon-lp); border-radius: 15px; z-index: 3000; overflow: hidden; display: flex; flex-direction: column; }
+        #chat-header { background: var(--neon-lp); color: white; padding: 10px; font-weight: bold; text-align: center; }
+        #chat-messages { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .message { padding: 8px 12px; border-radius: 10px; max-width: 80%; font-size: 0.9rem; }
+        .message.ai { background: #333; align-self: flex-start; }
+        .message.user { background: var(--neon-blue); align-self: flex-end; }
+        #chat-input-area { display: flex; padding: 10px; border-top: 1px solid #333; }
+        #chat-input { flex: 1; background: #222; border: 1px solid #444; color: white; padding: 8px; border-radius: 5px; outline: none; }
+        #chat-send { background: var(--neon-lp); color: white; border: none; padding: 8px 15px; margin-left: 5px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -71,13 +85,13 @@
     </div>
 
     <div class="rate-grid">
-        <div class="rate-card"><div id="txt-st-label" style="color:var(--neon-st);">스테이킹</div><div id="live-st">17.38%</div></div>
-        <div class="rate-card"><div id="txt-lp-label" style="color:var(--neon-lp);">LP 수익</div><div id="live-lp">28.12%</div></div>
+        <div class="rate-card"><div id="txt-st-label" style="color:var(--neon-st);">스테이킹 이율</div><div id="live-st">17.38%</div></div>
+        <div class="rate-card"><div id="txt-lp-label" style="color:var(--neon-lp);">LP 공급 수익</div><div id="live-lp">28.12%</div></div>
     </div>
 
     <div class="lp-total-box">
         <div id="txt-total-lp">총 유동성 공급량 (LP)</div>
-        <div id="lp-total-num" style="font-size: 1.4rem; font-weight: bold;">$ 88,432,159,375</div>
+        <div id="lp-total-num" style="font-size: 1.6rem; font-weight: bold; color: #fff;">$ 88,432,159,375</div>
     </div>
 
     <div class="main-btn-grid">
@@ -100,12 +114,23 @@
         <div id="faq-list"></div>
     </div>
 
-    <div style="text-align:center; padding:20px; font-size:0.8rem;">
+    <div style="text-align:center; padding:20px; font-size:0.8rem; color: #666;">
         <p>Official: support@hkwb.ai.kr</p>
     </div>
 </div>
 
-<div id="ai-bot" onclick="greet()">AI</div>
+<div id="ai-bot" onclick="toggleChat()">AI</div>
+
+<div id="chat-window">
+    <div id="chat-header">HKWB AI Support</div>
+    <div id="chat-messages">
+        <div class="message ai">반갑습니다, 혜공 형님! 무엇을 도와드릴까요?</div>
+    </div>
+    <div id="chat-input-area">
+        <input type="text" id="chat-input" placeholder="메시지를 입력하세요...">
+        <button id="chat-send" onclick="sendMessage()">전송</button>
+    </div>
+</div>
 
 <script>
     /* API SDK Mock Implementation */
@@ -121,13 +146,9 @@
         ex: () => alert("자산 포트폴리오 재구성을 시작합니다.")
     };
 
-    function greet() {
-        alert("반갑습니다, 혜공 형님! HKWB AI가 형님의 자산과 UBI 프로젝트를 안전하게 서포트하고 있습니다.");
-    }
-
     const i18n = {
-        ko: { ledger: "통합 자산 관리", st: "스테이킹", lp: "LP 수익", total: "총 유동성 공급", b1: "지갑 연동", b2: "DEX 스왑", b3: "LP 스테이킹", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "UBI", m6: "전환", center: "글로벌 AI 지원센터" },
-        en: { ledger: "Asset Ledger", st: "Staking", lp: "LP Yield", total: "Total Liquidity", b1: "Wallet", b2: "DEX Swap", b3: "LP Stake", m1: "Send", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Exchange", center: "AI Support Center" }
+        ko: { ledger: "통합 자산 관리 시스템", st: "스테이킹 이율", lp: "LP 공급 수익", total: "총 유동성 공급량 (LP)", b1: "지갑 연동", b2: "DEX 스왑", b3: "LP 스테이킹", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "UBI", m6: "전환", center: "글로벌 AI 지원센터" },
+        en: { ledger: "Asset Ledger System", st: "Staking APR", lp: "LP Yield", total: "Total Liquidity (LP)", b1: "Wallet", b2: "DEX Swap", b3: "LP Stake", m1: "Send", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Exchange", center: "AI Support Center" }
         // 50개국어는 별도 JSON 파일로 로드하는 구조로 확장
     };
 
@@ -170,11 +191,68 @@
     }
 
     function toggleFaq() { const f = document.getElementById('faqBox'); f.style.display = f.style.display === 'block' ? 'none' : 'block'; }
+    
+    function toggleChat() {
+        const chatWindow = document.getElementById('chat-window');
+        chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function sendMessage() {
+        const input = document.getElementById('chat-input');
+        const text = input.value.trim();
+        if (text === "") return;
+
+        const messages = document.getElementById('chat-messages');
+        const userMsg = document.createElement('div');
+        userMsg.className = 'message user';
+        userMsg.innerText = text;
+        messages.appendChild(userMsg);
+        input.value = '';
+        messages.scrollTop = messages.scrollHeight;
+
+        // Simple AI Response (Mock)
+        setTimeout(() => {
+            const aiMsg = document.createElement('div');
+            aiMsg.className = 'message ai';
+            let response = "죄송합니다, 혜공 형님. 아직 학습 중인 내용입니다. 지원센터로 문의 주시겠습니까?";
+            
+            if (text.includes("UBI")) {
+                response = "UBI는 20억 인류의 생존을 위한 핵심 프로젝트입니다. HKWB가 앞장서고 있습니다.";
+            } else if (text.includes("Pi") || text.includes("파이")) {
+                response = "Pi 코인은 GCV $314,159를 지향하며, HKWB 생태계의 기초 자산입니다.";
+            } else if (text.includes("메인넷")) {
+                response = "5월 18일, KYC를 완료한 메인넷 사용자들은 본사와 실시간 연동됩니다.";
+            } else if (text.includes("안녕")) {
+                response = "반갑습니다, 혜공 형님! 오늘 자산 상태는 최상입니다.";
+            }
+            
+            aiMsg.innerText = response;
+            messages.appendChild(aiMsg);
+            messages.scrollTop = messages.scrollHeight;
+        }, 1000);
+    }
+
+    // Enter Key to Send Message
+    document.getElementById('chat-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
     window.onload = updateAllLanguage;
 
+    // Real-time Number updates
+    let piBalance = 412.3141;
+    let baseVal = 129540600;
+    let baseLp = 88432159375;
+
     setInterval(() => {
-        document.getElementById('main-pi').innerText = (412.3141 + Math.random() * 0.005).toFixed(4);
-    }, 2000);
+        document.getElementById('main-pi').innerText = (piBalance + Math.random() * 0.001).toFixed(4);
+        document.getElementById('main-val').innerText = (baseVal + Math.floor(Math.random() * 10000)).toLocaleString();
+        document.getElementById('lp-total-num').innerText = '$ ' + (baseLp + Math.floor(Math.random() * 100000)).toLocaleString();
+        document.getElementById('live-st').innerText = (17 + Math.random()).toFixed(2) + '%';
+        document.getElementById('live-lp').innerText = (28 + Math.random()).toFixed(2) + '%';
+    }, 1500);
 </script>
 </body>
 </html>

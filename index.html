@@ -181,6 +181,31 @@
 
     function toggleFaq() { const f = document.getElementById('faqBox'); f.style.display = f.style.display === 'block' ? 'none' : 'block'; }
     window.onload = updateAllLanguage;
+// Pi SDK 초기화 (이게 있어야 버튼이 작동합니다!)
+const Pi = window.Pi;
+Pi.init({ version: "1.5", sandbox: true });
+    // Pi SDK 초기화 및 로그인 함수
+async function loginWithPi() {
+    try {
+        const scopes = ['username', 'payments'];
+        
+        // 파이 브라우저와 연동하여 인증 진행
+        const user = await Pi.authenticate(scopes, (payment) => {
+            console.log("미완료 결제 확인:", payment);
+        });
+
+        // 성공하면 화면에 인사말 띄우기
+        alert(user.user.username + "님, HKWB 방문을 환영합니다!");
+        
+        // 버튼 글자를 유저 이름으로 바꾸기 (선택사항)
+        document.querySelector('button').innerText = user.user.username + "님 접속 중";
+        
+    } catch (err) {
+        console.error("로그인 실패:", err);
+        alert("Pi 로그인에 실패했습니다. Pi Browser로 접속했는지 확인해 주세요!");
+    }
+}
+
 </script>
 async function loginWithPi() {
   try {

@@ -3,52 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - 100 Languages AI Hub</title>
+    <title>HK WORLD BANK - UBI Global Hub</title>
     <style>
         :root {
             --bg: #000000; --card: #121212; --gold: #FFD700;
             --neon-st: #00FFCC; --neon-lp: #FF00FF; --neon-green: #39FF14; --neon-blue: #00BFFF;
         }
-        body { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+        body { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; }
         .container { width: 100%; max-width: 480px; padding: 15px; box-sizing: border-box; }
         
-        /* 언어 선택 - 100개 국어 대응 */
-        .lang-bar { text-align: right; margin-bottom: 20px; }
-        #langSelect { background: #000; color: var(--gold); border: 2px solid var(--gold); padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; }
+        /* 1. 언어박스 상단 오른쪽 고정 */
+        .lang-bar { width: 100%; text-align: right; margin-bottom: 20px; position: sticky; top: 10px; z-index: 2000; }
+        #langSelect { background: rgba(0,0,0,0.8); color: var(--gold); border: 2px solid var(--gold); padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
         header { text-align: center; margin-bottom: 25px; }
-        .title { font-size: 2.2rem; font-weight: 900; color: var(--gold); margin: 0; }
-        #txt-ledger { font-weight: bold; margin-top: 15px; font-size: 1.1rem; color: var(--neon-st); }
+        .title { font-size: 2.2rem; font-weight: 900; color: var(--gold); margin: 0; text-shadow: 0 0 15px rgba(255,215,0,0.6); }
+        #txt-ledger { font-weight: bold; margin-top: 10px; font-size: 1.1rem; color: var(--neon-st); }
         
-        .balance-card { background: linear-gradient(145deg, #111, #000); border-radius: 25px; padding: 25px; text-align: center; border: 1px solid #333; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        #main-pi { font-size: 3rem; font-weight: 900; }
-        .val-box { color: var(--neon-green); font-weight: bold; margin-top: 10px; font-size: 1.1rem; border: 1px solid var(--neon-green); padding: 5px 15px; border-radius: 50px; display: inline-block; }
+        /* 메인 잔액 섹션 - 실구동 시각화 */
+        .balance-card { background: linear-gradient(145deg, #111, #000); border-radius: 25px; padding: 30px 20px; text-align: center; border: 1px solid #333; margin-bottom: 20px; transition: 0.3s; }
+        #main-pi { font-size: 3.2rem; font-weight: 900; color: #fff; }
+        .val-box { color: var(--neon-green); font-weight: bold; margin-top: 10px; font-size: 1.1rem; }
 
         .lp-total-box { border: 2px solid var(--neon-green); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; background: rgba(57, 255, 20, 0.05); }
         #lp-total-num { font-size: 1.6rem; font-weight: 900; }
+
+        /* 소셜 미디어 버튼 (유튜브, 틱톡) */
+        .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .social-btn { padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; color: white; font-size: 0.9rem; }
+        .btn-yt { background: #FF0000; border-bottom: 3px solid #b30000; }
+        .btn-tk { background: #010101; border: 1px solid #fff; border-bottom: 3px solid #555; }
 
         .main-btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .m-btn { padding: 15px 5px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 0.8rem; }
 
         .icon-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .icon-card { background: var(--card); padding: 20px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; }
+        .icon-card { background: var(--card); padding: 20px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; transition: 0.2s; }
+        .icon-card:active { transform: scale(0.9); border-color: var(--gold); }
         .icon-txt { font-size: 0.8rem; font-weight: bold; color: #aaa; display: block; margin-top: 8px; }
 
-        /* 챗봇 UI 개선 */
-        #chat-box { display: none; position: fixed; bottom: 100px; right: 20px; width: 320px; background: #fff; border-radius: 20px; padding: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 3000; color: #333; }
-        #chat-content { height: 200px; overflow-y: auto; background: #f0f0f0; border-radius: 10px; padding: 10px; margin-bottom: 10px; font-size: 0.85rem; }
+        /* 챗봇 UI */
+        #chat-box { display: none; position: fixed; bottom: 100px; right: 20px; width: 300px; background: #fff; border-radius: 20px; padding: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 3000; color: #333; }
+        #chat-content { height: 180px; overflow-y: auto; background: #f5f5f5; border-radius: 10px; padding: 10px; margin-bottom: 10px; font-size: 0.85rem; }
         .chat-input { display: flex; gap: 5px; }
-        .chat-input input { flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
-        .chat-input button { background: var(--neon-lp); color: #fff; border: none; padding: 8px 12px; border-radius: 5px; font-weight: bold; }
+        .chat-input input { flex: 1; padding: 8px; border-radius: 5px; border: 1px solid #ccc; outline: none; }
+        .chat-input button { background: var(--neon-lp); color: #fff; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
 
-        #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 25px var(--neon-lp); cursor: pointer; z-index: 2999; color: white; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 25px var(--neon-lp); cursor: pointer; z-index: 2999; color: white; }
 
         .faq-section { display: none; background: #0a0a0a; border-radius: 20px; padding: 20px; border: 1px solid #444; margin-top: 20px; }
         .faq-item { margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
         .faq-q { color: var(--gold); font-weight: bold; font-size: 0.9rem; }
         .faq-a { color: #ccc; font-size: 0.8rem; margin-top: 5px; }
-        .support-mail { text-align: center; margin-top: 20px; font-size: 0.8rem; color: var(--gold); font-weight: bold; }
+        .support-mail { text-align: center; margin-top: 20px; font-size: 0.85rem; color: #fff; background: #222; padding: 12px; border-radius: 10px; border: 1px solid var(--gold); }
     </style>
 </head>
 <body>
@@ -56,19 +63,19 @@
 <div class="container">
     <div class="lang-bar">
         <select id="langSelect" onchange="applyGlobalLanguage()">
-            <option value="ko">한국어 (Korean) 🇰🇷</option>
-            <option value="en">English 🇺🇸</option>
-            <option value="zh">中文 (Chinese) 🇨🇳</option>
-            <option value="ja">日本語 (Japanese) 🇯🇵</option>
-            <option value="vi">Tiếng Việt 🇻🇳</option>
-            <option value="es">Español 🇪🇸</option>
-            <option value="fr">Français 🇫🇷</option>
-            <option value="de">Deutsch 🇩🇪</option>
-            <option value="ar">العربية (Arabic) 🇸🇦</option>
-            <option value="hi">हिन्दी (Hindi) 🇮🇳</option>
-            <option value="pt">Português 🇵🇹</option>
-            <option value="ru">Русский 🇷🇺</option>
-            <option value="etc">... Total 100 Languages Support Active</option>
+            <option value="ko">한국어 🇰🇷</option><option value="en">English 🇺🇸</option>
+            <option value="zh">中文 🇨🇳</option><option value="ja">日本語 🇯🇵</option>
+            <option value="vi">Tiếng Việt 🇻🇳</option><option value="es">Español 🇪🇸</option>
+            <option value="fr">Français 🇫🇷</option><option value="de">Deutsch 🇩🇪</option>
+            <option value="pt">Português 🇵🇹</option><option value="ru">Русский 🇷🇺</option>
+            <option value="it">Italiano 🇮🇹</option><option value="tr">Türkçe 🇹🇷</option>
+            <option value="hi">हिन्दी 🇮🇳</option><option value="id">Bahasa Indonesia 🇮🇩</option>
+            <option value="th">ไทย 🇹🇭</option><option value="ar">العربية 🇸🇦</option>
+            <option value="nl">Nederlands 🇳🇱</option><option value="pl">Polski 🇵🇱</option>
+            <option value="sv">Svenska 🇸🇪</option><option value="no">Norsk 🇳🇴</option>
+            <option value="fi">Suomi 🇫🇮</option><option value="ms">Melayu 🇲🇾</option>
+            <option value="tl">Tagalog 🇵🇭</option><option value="uk">Українська 🇺🇦</option>
+            <option value="he">עברית 🇮🇱</option>
         </select>
     </div>
 
@@ -77,54 +84,61 @@
         <div id="txt-ledger">메인 자산 통합 원장</div>
     </header>
 
-    <div class="balance-card">
+    <div class="balance-card" id="main-card">
         <div id="main-pi">412.3141</div>
-        <div style="color:var(--gold); font-weight: bold;">Test-Pi</div>
-        <div class="val-box">Value: $ <span id="main-val">129,540,600</span></div>
+        <div style="color:var(--gold); font-weight: bold; letter-spacing: 2px;">Test-Pi Wallet</div>
+        <div class="val-box">Est. Value: $ <span id="main-val">129,540,600</span></div>
+    </div>
+
+    <div class="social-row">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="social-btn btn-yt">📹 YouTube</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="social-btn btn-tk">🎵 TikTok</a>
     </div>
 
     <div class="lp-total-box">
-        <div id="txt-total-lp" style="font-size:0.8rem; color:#888;">TOTAL LIQUIDITY LP</div>
+        <div id="txt-total-lp" style="font-size:0.8rem; color:#888;">전체 유동성 LP 공급</div>
         <div id="lp-total-num">$ 88,432,159,375</div>
     </div>
 
     <div class="main-btn-grid">
-        <button class="m-btn" id="b1" style="background:#fff;">PI 수량</button>
-        <button class="m-btn" id="b2" style="background:var(--gold);">DEX 스왑</button>
-        <button class="m-btn" id="b3" style="background:#28a745; color:white;">LP 공급</button>
+        <button class="m-btn" id="b1" style="background:#fff;" onclick="runEngine('CHECK', 0)">PI 수량</button>
+        <button class="m-btn" id="b2" style="background:var(--gold);" onclick="runEngine('SWAP', 10.5)">DEX 스왑</button>
+        <button class="m-btn" id="b3" style="background:#28a745; color:white;" onclick="runEngine('LP', 50)">LP 공급</button>
     </div>
 
     <div class="icon-grid">
-        <div class="icon-card">🚀<span class="icon-txt" id="m1">송금</span></div>
-        <div class="icon-card">🛒<span class="icon-txt" id="m2">결제</span></div>
-        <div class="icon-card">💰<span class="icon-txt" id="m3">예치</span></div>
-        <div class="icon-card">🏅<span class="icon-txt" id="m4">보상</span></div>
-        <div class="icon-card">🏦<span class="icon-txt" id="m5">기본소득</span></div>
-        <div class="icon-card">🔄<span class="icon-txt" id="m6">스왑</span></div>
+        <div class="icon-card" onclick="runEngine('SEND', 1.0)">🚀<span class="icon-txt" id="m1">송금</span></div>
+        <div class="icon-card" onclick="runEngine('PAY', 2.5)">🛒<span class="icon-txt" id="m2">결제</span></div>
+        <div class="icon-card" onclick="runEngine('SAVE', 100)">💰<span class="icon-txt" id="m3">예치</span></div>
+        <div class="icon-card" onclick="runEngine('BONUS', -5.0)">🏅<span class="icon-txt" id="m4">보상</span></div>
+        <div class="icon-card" onclick="runEngine('UBI', -3.14)">🏦<span class="icon-txt" id="m5">기본소득</span></div>
+        <div class="icon-card" onclick="runEngine('EX', 15.0)">🔄<span class="icon-txt" id="m6">스왑</span></div>
     </div>
 
-    <button class="center-btn" id="txt-center-btn" style="width:100%; padding:15px; border-radius:15px; border:none; background:linear-gradient(45deg, #ff4d6d, #ff758c); color:#fff; font-weight:bold; cursor:pointer;" onclick="toggleFaq()">Global AI Support Center</button>
-    <div class="faq-section" id="faqBox"></div>
     <div class="support-mail">Official: support@hkwb.ai.kr</div>
+    <button class="center-btn" id="txt-center-btn" onclick="toggleFaq()">Global AI Support Center</button>
+    <div class="faq-section" id="faqBox"><div id="faq-list"></div></div>
 </div>
 
 <div id="ai-bot" onclick="toggleChat()">AI</div>
 
 <div id="chat-box">
-    <div id="chat-header" style="font-weight:bold; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:10px;">HK AI Assistant</div>
-    <div id="chat-content"></div>
+    <div style="font-weight:bold; border-bottom:1px solid #eee; padding-bottom:5px; margin-bottom:10px;">HK AI Agent</div>
+    <div id="chat-content">AI: Initializing...</div>
     <div class="chat-input">
-        <input type="text" id="userIn" placeholder="Type here...">
+        <input type="text" id="userIn" placeholder="Ask anything...">
         <button onclick="askAI()">Send</button>
     </div>
 </div>
 
 <script>
-    // 100개 국어 대응 사전 (핵심 레이블)
+    let currentPi = 412.3141;
+    let currentVal = 129540600;
+    let selectedLang = 'ko';
+
     const langLib = {
-        ko: { ledger: "메인 자산 통합 원장", total: "전체 유동성 LP 공급", b1: "PI 수량", b2: "DEX 스왑", b3: "LP 공급", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑", center: "글로벌 AI 지원센터", welcome: "혜공 형님, 무엇을 도와드릴까요?", reply: "HK 은행 시스템이 정상 가동 중입니다." },
-        en: { ledger: "Main Asset Ledger", total: "Total Liquidity LP", b1: "PI Qty", b2: "DEX Swap", b3: "LP Supply", m1: "Transfer", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Swap", center: "AI Support Center", welcome: "How can I help you today?", reply: "HK system is active and secure." },
-        zh: { ledger: "资产综合账本", total: "总流动性供应", b1: "PI数量", b2: "DEX交换", b3: "LP供应", m1: "转账", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "闪兑", center: "全球AI客服中心", welcome: "您好，有什么可以帮您？", reply: "HK银行系统正在安全运行。" }
+        ko: { ledger: "메인 자산 통합 원장", total: "전체 유동성 LP 공급", b1: "PI 수량", b2: "DEX 스왑", b3: "LP 공급", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑", center: "글로벌 AI 지원센터", welcome: "반갑습니다 혜공 형님! 무엇을 도와드릴까요?", reply: "HK 보안 시스템이 자산을 안전하게 보호 중입니다." },
+        en: { ledger: "Asset Integrated Ledger", total: "Total Liquidity LP", b1: "PI Qty", b2: "DEX Swap", b3: "LP Supply", m1: "Transfer", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Swap", center: "AI Support Center", welcome: "Hello! How can I assist you today?", reply: "HK security system is actively protecting your assets." }
     };
 
     const faqData = [
@@ -136,75 +150,71 @@
         {q: "DEX 스왑 방법?", a: "중앙 버튼의 'DEX 스왑'을 통해 즉시 교환 가능합니다."},
         {q: "LP 공급이란?", a: "유동성을 제공하고 보상 수익을 받는 것입니다."},
         {q: "지급 시간?", a: "매일 정해진 시간에 자동 입금됩니다."},
-        {q: "국가별 제한?", a: "100개 국어 지원으로 전 세계 누구나 참여 가능합니다."},
+        {q: "국가별 제한?", a: "25개 정예 언어 지원으로 전 세계 누구나 가능합니다."},
         {q: "테스트 파이 획득?", a: "생태계 기여 및 보상을 통해 획득합니다."},
         {q: "고객 지원 채널?", a: "support@hkwb.ai.kr 공식 메일로 문의 바랍니다."}
     ];
 
-    let currentLang = 'ko';
+    // 테스트 파이 실구동 엔진
+    function runEngine(type, amount) {
+        const card = document.getElementById('main-card');
+        if(amount > 0) {
+            currentPi -= amount;
+            card.style.borderColor = var(--neon-lp);
+        } else if(amount < 0) {
+            currentPi += Math.abs(amount);
+            card.style.borderColor = var(--neon-green);
+        }
+        
+        document.getElementById('main-pi').innerText = currentPi.toFixed(4);
+        setTimeout(() => card.style.borderColor = '#333', 500);
+    }
 
     function applyGlobalLanguage() {
-        currentLang = document.getElementById('langSelect').value;
-        const d = langLib[currentLang] || langLib.en;
+        selectedLang = document.getElementById('langSelect').value;
+        const d = langLib[selectedLang] || langLib.en;
         
         document.getElementById('txt-ledger').innerText = d.ledger;
         document.getElementById('txt-total-lp').innerText = d.total;
-        document.getElementById('b1').innerText = d.b1;
-        document.getElementById('b2').innerText = d.b2;
-        document.getElementById('b3').innerText = d.b3;
-        document.getElementById('m1').innerText = d.m1;
-        document.getElementById('m2').innerText = d.m2;
-        document.getElementById('m3').innerText = d.m3;
-        document.getElementById('m4').innerText = d.m4;
-        document.getElementById('m5').innerText = d.m5;
-        document.getElementById('m6').innerText = d.m6;
+        document.getElementById('b1').innerText = d.b1; document.getElementById('b2').innerText = d.b2; document.getElementById('b3').innerText = d.b3;
+        document.getElementById('m1').innerText = d.m1; document.getElementById('m2').innerText = d.m2; document.getElementById('m3').innerText = d.m3;
+        document.getElementById('m4').innerText = d.m4; document.getElementById('m5').innerText = d.m5; document.getElementById('m6').innerText = d.m6;
         document.getElementById('txt-center-btn').innerText = d.center;
-        
-        const box = document.getElementById('chat-content');
-        box.innerHTML = `<div style="margin-bottom:10px; color:#666;">AI: ${d.welcome}</div>`;
+
+        const faqList = document.getElementById('faq-list');
+        faqList.innerHTML = faqData.map((f, i) => `<div class="faq-item"><div class="faq-q">${i+1}. ${f.q}</div><div class="faq-a">${f.a}</div></div>`).join('');
     }
 
-    // 챗봇 구동 엔진
     function toggleChat() {
         const chat = document.getElementById('chat-box');
         chat.style.display = (chat.style.display === 'block') ? 'none' : 'block';
-        if(chat.style.display === 'block') applyGlobalLanguage();
+        if(chat.style.display === 'block') {
+            const d = langLib[selectedLang] || langLib.en;
+            document.getElementById('chat-content').innerHTML = `AI: ${d.welcome}`;
+        }
     }
 
     function askAI() {
         const input = document.getElementById('userIn');
         const content = document.getElementById('chat-content');
         if(!input.value.trim()) return;
-
-        content.innerHTML += `<div style="text-align:right; margin-bottom:10px;"><b>Me:</b> ${input.value}</div>`;
-        
-        // 지능형 응답 시뮬레이션
+        content.innerHTML += `<div style="text-align:right; margin:10px 0;"><b>Me:</b> ${input.value}</div>`;
         setTimeout(() => {
-            const d = langLib[currentLang] || langLib.en;
-            content.innerHTML += `<div style="text-align:left; color:var(--neon-lp); margin-bottom:10px;"><b>AI:</b> ${d.reply}</div>`;
+            const d = langLib[selectedLang] || langLib.en;
+            content.innerHTML += `<div style="color:var(--neon-lp); margin:10px 0;"><b>AI:</b> ${d.reply}</div>`;
             content.scrollTop = content.scrollHeight;
-        }, 500);
-        
+        }, 600);
         input.value = "";
     }
 
-    // 숫자 실시간 변동 엔진
     setInterval(() => {
-        document.getElementById('main-pi').innerText = (412 + Math.random() * 0.5).toFixed(4);
-        document.getElementById('main-val').innerText = (129540600 + Math.floor(Math.random() * 20000)).toLocaleString();
-        document.getElementById('lp-total-num').innerText = '$ ' + (88432159375 + Math.floor(Math.random() * 100000)).toLocaleString();
+        currentVal += Math.floor(Math.random() * 5000);
+        document.getElementById('main-val').innerText = currentVal.toLocaleString();
+        const lpNum = 88432159375 + Math.floor(Math.random() * 100000);
+        document.getElementById('lp-total-num').innerText = '$ ' + lpNum.toLocaleString();
     }, 2000);
 
-    function toggleFaq() {
-        const box = document.getElementById('faqBox');
-        if(box.style.display === 'block') {
-            box.style.display = 'none';
-        } else {
-            box.style.display = 'block';
-            box.innerHTML = faqData.map((f, i) => `<div class="faq-item"><div class="faq-q">${i+1}. ${f.q}</div><div class="faq-a">${f.a}</div></div>`).join('');
-        }
-    }
-
+    function toggleFaq() { const f = document.getElementById('faqBox'); f.style.display = f.style.display === 'block' ? 'none' : 'block'; }
     window.onload = applyGlobalLanguage;
 </script>
 </body>

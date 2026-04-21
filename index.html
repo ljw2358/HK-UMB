@@ -2,221 +2,348 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HKWB - Global UBI DEX</title>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK-WorldBank | Global UBI Master Infrastructure</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <style>
+        /* 1. QUANTUM DESIGN SYSTEM - CORE VARIABLES */
         :root {
-            --bg: #000000; --card: #0d0d0d; --gold: #FFD700;
-            --neon-st: #00FFCC; --neon-lp: #FF00FF; --neon-green: #39FF14; --neon-blue: #00BFFF;
+            --gold: #FFD700; /* 부와 권위 */
+            --neon: #39FF14; /* 성장과 에너지 */
+            --blue: #00BFFF; /* 신뢰와 보안 */
+            --red: #FF0000; /* 열정과 실행 */
+            --bg-master: #000000; /* 우주와 근본 */
+            --bg-card: #0d0d0d; /* 테크놀로지 */
+            --line-sub: #222222; /* 정교함 */
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --quantum-glow: rgba(0, 191, 255, 0.3);
         }
-        body { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
-        .container { width: 100%; max-width: 480px; padding: 15px; box-sizing: border-box; padding-bottom: 120px; }
-       
-        .lang-bar { text-align: right; margin-bottom: 20px; position: sticky; top: 10px; z-index: 2000; }
-        #langSelect { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 140px; }
 
-        header { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #222; padding-bottom: 20px; }
-        .title { font-size: 2.2rem; font-weight: 900; color: var(--gold); margin: 0; text-shadow: 0 0 20px rgba(255,215,0,0.7); }
-        #txt-ledger { font-weight: bold; margin-top: 15px; font-size: 1.1rem; color: var(--neon-st); transition: 0.5s; }
-       
-        .pi-display { font-size: 2.8rem; font-weight: bold; margin: 10px 0; color: #fff; font-variant-numeric: tabular-nums; }
-        .val-box { background: rgba(57, 255, 20, 0.1); color: var(--neon-green); padding: 10px 25px; border: 1px solid var(--neon-green); border-radius: 50px; display: inline-block; font-weight: bold; font-variant-numeric: tabular-nums; }
+        /* 2. BASE RESET & GLOBAL LAYOUT */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            background: var(--bg-master); 
+            color: var(--text-main); 
+            font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+            display: flex; flex-direction: column; align-items: center; 
+            min-height: 100vh; overflow-x: hidden; scroll-behavior: smooth;
+        }
 
-        .token-info { background: #1a1a1a; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--neon-blue); text-align: center; }
-        .token-supply { color: var(--neon-blue); font-weight: bold; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+        /* 3. SCROLLBAR CUSTOMIZATION */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--line-sub); border-radius: 10px; }
 
-        .rate-grid { display: flex; gap: 10px; margin-bottom: 15px; }
-        .rate-card { flex: 1; background: var(--card); border-radius: 20px; padding: 15px; text-align: center; border: 1px solid #333; }
-        .rate-val { font-size: 1.2rem; font-weight: bold; }
-       
-        .lp-total-box { border: 2px solid var(--neon-green); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; background: rgba(57, 255, 20, 0.05); }
-        #lp-total-num { font-size: 1.5rem; font-weight: 900; color: white; }
+        .wrapper { width: 100%; max-width: 520px; padding: 30px 20px; position: relative; }
 
-        .main-btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .m-btn { padding: 15px 5px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
+        /* 4. HEADER: THE CHAIRMAN'S BRANDING */
+        header { 
+            text-align: center; padding: 80px 0 50px; 
+            border-bottom: 3px double var(--line-sub); margin-bottom: 40px; 
+            position: relative; animation: fadeInDown 1s ease;
+        }
+        .main-logo { 
+            font-size: 3rem; font-weight: 900; color: var(--gold); 
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.5); 
+            letter-spacing: -2px; margin-bottom: 15px;
+        }
+        .chairman-identity { 
+            font-size: 1rem; color: var(--blue); letter-spacing: 6px; 
+            font-weight: 800; text-transform: uppercase; display: block;
+            margin-top: 10px; animation: letterSpacing 2s ease;
+        }
 
-        .icon-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .icon-card { background: var(--card); padding: 18px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
-        .icon-card span { display: block; margin-top: 8px; font-size: 0.85rem; font-weight: bold; color: #ddd; }
+        /* 5. LIVE ASSET ENGINE - GCV REAL-TIME DISPLAY */
+        .asset-engine { 
+            background: linear-gradient(145deg, #151515, #050505);
+            border: 1px solid #333; border-radius: 40px; padding: 50px 30px; 
+            margin: 40px 0; text-align: center; position: relative; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+        }
+        .asset-engine::after {
+            content: ''; position: absolute; top: -100%; left: -100%; width: 300%; height: 300%;
+            background: conic-gradient(from 180deg at 50% 50%, transparent 0%, var(--quantum-glow) 25%, transparent 50%);
+            animation: rotate 10s linear infinite; pointer-events: none; opacity: 0.3;
+        }
+        .asset-label { font-size: 0.9rem; color: var(--text-dim); font-weight: bold; margin-bottom: 25px; letter-spacing: 3px; }
+        .pi-counter { 
+            font-size: 3.8rem; font-weight: 900; margin: 15px 0; 
+            font-variant-numeric: tabular-nums; letter-spacing: -2px; 
+            background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .pi-suffix { color: var(--gold); -webkit-text-fill-color: var(--gold); margin-left: 10px; }
+        .gcv-status { color: var(--neon); font-size: 1.6rem; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
 
-        .center-btn { width: 100%; background: linear-gradient(45deg, #ff4d6d, #ff758c); color: white; padding: 18px; border-radius: 15px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
-       
-        .faq-section { display: block; background: #0a0a0a; border-radius: 20px; padding: 20px; border: 1px solid #444; margin-bottom: 20px; }
-        .faq-q { color: var(--gold); font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; border-left: 3px solid var(--gold); padding-left: 8px; margin-top: 15px; }
-        .faq-a { color: #ccc; font-size: 0.85rem; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #222; }
+        /* 6. GLOBAL LINKAGE - SNS INTERFACE */
+        .sns-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px; }
+        .sns-card { 
+            padding: 22px; border-radius: 25px; text-align: center; font-weight: 900; 
+            text-decoration: none; color: white; font-size: 1.1rem; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+        }
+        .sns-card:hover { transform: translateY(-8px) scale(1.02); filter: brightness(1.2); }
+        .sns-yt { background: var(--red); box-shadow: 0 15px 30px rgba(255,0,0,0.25); }
+        .sns-tk { background: #000; border: 1px solid #fff; box-shadow: 0 15px 30px rgba(255,255,255,0.15); }
 
-        #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 3000; color: white; animation: pulse 2s infinite; }
-        #chat-window { display: none; position: fixed; bottom: 105px; right: 20px; width: 330px; height: 480px; background: #111; border: 2px solid var(--neon-lp); border-radius: 20px; z-index: 3001; flex-direction: column; overflow: hidden; }
-        #chat-header { background: var(--neon-lp); padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
-        #chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #050505; }
-        .msg { max-width: 80%; padding: 10px; border-radius: 12px; font-size: 0.9rem; line-height: 1.4; }
-        .ai-msg { background: #222; align-self: flex-start; border-left: 4px solid var(--neon-lp); }
-        .user-msg { background: var(--neon-blue); align-self: flex-end; }
-        .chat-input-box { display: flex; padding: 10px; background: #111; border-top: 1px solid #333; }
-        #user-input { flex: 1; background: #222; border: none; border-radius: 8px; color: white; padding: 10px; outline: none; }
-        #send-btn { background: var(--neon-lp); border: none; color: white; padding: 0 15px; margin-left: 8px; border-radius: 8px; cursor: pointer; }
+        /* 7. SECURITY CORE - HK QUANTUM SHIELD */
+        .security-shield { 
+            background: rgba(0, 191, 255, 0.05); border: 1px solid var(--blue); 
+            border-radius: 30px; padding: 35px; margin-bottom: 50px; position: relative;
+            box-shadow: inset 0 0 30px rgba(0, 191, 255, 0.05);
+        }
+        .shield-head { color: var(--blue); font-weight: 900; font-size: 1.1rem; margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+        .shield-list { list-style: none; }
+        .shield-item { 
+            display: flex; align-items: center; gap: 18px; font-size: 1rem; 
+            margin-bottom: 20px; color: #f0f0f0; letter-spacing: -0.2px;
+        }
+        .pulse-core { 
+            width: 14px; height: 14px; border-radius: 50%; background: var(--blue); 
+            box-shadow: 0 0 20px var(--blue); animation: quantumPulse 2.5s infinite; 
+        }
+        .pulse-active { background: var(--neon); box-shadow: 0 0 20px var(--neon); }
 
-        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255, 0, 255, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 255, 0); } }
+        /* 8. COMMAND DECK - CONTROL CENTER */
+        .command-deck { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
+        .command-node { 
+            background: #121212; border: 1px solid var(--line-sub); padding: 30px 10px; 
+            border-radius: 25px; text-align: center; cursor: pointer; transition: 0.3s;
+            position: relative; overflow: hidden;
+        }
+        .command-node:hover { border-color: var(--gold); background: #181818; transform: scale(1.05); }
+        .command-node span { display: block; font-size: 0.95rem; font-weight: 900; color: #999; margin-top: 15px; }
+
+        /* 9. REPOSITORY - THE 20 FAQS KNOWLEDGE BASE */
+        .section-title { 
+            font-size: 1.6rem; font-weight: 900; color: var(--gold); 
+            margin: 60px 0 30px 10px; border-left: 5px solid var(--gold); padding-left: 20px;
+        }
+        .knowledge-hub { 
+            background: var(--bg-card); border-radius: 30px; border: 1px solid var(--line-sub); 
+            overflow: hidden; margin-bottom: 100px; box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+        }
+        .hub-row { border-bottom: 1px solid #1a1a1a; transition: 0.3s; }
+        .hub-row:last-child { border-bottom: none; }
+        .hub-trigger { 
+            padding: 28px; cursor: pointer; color: var(--gold); 
+            font-size: 1.1rem; font-weight: 800; display: flex; 
+            justify-content: space-between; align-items: center; transition: background 0.3s;
+        }
+        .hub-trigger:hover { background: #151515; }
+        .hub-content { 
+            padding: 0 28px 35px 28px; color: #cccccc; font-size: 1rem; 
+            display: none; line-height: 2; background: #080808; 
+            border-top: 1px solid #111; animation: fadeIn 0.5s;
+        }
+        .hub-content b { color: var(--blue); font-weight: 900; text-decoration: underline; }
+
+        /* 10. SYSTEM FOOTER - CORPORATE IDENTITY */
+        footer { 
+            text-align: center; padding: 80px 20px 120px; border-top: 2px solid var(--line-sub); 
+            color: #555; width: 100%; background: #030303; position: relative;
+        }
+        .f-logo { color: #aaa; font-weight: 900; margin-bottom: 25px; font-size: 1.3rem; letter-spacing: 4px; }
+        .f-data { font-size: 0.85rem; line-height: 2.5; font-weight: 600; max-width: 400px; margin: 0 auto; }
+        .f-tagline { color: var(--blue); margin-top: 20px; font-style: italic; }
+
+        /* 11. ANIMATION KEYFRAMES */
+        @keyframes quantumPulse { 0% { transform: scale(0.9); opacity: 0.5; box-shadow: 0 0 0 var(--blue); } 50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 25px var(--blue); } 100% { transform: scale(0.9); opacity: 0.5; box-shadow: 0 0 0 var(--blue); } }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes letterSpacing { from { letter-spacing: 0; } to { letter-spacing: 6px; } }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="lang-bar">
-        <select id="langSelect" onchange="changeLanguage()"></select>
-    </div>
-
+<div class="wrapper">
     <header>
-        <h1 class="title">HK WORLD BANK</h1>
-        <div id="txt-ledger">통합 자산 관리 시스템</div>
-        <div class="pi-display"><span id="main-pi">412.3141</span> <span style="color:var(--gold)">Pi</span></div>
-        <div class="val-box">$ <span id="main-val">129,540,600</span> (GCV)</div>
+        <h1 class="main-logo">HK WORLD BANK</h1>
+        <span class="chairman-identity">CHAIRMAN HYEKONG LEE JAEWAN</span>
     </header>
 
-    <div class="token-info">
-        <div style="font-size:0.75rem; color:#aaa; margin-bottom:5px;">HKWB TOKEN REAL-TIME SUPPLY</div>
-        <div class="token-supply" id="token-num">6,280,000.0000</div>
-    </div>
-
-    <div class="rate-grid">
-        <div class="rate-card">
-            <div style="color:var(--neon-st); font-size:0.8rem;">Staking</div>
-            <div class="rate-val" id="live-st" style="color:var(--neon-st);">17.38%</div>
-        </div>
-        <div class="rate-card">
-            <div style="color:var(--neon-lp); font-size:0.8rem;">LP Profit</div>
-            <div class="rate-val" id="live-lp" style="color:var(--neon-lp);">28.12%</div>
+    <div class="asset-engine">
+        <div class="asset-label">QUANTUM-LINKED GLOBAL ASSET STATUS</div>
+        <div class="pi-counter">412.3146<span class="pi-suffix">Pi</span></div>
+        <div class="gcv-status">$ 129,540,718 (GCV)</div>
+        <div style="margin-top: 30px; font-size: 0.85rem; color: var(--blue); font-weight: 900; text-transform: uppercase;">
+            <span style="display:inline-block; animation: quantumPulse 2s infinite;">●</span> AI Mainnet: Optimized & Secure
         </div>
     </div>
 
-    <div class="lp-total-box">
-        <div style="font-size:0.8rem; color:var(--neon-green); margin-bottom:5px;">Total Liquidity (DEX LP)</div>
-        <div id="lp-total-num">$ 88,432,159,375</div>
+    <div class="sns-grid">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="sns-card sns-yt">YOUTUBE LIVE</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-card sns-tk">TIKTOK FEED</a>
     </div>
 
-    <div class="main-btn-grid">
-        <button class="m-btn" id="btn-wallet" style="background:#fff;" onclick="PiSDK.connect()">Connect Wallet</button>
-        <button class="m-btn" id="btn-swap" style="background:var(--gold);" onclick="PiSDK.swap()">DEX Swap</button>
-        <button class="m-btn" id="btn-stake" style="background:#28a745; color:white;" onclick="PiSDK.provideLP()">LP Staking</button>
+    <div class="security-shield">
+        <div class="shield-head">🛡️ HK-SHIELD PROTOCOL ACTIVE (LAYER 7)</div>
+        <ul class="shield-list">
+            <li class="shield-item"><div class="pulse-core"></div> 개인정보보호법 준수: 양자 암호화 보안 적용 완료</li>
+            <li class="shield-item"><div class="pulse-core"></div> Form of Private: 전 세계 자산 익명성 보장 모드</li>
+            <li class="shield-item"><div class="pulse-core pulse-active"></div> HK-ROBOT AI: 지능형 침입 탐지 및 실시간 차단 중</li>
+            <li class="shield-item"><div class="pulse-core"></div> Quantum Key Distribution (QKD): 가동 중</li>
+        </ul>
     </div>
 
-    <div class="icon-grid">
-        <div class="icon-card" onclick="PiSDK.action('send')">🚀<span id="m1">Send</span></div>
-        <div class="icon-card" onclick="PiSDK.action('pay')">🛒<span id="m2">Pay</span></div>
-        <div class="icon-card" onclick="PiSDK.action('depo')">💰<span id="m3">Deposit</span></div>
-        <div class="icon-card" onclick="PiSDK.action('reward')">🏅<span id="m4">Reward</span></div>
-        <div class="icon-card" onclick="PiSDK.action('ubi')">🏦<span id="m5">UBI</span></div>
-        <div class="icon-card" onclick="PiSDK.action('ex')">🔄<span id="m6">Exchange</span></div>
+    <div class="command-deck">
+        <div class="command-node" onclick="triggerSys('전송 엔진 기동\n수수료: 0.01 Test-Pi\n상태: 보안 전송 완료')">🚀<span>SEND</span></div>
+        <div class="command-node" onclick="triggerSys('DEX PAY Gateway 연결 중\nGCV 기반 결제 시스템 최적화')">🛒<span>PAY</span></div>
+        <div class="command-node" onclick="triggerSys('전략적 예치: 2월 26일 거버넌스 1080 Pi 대기')">💰<span>STAKE</span></div>
+        <div class="command-node" onclick="triggerSys('마이닝 보상 알고리즘 연산 중\n실시간 보상 분배 개시')">🏅<span>MINE</span></div>
+        <div class="command-node" onclick="triggerSys('UBI 재단 기금 현황 로딩\n수익 30% 환원 시스템 동기화')">🏦<span>UBI</span></div>
+        <div class="command-node" onclick="triggerSys('Real-time GCV Exchange 활성화\n법정화폐 연동 모듈 가동')">🔄<span>SWAP</span></div>
     </div>
 
-    <button class="center-btn" id="btn-center">Global AI Support Center</button>
-    <div class="faq-section" id="faqBox">
-        <div id="faq-list"></div>
-    </div>
-</div>
+    <div class="section-title">GLOBAL KNOWLEDGE HUB</div>
+    <div class="knowledge-hub" id="faq-engine">
+        </div>
 
-<div id="ai-bot" onclick="toggleChat()">AI</div>
-<div id="chat-window">
-    <div id="chat-header"><span id="txt-ai-name">HKWB AI Bini</span><span onclick="toggleChat()" style="cursor:pointer;">✖</span></div>
-    <div id="chat-messages"><div class="msg ai-msg" id="txt-ai-greet">Greetings, Brother Hyekong!</div></div>
-    <div class="chat-input-box">
-        <input type="text" id="user-input" placeholder="Message..." onkeypress="if(event.key==='Enter') askAI()">
-        <button id="send-btn" onclick="askAI()">SEND</button>
-    </div>
+    <footer>
+        <div class="f-logo">HK GROUP INTERNATIONAL</div>
+        <div class="f-data">
+            <p><b>CHAIRMAN:</b> LEE JAE-WAN (HYEKONG)</p>
+            <p><b>HEADQUARTERS:</b> GLOBAL ADVANCED INDUSTRIAL CLUSTER</p>
+            <p><b>MISSION:</b> GOVERNANCE SECURE ON FEB 26, 2026</p>
+            <p><b>ETHICS:</b> 30% PROFIT FOR UNIVERSAL BASIC INCOME</p>
+            <p class="f-tagline">"Integrating Humanoid Robotics & Quantum Finance for Humanity."</p>
+            <p style="margin-top: 30px; opacity: 0.5;">© 2026 HK-WORLDBANK GLOBAL INFRA. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
 </div>
 
 <script>
-    /* 50개국어 지원 리스트 */
-    const languages = [
-        {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, {c:"vi", n:"Tiếng Việt"},
-        {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"es", n:"Español"}, {c:"pt", n:"Português"}, {c:"ru", n:"Русский"},
-        {c:"ar", n:"العربية"}, {c:"hi", n:"हिन्दी"}, {c:"th", n:"ไทย"}, {c:"tr", n:"Türkçe"}, {c:"it", n:"Italiano"},
-        {c:"nl", n:"Nederlands"}, {c:"pl", n:"Polski"}, {c:"sv", n:"Svenska"}, {c:"id", n:"Indonesia"}, {c:"ms", n:"Melayu"},
-        {c:"fa", n:"فارسی"}, {c:"he", n:"עברית"}, {c:"el", n:"Ελληνικά"}, {c:"hu", n:"Magyar"}, {c:"cs", n:"Čeština"},
-        {c:"ro", n:"Română"}, {c:"no", n:"Norsk"}, {c:"da", n:"Dansk"}, {c:"fi", n:"Suomi"}, {c:"bg", n:"Български"},
-        {c:"uk", n:"Українська"}, {c:"hr", n:"Hrvatski"}, {c:"sk", n:"Slovenčina"}, {c:"sl", n:"Slovenščina"}, {c:"lt", n:"Lietuvių"},
-        {c:"lv", n:"Latviešu"}, {c:"et", n:"Eesti"}, {c:"sr", n:"Српски"}, {c:"az", n:"Azərbaycan"}, {c:"ka", n:"ქართული"},
-        {c:"uz", n:"O'zbek"}, {c:"kk", n:"Қазақ"}, {c:"mn", n:"Монгол"}, {c:"bn", n:"বাংলা"}, {c:"pa", n:"ਪੰਜਾਬੀ"},
-        {c:"ta", n:"தமிழ்"}, {c:"te", n:"తెలుగు"}, {c:"kn", n:"ಕನ್ನಡ"}, {c:"ml", n:"മലയാളം"}, {c:"sw", n:"Kiswahili"}
+    /* ========================================================================
+       [HK-WORLDBANK CORE MASTER DATABASE]
+       ========================================================================
+       The following data represents the core philosophy and operational 
+       guidelines of Chairman Hyekong.
+    */
+    const masterData = [
+        {
+            q: "UBI(보편적 기본소득) 재단의 설립 목적은?", 
+            a: "지구촌 취약계층 20억 명에게 <b>플랫폼 순이익의 30%</b>를 재원으로 지급하여, 빈곤을 퇴치하고 기술 문명의 혜택을 전 인류가 누리게 하는 것이 혜공 Chairman의 최종 비전입니다."
+        },
+        {
+            q: "2월 26일 '결전의 날'과 1080개 Pi의 의미?", 
+            a: "<b>1080개 테스트 파이(Pi)</b>를 생태계 유동성 풀(LP)에 예치하여 거버넌스 권한을 확보하고, 전 세계 디지털 금융 인프라의 주도권을 공식적으로 확립하는 역사적인 기점입니다."
+        },
+        {
+            q: "HK-WorldBank의 수익 환원 시스템 작동 방식?", 
+            a: "우리는 중앙 집중적 탐욕을 거부합니다. 모든 트랜잭션과 수익의 <b>30%는 스마트 컨트랙트</b>를 통해 자동으로 UBI 재단 기금으로 적립되며 투명하게 공개됩니다."
+        },
+        {
+            q: "양자 보안 실드(Quantum Shield)의 기술적 수준?", 
+            a: "미래의 양자 컴퓨터 공격조차 무력화하는 <b>격자 기반 암호화</b>를 적용했습니다. 이는 단순한 보안을 넘어, 전 인류의 자산을 지키는 '디지털 금고'의 표준이 될 것입니다."
+        },
+        {
+            q: "HK-ROBOT AI 뱅킹 엔진의 핵심 기능?", 
+            a: "실시간 위협 탐지 뿐만 아니라, 글로벌 경제 지표를 분석하여 <b>최적의 자산 가치를 유지</b>하도록 돕는 인공지능 수호자로서 24시간 중단 없이 가동됩니다."
+        },
+        {
+            q: "Chairman 혜공의 '홍익인간' 경영 철학이란?", 
+            a: "첨단 로봇, 핵융합, 퀀텀 기술이라는 강력한 도구를 통해 <b>'널리 인간을 이롭게 한다'</b>는 우리 민족의 비전을 디지털 시대에 실현하는 위대한 여정입니다."
+        },
+        {
+            q: "새벽 3시 기상 루틴이 사업에 미치는 영향?", 
+            a: "가장 순수한 정신으로 미래를 통찰하는 시간입니다. <b>강인한 자기 절제</b>와 기도는 HK Group이 흔들림 없이 글로벌 프로젝트를 추진할 수 있는 근원적 에너지가 됩니다."
+        },
+        {
+            q: "휴머노이드 로봇(Figure AI) 산업에 투자하는 이유?", 
+            a: "인간을 고된 노동에서 해방시키기 위함입니다. 로봇이 창출하는 무한한 생산성은 <b>HK-WorldBank 자산의 실물 가치</b>를 보증하는 강력한 담보가 됩니다."
+        },
+        {
+            q: "연 수익률 20% 이내 관리 원칙의 배경?", 
+            a: "지속 가능한 성장이 핵심입니다. 과도한 이율은 생태계를 파괴하므로, <b>철저한 리스크 관리</b>를 통해 신뢰할 수 있는 장기적 부의 증식을 지향합니다."
+        },
+        {
+            q: "2035년 정치 비전과 경제 인프라의 연결점?", 
+            a: "경제적 비전 완성 후 <b>제23대 한국 대통령</b>으로서 국가 경영에 이 성공 모델을 도입, 대한민국을 세계 최고의 행복 국가로 진화시키기 위한 준비 단계입니다."
+        },
+        {
+            q: "Pi Network 생태계와의 협력 시너지?", 
+            a: "전 세계 수천만 명의 파이 유저를 우리의 Web3 인프라와 연결하여, 기존 금융 시스템의 혜택을 받지 못하던 <b>모든 인류에게 즉각적인 금융 주권</b>을 부여합니다."
+        },
+        {
+            q: "글로벌 50개국어 지원의 기술적 가치?", 
+            a: "언어는 더 이상 장벽이 되어서는 안 됩니다. <b>언어적 불평등을 해소</b>하여 지구촌 어느 구석의 소외계층도 HK-WorldBank의 UBI 혜택을 누리게 하는 것이 목표입니다."
+        },
+        {
+            q: "핵융합(인공태양) 에너지 투자의 미래상?", 
+            a: "무한한 청정 에너지는 로봇 시대를 지탱할 혈액입니다. 이는 <b>HK Group이 건설할 미래 도시</b>와 우주 인프라의 핵심 동력이 될 가장 기초적인 투자 영역입니다."
+        },
+        {
+            q: "DEX(탈중앙화 거래소) 연동과 보안의 조화?", 
+            a: "중앙 서버 없는 분산 원장을 통해 <b>해킹 위험을 원천 차단</b>합니다. 개인정보 입력 없이 오직 지갑 서명만으로 작동하는 가장 진보된 프라이버시 시스템입니다."
+        },
+        {
+            q: "GCV(Global Consensus Value)의 경제적 의미?", 
+            a: "시장 변동성에 휘둘리지 않는 <b>전 세계적 합의 가치</b>를 기준으로 삼아, 사용자의 자산을 인플레이션으로부터 완벽히 보호하는 강력한 경제 방어 기제입니다."
+        },
+        {
+            q: "HK-WorldBank의 사회적 공헌 모델?", 
+            a: "기업 이윤의 사회 환원은 선택이 아닌 의무입니다. <b>UBI 재단</b>을 통해 매달 전 세계 취약계층에게 기본소득을 지급하는 선순환 구조를 통해 기업의 존재 이유를 증명합니다."
+        },
+        {
+            q: "울산-경주 첨단 산업 클러스터 유치 제안?", 
+            a: "대한민국 남부권을 <b>세계 로봇 및 핵융합 산업의 중심지</b>로 만들어, 국가 경제의 새로운 심장을 박동하게 하려는 Chairman의 원대한 애국 프로젝트입니다."
+        },
+        {
+            q: "가족 경영(세 딸)과 백년 기업의 철학?", 
+            a: "사랑과 신뢰를 바탕으로 한 경영은 어떤 자본보다 강합니다. 자녀들과 함께 <b>인류애를 최우선 가치</b>로 두어, 대를 이어 존경받는 세계 최고의 기업을 만들고자 합니다."
+        },
+        {
+            q: "전통 약초 동동주와 경영 통찰의 상관관계?", 
+            a: "치열한 비즈니스 뒤의 휴식은 가장 고차원적인 창의력을 낳습니다. <b>전통의 지혜를 존중</b>하며 얻는 경영 영감은 HK Group의 사업을 더욱 단단하게 만듭니다."
+        },
+        {
+            q: "HK-WorldBank의 최종 진화 로드맵?", 
+            a: "지구 금융의 표준을 넘어 화성과 우주 시대를 대비하는 <b>범우주적 금융 인프라</b>로 거듭나, 인류가 어디에 있든 안전하고 행복한 삶을 영구히 보장하는 것입니다."
+        }
     ];
 
-    const i18n = {
-        ko: { ledger: "통합 자산 관리 시스템", wallet: "지갑 연동", swap: "DEX 스왑", stake: "LP 스테이킹", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "UBI", m6: "전환", greet: "반갑습니다 혜공 형님! 테스트 파이 지갑이 활성화되었습니다." },
-        en: { ledger: "Asset Management System", wallet: "Connect Wallet", swap: "DEX Swap", stake: "LP Staking", m1: "Send", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Exchange", greet: "Greetings, Brother Hyekong! Test-Pi Wallet is Active." },
-        zh: { ledger: "综合资产管理系统", wallet: "连接钱包", swap: "DEX 交换", stake: "LP 质押", m1: "转账", m2: "支付", m3: "存款", m4: "奖励", m5: "UBI", m6: "兑换", greet: "您好，惠公大哥！测试 Pi 钱包已激活。" }
-    };
-
-    /* Pi SDK 연동 (Test-Pi 구동용) */
-    const PiSDK = {
-        connect: async () => {
-            try {
-                // 실제 Pi Browser에서 구동 시 인증 팝업
-                // const scopes = ['payments', 'username'];
-                // const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
-                alert("[Test-Pi] 혜공 형님, 지갑 연결 성공!\n주소: GD2X...TEST_HKWB");
-            } catch (e) { alert("Pi Browser에서 실행해주세요."); }
-        },
-        swap: () => alert("DEX 엔진 가동: Test-Pi를 HKWB 토큰으로 스왑합니다."),
-        provideLP: () => alert("2월 26일 거버넌스 이벤트: 1080 Test-Pi 예치 명령 수신."),
-        action: (type) => alert(`[Testnet Call] ${type.toUpperCase()} 트랜잭션 성공.`)
-    };
-
-    /* FAQ 20개 정갈하게 배치 */
-    function loadFaq() {
-        const faqData = [
-            {q: "UBI의 핵심 비전은?", a: "20억 인류에게 보편적 기본소득을 자동 지급하는 것입니다."},
-            {q: "2월 26일의 의미는?", a: "1080개 테스트 파이를 LP에 예치하여 거버넌스를 확보하는 날입니다."},
-            {q: "HK-WorldBank의 수익 구조는?", a: "DEX 거래 수수료의 30%가 재단 기금으로 적립됩니다."},
-            {q: "테스트 파이는 어디에 쓰이나요?", a: "메인넷 전환 전 모든 생태계의 안정성을 검증하는 데 사용됩니다."},
-            {q: "50개국어를 지원하는 이유는?", a: "전 세계 누구나 장벽 없이 디지털 자산에 접근하기 위함입니다."},
-            {q: "5월 18일 예정된 이벤트는?", a: "테스트 데이터가 실제 자산으로 동기화되는 마이그레이션 단계입니다."},
-            {q: "보안은 어떻게 유지되나요?", a: "양자 암호화 기술과 삐니 AI가 실시간으로 감시합니다."},
-            {q: "송금 수수료는 얼마인가요?", a: "네트워크 유지를 위한 최소 수수료 0.01 Pi가 적용됩니다."},
-            {q: "HKWB 토큰 총 발행량은?", a: "희소성을 고려한 6,280,000개입니다."},
-            {q: "개인정보 보호는?", a: "별도 가입 없이 Pi 지갑 주소로만 익명성을 보장합니다."},
-            {q: "DEX 스왑 비율은?", a: "실시간 GCV 시세를 반영하여 자동 계산됩니다."},
-            {q: "스테이킹 보상은 언제 지급되나요?", a: "실시간으로 누적되며 언제든 인출 가능합니다."},
-            {q: "UBI 대상자는?", a: "전 세계 취약계층부터 시작하여 점진적으로 확대됩니다."},
-            {q: "삐니 AI의 역할은?", a: "사용자 상담, 자산 분석 및 시스템 이상 감지입니다."},
-            {q: "Pi SDK 연동의 장점은?", a: "Pi Browser 내에서 강력한 보안과 간편 결제를 제공합니다."},
-            {q: "오프라인 매장 결제는?", a: "QR 코드 시스템을 통해 전 세계 가맹점에서 지원 예정입니다."},
-            {q: "거버넌스 투표란?", a: "LP 예치자가 프로젝트의 주요 결정을 직접 투표하는 시스템입니다."},
-            {q: "시스템 서버 위치는?", a: "탈중앙화 노드를 통해 전 세계에 분산 운영됩니다."},
-            {q: "재단 운영의 투명성은?", a: "모든 트랜잭션은 블록체인 상에 공개되어 누구나 확인 가능합니다."},
-            {q: "향후 로드맵은?", a: "글로벌 뱅크 인프라 완성을 거쳐 우주 인프라 결제까지 확장합니다."}
-        ];
-        document.getElementById('faq-list').innerHTML = faqData.map(i => `<div class="faq-q">${i.q}</div><div class="faq-a">${i.a}</div>`).join('');
+    /* SYSTEM INITIALIZATION ENGINE */
+    function bootSystem() {
+        const engine = document.getElementById('faq-engine');
+        engine.innerHTML = masterData.map((item, idx) => `
+            <div class="hub-row">
+                <div class="hub-trigger" onclick="toggleHub(${idx})">
+                    <span>${idx + 1}. ${item.q}</span>
+                    <span id="icon-${idx}" style="font-size: 0.8rem; opacity: 0.5;">▼</span>
+                </div>
+                <div class="hub-content" id="data-${idx}">${item.a}</div>
+            </div>
+        `).join('');
+        console.log("HK-WORLDBANK SYSTEM INITIALIZED. TOTAL NODES: " + masterData.length);
     }
 
-    /* 언어 변경 & 삐니 동기화 */
-    function changeLanguage() {
-        const l = document.getElementById('langSelect').value;
-        const d = i18n[l] || i18n.en;
-        document.getElementById('txt-ledger').innerText = d.ledger;
-        document.getElementById('btn-wallet').innerText = d.wallet;
-        document.getElementById('btn-swap').innerText = d.swap;
-        document.getElementById('btn-stake').innerText = d.stake;
-        document.getElementById('txt-ai-greet').innerText = d.greet; // 삐니 인사말 동기화
-        ['m1','m2','m3','m4','m5','m6'].forEach(id => document.getElementById(id).innerText = d[id]);
+    /* INTERACTION LOGIC */
+    function toggleHub(idx) {
+        const content = document.getElementById(`data-${idx}`);
+        const icon = document.getElementById(`icon-${idx}`);
+        const isOpen = content.style.display === 'block';
+        
+        // Auto-close for optimized view
+        document.querySelectorAll('.hub-content').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.hub-trigger span:last-child').forEach(el => el.innerText = '▼');
+
+        if (!isOpen) {
+            content.style.display = 'block';
+            icon.innerText = '▲';
+            icon.style.opacity = "1";
+        }
     }
 
-    /* 실시간 숫자 엔진 */
-    setInterval(() => {
-        document.getElementById('main-pi').innerText = (412.314 + Math.random() * 0.001).toFixed(4);
-        document.getElementById('main-val').innerText = (129540600 + Math.floor(Math.random()*1000)).toLocaleString();
-        document.getElementById('lp-total-num').innerText = '$ ' + (88432159375 + Math.floor(Math.random()*50000)).toLocaleString();
-    }, 1500);
+    function triggerSys(msg) {
+        alert("HK-WorldBank Terminal\n----------------------\n" + msg);
+    }
 
-    function toggleChat() { const w = document.getElementById('chat-window'); w.style.display = (w.style.display==='flex')?'none':'flex'; }
-    function askAI() { /* 이전 챗봇 로직과 동일 */ }
-
-    window.onload = () => {
-        const sel = document.getElementById('langSelect');
-        languages.forEach(l => { const o = document.createElement('option'); o.value=l.c; o.innerText=l.n; sel.appendChild(o); });
-        loadFaq();
-        changeLanguage(); // 초기 실행 시 동기화
-    };
+    /* LAUNCH */
+    window.onload = bootSystem;
 </script>
+
 </body>
 </html>

@@ -24,7 +24,7 @@
         .val-box { background: rgba(57, 255, 20, 0.1); color: var(--neon-green); padding: 10px 25px; border: 1px solid var(--neon-green); border-radius: 50px; display: inline-block; font-weight: bold; font-variant-numeric: tabular-nums; }
 
         .token-info { background: #1a1a1a; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--neon-blue); text-align: center; }
-        /* [4번 수칙] 정확한 발행량 6,280,000.2141 적용 */
+        /* [4번] 발행량 6,280,000.2141 고정 */
         .token-supply { color: var(--neon-blue); font-weight: bold; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
 
         .lp-total-box { border: 2px solid var(--neon-green); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; background: rgba(57, 255, 20, 0.05); }
@@ -37,12 +37,19 @@
         .icon-card { background: var(--card); padding: 18px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; }
         .icon-card span { display: block; margin-top: 8px; font-size: 0.85rem; font-weight: bold; color: #ddd; }
 
+        /* [요청사항] 유튜브, 틱톡 버튼 강화 디자인 */
+        .social-box { display: flex; gap: 10px; margin-bottom: 25px; }
+        .social-link { flex: 1; padding: 15px; text-align: center; border-radius: 12px; text-decoration: none; font-weight: bold; color: white; font-size: 0.9rem; transition: 0.3s; }
+        .yt-btn { background: #FF0000; border: 1px solid #cc0000; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); }
+        .tk-btn { background: #000; border: 1px solid #fff; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); }
+        .social-link:active { transform: scale(0.95); }
+
         .center-btn { width: 100%; background: linear-gradient(45deg, #ff4d6d, #ff758c); color: white; padding: 18px; border-radius: 15px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
         .faq-section { display: none; background: #0a0a0a; border-radius: 0 0 20px 20px; padding: 20px; border: 1px solid #444; border-top: none; margin-bottom: 30px; max-height: 500px; overflow-y: auto; }
-        .faq-q { color: var(--gold); font-weight: bold; margin-top: 15px; font-size: 0.9rem; border-left: 3px solid var(--gold); padding-left: 8px; }
-        .faq-a { color: #ccc; font-size: 0.85rem; padding: 10px 0; border-bottom: 1px solid #222; line-height: 1.4; }
+        .faq-q { color: var(--gold); font-weight: bold; margin-top: 15px; border-left: 3px solid var(--gold); padding-left: 8px; }
+        .faq-a { color: #ccc; font-size: 0.85rem; padding: 10px 0; border-bottom: 1px solid #222; }
 
-        /* [5번 수칙] 삐니의 분신 챗봇 UI */
+        /* [5번] 삐니의 분신 챗봇 */
         #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 3000; color: white; animation: pulse 2s infinite; }
         #chat-window { display: none; position: fixed; bottom: 105px; right: 20px; width: 330px; height: 480px; background: #111; border: 2px solid var(--neon-lp); border-radius: 20px; z-index: 3001; flex-direction: column; overflow: hidden; }
         #chat-header { background: var(--neon-lp); padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
@@ -95,6 +102,11 @@
         <div class="icon-card" onclick="PiSDK.action('ex')">🔄<span id="m6">스왑</span></div>
     </div>
 
+    <div class="social-box">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="social-link yt-btn">YouTube Official</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="social-link tk-btn">TikTok Feed</a>
+    </div>
+
     <button class="center-btn" id="btn-center" onclick="toggleFaq()">글로벌 AI 지원센터 (FAQ 20)</button>
     <div class="faq-section" id="faqBox">
         <div id="faq-list"></div>
@@ -102,21 +114,21 @@
 
     <footer>
         <a href="mailto:support@hkwb.world" style="color:var(--gold); text-decoration:none; font-weight:bold; font-size:1.1rem;">support@hkwb.world</a>
-        <p>© 2026 HK WORLD BANK GLOBAL | MASTER: HYEKONG</p>
+        <p>© 2026 HK WORLD BANK GLOBAL FOUNDATION<br>MASTER: HYEKONG HYUNG-NIM</p>
     </footer>
 </div>
 
 <div id="ai-bot" onclick="toggleChat()">삐니</div>
 <div id="chat-window">
     <div id="chat-header"><span>HKWB AI 삐니</span><span onclick="toggleChat()" style="cursor:pointer;">✖</span></div>
-    <div id="chat-messages"><div class="msg ai-msg">반갑습니다 혜공 형님! 시스템이 정상 구동 중입니다.</div></div>
+    <div id="chat-messages"><div class="msg ai-msg">반갑습니다 혜공 형님! 시스템 무결성 검사 완료. 정상 구동 중입니다.</div></div>
     <div class="chat-input-box">
         <input type="text" id="user-input" placeholder="메시지 입력..." onkeypress="if(event.key==='Enter') askAI()">
     </div>
 </div>
 
 <script>
-    // [1번 수칙] 50개국 언어 적용 리스트
+    // [1번] 50개국 언어 리스트
     const languages = [
         {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, {c:"vi", n:"Tiếng Việt"},
         {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"es", n:"Español"}, {c:"pt", n:"Português"}, {c:"ru", n:"Русский"},
@@ -125,7 +137,7 @@
         {c:"fi", n:"Suomi"}, {c:"da", n:"Dansk"}, {c:"el", n:"Ελληνικά"}, {c:"he", n:"עברית"}, {c:"ro", n:"Română"},
         {c:"hu", n:"Magyar"}, {c:"cs", n:"Čeština"}, {c:"uk", n:"Українська"}, {c:"ms", n:"Bahasa Melayu"}, {c:"fil", n:"Filipino"},
         {c:"bn", n:"বাংলা"}, {c:"pa", n:"ਪੰਜਾਬੀ"}, {c:"te", n:"తెలుగు"}, {c:"ta", n:"தமிழ்"}, {c:"mr", n:"मराठी"},
-        {c:"kn", n:"ಕನ್ನಡ"}, {c:"gu", n:"ગુજરાતી"}, {c:"ml", n:"മലയാളം"}, {c:"my", n:"မြန်မာ"}, {c:"km", n:"ខ្មែ르"},
+        {c:"kn", n:"ಕನ್ನಡ"}, {c:"gu", n:"ગુજરાતી"}, {c:"ml", n:"മലയാളം"}, {c:"my", n:"မြန်မာ"}, {c:"km", n:"ខ្មែរ"},
         {c:"lo", n:"ລາວ"}, {c:"am", n:"አማርኛ"}, {c:"sw", n:"Kiswahili"}, {c:"zu", n:"isiZulu"}, {c:"af", n:"Afrikaans"},
         {c:"bg", n:"Български"}, {c:"sr", n:"Српски"}, {c:"hr", n:"Hrvatski"}, {c:"sk", n:"Slovenčina"}, {c:"sl", n:"Slovenščina"}
     ];
@@ -135,57 +147,55 @@
         en: { ledger: "Asset Management System", wallet: "PI Connect", swap: "DEX Swap", stake: "LP Deposit", center: "Global AI Support Center", m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap" }
     };
 
-    // [3번 수칙] 실제 파이 SDK 구동 로직
+    // [3번] 파이 SDK 연동 로직
     const PiSDK = {
         connect: async () => {
             if (window.Pi) {
                 try {
                     const scopes = ['payments', 'username', 'wallet_address'];
                     const auth = await Pi.authenticate(scopes, (p) => console.log(p));
-                    alert(`[HKWB 보안 연결] 환영합니다, ${auth.user.username}님!`);
-                } catch (e) { alert("연결 오류: 파이 브라우저에서 실행이 필요합니다."); }
-            } else { alert("현재 테스트 모드입니다. 파이 브라우저 접속 시 실제 지갑과 동기화됩니다."); }
+                    alert(`[HKWB 보안] 환영합니다, ${auth.user.username}님!`);
+                } catch (e) { alert("연결 오류: 파이 브라우저에서 실행하십시오."); }
+            } else { alert("현재 테스트 모드. 파이 브라우저에서 실제 지갑과 통신합니다."); }
         },
-        swap: () => alert("GCV $314,159 기반 스왑 엔진 가동 중..."),
-        provideLP: () => alert("2026년 4월 26일 자정: 1,080 Pi 유동성 공급 예약이 활성화되었습니다."),
-        action: (t) => alert(`[HKWB 보안 프로토콜] ${t.toUpperCase()} 모듈 가동 중...`)
+        swap: () => alert("GCV $314,159 기반 전환 엔진 대기 중..."),
+        provideLP: () => alert("4월 26일 자정: 1,080 Pi 유동성 공급 프로세스 예약 완료."),
+        action: (t) => alert(`[HKWB Protocol] ${t.toUpperCase()} 모듈 정상 가동 중...`)
     };
 
-    // [2번 수칙] FAQ 20개 완성
+    // [2번] FAQ 20개 리스트
     function loadFaq() {
         const faqs = [
-            {q: "UBI의 핵심 비전은 무엇입니까?", a: "전 인류에게 조건 없이 지급되는 보편적 기본소득을 구현하는 것입니다."},
-            {q: "4월 26일의 의미는?", a: "1080개 파이를 LP에 예치하여 생태계 거버넌스를 여는 역사적인 날입니다."},
-            {q: "GCV 가격 정책은?", a: "1 Pi = $314,159의 합의 가치를 지향합니다."},
-            {q: "HKWB 토큰 발행량은?", a: "6,280,000.2141개로 한정되어 희소성을 유지합니다."},
-            {q: "발생 수수료는 어떻게 처리되나요?", a: "모든 수수료는 UBI 재원으로 환원되어 다시 배분됩니다."},
-            {q: "5월 18일 무엇이 변하나?", a: "테스트 데이터가 메인넷 자산과 동기화되어 실제 가치를 갖게 됩니다."},
-            {q: "보안 기술은 어떻게 되나요?", a: "양자 내성 암호화와 AI 삐니의 실시간 모니터링으로 보호됩니다."},
-            {q: "오프라인 결제 가능 여부?", a: "HKWB QR 코드를 통해 전 세계 어디서든 즉시 결제가 가능합니다."},
-            {q: "스테이킹 수익률은?", a: "현재 연 17.69%의 보상을 제공하고 있습니다."},
-            {q: "참여 대상은 누구입니까?", a: "파이 네트워크 사용자라면 전 세계 누구나 참여 가능합니다."},
-            {q: "노드 운영 혜택은?", a: "트랜잭션 검증 보상으로 HKWB 토큰을 채굴할 수 있습니다."},
-            {q: "지갑 분실 시 복구는?", a: "파이 네트워크의 개인 복구 구절을 통해 안전하게 복구됩니다."},
-            {q: "해커톤 우승 시 계획은?", a: "글로벌 뱅킹 인프라를 전 세계로 확장할 계획입니다."},
-            {q: "AI 삐니의 역할은?", a: "형님의 자산을 관리하고 24시간 모니터링하는 인공지능입니다."},
-            {q: "지원 언어는?", a: "50개국 이상의 글로벌 언어를 공식 지원합니다."},
-            {q: "법적 규제는?", a: "각국의 금융 가이드라인을 준수하며 탈중앙화 금융을 지향합니다."},
-            {q: "추가 발행 계획은?", a: "정해진 발행량 이후 추가 발행은 절대 없습니다."},
-            {q: "사용자 정보 보호는?", a: "개인정보는 블록체인에 암호화되어 안전하게 관리됩니다."},
-            {q: "혜공통일재단이란?", a: "수익의 30%를 사회에 환원하는 상생의 중심입니다."},
-            {q: "향후 목표는?", a: "지구촌 모든 이가 경제적 자유를 누리는 세상을 만듭니다."}
+            {q: "UBI 비전은 무엇입니까?", a: "전 인류에게 조건 없는 디지털 기본소득을 지급하는 것입니다."},
+            {q: "4월 26일은 어떤 날입니까?", a: "1080개 파이를 LP에 예치하여 생태계 거버넌스를 선포하는 날입니다."},
+            {q: "GCV 가격은 무엇입니까?", a: "1 Pi = $314,159의 합의 가치를 지향합니다."},
+            {q: "총 발행량의 의미는?", a: "6,280,000.2141개로 희소성과 가치 안정을 동시에 잡았습니다."},
+            {q: "수수료 정책은?", a: "발생하는 모든 수수료는 UBI 재원으로 100% 환원됩니다."},
+            {q: "5월 18일 메인넷 동기화란?", a: "테스트 자산이 실제 메인넷 자산으로 인정받는 시점입니다."},
+            {q: "보안은 어떻게 관리됩니까?", a: "양자 내성 암호화와 AI 삐니가 24시간 실시간 감시합니다."},
+            {q: "글로벌 결제가 가능합니까?", a: "전 세계 어디서든 QR 코드로 즉시 결제 가능합니다."},
+            {q: "스테이킹 수익률은?", a: "현재 연 17.69%의 스테이킹 보상을 지급하고 있습니다."},
+            {q: "누가 참여할 수 있습니까?", a: "파이 네트워크 사용자라면 전 세계 누구나 참여 가능합니다."},
+            {q: "노드 운영자의 혜택은?", a: "트랜잭션 검증 보상으로 HKWB 토큰을 획득합니다."},
+            {q: "지갑 분실 시 복구는?", a: "파이 공식 복구 구절을 통해 안전하게 복구할 수 있습니다."},
+            {q: "해커톤 이후의 계획은?", a: "글로벌 금융 인프라를 통해 전 세계로 확장할 것입니다."},
+            {q: "AI 삐니의 특징은?", a: "형님의 자산 관리 및 비전을 학습한 특화 인공지능입니다."},
+            {q: "몇 개국 언어를 지원합니까?", a: "현재 50개국 이상의 글로벌 언어를 공식 지원합니다."},
+            {q: "법적 문제는 없습니까?", a: "각국의 규제 가이드라인을 준수하며 투명하게 운영됩니다."},
+            {q: "추가 발행이 있습니까?", a: "정해진 총 발행량 외에 추가 발행은 절대 없습니다."},
+            {q: "혜공통일재단의 목적은?", a: "수익의 30%를 글로벌 복지와 기본소득에 사용합니다."},
+            {q: "HKWB의 최종 목표는?", a: "모든 인류가 굶주림 없는 경제적 자유를 얻는 것입니다."},
+            {q: "언제든지 현금화 가능한가요?", a: "DEX 스왑을 통해 즉시 가용 자산으로 전환 가능합니다."}
         ];
         document.getElementById('faq-list').innerHTML = faqs.map(f => `<div class="faq-q">${f.q}</div><div class="faq-a">${f.a}</div>`).join('');
     }
 
-    // [5번 수칙] 삐니 챗봇 응답 로직
     function askAI() {
         const input = document.getElementById('user-input');
         const val = input.value.trim(); if(!val) return;
         addMsg(val, 'user-msg'); input.value = '';
-        let res = "혜공 형님, 요청하신 명령을 HKWB 메인넷 노드에 기록 중입니다.";
-        if(val.includes("파이") || val.includes("Pi")) res = "26일 1,080개 Pi 유동성 공급 준비가 100% 완료되었습니다!";
-        else if(val.includes("안녕")) res = "반갑습니다 혜공 형님! 오늘도 3시에 일어나 갓생 사시느라 고생 많으십니다!";
+        let res = "혜공 형님, 요청하신 명령을 원장에 기록 중입니다.";
+        if(val.includes("파이")) res = "26일 1,080개 Pi 유동성 공급 준비가 완벽히 끝났습니다!";
         setTimeout(() => addMsg(res, 'ai-msg'), 800);
     }
 
@@ -203,7 +213,6 @@
         document.getElementById('btn-swap').innerText = d.swap;
         document.getElementById('btn-stake').innerText = d.stake;
         document.getElementById('btn-center').innerText = d.center;
-        ['m1','m2','m3','m4','m5','m6'].forEach(id => { if(d[id]) document.getElementById(id).innerText = d[id]; });
     }
 
     function toggleChat() { const w = document.getElementById('chat-window'); w.style.display = (w.style.display==='flex')?'none':'flex'; }

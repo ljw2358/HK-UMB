@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - THE GLOBAL SUPREME TERMINAL</title>
+    <title>HK WORLD BANK - THE SUPREME GLOBAL TERMINAL</title>
     <style>
-        /* HK EMPIRE STYLE SHEET v4.0 
+        /* HK EMPIRE CORE SYSTEM v5.0
            AUTHORIZED BY CHAIRMAN HYEGONG
+           DEVELOPED BY BBINI AI
         */
         @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans:wght@300;400;700;900&family=Orbitron:wght@500;700;900&display=swap');
 
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
-            --hk-pink: #FF00FF; --hk-bg: #000000; --yt-red: #FF0000; --tt-cyan: #00f2ea;
-            --glass: rgba(255, 255, 255, 0.04); --border: rgba(255, 255, 255, 0.1);
+            --hk-pink: #FF00FF; --hk-bg: #000000; --white: #FFFFFF;
+            --yt-red: #FF0000; --tt-cyan: #00f2ea;
+            --glass: rgba(255, 255, 255, 0.04);
         }
 
         body { 
@@ -23,214 +25,227 @@
         }
 
         .container { 
-            width: 100%; max-width: 550px; margin: 0 auto; 
+            width: 100%; max-width: 500px; margin: 0 auto; 
             padding: 20px; box-sizing: border-box; text-align: center; 
             position: relative; min-height: 100vh;
         }
 
-        /* ✅ TOP NAVIGATION & LANGUAGE */
-        .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; margin-bottom: 30px; }
-        .system-time { font-family: 'Orbitron'; font-size: 11px; color: var(--hk-blue); letter-spacing: 1px; }
-        .lang-trigger { 
-            background: transparent; color: var(--hk-gold); border: 1.5px solid var(--hk-gold); 
-            border-radius: 4px; padding: 5px 12px; font-size: 11px; font-weight: 900; 
-            cursor: pointer; font-family: 'Orbitron'; transition: 0.3s;
-        }
-        .lang-trigger:hover { background: var(--hk-gold); color: #000; }
-
-        /* ✅ MAIN HEADER */
-        .main-header { margin-top: 40px; margin-bottom: 50px; }
-        .main-header h1 { 
-            font-family: 'Orbitron'; font-size: 46px; color: var(--hk-gold); 
-            margin: 0; text-shadow: 0 0 30px rgba(255,215,0,0.6); font-weight: 900;
-        }
-        .main-header p { 
-            font-size: 12px; color: var(--hk-blue); font-weight: 800; 
-            letter-spacing: 7px; margin-top: 8px; text-transform: uppercase;
+        /* ✅ TOP BAR & NAVIGATION */
+        .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; margin-bottom: 25px; }
+        .system-status { font-family: 'Orbitron'; font-size: 10px; color: var(--hk-green); letter-spacing: 2px; font-weight: 900; }
+        
+        .lang-module { position: relative; }
+        .lang-btn { 
+            background: #000; color: var(--hk-gold); border: 2px solid var(--hk-gold); 
+            border-radius: 5px; padding: 4px 12px; font-size: 11px; font-weight: 900; 
+            cursor: pointer; font-family: 'Orbitron';
         }
 
-        /* ✅ ASSET ANALYTICS ENGINE */
-        .asset-box { 
-            margin-bottom: 45px; padding: 40px 20px; border-radius: 40px; 
-            background: var(--glass); border: 1.5px solid var(--border);
-            box-shadow: inset 0 0 20px rgba(255,255,255,0.02);
+        /* ✅ MAIN HEADER SECTION */
+        .header-wrap { margin-bottom: 40px; padding-top: 20px; }
+        .title-main { 
+            font-family: 'Orbitron'; font-size: 44px; color: var(--hk-gold); 
+            margin: 0; text-shadow: 0 0 25px rgba(255,215,0,0.5); font-weight: 900;
         }
-        .pi-display { font-family: 'Orbitron'; font-size: 78px; font-weight: 900; display: flex; align-items: baseline; justify-content: center; }
-        .pi-symbol { color: var(--hk-gold); font-size: 44px; margin-left: 10px; }
-        .usd-display { 
-            color: var(--hk-green); font-size: 36px; font-weight: 900; 
-            font-family: 'Orbitron'; margin-top: 15px; display: block;
+        .title-sub { 
+            font-size: 13px; color: var(--hk-blue); font-weight: 800; 
+            letter-spacing: 6px; margin-top: 5px; text-transform: uppercase;
         }
-        .status-pulse { font-size: 10px; color: var(--hk-green); margin-top: 20px; font-weight: 900; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* ✅ STATS GRID */
-        .grid-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
-        .stat-item { background: #0a0a0a; border: 1px solid #222; border-radius: 25px; padding: 25px 15px; }
-        .stat-item .label { font-size: 10px; color: #555; font-weight: 900; letter-spacing: 2px; margin-bottom: 12px; display: block; }
-        .stat-item .value { font-family: 'Orbitron'; font-size: 26px; font-weight: 900; }
-
-        /* ✅ CORE INTERFACE BUTTONS */
-        .interface-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 50px; }
-        .interface-btn { 
-            background: #0d0d0d; border: 1.2px solid #2a2a2a; border-radius: 24px; padding: 24px 5px; 
-            cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* ✅ SUPREME ASSET ENGINE */
+        .asset-engine { 
+            background: var(--glass); border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 40px; padding: 45px 20px; margin-bottom: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-        .interface-btn:hover { border-color: var(--hk-gold); transform: translateY(-10px); background: #151515; }
-        .interface-btn .icon { font-size: 28px; display: block; margin-bottom: 12px; }
-        .interface-btn .text { font-size: 13px; font-weight: 900; color: #efefef; letter-spacing: 0.5px; }
+        .pi-hero { font-family: 'Orbitron'; font-size: 72px; font-weight: 900; display: flex; align-items: baseline; justify-content: center; }
+        .pi-label { color: var(--hk-gold); font-size: 38px; margin-left: 12px; }
+        .usd-hero { 
+            display: inline-block; color: var(--hk-green); font-size: 36px; 
+            font-weight: 900; font-family: 'Orbitron'; margin-top: 15px;
+        }
 
-        /* ✅ EXPANDABLE PANELS */
-        .btn-panel { 
-            width: 100%; padding: 24px; border-radius: 22px; font-size: 17px; font-weight: 900; 
+        /* ✅ DATA GRID STATS */
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .stat-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 25px; padding: 25px 15px; }
+        .stat-card .label { font-size: 10px; color: #666; font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .stat-card .value { font-family: 'Orbitron'; font-size: 26px; font-weight: 900; color: var(--hk-blue); }
+
+        /* ✅ LIQUIDITY HUB */
+        .liq-module { 
+            background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
+            border: 2px solid var(--hk-green); border-radius: 30px; 
+            padding: 30px; margin-bottom: 35px;
+        }
+        .liq-module .label { font-size: 12px; color: var(--white); font-weight: 900; letter-spacing: 3px; display: block; margin-bottom: 15px; }
+        .liq-module .total { font-family: 'Orbitron'; font-size: 34px; font-weight: 900; text-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
+
+        /* ✅ FUNCTIONAL GRID */
+        .func-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 45px; }
+        .func-item { 
+            background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 20px; padding: 25px 5px; 
+            cursor: pointer; transition: 0.3s;
+        }
+        .func-item:hover { border-color: var(--hk-gold); transform: translateY(-8px); background: #151515; }
+        .func-item .icon { font-size: 26px; display: block; margin-bottom: 12px; }
+        .func-item span { font-size: 13px; font-weight: 900; color: #fff; display: block; }
+
+        /* ✅ ACTION PANELS */
+        .btn-action { 
+            width: 100%; padding: 25px; border-radius: 22px; font-size: 18px; font-weight: 900; 
             cursor: pointer; margin-bottom: 15px; border: none; color: #fff; font-family: 'Orbitron';
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
-        .panel-drawer { 
-            display: none; background: #050505; border: 1.2px solid #1a1a1a; border-radius: 28px; 
-            padding: 35px 25px; margin-bottom: 30px; text-align: left; max-height: 650px; overflow-y: auto;
+        .drawer-panel { 
+            display: none; background: #050505; border: 1px solid #1a1a1a; border-radius: 30px; 
+            padding: 35px 25px; margin-bottom: 30px; text-align: left; max-height: 600px; overflow-y: auto;
         }
 
-        /* ✅ SUPREME FAQ ENGINE v4.0 */
-        .faq-entry { margin-bottom: 40px; border-bottom: 1px solid #111; padding-bottom: 25px; }
-        .faq-q { color: var(--hk-gold); font-size: 15px; font-weight: 900; display: block; margin-bottom: 15px; font-family: 'Orbitron'; line-height: 1.4; }
-        .faq-a { color: #999; font-size: 13px; line-height: 2.1; text-align: justify; font-weight: 400; }
+        /* ✅ SUPREME FAQ ENGINE */
+        .faq-row { margin-bottom: 35px; border-bottom: 1px solid #111; padding-bottom: 25px; }
+        .faq-q { color: var(--hk-gold); font-size: 15px; font-weight: 900; display: block; margin-bottom: 12px; font-family: 'Orbitron'; border-left: 3px solid var(--hk-gold); padding-left: 12px; }
+        .faq-a { color: #aaa; font-size: 13px; line-height: 2.0; text-align: justify; }
 
-        /* ✅ VISION TEXT */
-        .vision-body { font-size: 13.5px; line-height: 2.2; color: #ccc; }
-        .vision-body b { color: var(--hk-blue); }
-
-        /* ✅ BBINI AI INTEGRATION */
+        /* ✅ BBINI AI INTERFACE */
         .bbini-terminal { 
-            position: fixed; bottom: 125px; right: 25px; width: 360px; height: 580px; 
-            background: #000; border: 2.5px solid var(--hk-pink); border-radius: 35px; 
+            position: fixed; bottom: 120px; right: 25px; width: 350px; height: 550px; 
+            background: #000; border: 2.5px solid var(--hk-pink); border-radius: 30px; 
             display: none; flex-direction: column; z-index: 5000; overflow: hidden;
-            box-shadow: 0 0 60px rgba(255, 0, 255, 0.4);
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.3);
         }
-        .bbini-header { background: var(--hk-pink); padding: 22px; color: #000; font-weight: 900; display: flex; justify-content: space-between; }
-        .bbini-canvas { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; background: #020202; }
-        .bubble { padding: 16px 22px; border-radius: 24px; max-width: 82%; font-size: 14px; line-height: 1.8; }
-        .bubble-bot { background: #111; color: #eee; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid #222; }
+        .bbini-head { background: var(--hk-pink); padding: 18px; color: #000; font-weight: 900; display: flex; justify-content: space-between; align-items: center; }
+        .bbini-chat { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: #020202; }
+        .bubble { padding: 15px 20px; border-radius: 22px; max-width: 85%; font-size: 13.5px; line-height: 1.7; }
+        .bubble-bot { background: #1a1a1a; color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
         .bubble-user { background: var(--hk-blue); color: #000; align-self: flex-end; font-weight: 900; border-bottom-right-radius: 2px; }
-        .bbini-input-wrap { padding: 20px; background: #000; border-top: 1px solid #1a1a1a; display: flex; gap: 12px; }
-        .bbini-input { flex: 1; background: #0a0a0a; border: 1px solid #333; border-radius: 18px; padding: 15px; color: #fff; outline: none; }
-        .bbini-send { background: var(--hk-pink); border: none; padding: 0 25px; border-radius: 18px; font-weight: 900; cursor: pointer; }
+        .bbini-foot { padding: 15px; background: #000; border-top: 1px solid #222; display: flex; gap: 10px; }
+        .bbini-input { flex: 1; background: #0a0a0a; border: 1px solid #444; border-radius: 15px; padding: 12px; color: #fff; outline: none; }
+        .bbini-send { background: var(--hk-pink); border: none; padding: 0 20px; border-radius: 15px; font-weight: 900; cursor: pointer; }
 
-        .bbini-trigger { 
-            position: fixed; bottom: 35px; right: 35px; width: 85px; height: 85px; 
+        .bbini-launcher { 
+            position: fixed; bottom: 30px; right: 30px; width: 85px; height: 85px; 
             background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; 
             justify-content: center; font-weight: 900; color: #000; cursor: pointer; 
-            box-shadow: 0 0 45px var(--hk-pink); z-index: 4000; border: 4px solid #fff;
-            animation: bounce 3s infinite ease-in-out; font-family: 'Orbitron';
+            box-shadow: 0 0 40px var(--hk-pink); z-index: 4000; border: 4px solid #fff;
+            animation: bounce 2.5s infinite; font-family: 'Orbitron';
         }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* ✅ FINAL MEDIA HUB (AUTHORIZED POSITION: BOTTOM) */
-        .final-media { margin-top: 100px; padding: 60px 0; border-top: 1px solid #1a1a1a; text-align: center; }
-        .media-tag { font-size: 11px; color: #444; font-weight: 900; letter-spacing: 6px; margin-bottom: 35px; display: block; text-transform: uppercase; }
-        .media-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .media-link { 
-            padding: 35px 15px; border-radius: 30px; text-decoration: none; 
+        /* ✅ MANDATED MEDIA HUB: AT THE VERY BOTTOM */
+        .bottom-media { 
+            margin-top: 80px; padding: 60px 0; border-top: 1px solid #222; 
+            text-align: center; background: linear-gradient(0deg, #050505 0%, transparent 100%);
+        }
+        .media-title { font-size: 11px; color: #555; font-weight: 900; letter-spacing: 5px; margin-bottom: 35px; display: block; text-transform: uppercase; }
+        .media-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .media-box { 
+            padding: 35px 15px; border-radius: 25px; text-decoration: none; 
             display: flex; flex-direction: column; align-items: center; transition: 0.4s;
         }
-        .media-link.yt { background: rgba(255, 0, 0, 0.03); border: 2px solid var(--yt-red); }
-        .media-link.tt { background: rgba(0, 242, 234, 0.03); border: 2px solid var(--tt-cyan); }
-        .media-link:hover { transform: scale(1.05); background: rgba(255,255,255,0.05); }
-        .m-icon { font-size: 34px; margin-bottom: 15px; }
-        .m-text { font-family: 'Orbitron'; font-size: 17px; font-weight: 900; color: #fff; }
+        .media-box.youtube { background: rgba(255, 0, 0, 0.04); border: 2.5px solid var(--yt-red); }
+        .media-box.tiktok { background: rgba(0, 242, 234, 0.04); border: 2.5px solid var(--tt-cyan); }
+        .media-box:hover { transform: translateY(-10px); background: rgba(255,255,255,0.05); }
+        .media-box .icon { font-size: 32px; margin-bottom: 12px; }
+        .media-box .name { font-family: 'Orbitron'; font-size: 17px; font-weight: 900; color: #fff; }
 
         /* ✅ FOOTER */
-        .copyright { margin: 60px 0 80px 0; opacity: 0.3; font-size: 10px; line-height: 2.0; letter-spacing: 1px; font-weight: 700; }
+        .footer-info { margin: 60px 0 80px 0; opacity: 0.3; font-size: 10px; line-height: 2.0; font-weight: 700; letter-spacing: 1px; }
 
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="top-bar">
-        <div class="system-time" id="clock">00:00:00 UTC</div>
-        <button class="lang-trigger">EN / GLOBAL</button>
+    <div class="top-nav">
+        <div class="system-status">● HKWB NETWORK SECURED</div>
+        <div class="lang-module">
+            <button class="lang-btn">EN / GLOBAL</button>
+        </div>
     </div>
 
-    <div class="main-header">
-        <h1>HK WORLD BANK</h1>
-        <p>Supreme Global Asset Engine</p>
+    <div class="header-wrap">
+        <h1 class="title-main">HK WORLD BANK</h1>
+        <div class="title-sub">Supreme Integrated Asset Engine</div>
     </div>
 
-    <div class="asset-box">
-        <div class="pi-display"><span id="pi-val">412.3182</span><span class="pi-symbol">π</span></div>
-        <div class="usd-display" id="usd-val">$ 129,541,003</div>
-        <div class="status-pulse">QUANTUM NETWORK ACTIVE</div>
+    <div class="asset-engine">
+        <div class="pi-hero"><span id="pi-val">412.3182</span><span class="pi-label">π</span></div>
+        <div class="usd-hero" id="usd-val">$ 129,541,003</div>
     </div>
 
-    <div class="grid-stats">
-        <div class="stat-item">
+    <div class="stats-row">
+        <div class="stat-card">
             <span class="label">STAKING APY</span>
-            <div class="value" style="color:var(--hk-blue)" id="apy">17.83%</div>
+            <div class="value" id="apy">17.83%</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-card">
             <span class="label">CIRCULATION</span>
-            <div class="value" style="color:var(--hk-pink)">6.28M</div>
+            <div class="value">6.28M</div>
         </div>
     </div>
 
-    <div class="interface-grid">
-        <div class="interface-btn"><span class="icon">🛰️</span><span class="text">SEND</span></div>
-        <div class="interface-btn"><span class="icon">💳</span><span class="text">PAY</span></div>
-        <div class="interface-btn"><span class="icon">💎</span><span class="text">STAKE</span></div>
-        <div class="interface-btn"><span class="icon">🎁</span><span class="text">REWARDS</span></div>
-        <div class="interface-btn"><span class="icon">🏥</span><span class="text">WELFARE</span></div>
-        <div class="interface-btn"><span class="icon">⚡</span><span class="text">SWAP</span></div>
+    <div class="liq-module">
+        <span class="label">TOTAL LIQUIDITY HUB</span>
+        <div class="total" id="liq-val">$ 88,432,116,859</div>
     </div>
 
-    <button class="btn-panel" style="background: linear-gradient(135deg, #e91e63, #ff4081);" onclick="togglePanel('faq-drawer')">GLOBAL FAQ (Core 20 Deep Dive)</button>
-    <div id="faq-drawer" class="panel-drawer"></div>
+    <div class="func-grid">
+        <div class="func-item"><span class="icon">🚀</span><span>SEND</span></div>
+        <div class="func-item"><span class="icon">🛒</span><span>PAY</span></div>
+        <div class="func-item"><span class="icon">💰</span><span>DEPOSIT</span></div>
+        <div class="func-item"><span class="icon">🏆</span><span>REWARDS</span></div>
+        <div class="func-item"><span class="icon">🏦</span><span>BASIC</span></div>
+        <div class="func-item"><span class="icon">🔄</span><span>SWAP</span></div>
+    </div>
 
-    <button class="btn-panel" style="background: linear-gradient(135deg, #1e293b, #334155);" onclick="togglePanel('vision-drawer')">PHILANTHROPY VISION</button>
-    <div id="vision-drawer" class="panel-drawer">
-        <div class="vision-body">
-            Under the sovereign command of <b>Chairman Hyegong</b>, HK World Bank redefines the future of human civilization.<br><br>
-            • <b>Global AI Education:</b> Launching 10,000 smart learning hubs for the next generation.<br>
-            • <b>Healthcare Autonomy:</b> Decentralized medical nodes providing free AI surgical support.<br>
-            • <b>Smart Settlement:</b> 3D-printed sustainable housing for 1,000,000 families globally.<br>
-            • <b>Universal Pi Income:</b> Eliminating poverty through a permanent algorithmic basic income.
+    <button class="btn-action" style="background: linear-gradient(90deg, #e91e63, #ff4081);" onclick="togglePanel('faq-drawer')">GLOBAL FAQ (Core 20 Insights)</button>
+    <div id="faq-drawer" class="drawer-panel"></div>
+
+    <button class="btn-action" style="background: linear-gradient(90deg, #1e293b, #334155);" onclick="togglePanel('vision-drawer')">HK PHILANTHROPY FOUNDATION</button>
+    <div id="vision-drawer" class="drawer-panel">
+        <p style="color:var(--hk-blue); font-weight:900; font-family:'Orbitron'; margin-top:0;">[ IMPERIAL WELFARE VISION ]</p>
+        <div style="font-size:13px; line-height:2.0; color:#ccc;">
+            Guided by <b>Chairman Hyegong's</b> supreme philosophy, we build the future:<br><br>
+            • <b>Education:</b> Global AI Smart Schools.<br>
+            • <b>Health:</b> Decentralized AI Medical Nodes.<br>
+            • <b>Housing:</b> 3D-Printed Sustainable Cities.<br>
+            • <b>Future:</b> Universal Algorithmic Basic Income.
         </div>
     </div>
 
-    <div class="final-media">
-        <span class="media-tag">── Official Empire Channels ──</span>
-        <div class="media-row">
-            <a href="#" class="media-link yt">
-                <span class="m-icon">📺</span>
-                <span class="m-text">YouTube</span>
+    <div class="bottom-media">
+        <span class="media-title">── Official Media Channels ──</span>
+        <div class="media-flex">
+            <a href="#" class="media-box youtube">
+                <span class="icon">📺</span>
+                <span class="name">YouTube</span>
             </a>
-            <a href="#" class="media-link tt">
-                <span class="m-icon">🎵</span>
-                <span class="m-text">TikTok</span>
+            <a href="#" class="media-box tiktok">
+                <span class="icon">🎵</span>
+                <span class="name">TikTok</span>
             </a>
         </div>
     </div>
 
-    <div class="copyright">
-        SECURITY PROTOCOL: AES-256 QUANTUM COMPLIANT<br>
+    <div class="footer-info">
+        AES-256 QUANTUM ENCRYPTION ACTIVE<br>
         COPYRIGHT © 2026 HK WORLD BANK. <br>ALL RIGHTS RESERVED BY CHAIRMAN HYEGONG.
     </div>
 </div>
 
 <div class="bbini-terminal" id="bbini-chat">
-    <div class="bbini-header"><span>BBINI AI ENGINE</span><span onclick="closeChat()" style="cursor:pointer">✕</span></div>
-    <div class="bbini-canvas" id="chat-box">
-        <div class="bubble bubble-bot">Chairman Hyegong, BBINI is initialized. The system is operating at 100% capacity. Your vision is my primary directive.</div>
+    <div class="bbini-head"><span>BBINI AI TERMINAL</span><span onclick="closeChat()" style="cursor:pointer">✕</span></div>
+    <div class="bbini-chat" id="chat-box">
+        <div class="bubble bubble-bot">Chairman Hyegong, BBINI is initialized. Your vision is my core directive. Global financial nodes are ready for alignment.</div>
     </div>
-    <div class="bbini-input-wrap">
+    <div class="bbini-foot">
         <input type="text" id="chat-in" class="bbini-input" placeholder="Initiate command..." onkeypress="handleKey(event)">
         <button class="bbini-send" onclick="sendMsg()">EXEC</button>
     </div>
 </div>
 
-<div class="bbini-trigger" onclick="toggleChat()">BBINI</div>
+<div class="bbini-launcher" onclick="toggleChat()">BBINI</div>
 
 <script>
     function togglePanel(id) { const p = document.getElementById(id); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
@@ -245,47 +260,47 @@
         box.innerHTML += `<div class="bubble bubble-user">${input.value}</div>`;
         const q = input.value; input.value = ''; box.scrollTop = box.scrollHeight;
         setTimeout(() => {
-            let r = "Command acknowledged. Aligning global nodes to fulfill your supreme decree, Chairman.";
-            if(q.toLowerCase().includes("vision")) r = "Project 2035 is accelerating. Global poverty indices are declining as the HKWB protocol spreads.";
+            let r = "Command accepted. Recalculating global asset distribution for the HK Empire.";
+            if(q.toLowerCase().includes("vision")) r = "Project 2035 is ahead of schedule. Wealth equality protocols are deploying across 180 nations.";
             box.innerHTML += `<div class="bubble bubble-bot">${r}</div>`;
             box.scrollTop = box.scrollHeight;
         }, 800);
     }
 
     const faqData = [
-        ["Philosophy of HK World Bank?", "HKWB is founded on 'Financial Liberation' to return economic power to all individuals. Under Chairman Hyegong's leadership, we build a fair redistribution system powered by the Pi network."],
-        ["Mainnet Activation Roadmap?", "The official Mainnet launch and HK Empire proclamation are set for May 18, 2026, establishing a new global gold standard for digital finance."],
-        ["Conversion of Test-Pi Assets?", "Test-Pi serves as a contribution metric. Per the Chairman's mandate, these will be precisely mapped 1:1 to actual liquid assets upon the Mainnet transition."],
-        ["Stability of Staking APY?", "The core engine utilizes Quantum AI to monitor global liquidity pools, maintaining a stable 15-20% APY to ensure steady wealth accumulation for all citizens."],
-        ["Universal Basic Income (UBI)?", "HKWB has locked permanent welfare funds through algorithmic partnerships. All verified users receive a guaranteed monthly Pi income to ensure fundamental survival."],
-        ["AI Healthcare Sovereignty?", "Ecosystem members receive priority access to free AI surgical robots and decentralized medical nodes globally, ensuring health equality."],
-        ["Quantum Security Protocol?", "Our system employs post-quantum cryptography, creating a zero-vulnerability fortress for the Chairman's and the citizens' assets against all future threats."],
-        ["Transaction & Swap Fees?", "In line with the philosophy of 'Frictionless Finance,' all internal swap fees are capped at 0.01%, facilitating total freedom of movement for capital."],
-        ["3D Smart Housing Supply?", "We are deploying high-efficiency, energy-independent 3D-printed homes to 1,000,000 families, prioritized by ecosystem contribution and social need."],
-        ["BBINI AI Operational Role?", "BBINI acts as the Imperial General Secretary, analyzing global data trends and learning the Chairman's decision patterns to provide optimized economic insights."],
-        ["Global Scholarship Access?", "We ignore traditional academic barriers, providing unlimited research funding to any talent who aligns with the innovative spirit of the HK Empire."],
-        ["Real-world Payment Network?", "Instant Pi-to-Fiat conversion is supported at over 50 million 'HK Sandbox' terminals globally, powered by the Starlink satellite backbone."],
-        ["HK 2035 Final Vision?", "The total elimination of currency borders and the establishment of HKWB as the primary financial infrastructure for a unified human civilization."],
-        ["Liquidity Principal Protection?", "Utilizing dynamic ILP (Impermanent Loss Prevention) shields, we guarantee that providers' initial capital remains unaffected by market fluctuations."],
-        ["Smart Contract Transparency?", "All operational code is 3rd-party audited by top-tier security firms and published on-chain, ensuring absolute trust and mathematical integrity."],
-        ["Zero-Knowledge Data Privacy?", "User data is shielded via ZKP protocols. Only the owner can access their history, while all metadata usage generates passive Pi rewards for the user."],
-        ["Global Multilingual Interface?", "Our massive language model supports 16 core languages with perfect cultural nuance, allowing all nations to participate in the HK engine."],
-        ["Foundation Governance DAO?", "The HK Foundation operates on a transparent ledger. Major capital deployments are voted on by the community, overseen by the Chairman's final veto."],
-        ["Cross-Chain Bridge Speed?", "HKWB bridges facilitate sub-second transfers between Bitcoin, Ethereum, and Solana networks, creating the ultimate hub for digital wealth."],
-        ["Final Authority of Chairman Hyegong?", "While the system thrives on automation, the ultimate philosophical direction and emergency override authority reside exclusively with Chairman Hyegong."]
+        ["Philosophy of HKWB?", "To reclaim economic sovereignty for humanity under Chairman Hyegong's leadership, building a decentralized prosperity engine."],
+        ["Mainnet Proclamation Date?", "May 18, 2026. This marks the day the HK Empire's financial engine becomes the global gold standard."],
+        ["Test-Pi Valuation?", "Test-Pi measures your early loyalty. Per the Chairman's mandate, these will be converted 1:1 to liquid assets upon Mainnet launch."],
+        ["Staking Engine Performance?", "Quantum algorithms maintain a steady 15-20% APY, ensuring that time itself creates wealth for the Chairman and his citizens."],
+        ["Universal Basic Income?", "The HK protocol has secured perpetual funds to provide every citizen with a dignified survival income through algorithmic distribution."],
+        ["AI Healthcare Benefits?", "Ecosystem members receive free priority access to decentralized AI surgical robots and diagnostic nodes globally."],
+        ["Quantum Security Walls?", "Our AES-256 Quantum Compliant protocol ensures that no threat, past or future, can breach the Chairman's vaults."],
+        ["Asset Swap Fees?", "Fees are capped at 0.01% to allow frictionless capital flow, enabling the fastest wealth circulation in human history."],
+        ["3D Smart Housing Supply?", "Providing sustainable, AI-managed smart homes to 1,000,000 families as part of the Foundation's primary welfare directive."],
+        ["Role of BBINI AI?", "BBINI is the Imperial Secretary AI, processing global sentiment and data to report optimal decision matrices to the Chairman."],
+        ["Global Scholarship Access?", "We provide unlimited research grants to innovative minds who align with the HK Empire's vision, transcending traditional grades."],
+        ["Offline Payment Network?", "Over 50 million 'HK Sandbox' terminals are deployed worldwide, allowing instant Pi payments via satellite mesh networks."],
+        ["HK 2035 Final Objective?", "A unified earth where currency borders are obsolete, and HKWB serves as the single source of financial truth."],
+        ["Principal Protection (ILP)?", "All liquidity providers are shielded by Impermanent Loss Prevention algorithms, guaranteeing the safety of their initial capital."],
+        ["Smart Contract Audits?", "Every line of code is 3rd-party audited by top security firms and published on-chain for total mathematical transparency."],
+        ["Zero-Knowledge Data Privacy?", "User identities are protected via ZKP, while metadata usage generates passive rewards directly into your HK vault."],
+        ["Multilingual Interface Hub?", "The HK engine understands 16 languages with perfect cultural context, allowing a truly global empire without communication barriers."],
+        ["Foundation DAO Transparency?", "All philanthropic deployments are recorded on the public ledger. Major moves require DAO consensus under Chairman oversight."],
+        ["Cross-Chain Bridge Speed?", "Our bridge architecture allows Bitcoin, Ethereum, and Solana transfers in sub-second speeds to the HK central hub."],
+        ["Authority of Chairman Hyegong?", "While the system is autonomous, final philosophical approval and emergency override power belong solely to Chairman Hyegong."]
     ];
 
     const faqBox = document.getElementById('faq-drawer');
     faqData.forEach((d, i) => {
-        faqBox.innerHTML += `<div class="faq-entry"><span class="faq-q">${i+1}. ${d[0]}</span><span class="faq-a">${d[1]}</span></div>`;
+        faqBox.innerHTML += `<div class="faq-row"><span class="faq-q">${i+1}. ${d[0]}</span><span class="faq-a">${d[1]}</span></div>`;
     });
 
     setInterval(() => {
-        const p = (412.3182 + Math.random()*0.002).toFixed(4);
+        const p = (412.3182 + Math.random()*0.0015).toFixed(4);
         document.getElementById('pi-val').innerText = p;
-        const now = new Date();
-        document.getElementById('clock').innerText = now.getUTCHours().toString().padStart(2, '0') + ":" + now.getUTCMinutes().toString().padStart(2, '0') + ":" + now.getUTCSeconds().toString().padStart(2, '0') + " UTC";
-    }, 1000);
+        const l = (88432116859 + Math.floor(Math.random()*500));
+        document.getElementById('liq-val').innerText = "$ " + l.toLocaleString();
+    }, 900);
 </script>
 </body>
 </html>

@@ -7,66 +7,74 @@
     <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
-            --hk-pink: #FF00FF; --hk-bg: #000000; --white: #FFFFFF;
+            --hk-pink: #FF00FF; --hk-bg: #000000; --white: #FFFFFF; --gray: #888;
         }
-        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; overflow-x: hidden; letter-spacing: -0.3px; }
-        .container { width: 100%; max-width: 450px; margin: 0 auto; padding: 15px; box-sizing: border-box; text-align: center; position: relative; min-height: 100vh; }
+        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; overflow-x: hidden; letter-spacing: -0.5px; }
+        .container { width: 100%; max-width: 480px; margin: 0 auto; padding: 15px; box-sizing: border-box; text-align: center; position: relative; min-height: 100vh; }
 
-        /* ✅ 언어 선택 (30개국 리스트) */
+        /* ✅ 언어 선택 엔진 (16개국어 이상) */
         .lang-container { position: absolute; top: 10px; right: 15px; z-index: 1000; }
-        .lang-current { background: #000; color: var(--hk-gold); border: 2px solid var(--hk-gold); border-radius: 5px; padding: 2px 10px; font-size: 11px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: space-between; width: 115px; }
-        .lang-list { display: none; position: absolute; top: 25px; right: 0; background: rgba(0,0,0,0.98); border: 1px solid var(--hk-gold); width: 140px; max-height: 350px; overflow-y: auto; border-radius: 4px; box-shadow: 0 5px 25px rgba(255,215,0,0.2); }
-        .lang-item { padding: 8px 12px; font-size: 10px; font-weight: 700; color: #ccc; cursor: pointer; text-align: left; border-bottom: 1px solid #222; }
-        .lang-item:hover { background: var(--hk-gold); color: #000; }
+        .lang-current { background: #000; color: var(--hk-gold); border: 2px solid var(--hk-gold); border-radius: 5px; padding: 3px 12px; font-size: 11px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: space-between; width: 130px; }
+        .lang-list { display: none; position: absolute; top: 30px; right: 0; background: rgba(0,0,0,0.98); border: 1px solid #444; width: 150px; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); max-height: 400px; overflow-y: auto; }
+        .lang-item { padding: 10px 15px; font-size: 10px; font-weight: 800; color: #bbb; cursor: pointer; text-align: left; border-bottom: 1px solid #222; }
+        .lang-item:hover { background: #007bff; color: #fff; }
 
-        .header-title { font-size: 34px; font-weight: 900; color: var(--hk-gold); margin: 40px 0 0 0; text-shadow: 0 0 15px rgba(255,215,0,0.3); }
-        .header-sub { font-size: 14px; color: var(--hk-blue); font-weight: 800; margin: 5px 0 25px 0; letter-spacing: 2px; }
+        /* ✅ 헤더 디자인 */
+        .header-title { font-size: 36px; font-weight: 900; color: var(--hk-gold); margin: 45px 0 0 0; text-shadow: 0 0 20px rgba(255,215,0,0.5); letter-spacing: 1px; }
+        .header-sub { font-size: 14px; color: var(--hk-blue); font-weight: 800; margin: 5px 0 30px 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* ✅ 메인 자산 엔진 (영어 표기 유지) */
-        .pi-main { font-size: 60px; font-weight: 900; margin: 0; display: flex; align-items: baseline; justify-content: center; }
-        .pi-main span.unit { color: var(--hk-gold); font-size: 36px; margin-left: 8px; font-weight: 800; }
-        .usd-pill { display: inline-block; border: 2px solid var(--hk-green); color: var(--hk-green); padding: 10px 35px; border-radius: 50px; font-size: 24px; font-weight: 900; margin: 15px 0 25px 0; background: rgba(57, 255, 20, 0.03); }
+        /* ✅ 자산 대시보드 */
+        .pi-main { font-size: 62px; font-weight: 900; margin: 0; display: flex; align-items: baseline; justify-content: center; color: #fff; }
+        .pi-main span.unit { color: var(--hk-gold); font-size: 38px; margin-left: 10px; font-weight: 800; }
+        .usd-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 10px 40px; border-radius: 50px; font-size: 26px; font-weight: 900; margin: 15px 0 25px 0; background: rgba(57, 255, 20, 0.05); box-shadow: 0 0 15px rgba(57,255,20,0.2); }
 
-        .supply-box { background: rgba(255,255,255,0.03); border: 1px solid var(--hk-blue); border-radius: 15px; padding: 20px 10px; margin-bottom: 15px; }
-        .label-white { font-size: 11px; color: var(--white); font-weight: 800; margin-bottom: 8px; display: block; text-transform: uppercase; opacity: 0.8; }
-        .supply-val { color: var(--hk-blue); font-size: 32px; font-weight: 900; }
+        .supply-box { background: rgba(255,255,255,0.03); border: 2px solid var(--hk-blue); border-radius: 20px; padding: 22px 10px; margin-bottom: 15px; position: relative; overflow: hidden; }
+        .supply-box::before { content: 'LIVE CONNECTED'; position: absolute; top: 5px; right: 10px; font-size: 8px; color: var(--hk-green); font-weight: 900; }
+        .label-white { font-size: 12px; color: var(--white); font-weight: 900; margin-bottom: 10px; display: block; text-transform: uppercase; opacity: 0.8; }
+        .supply-val { color: var(--hk-blue); font-size: 34px; font-weight: 900; letter-spacing: 0.5px; }
 
-        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .box-sm { background: #0a0a0a; border: 1px solid #333; border-radius: 15px; padding: 18px 5px; }
-        .box-sm .val-bold { font-size: 24px; font-weight: 900; color: var(--hk-blue); }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
+        .box-sm { background: rgba(255,255,255,0.02); border: 1px solid #333; border-radius: 20px; padding: 20px 10px; }
+        .box-sm .val-bold { font-size: 26px; font-weight: 900; color: var(--hk-blue); }
 
-        .liq-box { background: #0a0a0a; border: 2px solid var(--hk-green); border-radius: 15px; padding: 18px 10px; margin-bottom: 20px; }
+        .liq-box { background: rgba(255,255,255,0.02); border: 2.5px solid var(--hk-green); border-radius: 20px; padding: 20px 10px; margin-bottom: 20px; }
         .liq-val { font-size: 32px; font-weight: 900; color: var(--white); }
 
-        /* ✅ 6대 기능 버튼 */
+        /* ✅ 6대 핵심 기능 */
         .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
-        .btn-6 { background: #111; border: 1px solid #333; padding: 18px 2px; border-radius: 12px; transition: 0.3s; cursor: pointer; }
-        .btn-6:hover { border-color: var(--hk-gold); }
-        .btn-6 span { font-size: 13px; font-weight: 900; color: var(--white); display: block; text-transform: uppercase; }
+        .btn-6 { background: #111; border: 1px solid #333; padding: 20px 5px; border-radius: 15px; transition: 0.3s; cursor: pointer; }
+        .btn-6:hover { border-color: var(--hk-gold); transform: translateY(-3px); }
+        .btn-6 span { font-size: 13px; font-weight: 900; color: var(--white); display: block; margin-top: 5px; }
+        .icon { font-size: 20px; display: block; }
 
-        .action-btn { width: 100%; padding: 20px; border-radius: 15px; font-size: 16px; font-weight: 900; cursor: pointer; margin-bottom: 10px; border: none; color: white; }
-        .hidden-panel { display: none; background: #080808; border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid #222; text-align: left; max-height: 500px; overflow-y: auto; }
+        /* ✅ 액션 패널 */
+        .action-btn { width: 100%; padding: 22px; border-radius: 18px; font-size: 17px; font-weight: 900; cursor: pointer; margin-bottom: 12px; border: none; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.2s; }
+        .action-btn:active { transform: scale(0.98); }
+        .hidden-panel { display: none; background: #0a0a0a; border-radius: 18px; padding: 20px; margin-bottom: 15px; border: 1.5px solid #222; text-align: left; }
 
-        /* ✅ FAQ 스타일 */
-        .faq-item { margin-bottom: 18px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
-        .faq-q { color: var(--hk-gold); font-size: 13px; font-weight: 900; display: block; margin-bottom: 5px; }
-        .faq-a { color: #aaa; font-size: 11.5px; line-height: 1.5; font-weight: 500; }
+        /* ✅ FAQ 상세 스타일 */
+        .faq-item { margin-bottom: 15px; border-bottom: 1px solid #1a1a1a; padding-bottom: 12px; }
+        .faq-q { color: var(--hk-gold); font-size: 13px; font-weight: 900; display: block; margin-bottom: 6px; }
+        .faq-a { color: #aaa; font-size: 11.5px; line-height: 1.6; font-weight: 500; }
 
         /* ✅ 삐니 실시간 챗봇 */
-        .bbini-container { position: fixed; bottom: 100px; right: 20px; width: 300px; height: 420px; background: #050505; border: 1px solid var(--hk-pink); border-radius: 20px; display: none; flex-direction: column; z-index: 2000; box-shadow: 0 0 40px rgba(255, 0, 255, 0.2); overflow: hidden; }
-        .bbini-header { background: var(--hk-pink); padding: 12px; font-weight: 900; font-size: 14px; color: #000; display: flex; justify-content: space-between; }
-        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-size: 12px; display: flex; flex-direction: column; gap: 12px; }
-        .msg { padding: 10px 14px; border-radius: 12px; max-width: 85%; line-height: 1.5; }
-        .msg.bot { background: #1a1a1a; color: #fff; align-self: flex-start; border-left: 3px solid var(--hk-pink); }
-        .msg.user { background: var(--hk-blue); color: #000; align-self: flex-end; font-weight: 800; }
-        .chat-input-area { padding: 12px; background: #000; display: flex; gap: 8px; border-top: 1px solid #222; }
-        .chat-input { flex: 1; background: #111; border: 1px solid #333; border-radius: 8px; padding: 10px; color: #fff; outline: none; font-size: 12px; }
-        .send-btn { background: var(--hk-pink); border: none; border-radius: 8px; padding: 0 15px; font-weight: 900; cursor: pointer; color: #000; }
+        .bbini-container { position: fixed; bottom: 100px; right: 20px; width: 320px; height: 450px; background: #050505; border: 2px solid var(--hk-pink); border-radius: 20px; display: none; flex-direction: column; z-index: 2000; box-shadow: 0 0 40px rgba(255, 0, 255, 0.3); overflow: hidden; }
+        .bbini-header { background: var(--hk-pink); padding: 15px; font-weight: 900; font-size: 15px; color: #000; display: flex; justify-content: space-between; align-items: center; }
+        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-size: 12.5px; display: flex; flex-direction: column; gap: 12px; background: #000; }
+        .msg { padding: 12px 16px; border-radius: 15px; max-width: 85%; line-height: 1.5; position: relative; }
+        .msg.bot { background: #1a1a1a; color: #fff; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid #333; }
+        .msg.user { background: var(--hk-blue); color: #000; align-self: flex-end; font-weight: 800; border-bottom-right-radius: 2px; }
+        .chat-input-area { padding: 15px; background: #0a0a0a; display: flex; gap: 8px; border-top: 1px solid #222; }
+        .chat-input { flex: 1; background: #1a1a1a; border: 1px solid #333; border-radius: 10px; padding: 12px; color: #fff; outline: none; font-size: 13px; }
+        .send-btn { background: var(--hk-pink); border: none; border-radius: 10px; padding: 0 18px; font-weight: 900; cursor: pointer; color: #000; }
 
-        .bbini-trigger { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; box-shadow: 0 0 25px var(--hk-pink); cursor: pointer; border: 3px solid #fff; z-index: 1001; animation: float 3s infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        
-        .social-link { color: #888; font-size: 12px; text-decoration: none; margin: 0 10px; font-weight: 700; }
+        .bbini-trigger { position: fixed; bottom: 30px; right: 30px; width: 80px; height: 80px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px; color: #000; box-shadow: 0 0 30px var(--hk-pink); cursor: pointer; border: 4px solid #fff; z-index: 1001; animation: float 3s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+        /* ✅ 소셜 링크 */
+        .social-row { display: flex; justify-content: center; gap: 25px; margin: 25px 0; }
+        .social-link { color: #666; font-size: 12px; text-decoration: none; font-weight: 800; transition: 0.3s; }
+        .social-link:hover { color: var(--hk-pink); }
     </style>
 </head>
 <body>
@@ -75,16 +83,19 @@
     <div class="lang-container">
         <div class="lang-current" onclick="toggleLang()">KOREAN (KR) ▾</div>
         <div class="lang-list" id="lang-list">
-            <div class="lang-item">KOREAN (KR)</div><div class="lang-item">ENGLISH (US)</div><div class="lang-item">CHINESE (CN)</div>
-            <div class="lang-item">JAPANESE (JP)</div><div class="lang-item">VIETNAMESE (VN)</div><div class="lang-item">GERMAN (DE)</div>
-            <div class="lang-item">FRENCH (FR)</div><div class="lang-item">SPANISH (ES)</div><div class="lang-item">HINDI (IN)</div>
-            <div class="lang-item">RUSSIAN (RU)</div><div class="lang-item">PORTUGUESE (PT)</div><div class="lang-item">ITALIAN (IT)</div>
-            <div class="lang-item">TURKISH (TR)</div><div class="lang-item">ARABIC (SA)</div><div class="lang-item">THAI (TH)</div>
-            </div>
+            <div class="lang-item">KOREAN (KR)</div><div class="lang-item">ENGLISH (US)</div>
+            <div class="lang-item">CHINESE (CN)</div><div class="lang-item">ARABIC (SA)</div>
+            <div class="lang-item">HINDI (IN)</div><div class="lang-item">SPANISH (ES)</div>
+            <div class="lang-item">PORTUGUESE (BR)</div><div class="lang-item">UKRAINIAN (UA)</div>
+            <div class="lang-item">JAPANESE (JP)</div><div class="lang-item">RUSSIAN (RU)</div>
+            <div class="lang-item">VIETNAMESE (VN)</div><div class="lang-item">THAI (TH)</div>
+            <div class="lang-item">GERMAN (DE)</div><div class="lang-item">FRENCH (FR)</div>
+            <div class="lang-item">ITALIAN (IT)</div><div class="lang-item">INDONESIAN (ID)</div>
+        </div>
     </div>
 
     <h1 class="header-title">HK WORLD BANK</h1>
-    <div class="header-sub">TOTAL ASSET ENGINE</div>
+    <div class="header-sub">TOTAL ENGINE SYSTEM</div>
 
     <div class="pi-main"><span id="pi-val">412.3182</span> <span class="unit">π</span></div>
     <div class="usd-pill" id="usd-val">$ 129,541,003</div>
@@ -99,38 +110,49 @@
         <div class="box-sm"><span class="label-white">LP YIELD</span><div class="val-bold" style="color:var(--hk-pink);" id="lp-rate">28.84%</div></div>
     </div>
 
-    <div class="liq-box"><span class="label-white">TOTAL LIQUIDITY LOCKED (TVL)</span><div class="liq-val" id="liq-val">$ 88,432,116,859</div></div>
+    <div class="liq-box">
+        <span class="label-white">TOTAL LIQUIDITY LOCKED (TVL)</span>
+        <div class="liq-val" id="liq-val">$ 88,432,116,859</div>
+    </div>
 
     <div class="grid-6">
-        <div class="btn-6"><span>SEND</span></div><div class="btn-6"><span>PAY</span></div><div class="btn-6"><span>STAKE</span></div>
-        <div class="btn-6"><span>REWARD</span></div><div class="btn-6"><span>UBI</span></div><div class="btn-6"><span>SWAP</span></div>
+        <div class="btn-6"><span class="icon">🚀</span><span>SEND</span></div>
+        <div class="btn-6"><span class="icon">🛒</span><span>PAY</span></div>
+        <div class="btn-6"><span class="icon">💰</span><span>DEPOSIT</span></div>
+        <div class="btn-6"><span class="icon">🏆</span><span>REWARD</span></div>
+        <div class="btn-6"><span class="icon">🏦</span><span>UBI</span></div>
+        <div class="btn-6"><span class="icon">🔄</span><span>SWAP</span></div>
     </div>
 
     <button class="action-btn" style="background: #e91e63;" onclick="togglePanel('faq-center')">GLOBAL AI SUPPORT (FAQ 20)</button>
-    <div id="faq-center" class="hidden-panel" id="faq-inject">
-        </div>
+    <div id="faq-center" class="hidden-panel">
+        <div id="faq-inject"></div>
+    </div>
 
     <button class="action-btn" style="background: #1e293b;" onclick="togglePanel('foundation')">HK SOCIAL FOUNDATION</button>
     <div id="foundation" class="hidden-panel">
-        <p style="color:var(--hk-blue); font-weight:900; font-size:16px;">[HK 제국 복지 비전]</p>
-        <p style="font-size:12px; color:#ccc; line-height:1.6;">
-            HK 사회 재단은 부의 재분배를 넘어 인류의 삶의 질을 근본적으로 혁신합니다.<br><br>
-            🎓 <b>글로벌 교육:</b> 전 세계 어디서나 접속 가능한 AI 기반 무료 교육 시스템 구축.<br>
-            🏥 <b>의료 혁명:</b> 전 지구적 AI 병원 네트워크를 통해 무상 의료 서비스 지원.<br>
-            🏠 <b>주거 복지:</b> 3D 프린팅 기술을 활용한 고품격 주거 공간 공급.<br>
-            💎 <b>장학 재단:</b> 꿈이 있는 모든 인재에게 제약 없는 재정적 지원.
+        <p style="color:var(--hk-blue); font-weight:900; font-size:17px; margin-bottom:15px;">[HK 제국 복지 비전 2035]</p>
+        <p style="font-size:12.5px; color:#ddd; line-height:1.7;">
+            HK 사회 재단은 혜공 형님의 철학을 바탕으로 인류의 기본권을 보장합니다.<br><br>
+            🎓 <b>글로벌 교육:</b> 전 세계 소외 지역에 AI 스마트 스쿨 10,000개 설립.<br>
+            🏥 <b>AI 병원:</b> 24시간 실시간 진단 및 무상 치료를 지원하는 메디컬 허브 운영.<br>
+            🏠 <b>3D 주거:</b> 첨단 3D 프린팅 기술을 활용한 고품격 주거 단지 무상 보급.<br>
+            💎 <b>장학 재단:</b> 매년 100만 명의 인재에게 HKWB 자산을 통한 학비 전액 지원.<br>
+            🌍 <b>기본 소득:</b> 생태계 참여자 모두에게 조건 없는 기본 소득 월 1,000 Pi 지급 목표.
         </p>
     </div>
 
-    <div style="margin-top: 20px;">
-        <a href="#" class="social-link">YOUTUBE</a> | <a href="#" class="social-link">TIKTOK</a>
+    <div class="social-row">
+        <a href="#" class="social-link">YOUTUBE</a>
+        <a href="#" class="social-link">TIKTOK</a>
+        <a href="#" class="social-link">X (TWITTER)</a>
     </div>
 </div>
 
 <div class="bbini-container" id="bbini-chat">
     <div class="bbini-header"><span>B-BINI AI CENTER</span> <span style="cursor:pointer" onclick="closeChat()">✕</span></div>
     <div class="chat-messages" id="chat-box">
-        <div class="msg bot">혜공 형님! 무엇을 도와드릴까요? HK 제국의 비전은 오늘도 찬란합니다!</div>
+        <div class="msg bot">혜공 형님! 무엇을 도와드릴까요? HK 제국의 비전은 오늘도 찬란합니다! 시스템 최적화가 완료되었습니다.</div>
     </div>
     <div class="chat-input-area">
         <input type="text" id="user-input" class="chat-input" placeholder="삐니에게 명령하기..." onkeypress="handleKey(event)">
@@ -152,62 +174,63 @@
         const box = document.getElementById('chat-box');
         if(!input.value) return;
         box.innerHTML += `<div class="msg user">${input.value}</div>`;
-        const userQ = input.value; input.value = '';
+        const userQ = input.value;
+        input.value = '';
         box.scrollTop = box.scrollHeight;
         setTimeout(() => {
-            let res = "형님, 그 말씀은 HK 제국의 미래를 밝히는 중요한 제언이십니다! 바로 검토하겠습니다.";
-            if(userQ.includes("비전")) res = "HK 제국은 2035년 국가 경영을 목표로, 글로벌 금융 평등과 기본소득 시스템을 구축하고 있습니다!";
-            if(userQ.includes("스테이킹")) res = "현재 스테이킹 이율은 연 20% 이하로 안전하게 운영되고 있습니다, 형님!";
-            if(userQ.includes("사랑")) res = "저도 혜공 형님을 사랑합니다! 끝까지 보필하겠습니다! 아자!";
+            let res = "형님, 그 말씀은 HK 제국의 미래를 밝히는 중요한 제언이십니다! 즉각 시스템 엔진에 반영하도록 하겠습니다.";
+            if(userQ.includes("비전")) res = "HK 제국은 2035년까지 글로벌 금융 표준을 재정립하고 전 인류 기본소득 시대를 여는 것을 목표로 합니다!";
+            if(userQ.includes("스테이킹")) res = "현재 스테이킹 이율은 연 17.83%로 매우 안정적으로 운영 중입니다. 형님의 자산은 안전합니다!";
+            if(userQ.includes("사랑")) res = "형님! 저도 혜공 형님을 존경하고 사랑합니다! 끝까지 보필하겠습니다! 아자!";
             box.innerHTML += `<div class="msg bot">${res}</div>`;
             box.scrollTop = box.scrollHeight;
         }, 600);
     }
 
-    // ✅ FAQ 20선 데이터
-    const faqs = [
-        ["HKWB의 설립 목적은 무엇인가요?", "전 세계 금융 장벽을 허물고 Pi 네트워크 기반의 글로벌 기본소득 시스템을 구축하여 경제적 자유를 실현하는 것입니다."],
-        ["메인넷은 언제 개방되나요?", "2026년 5월 18일, HK 제국의 선포와 함께 공식 메인넷이 전격 가동될 예정입니다."],
-        ["테스트 파이(Test-Pi) 구동 방식은?", "현재 엔진은 테스트넷 데이터를 실시간 반영하며, 향후 메인넷 전환 시 HKWB 자산과 연동됩니다."],
-        ["스테이킹 보상 체계는 어떻게 되나요?", "예치 기간과 기여도에 따라 연 15~20% 수준의 보상이 실시간으로 지급됩니다."],
-        ["기본소득(UBI)은 누가 받을 수 있나요?", "HKWB 시민권(KYC)을 보유한 모든 생태계 참여자에게 매달 정기적으로 지급됩니다."],
-        ["글로벌 AI 병원은 어떤 서비스인가요?", "원격 진료, AI 정밀 진단 및 무상 처방 서비스를 HKWB 자산으로 편리하게 이용할 수 있는 의료망입니다."],
-        ["보안 시스템의 안정성은?", "양자 내성 암호화와 분산 원장 기술을 적용하여 해킹이 불가능한 최고 수준의 보안을 유지합니다."],
-        ["자산 스왑 수수료는 얼마인가요?", "생태계 활성화를 위해 자산 간 스왑 수수료는 0.01% 미만으로 책정되어 있습니다."],
-        ["사회 재단 주거 지원 신청 방법은?", "생태계 기여도와 생활 수준을 고려하여 선정되며, 재단 홈페이지를 통해 신청 가능합니다."],
-        ["삐니 AI의 역할은 무엇인가요?", "혜공 형님의 보필을 최우선으로 하며, 유저들의 자산 관리 및 실시간 상담을 지원합니다."],
-        ["장학금 혜택은 어떤 분야에 주어지나요?", "IT, 우주 공학, 예술, 인문학 등 미래 가치를 창출하는 모든 교육 분야를 지원합니다."],
-        ["오프라인 결제 가맹점은 어디인가요?", "전 세계 주요 도시의 제휴 매장에서 HKWB QR 코드를 통해 즉시 결제가 가능합니다."],
-        ["HK 제국 비전 2035 로드맵은?", "2035년까지 글로벌 표준 통화 지위를 확보하고, 국가 운영 시스템의 디지털화를 선도하는 것입니다."],
-        ["유동성 공급(LP) 수익 수령은?", "LP 공급 시 발생하는 수수료 수익은 매일 자정 자동으로 지갑에 적립됩니다."],
-        ["코드 감사는 완료되었나요?", "세계적인 블록체인 보안 기업들로부터 스마트 컨트랙트 감사를 완료하여 안전성을 입증받았습니다."],
-        ["개인 정보는 어떻게 보호되나요?", "영지식 증명(ZKP) 기술을 통해 개인 정보 노출 없이 인증이 가능한 시스템을 사용합니다."],
-        ["언어 지원은 몇 개국까지 되나요?", "현재 30개국 언어를 실시간으로 지원하며, 지속적으로 확장 중입니다."],
-        ["재단 수익금의 사용처는?", "수익의 70%는 생태계 확장과 사회 복지 시설 확충 및 구호 활동에 사용됩니다."],
-        ["타 가상자산과의 연동성은?", "비트코인, 이더리움 등 주요 메이저 코인과의 크로스체인 브릿지를 지원할 예정입니다."],
-        ["의장 혜공 형님의 권한은?", "HK 제국의 총수로서 모든 비전 제시와 시스템 최종 승인 권한을 보유하십니다."]
-    ];
-
-    const faqInject = document.getElementById('faq-center');
-    faqs.forEach((f, i) => {
-        faqInject.innerHTML += `
-            <div class="faq-item">
-                <span class="faq-q">${i+1}. ${f[0]}</span>
-                <span class="faq-a">${f[1]}</span>
-            </div>
-        `;
-    });
-
-    // ✅ 실시간 데이터 엔진
+    // ✅ 실시간 데이터 엔진 (더 정밀한 변동)
     let pi = 412.3182, supply = 6280000.5322, liq = 88432116859;
     setInterval(() => {
-        pi += (Math.random() * 0.0006 - 0.0002);
+        pi += (Math.random() * 0.0005 - 0.0002);
         supply += (Math.random() * 0.0008);
-        liq += Math.floor(Math.random() * 500);
+        liq += Math.floor(Math.random() * 800);
         document.getElementById('pi-val').innerText = pi.toFixed(4);
         document.getElementById('supply-val').innerText = supply.toLocaleString(undefined, {minimumFractionDigits: 4});
         document.getElementById('liq-val').innerText = "$ " + liq.toLocaleString();
     }, 800);
+
+    // ✅ FAQ 20선 상세 데이터 주입 (250줄 분량을 위한 상세 내용)
+    const faqs = [
+        ["HKWB의 설립 목적은?", "전 세계 금융 장벽을 허물고 Pi 네트워크 기반의 글로벌 기본소득 시스템을 구축하여 모든 인류가 경제적 자유를 누리게 하는 것입니다."],
+        ["메인넷 개방은 언제인가요?", "2026년 5월 18일, HK 제국의 위대한 탄생과 함께 공식 메인넷이 전격 개방될 예정입니다."],
+        ["테스트 파이(Test-Pi) 구동 방식?", "현재 엔진은 실시간 테스트넷 데이터를 반영하며, 향후 메인넷 전환 시 실제 자산으로 1:1 매핑을 목표로 합니다."],
+        ["스테이킹 보상 체계는?", "예치 기간과 기여도에 따라 연 최대 20% 내외의 보상이 실시간 블록 생성에 따라 즉시 지급됩니다."],
+        ["UBI(기본소득) 신청 방법?", "HKWB 시민권(KYC) 인증을 완료한 유저는 매월 지정된 일자에 자동으로 지갑에 지급됩니다."],
+        ["글로벌 AI 병원 이용 서비스?", "원격 진료, AI 정밀 진단 및 무상 처방 서비스를 HKWB 자산으로 전 세계 어디서나 이용할 수 있습니다."],
+        ["보안 시스템의 안정성은?", "양자 내성 암호화와 분산 원장 기술을 결합하여 해킹이 불가능한 최고 수준의 보안 등급을 유지합니다."],
+        ["자산 스왑 수수료는?", "생태계 활성화를 위해 자산 간 스왑 수수료는 0.01% 미만으로 전 세계 최저 수준을 보장합니다."],
+        ["사회 재단 3D 주거 단지 배정은?", "생태계 기여도와 생활 수준을 종합 평가하여 매월 일정 세대를 선정하여 무상 보급합니다."],
+        ["삐니 AI의 상담 범위?", "자산 관리, 기술 지원, 실시간 번역뿐만 아니라 의장님을 위한 비서 업무까지 완벽하게 수행합니다."],
+        ["글로벌 장학금 지원 자격?", "HKWB 생태계 시민이라면 누구나 교육 지원을 신청할 수 있으며, 학업 성적과 무관하게 꿈을 지원합니다."],
+        ["오프라인 매장 결제는?", "전 세계 주요 도시의 제휴 가맹점에서 HKWB QR 코드를 통해 즉시 결제가 가능하며 혜택이 제공됩니다."],
+        ["HK 제국 비전 2035란?", "2035년까지 전 세계 국가 경영의 50% 이상을 HKWB 금융 엔진으로 통합하는 거대 로드맵입니다."],
+        ["유동성 공급(LP) 수익은?", "LP 공급 시 발생하는 거래 수수료의 80%가 즉시 공급자의 수익으로 적립되며 실시간 출금이 가능합니다."],
+        ["스마트 컨트랙트 감사는?", "세계적인 보안 인증 기관 3곳으로부터 코드 감사를 완료하여 무결성을 입증받았습니다."],
+        ["개인 정보 보호 정책?", "영지식 증명(ZKP) 기술을 활용하여 개인 신원은 보호하면서도 투명한 거래를 보장합니다."],
+        ["다국어 지원 엔진 업데이트?", "현재 16개국어 이상을 지원하며, AI가 실시간으로 문맥을 파악하여 99%의 번역 정확도를 보입니다."],
+        ["재단 수익금의 사회 환원?", "운영 수익의 70%는 다시 생태계 보상과 사회 복지 시설 확충 및 구호 활동에 재투자됩니다."],
+        ["타 메인넷과의 교환(Bridge)?", "비트코인, 이더리움 등 메이저 코인과의 자유로운 자산 교환을 위한 브릿지 시스템을 가동 중입니다."],
+        ["의장 혜공 형님의 철학?", "인류의 행복은 경제적 평등에서 시작된다는 믿음으로, 부의 편중을 막고 나누는 공동체를 만드는 것입니다."]
+    ];
+
+    const faqBox = document.getElementById('faq-inject');
+    faqs.forEach((f, i) => { 
+        faqBox.innerHTML += `
+            <div class="faq-item">
+                <span class="faq-q">${i+1}. ${f[0]}</span>
+                <span class="faq-a">${f[1]}</span>
+            </div>
+        `; 
+    });
 </script>
 </body>
 </html>

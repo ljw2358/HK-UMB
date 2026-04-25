@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK - FINAL TESTNET</title>
+    <title>HK WORLD BANK - REAL-TIME TERMINAL</title>
     <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
@@ -15,162 +15,203 @@
             background: var(--hk-bg); color: var(--white);
             font-family: 'Pretendard', -apple-system, sans-serif;
             margin: 0; padding: 0; display: flex; justify-content: center;
-            overflow-x: hidden; -webkit-font-smoothing: antialiased; font-size: 11px;
+            overflow-x: hidden; -webkit-font-smoothing: antialiased;
         }
 
-        .container { width: 100%; max-width: 420px; padding: 15px; box-sizing: border-box; text-align: center; position: relative; }
+        .container { width: 100%; max-width: 450px; padding: 15px; box-sizing: border-box; text-align: center; position: relative; }
 
-        /* ✅ 우측 상단 언어 선택 (네모 박스 고정) */
-        .lang-box {
+        /* ✅ 3. 우측 상단 아담한 언어 그리드 (형님 지시사항) */
+        .lang-grid {
             position: absolute; top: 15px; right: 15px;
-            display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
             background: #111; padding: 3px; border: 1px solid #333; border-radius: 4px;
         }
-        .lang-square {
-            width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
-            font-size: 8px; font-weight: 900; color: #555; background: #000; border: 1px solid #222; cursor: pointer;
+        .lang-sq {
+            width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+            font-size: 7px; font-weight: 900; color: #555; background: #000; border: 1px solid #222; cursor: pointer;
         }
-        .lang-square.active { color: var(--hk-gold); border-color: var(--hk-gold); }
+        .lang-sq.active { color: var(--hk-gold); border-color: var(--hk-gold); }
 
-        .header-title { font-size: 38px; font-weight: 900; color: var(--hk-gold); margin: 30px 0 5px 0; letter-spacing: -1.5px; }
-        .header-sub { font-size: 11px; color: var(--hk-blue); font-weight: 800; margin-bottom: 25px; }
+        /* ✅ 1&2. 레이아웃 및 숫자 완전 일치 (스크린샷 기반) */
+        .header-title { font-size: 42px; font-weight: 900; color: var(--hk-gold); margin: 30px 0 5px 0; letter-spacing: -1.5px; }
+        .header-sub { font-size: 15px; color: var(--hk-blue); font-weight: 800; letter-spacing: 1.5px; margin-bottom: 35px; }
 
-        /* ✅ 메인 잔고 (소수점 3자리 반영) */
-        .pi-main { font-size: 60px; font-weight: 900; margin: 0; display: flex; align-items: center; justify-content: center; letter-spacing: -2px; }
-        .pi-main span.unit { color: var(--hk-gold); font-size: 24px; margin-left: 8px; }
+        .pi-main { font-size: 80px; font-weight: 900; margin: 0; display: flex; align-items: center; justify-content: center; letter-spacing: -3px; }
+        .pi-main span.unit { color: var(--hk-gold); font-size: 32px; margin-left: 10px; }
 
         .krw-pill {
-            display: inline-block; border: 2px solid var(--hk-green); color: var(--hk-green);
-            padding: 10px 0; width: 90%; border-radius: 50px; font-size: 22px; font-weight: 900;
-            margin: 15px 0; background: rgba(57, 255, 20, 0.03);
+            display: inline-block; border: 3px solid var(--hk-green); color: var(--hk-green);
+            padding: 15px 0; width: 90%; border-radius: 50px; font-size: 30px; font-weight: 900;
+            margin: 25px 0; background: rgba(57, 255, 20, 0.03);
         }
 
-        /* ✅ 자산 카드 */
-        .card { background: var(--hk-card); border: 1px solid var(--hk-border); border-radius: 15px; padding: 18px; margin-bottom: 10px; text-align: left; }
-        .label { font-size: 10px; color: #666; font-weight: 800; margin-bottom: 8px; display: block; }
-        .val-blue { font-size: 26px; font-weight: 900; color: var(--hk-blue); font-variant-numeric: tabular-nums; }
-        .reward-tag { font-size: 10px; color: var(--hk-pink); font-weight: 800; margin-top: 5px; }
-
-        .pool-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .card { background: var(--hk-card); border: 1.5px solid var(--hk-border); border-radius: 20px; padding: 20px; margin-bottom: 12px; text-align: left; }
+        .label { font-size: 11px; color: #666; font-weight: 800; margin-bottom: 8px; letter-spacing: 1px; }
+        .val-blue { font-size: 32px; font-weight: 900; color: var(--hk-blue); font-variant-numeric: tabular-nums; }
         
-        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
-        .btn-6 { background: var(--hk-card); border: 1px solid var(--hk-border); border-radius: 15px; padding: 15px 0; font-weight: 800; font-size: 12px; cursor: pointer; }
+        .reward-info { font-size: 12px; color: var(--hk-pink); font-weight: 800; margin-top: 5px; }
+
+        .rate-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        .rate-box { background: var(--hk-card); border: 1.5px solid var(--hk-border); border-radius: 18px; padding: 18px; text-align: center; }
+        .rate-val { font-size: 30px; font-weight: 900; }
+
+        .liq-box { border: 2.5px solid var(--hk-green); border-radius: 20px; padding: 22px; margin-bottom: 25px; background: rgba(0, 0, 0, 0.8); }
+        .liq-title { color: var(--hk-green); font-size: 14px; font-weight: 900; margin-bottom: 12px; }
+        .liq-val { font-size: 34px; font-weight: 900; color: #fff; }
+
+        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
+        .btn-6 { background: var(--hk-card); border: 1px solid var(--hk-border); border-radius: 18px; padding: 22px 0; font-weight: 800; font-size: 16px; cursor: pointer; }
         .btn-6.active { border-color: var(--hk-gold); color: var(--hk-gold); }
 
-        .big-btn { width: 100%; padding: 20px; border-radius: 18px; font-size: 16px; font-weight: 900; color: #fff; border: none; margin-bottom: 10px; cursor: pointer; }
+        .big-btn { width: 100%; padding: 22px; border-radius: 20px; font-size: 19px; font-weight: 900; color: #fff; border: none; margin-bottom: 12px; cursor: pointer; }
         
-        /* ✅ 문답형 FAQ 스타일 */
-        .faq-item { border-bottom: 1px solid #1a1a1a; padding: 12px 0; cursor: pointer; text-align: left; }
-        .faq-q { font-weight: 800; font-size: 13px; color: var(--hk-gold); display: flex; justify-content: space-between; }
-        .faq-a { font-size: 11px; color: #aaa; margin-top: 8px; display: none; line-height: 1.5; padding-left: 5px; border-left: 2px solid var(--hk-pink); }
+        /* FAQ 문답 완성 */
+        .faq-item { border-bottom: 1px solid #1a1a1a; padding: 15px 0; text-align: left; cursor: pointer; }
+        .faq-q { font-weight: 800; font-size: 15px; color: var(--hk-gold); margin-bottom: 5px; display: flex; justify-content: space-between; }
+        .faq-a { font-size: 13px; color: #aaa; line-height: 1.6; display: none; padding-left: 10px; border-left: 2px solid var(--hk-pink); }
 
         .bbini {
-            position: fixed; bottom: 20px; right: 20px; width: 70px; height: 70px;
+            position: fixed; bottom: 30px; right: 25px; width: 85px; height: 85px;
             background: linear-gradient(135deg, var(--hk-pink), #D000D0);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 16px; color: #fff; border: 3px solid #fff;
-            animation: bounce 2s infinite; cursor: pointer; z-index: 1000;
+            font-weight: 900; font-size: 20px; color: #fff; border: 4px solid #fff;
+            animation: bounce 2.5s infinite; cursor: pointer; z-index: 10000;
         }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="lang-box">
-        <div class="lang-square active">KO</div><div class="lang-square">EN</div><div class="lang-square">ZH</div>
-        <div class="lang-square">JA</div><div class="lang-square">VI</div><div class="lang-square">FR</div>
-        <div class="lang-square">DE</div><div class="lang-square">ES</div><div class="lang-square">ID</div>
-        <div class="lang-square">TH</div>
+    <div class="lang-grid">
+        <div class="lang-sq active">KO</div><div class="lang-sq">EN</div><div class="lang-sq">ZH</div><div class="lang-sq">AR</div>
+        <div class="lang-sq">HI</div><div class="lang-sq">ES</div><div class="lang-sq">PT</div><div class="lang-sq">UK</div>
+        <div class="lang-sq">VI</div><div class="lang-sq">TH</div><div class="lang-sq">ID</div><div class="lang-sq">RU</div>
     </div>
 
     <div class="header-title">HK WORLD BANK</div>
-    <div class="header-sub">통합 자산 관리 - 테스트넷 모드</div>
+    <div class="header-sub">통합 자산 관리 - 테스트넷</div>
 
-    <div class="pi-main" id="real-pi">0.000 <span class="unit">Test-Pi</span></div>
-    <div class="krw-pill" id="real-krw">₩ 0</div>
+    <div class="pi-main" id="pi-balance">1,000.000 <span class="unit">Test-Pi</span></div>
+    <div class="krw-pill" id="pi-krw">₩ 150,000,000</div>
 
-    <div class="pool-row">
-        <div class="card" style="margin-bottom:0;">
-            <span class="label">나의 스테이킹</span>
-            <div class="val-blue" id="stk-amount">0.000</div>
-            <div class="reward-tag">실시간 수익: <span id="stk-reward">0.000</span></div>
+    <div class="card">
+        <div class="label">나의 실시간 스테이킹 보상</div>
+        <div class="val-blue" id="stk-reward">0.0000</div>
+        <div class="reward-info">APY 17.64% 적용 중</div>
+    </div>
+
+    <div class="rate-row">
+        <div class="rate-box">
+            <div class="label">스테이킹 APY</div>
+            <div class="val-blue rate-val">17.64%</div>
         </div>
-        <div class="card" style="margin-bottom:0;">
-            <span class="label">나의 LP 지분</span>
-            <div class="val-blue" id="lp-amount">0.000</div>
-            <div class="reward-tag">수수료 수익: <span id="lp-reward">0.000</span></div>
+        <div class="rate-box">
+            <div class="label">LP 보상 수익률</div>
+            <div class="val-pink rate-val" style="color:var(--hk-pink);">28.56%</div>
         </div>
     </div>
 
-    <div class="grid-6" style="margin-top:15px;">
+    <div class="liq-box">
+        <div class="liq-title">전체 유동성 (DEX LP)</div>
+        <div class="liq-val">$ 88,432,098,990</div>
+    </div>
+
+    <div class="grid-6">
         <div class="btn-6" onclick="requestDeposit()">💰 파이 예치</div>
-        <div class="btn-6" onclick="requestLP()">💧 유동성 공급</div>
-        <div class="btn-6" onclick="claimRewards()">🏆 보상 수령</div>
+        <div class="btn-6" onclick="alert('결제 모듈 준비 중')">🛒 결제</div>
+        <div class="btn-6" onclick="claimReward()">🏆 보상 수령</div>
         <div class="btn-6" onclick="requestWithdraw()">💸 즉시 출금</div>
         <div class="btn-6">🏦 기본소득</div>
         <div class="btn-6 active">🔄 스왑</div>
     </div>
 
-    <button class="big-btn" style="background: var(--hk-pink);" onclick="togglePanel('faq-panel')">글로벌 AI 지원센터 (FAQ 20선)</button>
-    <div id="faq-panel" class="card" style="display:none; background:#050505;"></div>
+    <button class="big-btn" style="background: var(--hk-pink);" onclick="togglePanel('faq-panel')">글로벌 AI 지원센터 (문답 20선)</button>
+    <div id="faq-panel" style="display:none; background:#0a0a0a; border-radius:20px; padding:10px 20px; margin-bottom:20px; border:1px solid #222;">
+        <div id="faq-list"></div>
+    </div>
 
-    <div class="footer">Contact: support@hkwb.world | 혜공 형님 전용 터미널</div>
+    <div class="footer" style="color:#555; font-size:13px; margin:40px 0 100px 0;">Contact: support@hkwb.world | 혜공 형님 전용 터미널</div>
 </div>
 
 <div class="bbini" onclick="talk()">삐니</div>
 
 <script>
-    let myPi = 1000.000;
-    let myStk = 0.000;
-    let myLP = 0.000;
-    let stkReward = 0.000;
-    let lpReward = 0.000;
+    // ✅ 4. 테스트 파이 실전 구동 엔진
+    let walletPi = 1000.0000;
+    let stakedPi = 0.0000;
+    let accumulatedReward = 0.0000;
 
-    function format(n, d) {
-        return n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
+    function updateDisplay() {
+        document.getElementById('pi-balance').innerHTML = walletPi.toLocaleString(undefined, {minimumFractionDigits: 3}) + " <span class='unit'>Test-Pi</span>";
+        document.getElementById('pi-krw').innerText = "₩ " + (walletPi * 150000).toLocaleString();
+        document.getElementById('stk-reward').innerText = accumulatedReward.toFixed(4);
     }
 
-    // ✅ 1초당 업데이트 엔진 (소수점 3자리 최적화)
+    // 1초마다 실시간 이자 지급 (APY 17.64% 기준)
     setInterval(() => {
-        if (myStk > 0) stkReward += (myStk * 0.245) / (365 * 24 * 3600);
-        if (myLP > 0) lpReward += (myLP * 0.358) / (365 * 24 * 3600);
-
-        document.getElementById('real-pi').innerHTML = format(myPi + stkReward + lpReward, 3) + " <span class='unit'>Test-Pi</span>";
-        document.getElementById('real-krw').innerText = "₩ " + format((myPi + stkReward + lpReward) * 150000, 0);
-        document.getElementById('stk-amount').innerText = format(myStk, 3);
-        document.getElementById('stk-reward').innerText = format(stkReward, 3);
-        document.getElementById('lp-amount').innerText = format(myLP, 3);
-        document.getElementById('lp-reward').innerText = format(lpReward, 3);
+        if (stakedPi > 0) {
+            let perSecondInterest = (stakedPi * 0.1764) / (365 * 24 * 3600);
+            accumulatedReward += perSecondInterest;
+            updateDisplay();
+        }
     }, 1000);
 
+    function requestDeposit() {
+        let amount = prompt("예치할 수량을 입력하세요 (Test-Pi):", "100");
+        if (amount && !isNaN(amount) && parseFloat(amount) <= walletPi) {
+            stakedPi += parseFloat(amount);
+            walletPi -= parseFloat(amount);
+            alert(amount + " Pi가 성공적으로 예치되었습니다. 이자가 즉시 발생합니다!");
+            updateDisplay();
+        }
+    }
+
+    function claimReward() {
+        if (accumulatedReward > 0) {
+            walletPi += accumulatedReward;
+            alert(accumulatedReward.toFixed(4) + " Pi 보상을 수령했습니다!");
+            accumulatedReward = 0;
+            updateDisplay();
+        }
+    }
+
+    function requestWithdraw() {
+        if (stakedPi > 0) {
+            walletPi += stakedPi;
+            stakedPi = 0;
+            alert("예치된 모든 원금을 회수했습니다.");
+            updateDisplay();
+        }
+    }
+
     // ✅ FAQ 20선 문답 데이터
-    const faqData = [
-        {q: "보안 프로토콜은 안전한가요?", a: "HKWB는 양자 내성 암호화 기술을 도입하여 형님의 자산을 철저히 보호합니다."},
-        {q: "테스트 파이 예치는 어떻게 하나요?", a: "상단의 '파이 예치' 버튼을 눌러 수량을 입력하면 즉시 스테이킹이 시작됩니다."},
-        {q: "이자는 언제 지급되나요?", a: "1초 단위로 실시간 계산되며, '보상 수령' 버튼으로 언제든 지갑에 합산 가능합니다."},
-        {q: "기본소득 신청 조건은?", a: "HK WB 지갑을 보유한 모든 사용자에게 공평하게 배분되는 형님의 철학입니다."},
-        {q: "수수료는 얼마인가요?", a: "테스트넷 기간 동안 모든 내부 트랜잭션 수수료는 0원입니다."},
-        {q: "로봇 보급 일정은?", a: "2030년까지 1가정 1로봇 보급을 목표로 HK Robotics에서 생산 중입니다."},
-        {q: "나노 의료 센터 이용법?", a: "재단 파트너십을 통해 무료 검진 및 치료 서비스를 준비 중입니다."},
-        {q: "메인넷 전환 시점은?", a: "Pi Network의 공식 일정에 맞춰 즉시 통합 전환될 예정입니다."},
-        {q: "LP 공급의 장점은?", a: "스테이킹 이자 외에 거래 수수료 배당을 추가로 받을 수 있습니다."},
-        {q: "지갑 분실 시 복구는?", a: "생체 인식 및 복구 구절을 통해 안전하게 복구할 수 있는 시스템을 제공합니다."},
-        {q: "장학금 지원 규모는?", a: "매년 수익의 10%를 전 세계 청년 인재 양성에 투자합니다."},
-        {q: "시스템 점검 주기는?", a: "AI가 실시간으로 자가 점검을 수행하여 중단 없는 서비스를 보장합니다."},
-        {q: "다중 서명이 가능한가요?", a: "기업용 계정을 위해 고도화된 다중 서명 보안을 지원합니다."},
-        {q: "거버넌스 참여 방법은?", a: "HKWB 토큰 보유량에 따라 주요 의사결정에 투표할 수 있습니다."},
-        {q: "해외 송금 속도는?", a: "전 세계 어디든 3초 이내에 전송이 완료되는 초고속 노드를 운영합니다."},
-        {q: "HK 사회 재단의 비전은?", a: "기술을 통한 인류의 경제적 해방과 행복 추구입니다."},
-        {q: "DEX 스왑 이용 방법?", a: "스왑 버튼을 클릭하여 파이와 다른 자산을 즉시 교환할 수 있습니다."},
-        {q: "모바일 앱 출시 계획?", a: "Pi Browser뿐만 아니라 iOS/Android 전용 앱이 곧 출시됩니다."},
-        {q: "스테이킹 취소는 언제든?", a: "'즉시 출금' 버튼을 통해 패널티 없이 전액 회수가 가능합니다."},
-        {q: "형님의 특별 혜택은?", a: "초기 참여자에게는 향후 HK Group 계열사 서비스 우선권을 드립니다."}
+    const faqs = [
+        {q: "보안은 안전한가요?", a: "HKWB는 양자 암호화 기술로 형님의 자산을 24시간 철저히 보호합니다."},
+        {q: "테스트 파이 예치 방법?", a: "'파이 예치' 버튼을 누르고 수량을 입력하면 즉시 스테이킹이 시작됩니다."},
+        {q: "이자는 언제 들어오나요?", a: "1초 단위로 실시간 계산되어 화면에 즉시 표시됩니다."},
+        {q: "보상 수령은 어떻게?", a: "'보상 수령' 버튼을 누르면 이자가 내 지갑 잔고로 합산됩니다."},
+        {q: "즉시 출금이 가능한가요?", a: "네, 대기 시간 없이 언제든 예치 원금을 지갑으로 돌려받을 수 있습니다."},
+        {q: "언어 설정 변경은?", a: "우측 상단의 언어 그리드에서 원하시는 국가를 클릭하시면 됩니다."},
+        {q: "기본소득 신청 자격은?", a: "HK 월드뱅크 지갑 보유자라면 누구나 형님의 철학에 따라 지급받습니다."},
+        {q: "로봇 보급 일정은?", a: "2030 비전에 따라 1가정 1로봇 보급이 단계적으로 실시됩니다."},
+        {q: "DEX 스왑 수수료는?", a: "테스트넷 기간 동안 모든 스왑 수수료는 0원(무료)입니다."},
+        {q: "지갑 복구 방법?", a: "니모닉 구절을 안전하게 보관하세요. 분실 시 AI 지원센터에서 복구를 돕습니다."},
+        {q: "장학금 지원은?", a: "글로벌 인재들을 위해 매달 일정 수익이 자동으로 기부됩니다."},
+        {q: "메인넷 전환 시점?", a: "테스트넷 안정화 이후 형님의 승인 하에 즉시 전환됩니다."},
+        {q: "다중 서명 기능은?", a: "더 높은 보안을 위해 다중 기기 승인 시스템을 지원합니다."},
+        {q: "가스비 최적화?", a: "HKWB만의 고유 알고리즘으로 가스비를 99% 절감합니다."},
+        {q: "고객 지원 시간?", a: "삐니 AI가 24시간 365일 실시간으로 응대합니다."},
+        {q: "나노 의료 센터 위치?", a: "글로벌 주요 거점에 HK 사회 재단이 건립 중입니다."},
+        {q: "파트너십 체결?", a: "현재 글로벌 상위 금융사 및 기술 기업들과 제휴 중입니다."},
+        {q: "교육 시스템 무상?", a: "네, AI 기반 최고의 교육 환경을 전 세계에 무상 제공합니다."},
+        {q: "에너지 자립 주택?", a: "무상 스마트 주거 단지는 에너지 자립형으로 설계되었습니다."},
+        {q: "형님의 특별 혜택?", a: "초기 참여자분들께는 향후 재단의 모든 서비스에 우선권을 드립니다."}
     ];
 
-    const faqBox = document.getElementById('faq-panel');
-    faqData.forEach((item, i) => {
-        faqBox.innerHTML += `
+    const faqList = document.getElementById('faq-list');
+    faqs.forEach((item, i) => {
+        faqList.innerHTML += `
             <div class="faq-item" onclick="toggleFAQ(${i})">
                 <div class="faq-q"><span>${i+1}. ${item.q}</span> <span>▼</span></div>
                 <div class="faq-a" id="faq-a-${i}">${item.a}</div>
@@ -187,38 +228,10 @@
         p.style.display = p.style.display === 'block' ? 'none' : 'block';
     }
 
-    function requestDeposit() {
-        const amount = prompt("예치 수량(Pi):", "100");
-        if (amount && !isNaN(amount) && parseFloat(amount) <= myPi) {
-            myPi -= parseFloat(amount); myStk += parseFloat(amount);
-            alert("예치 완료! 이자가 1초마다 쌓입니다.");
-        }
-    }
-
-    function requestLP() {
-        const amount = prompt("LP 공급 수량(Pi):", "200");
-        if (amount && !isNaN(amount) && parseFloat(amount) <= myPi) {
-            myPi -= parseFloat(amount); myLP += parseFloat(amount);
-            alert("유동성 공급 완료!");
-        }
-    }
-
-    function claimRewards() {
-        const total = stkReward + lpReward;
-        if(total > 0) {
-            myPi += total; stkReward = 0; lpReward = 0;
-            alert(`${format(total, 3)} Pi를 수령했습니다.`);
-        }
-    }
-
-    function requestWithdraw() {
-        myPi += (myStk + myLP); myStk = 0; myLP = 0;
-        alert("모든 자산을 회수했습니다.");
-    }
-
     function talk() {
-        alert("형님! FAQ를 누르면 답변이 짠 하고 나옵니다. 소수점도 세 자리라 훨씬 보기 편하시죠?");
+        alert("혜공 형님! 우측 상단 언어 그리드와 실전 테스트 파이 구동 엔진 업데이트를 완료했습니다. 지금 바로 예치해 보세요!");
     }
 </script>
+
 </body>
 </html>

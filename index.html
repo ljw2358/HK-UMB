@@ -201,13 +201,13 @@
             title: "HK 世界银行", subtitle: "全球资产分类账", apr: "质押收益率 (APR)", lp: "流动性收益 (LP)", supply: "HKWB 实时供应量",
             liq: "总流动性 LP 供应状态 (DEX)", main_assets: "主要资产", pi_qty: "PI 数量", dex_swap: "DEX 交换", lp_staking: "LP 质押",
             eco: "HK 生态系统", m1: "汇款", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "互换", faq_btn: "全球 AI 支持中心 (FAQ)",
-            vision_btn: "HK 사회基金会 2030 愿景", welcome: "你好？ 有什么可以帮到你的吗？", chat_ph: "输入任何命令..."
+            vision_btn: "HK 社会基金会 2030 愿景", welcome: "你好？ 有什么可以帮到你的吗？", chat_ph: "输入任何命令..."
         },
         ja: {
-            title: "HK WORLD BANK", subtitle: "メイン資産統合台帳", apr: "ステーキング利率 (APR)", lp: "流動성収益 (LP)", supply: "HKWB リアルタイム供給量",
-            liq: "총流動性 LP 供給状況 (DEX)", main_assets: "主要資産", pi_qty: "PI 数量", dex_swap: "DEX ス와ップ", lp_staking: "LP ステーキング",
-            eco: "HK エコシステム", m1: "送금", m2: "決済", m3: "預금", m4: "報酬", m5: "基本所得", m6: "スワップ", faq_btn: "グローバル AI サポート (FAQ)",
-            vision_btn: "HK 사회재단 비전 2030", welcome: "こんにちは？何かお手伝いしましょうか？", chat_ph: "何でも命じてください..."
+            title: "HK WORLD BANK", subtitle: "メイン資産統合台帳", apr: "ステーキング利率 (APR)", lp: "流動性収益 (LP)", supply: "HKWB リアルタイム供給量",
+            liq: "총流動性 LP 供給状況 (DEX)", main_assets: "主要資産", pi_qty: "PI 数量", dex_swap: "DEX スワップ", lp_staking: "LP ステーキング",
+            eco: "HK エコシステム", m1: "送金", m2: "決済", m3: "預金", m4: "報酬", m5: "基本所得", m6: "スワップ", faq_btn: "グローバル AI サポート (FAQ)",
+            vision_btn: "HK 社会財団ビジョン 2030", welcome: "こんにちは？何かお手伝いしましょうか？", chat_ph: "何でも命じてください..."
         }
     };
 
@@ -339,31 +339,6 @@
     // 초기 실행
     renderFAQ();
     renderVision();
-</script>
-
-<script>
-    // 형님의 자산을 서버와 실시간 동기화하는 로직
-    async function syncHkBackend() {
-        try {
-            // 시연 시 이 URL은 실제 서버 주소로 자동 대체됩니다.
-            const response = await fetch('https://api.hkwb.world/v1/assets/hyekong');
-            const data = await response.json();
-            
-            // 전역 변수(p, g, l 등) 업데이트
-            p = data.pi_balance;
-            g = data.total_value_usd;
-            l = data.total_liquidity;
-            s = data.circulating_supply;
-            
-            // 화면 즉시 갱신
-            if (typeof updateUI === 'function') updateUI();
-        } catch (e) {
-            // 서버 연결 전까지는 형님의 원본 시뮬레이션 엔진이 작동합니다.
-        }
-    }
-
-    // 원본 시뮬레이션과 서버 동기화를 결합
-    setInterval(syncHkBackend, 2000);
 </script>
 
 </body>

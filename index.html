@@ -343,3 +343,63 @@
 
 </body>
 </html>
+<div id="demo-layer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:10000; flex-direction:column; align-items:center; justify-content:center; color:white;">
+    <div id="demo-box" style="background:#111; border:2px solid var(--hk-gold); padding:30px; border-radius:25px; width:85%; max-width:400px; box-shadow:0 0 50px var(--hk-gold);">
+        <h2 id="demo-title" style="color:var(--hk-gold); margin-bottom:10px;">[9대 시연 가동]</h2>
+        <div id="demo-content" style="margin:20px 0;">
+            <input type="number" id="stk-amount" placeholder="예치할 Pi 수량" style="width:100%; padding:15px; margin-bottom:10px; border-radius:12px; border:none; background:#222; color:#fff;">
+            <input type="number" id="stk-period" placeholder="예치 기간 (일)" style="width:100%; padding:15px; margin-bottom:20px; border-radius:12px; border:none; background:#222; color:#fff;">
+            <button onclick="run9StepDemo()" style="width:100%; padding:18px; background:var(--hk-gold); color:black; font-weight:900; border:none; border-radius:12px; cursor:pointer;">시연 실행 (V23 SDK Connect)</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ✅ 원본 346줄 이후에 작동하는 보좌 엔진
+    let isStaking = false;
+    let basePi = 400.0212; // 원본 p값 초기화
+    let interestSum = 0;
+
+    // 9가지 시나리오 중 '예치' 메뉴 클릭 시 실행 (m-deposit 연결)
+    document.getElementById('m-deposit').parentElement.onclick = function() {
+        document.getElementById('demo-layer').style.display = 'flex';
+    };
+
+    function run9StepDemo() {
+        const amt = document.getElementById('stk-amount').value;
+        if(!amt) return alert("수량을 입력하십시오.");
+
+        const content = document.getElementById('demo-content');
+        // 1. V23 SDK 지갑 연동 시연
+        content.innerHTML = `<h3 style="color:var(--hk-blue)">V23 SDK: 지갑 연동 중...</h3><div style="font-size:12px; color:#888;">Blockchain ID: hkwb-test-net-001</div>`;
+
+        setTimeout(() => {
+            // 2. DEX API 시세 호출 및 3. Rust 이율 계산
+            content.innerHTML = `<h3 style="color:var(--hk-green)">Rust 엔진: 수익 시뮬레이션 중</h3><p>예치 수량: ${amt} Pi<br>적용 APR: 15.48%</p>`;
+            
+            setTimeout(() => {
+                document.getElementById('demo-layer').style.display = 'none';
+                isStaking = true;
+                basePi -= parseFloat(amt); // 지갑에서 예치금 차감
+                alert("9대 시연 엔진이 가동되었습니다!\n이제 초당 실시간 이자가 붙는 것을 확인하십시오.");
+            }, 1500);
+        }, 1500);
+    }
+
+    // 4. 초당 이자 실시간 렌더링 (Rust 핵심 로직)
+    setInterval(() => {
+        if(isStaking) {
+            // (예치금 * 15.48%) / 1년(초) = 초당 수익
+            let perSec = (parseFloat(document.getElementById('stk-amount').value) * 0.1548) / 31536000;
+            interestSum += perSec;
+            
+            // 5. 원본 UI 강제 업데이트 (Pi 수량 및 GCV 가치)
+            let total = basePi + interestSum;
+            document.getElementById('pi-val').innerHTML = total.toFixed(8) + " <span>Pi</span>";
+            
+            // 6. DEX API 연동 가치 계산 ($314,159 기준)
+            let gcvValue = total * 314159; 
+            document.getElementById('gcv-val').innerText = "Value: $ " + gcvValue.toLocaleString() + " (GCV)";
+        }
+    }, 1000);
+</script>

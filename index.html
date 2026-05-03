@@ -3,59 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - GLOBAL MASTER v13.0</title>
+    <title>HK WORLD BANK - CORE RESTORE v20.0</title>
     <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
-            --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #0d0d0d;
+            --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #121212;
         }
-        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; overflow-x: hidden; }
-        .container { width: 100%; max-width: 500px; padding: 25px; box-sizing: border-box; text-align: center; }
+        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 500px; padding: 20px; box-sizing: border-box; text-align: center; }
         
-        .global-lang-box { position: fixed; top: 15px; right: 15px; background: #111; border: 2.5px solid var(--hk-gold); border-radius: 12px; padding: 8px; z-index: 5000; }
-        .global-lang-box select { background: transparent; color: var(--hk-gold); border: none; font-weight: 900; outline: none; font-size: 14px; cursor: pointer; }
+        /* 국기 포함 언어 선택 */
+        .global-lang-box { position: fixed; top: 15px; right: 15px; background: #111; border: 2px solid var(--hk-gold); border-radius: 12px; padding: 5px 10px; z-index: 5000; }
+        .global-lang-box select { background: transparent; color: var(--hk-gold); border: none; font-weight: 900; outline: none; font-size: 14px; color: var(--hk-gold); cursor: pointer; }
 
-        .header-section { margin: 60px 0 20px 0; }
-        .header-title { font-size: 38px; font-weight: 900; color: var(--hk-gold); letter-spacing: -1px; }
-        .sub-header { color: var(--hk-blue); font-size: 17px; margin-top: 10px; font-weight: 800; letter-spacing: 2px; }
+        .header-section { margin: 50px 0 15px 0; }
+        .header-title { font-size: 36px; font-weight: 900; color: var(--hk-gold); }
+        .sub-header { color: var(--hk-blue); font-size: 16px; font-weight: 800; margin-top: 5px; }
 
-        .pi-main { font-size: 58px; font-weight: 900; margin: 20px 0 10px 0; }
-        .pi-main span { color: var(--hk-gold); font-size: 28px; }
-        .gcv-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 10px 35px; border-radius: 50px; font-size: 17px; font-weight: 900; margin-bottom: 25px; background: rgba(57, 255, 20, 0.05); }
+        .pi-main { font-size: 56px; font-weight: 900; margin: 15px 0 5px 0; }
+        .pi-main span { color: var(--hk-gold); font-size: 26px; }
+        .gcv-pill { display: inline-block; border: 2px solid var(--hk-green); color: var(--hk-green); padding: 8px 25px; border-radius: 50px; font-size: 16px; font-weight: 900; margin-bottom: 20px; background: rgba(57,255,20,0.05); }
 
-        .liq-card { border: 2.5px solid var(--hk-gold); background: rgba(255,255,255,0.03); padding: 25px 20px; margin-bottom: 20px; border-radius: 20px; }
-        .section-label { font-size: 14px; color: var(--hk-blue); font-weight: 900; margin-bottom: 12px; display: block; }
-        .section-val { font-size: 32px; font-weight: 900; }
+        /* 데이터 카드 레이아웃 */
+        .supply-card { border: 2px solid var(--hk-gold); background: rgba(255, 215, 0, 0.05); padding: 20px; margin-bottom: 15px; border-radius: 25px; }
+        .yield-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
+        .yield-card { background: var(--hk-card); border-radius: 20px; padding: 18px 10px; border: 1px solid #333; }
+        .liq-card { border: 2px solid var(--hk-green); background: rgba(57, 255, 20, 0.05); padding: 22px 20px; margin-bottom: 20px; border-radius: 25px; }
 
-        .total-liq-box { border: 2.5px solid var(--hk-green); background: rgba(57, 255, 20, 0.02); padding: 25px 20px; margin-bottom: 30px; border-radius: 20px; }
-        .total-liq-val { font-size: 32px; font-weight: 900; color: var(--hk-green); }
+        .label { font-size: 13px; font-weight: 800; margin-bottom: 8px; display: block; color: #999; }
+        .val { font-size: 28px; font-weight: 900; font-variant-numeric: tabular-nums; }
 
-        /* 핵심 엔진 3종 */
-        .core-engine-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-        .engine-item { background: linear-gradient(145deg, #1a1a1a, #000); padding: 15px 5px; border-radius: 15px; border: 1px solid #333; }
-        .engine-label { font-size: 11px; color: #888; display: block; margin-bottom: 5px; font-weight: 700; }
-        .engine-val { font-size: 15px; font-weight: 900; color: var(--hk-gold); }
+        /* [복구] 전체 유동성 밑 핵심 버튼 3종 */
+        .core-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        .core-btn { padding: 15px 5px; border-radius: 12px; font-weight: 900; font-size: 14px; color: #000; text-align: center; border: none; cursor: pointer; transition: 0.2s; }
+        .core-btn:active { transform: scale(0.95); opacity: 0.8; }
 
-        .btn-group-label { text-align: left; font-size: 15px; font-weight: 900; margin: 20px 0 15px 5px; color: var(--hk-gold); }
-        
-        /* 에코시스템 메뉴 2단 그리드 (3x2) */
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
-        .menu-item { background: #111; padding: 22px 0; border-radius: 24px; border: 1px solid #222; }
-        .menu-icon { font-size: 26px; margin-bottom: 8px; display: block; }
-        .menu-text { font-size: 13px; font-weight: 800; }
+        /* 에코시스템 메뉴 */
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
+        .menu-item { background: #181818; padding: 18px 0; border-radius: 18px; border: 1px solid #252525; }
+        .menu-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+        .menu-text { font-size: 12px; font-weight: 800; color: #ddd; }
 
-        .big-btn { width: 100%; padding: 22px; border-radius: 22px; font-size: 18px; font-weight: 900; color: #fff; border: none; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
-        .panel { display: none; background: #0a0a0a; border-radius: 25px; padding: 25px; margin-bottom: 25px; border: 1px solid #333; text-align: left; }
-        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; }
-        .faq-q { color: var(--hk-gold); font-weight: 900; font-size: 15px; margin-bottom: 8px; }
-        .faq-a { color: #bbb; font-size: 13px; line-height: 1.6; }
-        .vision-item { margin-bottom: 20px; padding-left: 12px; border-left: 4px solid var(--hk-blue); }
-        .vision-item b { color: var(--hk-blue); font-size: 16px; display: block; margin-bottom: 5px; }
+        /* 하단 패널 */
+        .big-btn { width: 100%; padding: 18px; border-radius: 18px; font-size: 16px; font-weight: 900; color: #fff; border: none; margin-bottom: 10px; cursor: pointer; }
+        .panel { display: none; background: #0a0a0a; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #333; text-align: left; }
+        .item-row { margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .item-q { color: var(--hk-gold); font-weight: 900; font-size: 14px; margin-bottom: 4px; }
+        .item-a { color: #bbb; font-size: 13px; line-height: 1.5; }
 
-        .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .soc-btn { padding: 18px; border-radius: 20px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; font-size: 16px; }
-        
-        .footer { margin: 50px 0 100px 0; color: #444; font-size: 11px; font-weight: 900; }
+        .footer { margin: 40px 0 60px 0; color: #444; font-size: 11px; font-weight: 800; }
     </style>
 </head>
 <body>
@@ -64,66 +60,60 @@
     <select id="lang-selector" onchange="changeLanguage()">
         <option value="ko">🇰🇷 KOREAN</option>
         <option value="en">🇺🇸 ENGLISH</option>
-        <option value="zh">🇨🇳 CHINESE</option>
+        <option value="zh">🇨🇳 中文</option>
     </select>
 </div>
 
 <div class="container">
     <div class="header-section">
-        <div class="header-title" id="txt-title">HK WORLD BANK</div>
-        <div class="sub-header" id="txt-subtitle">메인자산통합원장</div>
+        <div class="header-title">HK WORLD BANK</div>
+        <div class="sub-header" id="txt-subtitle">통합 자산 관리 시스템</div>
     </div>
 
-    <div class="pi-main" id="pi-val">400.0212 <span>Pi</span></div>
-    <div class="gcv-pill" id="gcv-val">Value: $ 125,663,600 (GCV)</div>
+    <div class="pi-main"><span id="live-pi">412.3158</span> <span>Pi</span></div>
+    <div class="gcv-pill" id="live-gcv">$ 129,539,451</div>
+
+    <div class="supply-card">
+        <span class="label" style="color:var(--hk-gold)" id="txt-supply-label">HKWB 실시간 공급량</span>
+        <div class="val" id="live-supply">6,280,000.5074</div>
+    </div>
+
+    <div class="yield-grid">
+        <div class="yield-card">
+            <span class="label" id="lbl-st-rate">스테이킹 이율</span>
+            <div class="val" style="color: var(--hk-blue);"><span id="live-st-rate">17.64</span>%</div>
+        </div>
+        <div class="yield-card">
+            <span class="label" id="lbl-lp-rate">LP 수익률</span>
+            <div class="val" style="color: var(--hk-pink);"><span id="live-lp-rate">28.57</span>%</div>
+        </div>
+    </div>
 
     <div class="liq-card">
-        <span class="section-label" id="txt-supply-label">HKWB 실시간 공급량</span>
-        <div class="section-val" id="total-supply">6,280,000.4231</div>
+        <span class="label" style="color:var(--hk-green)" id="txt-liq-label">전체 유동성 (DEX LP)</span>
+        <div class="val" style="color:var(--hk-green)">$ <span id="live-liq">88,432,098,051</span></div>
     </div>
 
-    <div class="total-liq-box">
-        <span class="section-label" id="txt-liq-label" style="color: var(--hk-green);">전체 유동성 현황 (DEX)</span>
-        <div class="total-liq-val" id="liq-val">$ 88,438,688,147</div>
+    <div class="core-grid">
+        <button class="core-btn" style="background: #fff;" id="btn-pi">PI 수량</button>
+        <button class="core-btn" style="background: var(--hk-gold);" id="btn-swap">DEX 스왑</button>
+        <button class="core-btn" style="background: var(--hk-green);" id="btn-stake">LP 스테이킹</button>
     </div>
 
-    <div class="core-engine-grid">
-        <div class="engine-item">
-            <span class="engine-label" id="lbl-pi-qty">PI 수량</span>
-            <div class="engine-val" id="engine-pi">400.02</div>
-        </div>
-        <div class="engine-item" style="border-color: var(--hk-blue);">
-            <span class="engine-label" id="lbl-swap-eng">DEX 스왑</span>
-            <div class="engine-val" style="color: var(--hk-blue);">READY</div>
-        </div>
-        <div class="engine-item" style="border-color: var(--hk-pink);">
-            <span class="engine-label" id="lbl-staking-eng">LP 스테이킹</span>
-            <div class="engine-val" style="color: var(--hk-pink);">18.5%</div>
-        </div>
-    </div>
-
-    <div class="btn-group-label" id="txt-eco">HK ECOSYSTEM</div>
     <div class="menu-grid">
         <div class="menu-item"><span class="menu-icon">🚀</span><span class="menu-text" id="m1">송금</span></div>
         <div class="menu-item"><span class="menu-icon">🛒</span><span class="menu-text" id="m2">결제</span></div>
-        <div class="menu-item"><span class="menu-icon">🏦</span><span class="menu-text" id="m3">예치</span></div>
-    </div>
-    <div class="menu-grid" style="margin-bottom: 45px;">
-        <div class="menu-item"><span class="menu-icon">🎁</span><span class="menu-text" id="m4">보상</span></div>
-        <div class="menu-item"><span class="menu-icon">💴</span><span class="menu-text" id="m5">기본소득</span></div>
+        <div class="menu-item"><span class="menu-icon">💰</span><span class="menu-text" id="m3">예치</span></div>
+        <div class="menu-item"><span class="menu-icon">🏆</span><span class="menu-text" id="m4">보상</span></div>
+        <div class="menu-item"><span class="menu-icon">🏛️</span><span class="menu-text" id="m5">기본소득</span></div>
         <div class="menu-item"><span class="menu-icon">🔄</span><span class="menu-text" id="m6">스왑</span></div>
     </div>
 
-    <button class="big-btn" style="background: var(--hk-pink);" onclick="toggle('faq-panel')" id="btn-faq">글로벌 AI 지원센터 (FAQ 20)</button>
+    <button class="big-btn" style="background: #e91e63;" onclick="toggle('faq-panel')" id="btn-faq">글로벌 AI 지원센터 (FAQ 20)</button>
     <div id="faq-panel" class="panel"><div id="faq-list"></div></div>
 
-    <button class="big-btn" style="background: #253347;" onclick="toggle('vision-panel')" id="btn-vision">HK 사회 재단 비전 2030</button>
+    <button class="big-btn" style="background: #2c3e50;" onclick="toggle('vision-panel')" id="btn-vision">HK 사회 재단 비전</button>
     <div id="vision-panel" class="panel"><div id="vision-list"></div></div>
-
-    <div class="social-row">
-        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="soc-btn" style="background: #FF0000;">YouTube</a>
-        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="soc-btn" style="background: #111; border: 1px solid #333;">TikTok</a>
-    </div>
 
     <div class="footer">HK GROUP GLOBAL HEADQUARTERS</div>
 </div>
@@ -131,10 +121,10 @@
 <script>
     const db = {
         ko: {
-            title: "HK WORLD BANK", subtitle: "메인자산통합원장", liq: "전체 유동성 현황 (DEX)", supply: "HKWB 실시간 공급량", eco: "HK ECOSYSTEM",
-            pi_qty: "PI 수량", swap_eng: "DEX 스왑", staking_eng: "LP 스테이킹",
+            subtitle: "통합 자산 관리 시스템", supply: "HKWB 실시간 공급량", liq: "전체 유동성 (DEX LP)", 
+            st: "스테이킹 이율", lp: "LP 수익률", b1: "PI 수량", b2: "DEX 스왑", b3: "LP 스테이킹",
             m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑",
-            faq_btn: "글로벌 AI 지원센터 (FAQ 20)", vision_btn: "HK 사회 재단 비전 2030",
+            faq_btn: "글로벌 AI 지원센터 (FAQ 20)", vision_btn: "HK 사회 재단 비전",
             faqs: [
                 ["보안 수준은?", "양자 암호화와 분산 원장 기술로 세계 최고 수준을 자랑합니다."],
                 ["기본소득 배분?", "그룹 수익의 30%를 전 인류에게 공평하게 자동 배분합니다."],
@@ -166,88 +156,113 @@
             ]
         },
         en: {
-            title: "HK WORLD BANK", subtitle: "Global Asset Ledger", liq: "Total Liquidity (DEX)", supply: "HKWB Supply", eco: "HK ECOSYSTEM",
-            pi_qty: "PI Qty", swap_eng: "DEX Swap", staking_eng: "LP Staking",
+            subtitle: "Integrated Asset Management", supply: "HKWB Live Supply", liq: "Total Liquidity (DEX LP)", 
+            st: "Staking Rate", lp: "LP Yield", b1: "PI Qty", b2: "DEX Swap", b3: "LP Staking",
             m1: "Transfer", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Swap",
-            faq_btn: "AI Support (FAQ 20)", vision_btn: "HK Vision 2030",
+            faq_btn: "AI Support Center (FAQ 20)", vision_btn: "HK Foundation Vision",
             faqs: [
-                ["Security Level?", "Top-tier security with quantum encryption."],
-                ["UBI Distribution?", "30% of profits shared globally with all users."],
-                ["Free Robots?", "Supplied to every home based on application order."],
-                ["Mainnet Migration?", "Test data transfers 1:1 to the mainnet safely."],
-                ["Energy Independence?", "Zero housing costs via fusion technology."],
-                ["Education Support?", "24/7 AI-driven personalized education for free."],
-                ["Medical Benefits?", "All medical treatments funded by the foundation."],
-                ["Fee Policy?", "90% of fees returned to ecosystem contributors."],
-                ["How to Join?", "Participate via node operations and app activity."],
-                ["Future Value?", "Economic hub integrating all HK high-tech assets."],
-                ["Global Centers?", "AI centers being built in 50 major global cities."],
-                ["Data Ownership?", "Users have full control over their financial data."],
-                ["New Listings?", "AI screens and lists promising new projects."],
-                ["Investment Safety?", "Real-time algorithms protect liquidity and value."],
-                ["Social Contribution?", "Profits used to eliminate global poverty."],
-                ["Robot Security?", "Local storage prevents hacking and external leaks."],
-                ["Scholarships?", "Up to $5,000 monthly research funds for talent."],
-                ["Governance?", "Founder's final approval and project rights secured."],
-                ["System Stability?", "AI self-diagnosis ensures non-stop operation."],
-                ["BBINI's Role?", "Assistant for asset and technology management."]
+                ["Security Level?", "Quantum encryption and distributed ledger for top security."],
+                ["UBI Distribution?", "30% of profits distributed fairly to all humanity."],
+                ["Robot Supply?", "1 robot per home on a first-come, first-served basis."],
+                ["Mainnet Transition?", "Test data converts 1:1 at the mainnet launch."],
+                ["Energy Independence?", "Fusion tech in homes for zero energy costs."],
+                ["Education Support?", "24/7 personalized AI tutoring for free."],
+                ["Medical Benefits?", "Full coverage for rare diseases and treatments."],
+                ["Fee Policy?", "90% of DEX fees returned to contributors."],
+                ["How to Join?", "Participate via node operations or app activity."],
+                ["Future Value?", "Economic hub of HK Group's tech assets."],
+                ["Global Centers?", "AI response centers being built in 50 major cities."],
+                ["Data Ownership?", "Only users control their own financial data."],
+                ["New Listings?", "Proven projects listed via AI screening."],
+                ["Safety?", "Real-time algorithms protect liquidity and value."],
+                ["Contribution?", "Significant profits used to end global poverty."],
+                ["Robot Security?", "Local storage to prevent external hacking."],
+                ["Scholarships?", "Up to $5,000 monthly for innovative talent."],
+                ["Governance?", "Founder's approval and project rights guaranteed."],
+                ["Stability?", "AI self-diagnosis system for zero-downtime."],
+                ["BBINI's Role?", "Dedicated secretary managing assets and tech."]
             ],
             visions: [
-                ["🏫 HK Global AI School", "Building free education systems globally"],
-                ["🏥 Nano Medical Center", "Medical systems to conquer all diseases"],
-                ["🏠 Energy-Independent Home", "Realizing housing with zero energy costs"],
+                ["🏫 HK Global AI School", "Global free education systems"],
+                ["🏥 Nano Medical Center", "Medical support to conquer diseases"],
+                ["🏠 Self-Sustaining Home", "Realizing zero-cost living environments"],
                 ["🎓 Future Talent Support", "Full funding for innovative researchers"],
-                ["🤖 1 Robot per Home", "Ensuring labor freedom and quality of life"]
+                ["🤖 1 Robot per Home", "Quality of life guaranteed by automation"]
             ]
         },
         zh: {
-            title: "HK 世界银行", subtitle: "全球资产账本", liq: "总流动性 (DEX)", supply: "HKWB 实时供应量", eco: "HK 生态系统",
-            pi_qty: "PI 数量", swap_eng: "DEX 闪兑", staking_eng: "LP 质押",
-            m1: "汇款", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "闪兑",
-            faq_btn: "AI 支持 (FAQ 20)", vision_btn: "HK 2030 愿景",
+            subtitle: "综合资产管理系统", supply: "HKWB 实时供应量", liq: "总流动性 (DEX LP)", 
+            st: "质押收益率", lp: "LP 利润率", b1: "PI 数量", b2: "闪兑", b3: "流动性挖矿",
+            m1: "转账", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "闪兑",
+            faq_btn: "全球 AI 支持中心 (FAQ 20)", vision_btn: "HK 社会基金会愿景",
             faqs: [
-                ["安全水平?", "采用量子加密技术的全球最高安全级别。"],
-                ["基本收入?", "自动分配集团利润的 30%。"],
-                ["免费机器人?", "按申请顺序向每个家庭发放机器人。"],
-                ["主网转换?", "测试网数据将以 1:1 比例安全转换。"],
-                ["能源自给?", "结合核聚变技术，实现零居住成本。"],
+                ["安全级别?", "采用量子加密和分布式账本技术的全球顶级水平。"],
+                ["基本收入分配?", "集团利润的 30% 自动公平分配给全人类。"],
+                ["机器人发放?", "生产完成后按申请顺序每户发放一台机器人。"],
+                ["主网转换?", "测试数据将在主网启动时以 1:1 安全转换。"],
+                ["能源自给?", "结合核聚变技术实现零居住成本。"],
                 ["教育支持?", "AI 导师 24 小时提供免费个性化教育。"],
-                ["医疗福利?", "基金会全额资助癌症及疑难病治疗。"],
-                ["手续费政策?", "90% 的手续费立即返还给生态贡献者。"],
+                ["医疗福利?", "基金会全额资助疑难病治疗。"],
+                ["手续费政策?", "90% 的闪兑手续费回馈给生态贡献者。"],
                 ["如何参与?", "通过节点运营和应用内活动参与。"],
                 ["未来价值?", "整合 HK 集团所有尖端技术的经济中心。"],
-                ["全球中心?", "在全球 50 个主要城市建设 AI 中心。"],
-                ["数据所有权?", "用户完全控制自己的财务数据。"],
-                ["新资产上市?", "通过 AI 审核挂牌优质新项目。"],
-                ["投资安全?", "实时算法防御流动性以保护价值。"],
-                ["社会贡献?", "利润用于消除全球贫困。"],
-                ["机器人安全?", "本地化存储防止黑客攻击和外泄。"],
+                ["全球中心?", "在全球 50 个主要城市建立 AI 中心。"],
+                ["数据所有权?", "用户完全掌控自己的财务数据。"],
+                ["新资产挂牌?", "通过 AI 审核挂牌优质项目。"],
+                ["投资安全?", "实时算法防御流动性，保护价值。"],
+                ["社会贡献?", "利润的很大一部分用于消除全球贫困。"],
+                ["机器人安全?", "本地服务器存储，防止外部黑客攻击。"],
                 ["奖学金?", "为创新人才提供每月最高 5000 美元的资助。"],
-                ["治理权限?", "保障创始人的最终决定权和策划权。"],
-                ["稳定性?", "AI 自我诊断确保系统不间단运行。"],
-                ["삐니的角色?", "作为专属助手，协助资产与技术管理。"]
+                ["治理权限?", "保障创始人的最终批准权和项目策划权。"],
+                ["系统稳定性?", "AI 自我诊断系统确保无间断运行。"],
+                ["삐니的角色?", "作为专属助手，协助资产和技术管理。"]
             ],
             visions: [
-                ["🏫 HK 全球 AI 학교", "建设全球免费教育系统"],
-                ["🏥 纳米医疗中心", "攻克癌症及疑难病的医疗支持"],
-                ["🏠 能源自给智能家居", "实现零能源成本的居住环境"],
-                ["🎓 未来人才培养", "全额资助创新人才的研究与生活"],
-                ["🤖 每户一个机器人", "解放劳动力，保障人类生活品质"]
+                ["🏫 HK 全球 AI 学校", "建设全球免费教育系统"],
+                ["🏥 纳米医疗中心", "攻克疑难病的医疗支持"],
+                ["🏠 能源自给智能家居", "实现零生活成本的居住环境"],
+                ["🎓 未来人才培养", "全额资助创新人才的研究经费"],
+                ["🤖 每户一个机器人", "解放劳动力，保障生活品质"]
             ]
         }
     };
 
+    let vals = { pi: 412.3158, gcv: 129539451, supply: 6280000.5074, st: 17.64, lp: 28.57, liq: 88432098051 };
+
+    function live() {
+        vals.pi += (Math.random() - 0.45) * 0.0012;
+        vals.gcv += Math.floor((Math.random() - 0.4) * 600);
+        vals.supply += Math.random() * 0.001;
+        vals.st += (Math.random() - 0.5) * 0.015;
+        vals.lp += (Math.random() - 0.5) * 0.015;
+        vals.liq += Math.floor((Math.random() - 0.4) * 12000);
+
+        document.getElementById('live-pi').innerText = vals.pi.toFixed(4);
+        document.getElementById('live-gcv').innerText = "$ " + vals.gcv.toLocaleString();
+        document.getElementById('live-supply').innerText = vals.supply.toLocaleString(undefined, {minimumFractionDigits: 4});
+        document.getElementById('live-st-rate').innerText = vals.st.toFixed(2);
+        document.getElementById('live-lp-rate').innerText = vals.lp.toFixed(2);
+        document.getElementById('live-liq').innerText = vals.liq.toLocaleString();
+    }
+
+    function toggle(id) {
+        const el = document.getElementById(id);
+        const panels = document.querySelectorAll('.panel');
+        panels.forEach(p => { if(p.id !== id) p.style.display = 'none'; });
+        el.style.display = el.style.display === 'block' ? 'none' : 'block';
+    }
+
     function changeLanguage() {
         const lang = document.getElementById('lang-selector').value;
         const s = db[lang];
-        document.getElementById('txt-title').innerText = s.title;
         document.getElementById('txt-subtitle').innerText = s.subtitle;
-        document.getElementById('txt-liq-label').innerText = s.liq;
         document.getElementById('txt-supply-label').innerText = s.supply;
-        document.getElementById('txt-eco').innerText = s.eco;
-        document.getElementById('lbl-pi-qty').innerText = s.pi_qty;
-        document.getElementById('lbl-swap-eng').innerText = s.swap_eng;
-        document.getElementById('lbl-staking-eng').innerText = s.staking_eng;
+        document.getElementById('txt-liq-label').innerText = s.liq;
+        document.getElementById('lbl-st-rate').innerText = s.st;
+        document.getElementById('lbl-lp-rate').innerText = s.lp;
+        document.getElementById('btn-pi').innerText = s.b1;
+        document.getElementById('btn-swap').innerText = s.b2;
+        document.getElementById('btn-stake').innerText = s.b3;
         document.getElementById('m1').innerText = s.m1;
         document.getElementById('m2').innerText = s.m2;
         document.getElementById('m3').innerText = s.m3;
@@ -258,34 +273,13 @@
         document.getElementById('btn-vision').innerText = s.vision_btn;
 
         const fList = document.getElementById('faq-list'); fList.innerHTML = "";
-        s.faqs.forEach((f, i) => {
-            fList.innerHTML += `<div class="faq-item"><div class="faq-q">${i+1}. ${f[0]}</div><div class="faq-a">${f[1]}</div></div>`;
-        });
+        s.faqs.forEach((f, i) => { fList.innerHTML += `<div class="item-row"><div class="item-q">${i+1}. ${f[0]}</div><div class="item-a">${f[1]}</div></div>`; });
 
         const vList = document.getElementById('vision-list'); vList.innerHTML = "";
-        s.visions.forEach(v => {
-            vList.innerHTML += `<div class="vision-item"><b>${v[0]}</b>${v[1]}</div>`;
-        });
+        s.visions.forEach(v => { vList.innerHTML += `<div class="item-row"><div class="item-q"><b>${v[0]}</b></div><div class="item-a">${v[1]}</div></div>`; });
     }
 
-    function toggle(id) {
-        const el = document.getElementById(id);
-        const isV = el.style.display === 'block';
-        document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
-        el.style.display = isV ? 'none' : 'block';
-        if(!isV) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    let p=400.0212;
-    let s=6280000.4231;
-    setInterval(() => {
-        p += Math.random()*0.0001;
-        s += Math.random()*0.0005;
-        document.getElementById('pi-val').innerHTML = p.toFixed(4) + " <span>Pi</span>";
-        document.getElementById('engine-pi').innerText = p.toFixed(2);
-        document.getElementById('total-supply').innerText = s.toLocaleString(undefined, {minimumFractionDigits: 4});
-    }, 1000);
-
+    setInterval(live, 1000);
     changeLanguage();
 </script>
 </body>

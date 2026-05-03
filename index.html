@@ -3,156 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - GLOBAL MASTER</title>
+    <title>HK WORLD BANK - GLOBAL MASTERPIECE</title>
     <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
-            --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #151515;
+            --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #0d0d0d;
         }
-        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 500px; padding: 20px; box-sizing: border-box; text-align: center; }
+        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; overflow-x: hidden; }
+        .container { width: 100%; max-width: 500px; padding: 25px; box-sizing: border-box; text-align: center; }
         
-        .header-section { margin: 45px 0 25px 0; }
+        .global-lang-box { position: fixed; top: 15px; right: 15px; background: #111; border: 2.5px solid var(--hk-gold); border-radius: 12px; padding: 8px; z-index: 5000; }
+        .global-lang-box select { background: transparent; color: var(--hk-gold); border: none; font-weight: 900; outline: none; font-size: 14px; cursor: pointer; }
+
+        .header-section { margin: 50px 0 30px 0; }
         .header-title { font-size: 38px; font-weight: 900; color: var(--hk-gold); letter-spacing: -1px; }
-        .sub-header { color: var(--hk-blue); font-size: 17px; font-weight: 800; }
+        .sub-header { color: var(--hk-blue); font-size: 16px; margin-top: 10px; font-weight: 800; letter-spacing: 2px; }
         
-        .lang-box { margin-bottom: 20px; text-align: right; }
-        .lang-box select { background: #111; color: var(--hk-gold); border: 2px solid var(--hk-gold); border-radius: 10px; padding: 8px; font-weight: 900; font-size: 13px; }
+        .pi-main { font-size: 58px; font-weight: 900; margin: 20px 0 10px 0; }
+        .pi-main span { color: var(--hk-gold); font-size: 28px; margin-left: 8px; }
 
-        .pi-main { font-size: 60px; font-weight: 900; margin: 30px 0; color: #fff; }
-        .pi-main span { color: var(--hk-gold); font-size: 30px; margin-left: 10px; }
-
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .stat-box { background: var(--hk-card); padding: 22px; border-radius: 22px; border: 1px solid #333; }
-        .stat-label { font-size: 13px; color: #aaa; margin-bottom: 12px; display: block; font-weight: 800; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .stat-box { background: #111; border: 1px solid #333; padding: 20px; border-radius: 24px; }
+        .stat-label { font-size: 12px; color: #888; display: block; margin-bottom: 8px; font-weight: 800; }
         .stat-val { font-size: 24px; font-weight: 900; }
 
-        .liq-card { border: 3.5px solid var(--hk-green); background: rgba(57, 255, 20, 0.05); padding: 30px 20px; margin-bottom: 35px; border-radius: 22px; }
+        .liq-card { border: 2.5px solid var(--hk-green); background: rgba(57, 255, 20, 0.05); padding: 30px 20px; margin: 20px 0 40px 0; border-radius: 20px; }
+        .liq-label { font-size: 14px; color: var(--hk-green); font-weight: 900; margin-bottom: 15px; display: block; }
+        .liq-val { font-size: 32px; font-weight: 900; color: var(--hk-green); }
 
-        .top-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-        .top-menu-item { padding: 18px 0; border-radius: 18px; font-weight: 900; font-size: 14px; border: none; }
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 45px; }
+        .menu-item { background: #111; padding: 25px 0; border-radius: 24px; border: 1px solid #222; transition: 0.3s; }
+        .menu-item:active { transform: scale(0.95); background: #222; }
+        .menu-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+        .menu-text { font-size: 13px; font-weight: 800; }
 
-        .main-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 35px; }
-        .menu-item { background: var(--hk-card); padding: 22px 0; border-radius: 22px; border: 1px solid #222; }
-        .menu-text { font-size: 14px; font-weight: 800; color: #eee; display: block; margin-top: 8px; }
-
-        .action-btn { width: 100%; padding: 22px; border-radius: 22px; font-size: 18px; font-weight: 900; color: #fff; border: none; margin-bottom: 15px; cursor: pointer; }
+        .big-btn { width: 100%; padding: 22px; border-radius: 22px; font-size: 18px; font-weight: 900; color: #fff; border: none; margin-bottom: 15px; cursor: pointer; }
         .panel { display: none; background: #0a0a0a; border-radius: 25px; padding: 25px; margin-bottom: 25px; border: 1px solid #333; text-align: left; }
-        
-        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-        .soc-btn { padding: 20px; border-radius: 18px; font-weight: 900; color: #fff; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        .faq-q { color: var(--hk-gold); font-weight: 900; font-size: 15px; margin-bottom: 8px; }
+        .faq-a { color: #bbb; font-size: 13px; line-height: 1.6; }
+
+        .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .soc-btn { padding: 18px; border-radius: 20px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; }
+
+        .footer { margin: 50px 0 100px 0; color: #444; font-size: 11px; font-weight: 900; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="lang-box">
-        <select id="lang-select" onchange="updateLang()">
-            <option value="ko">🇰🇷 한국어</option>
-            <option value="en">🇺🇸 English</option>
-            <option value="zh">🇨🇳 中문</option>
-            <option value="ar">🇸🇦 العربية</option>
-            <option value="hi">🇮🇳 हिन्दी</option>
-            <option value="es">🇪🇸 Español</option>
-            <option value="pt">BR Português</option>
-            <option value="uk">🇺🇦 Українська</option>
-            <option value="ja">🇯🇵 日本語</option>
-            <option value="ru">🇷🇺 Русский</option>
-            <option value="vi">🇻🇳 Tiếng Việt</option>
-            <option value="th">🇹🇭 ภาษาไทย</option>
-            <option value="id">🇮🇩 Indonesia</option>
-        </select>
-    </div>
+<div class="global-lang-box">
+    <select id="lang-selector" onchange="changeLanguage()">
+        <option value="ko">🇰🇷 KOREAN</option><option value="en">🇺🇸 ENGLISH</option>
+        <option value="zh">🇨🇳 CHINESE</option><option value="ar">🇸🇦 ARABIC</option>
+        <option value="hi">🇮🇳 HINDI</option><option value="es">🇪🇸 SPANISH</option>
+        <option value="pt">🇧🇷 BRAZIL</option><option value="uk">🇺🇦 UKRAINE</option>
+        <option value="ja">🇯🇵 JAPANESE</option><option value="ru">🇷🇺 RUSSIAN</option>
+        <option value="vi">🇻🇳 VIETNAM</option><option value="th">🇹🇭 THAILAND</option>
+        <option value="id">🇮🇩 INDONESIA</option>
+    </select>
+</div>
 
+<div class="container">
     <div class="header-section">
         <div class="header-title">HK WORLD BANK</div>
-        <div id="txt-subtitle" class="sub-header">통합 자산 관리 시스템</div>
+        <div class="sub-header" id="txt-subtitle">통합 자산 관리 시스템</div>
     </div>
 
-    <div class="pi-main"><span id="val-pi">412.3171</span><span>Pi</span></div>
+    <div class="pi-main"><span id="val-pi">412.3171</span> <span>Pi</span></div>
 
     <div class="stats-grid">
         <div class="stat-box">
-            <span id="txt-staking" class="stat-label">스테이킹 이율</span>
-            <div id="val-staking" class="stat-val" style="color: var(--hk-blue);">17.61%</div>
+            <span class="stat-label" id="txt-stake-label">스테이킹 이율</span>
+            <div class="stat-val" id="val-stake" style="color: var(--hk-blue);">17.61%</div>
         </div>
         <div class="stat-box">
-            <span id="txt-lp" class="stat-label">LP 수익률</span>
-            <div id="val-lp" class="stat-val" style="color: var(--hk-pink);">28.56%</div>
+            <span class="stat-label" id="txt-lp-label">LP 수익률</span>
+            <div class="stat-val" id="val-lp" style="color: var(--hk-pink);">28.56%</div>
         </div>
     </div>
 
     <div class="liq-card">
-        <span id="txt-liq" class="stat-label" style="color: var(--hk-green);">전체 유동성 (DEX LP)</span>
-        <div id="val-liq" class="stat-val" style="color: var(--hk-green); font-size: 32px;">$ 88,432,240,219</div>
+        <span class="liq-label" id="txt-liq-label">전체 유동성 (DEX LP)</span>
+        <div class="liq-val" id="val-liq">$ 88,438,688,147</div>
     </div>
 
-    <div class="main-menu-grid" id="menu-container"></div>
+    <div class="menu-grid" id="menu-container"></div>
 
-    <button id="btn-faq" class="action-btn" style="background: #e91e63;" onclick="toggle('faq-panel')">글로벌 AI 지원센터 (FAQ 20)</button>
+    <button class="big-btn" style="background: var(--hk-pink);" onclick="toggle('faq-panel')" id="btn-faq">글로벌 AI 지원센터 (FAQ 20)</button>
     <div id="faq-panel" class="panel"></div>
 
-    <button id="btn-vision" class="action-btn" style="background: #34495e;" onclick="toggle('vision-panel')">HK 사회 재단 비전</button>
+    <button class="big-btn" style="background: #253347;" onclick="toggle('vision-panel')" id="btn-vision">HK 사회 재단 비전</button>
     <div id="vision-panel" class="panel"></div>
 
-    <div class="social-grid">
-        <a href="https://youtube.com/@형님채널" class="soc-btn" style="background: #ff0000;">📺 YouTube</a>
-        <a href="https://tiktok.com/@형님계정" class="soc-btn" style="background: #111; border: 1px solid #333;">🎵 TikTok</a>
+    <div class="social-row">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="soc-btn" style="background: #FF0000;">YouTube</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="soc-btn" style="background: #111; border: 1px solid #333;">TikTok</a>
     </div>
+
+    <div class="footer">HK GROUP GLOBAL HEADQUARTERS</div>
 </div>
 
 <script>
-    const data = {
+    const db = {
         ko: { sub: "통합 자산 관리 시스템", stake: "스테이킹 이율", lp: "LP 수익률", liq: "전체 유동성 (DEX LP)", menus: ["송금", "결제", "예치", "보상", "기본소득", "스왑"], faq_btn: "글로벌 AI 지원센터 (FAQ 20)", vision_btn: "HK 사회 재단 비전", 
-              faqs: [["삐니의 역할?", "형님의 전담 비서로서 모든 관리를 돕습니다."], ["보안은?", "양자 암호화로 철저히 보호됩니다."]], 
-              visions: ["HK 글로벌 AI 학교", "1가정 1로봇 보급"] },
-        en: { sub: "Integrated Asset Management", stake: "Staking APR", lp: "LP Yield", liq: "Total Liquidity", menus: ["Send", "Pay", "Deposit", "Reward", "UBI", "Swap"], faq_btn: "Global AI Support (FAQ 20)", vision_btn: "HK Foundation Vision", 
-              faqs: [["Role of BBINI?", "As your dedicated assistant, I manage everything."], ["Security?", "Protected by top-tier quantum encryption."]], 
-              visions: ["HK Global AI School", "1 Robot per Household"] },
-        zh: { sub: "综合资产管理系统", stake: "质押收益率", lp: "LP 收益率", liq: "总流动性", menus: ["转账", "支付", "存款", "奖励", "基本收入", "交换"], faq_btn: "全球 AI 支持中心", vision_btn: "HK 基金会愿景", 
-              faqs: [["BBINI 的角色？", "作为您的专属秘书，我负责管理一切。"], ["安全性？", "通过量子加密技术实现最高安全级别。"]], 
-              visions: ["HK 全球 AI 学校", "每户一台机器人"] }
+              faqs: [["보안 수준?", "양자 암호화로 세계 최고 수준입니다."], ["기본소득?", "수익의 30%를 전 인류에게 배분합니다."], ["삐니의 역할?", "형님의 모든 자산을 관리하는 전담 비서입니다."]],
+              visions: [["🏥 나노 센터", "암 정복 지원"], ["🤖 로봇 보급", "1가정 1로봇 실현"]] },
+        en: { sub: "Global Asset System", stake: "Staking APR", lp: "LP Yield", liq: "Total Liquidity", menus: ["Send", "Pay", "Deposit", "Reward", "UBI", "Swap"], faq_btn: "AI Support (FAQ 20)", vision_btn: "HK Vision 2030",
+              faqs: [["Security?", "Quantum encryption protection."], ["UBI?", "30% profit sharing globally."], ["BBINI?", "Your dedicated AI assistant."]],
+              visions: [["🏥 Medical", "Curing diseases"], ["🤖 Robotics", "Robot for every home"]] },
+        zh: { sub: "全球资产管理系统", stake: "质押收益", lp: "流动性收益", liq: "总流动性", menus: ["转账", "支付", "存款", "奖励", "基本收入", "交换"], faq_btn: "AI 支持中心", vision_btn: "HK 2030 愿景",
+              faqs: [["安全性?", "量子加密技术保护."], ["基本收入?", "利润 30% 全球分配."], ["BBINI?", "您的专属 AI 秘书."]],
+              visions: [["🏥 医疗", "攻克难治之症"], ["🤖 机器人", "实现每户一机"]] }
     };
 
-    function updateLang() {
-        const l = document.getElementById('lang-select').value;
-        const s = data[l] || data.en; // 아랍어 등은 영어로 대체 가능
+    function changeLanguage() {
+        const lang = document.getElementById('lang-selector').value;
+        const s = db[lang] || db.en;
         document.getElementById('txt-subtitle').innerText = s.sub;
-        document.getElementById('txt-staking').innerText = s.stake;
-        document.getElementById('txt-lp').innerText = s.lp;
-        document.getElementById('txt-liq').innerText = s.liq;
+        document.getElementById('txt-stake-label').innerText = s.stake;
+        document.getElementById('txt-lp-label').innerText = s.lp;
+        document.getElementById('txt-liq-label').innerText = s.liq;
         document.getElementById('btn-faq').innerText = s.faq_btn;
         document.getElementById('btn-vision').innerText = s.vision_btn;
-        
+
         let mHtml = "";
-        s.menus.forEach((m, i) => mHtml += `<div class="menu-item"><span>🚀</span><span class="menu-text">${m}</span></div>`);
+        const icons = ["🚀", "🛒", "🏦", "🏆", "🏛️", "🔄"];
+        s.menus.forEach((m, i) => {
+            mHtml += `<div class="menu-item"><span class="menu-icon">${icons[i]}</span><span class="menu-text">${m}</span></div>`;
+        });
         document.getElementById('menu-container').innerHTML = mHtml;
 
-        let fHtml = ""; s.faqs.forEach(f => fHtml += `<p><b>${f[0]}</b><br>${f[1]}</p>`);
+        let fHtml = "";
+        s.faqs.forEach((f, i) => {
+            fHtml += `<div class="faq-item"><div class="faq-q">${i+1}. ${f[0]}</div><div class="faq-a">${f[1]}</div></div>`;
+        });
         document.getElementById('faq-panel').innerHTML = fHtml;
-        
-        let vHtml = ""; s.visions.forEach(v => vHtml += `<p>✅ ${v}</p>`);
-        document.getElementById('vision-panel').innerHTML = vHtml;
-    }
 
-    // 숫자가 살아 움직이게!
-    function animateValue(id, start, range, fixed) {
-        setInterval(() => {
-            let current = start + (Math.random() * range);
-            document.getElementById(id).innerText = fixed ? current.toFixed(4) : '$ ' + Math.floor(current).toLocaleString();
-        }, 1500);
+        let vHtml = "";
+        s.visions.forEach(v => {
+            vHtml += `<div style="margin-bottom:15px;"><b style="color:var(--hk-blue);">${v[0]}</b><p style="color:#aaa; font-size:13px; margin:5px 0;">${v[1]}</p></div>`;
+        });
+        document.getElementById('vision-panel').innerHTML = vHtml;
     }
 
     function toggle(id) {
         const el = document.getElementById(id);
-        el.style.display = el.style.display === 'block' ? 'none' : 'block';
+        const isV = el.style.display === 'block';
+        document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+        el.style.display = isV ? 'none' : 'block';
     }
 
-    animateValue('val-pi', 412.31, 0.05, true);
-    animateValue('val-staking', 17.5, 0.5, true); // %는 생략
-    animateValue('val-lp', 28.5, 0.2, true);
-    animateValue('val-liq', 88432240219, 1000000, false);
-    updateLang();
+    // 숫자가 살아 움직이게!
+    let p = 412.3171, l = 88438688147, s = 17.61, lp = 28.56;
+    setInterval(() => {
+        p += Math.random() * 0.0001;
+        l += Math.floor(Math.random() * 10000);
+        s += (Math.random() - 0.5) * 0.01;
+        lp += (Math.random() - 0.5) * 0.01;
+        document.getElementById('val-pi').innerText = p.toFixed(4);
+        document.getElementById('val-liq').innerText = "$ " + l.toLocaleString();
+        document.getElementById('val-stake').innerText = s.toFixed(2) + "%";
+        document.getElementById('val-lp').innerText = lp.toFixed(2) + "%";
+    }, 1500);
+
+    changeLanguage();
 </script>
 </body>
 </html>

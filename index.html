@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - V23 PROTOCOL READY</title>
+    <title>HK WORLD BANK - V23 READY</title>
     <style>
-        :root { --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF; --hk-pink: #FF00FF; --hk-bg: #000; --hk-card: #0d0d0d; }
+        :root { --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF; --hk-pink: #FF00FF; --hk-bg: #000; }
         body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 500px; padding: 25px; box-sizing: border-box; text-align: center; }
         .header-section { margin: 50px 0 30px 0; }
@@ -15,22 +15,20 @@
         .pi-main span { color: var(--hk-gold); font-size: 28px; margin-left: 8px; }
         .gcv-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 10px 35px; border-radius: 50px; font-size: 18px; font-weight: 900; margin-bottom: 30px; background: rgba(57, 255, 20, 0.05); }
         .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; }
-        .info-card { background: var(--hk-card); border: 1px solid #222; padding: 20px 10px; border-radius: 20px; }
+        .info-card { background: #0d0d0d; border: 1px solid #222; padding: 20px 10px; border-radius: 20px; }
         .info-label { font-size: 13px; color: #888; font-weight: 800; margin-bottom: 10px; display: block; }
         .info-val { font-size: 24px; font-weight: 900; color: #fff; }
         .supply-section { background: linear-gradient(145deg, #0a0a0a, #111); padding: 25px; border-radius: 25px; margin: 15px 0; border: 1px solid #222; position: relative; overflow: hidden; }
         .supply-section::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, var(--hk-blue), transparent 30%); animation: rotate 4s linear infinite; opacity: 0.1; }
         @keyframes rotate { 100% { transform: rotate(360deg); } }
         .liq-card { border: 2.5px solid; border-image: linear-gradient(45deg, var(--hk-green), var(--hk-gold)) 1; background: rgba(255,255,255,0.03); padding: 30px 20px; margin: 20px 0 40px 0; }
-        .section-label { font-size: 14px; color: #fff; font-weight: 900; margin-bottom: 15px; display: block; letter-spacing: 1px; }
+        .section-label { font-size: 14px; color: #fff; font-weight: 900; margin-bottom: 15px; display: block; }
         .section-val { font-size: 34px; font-weight: 900; }
         .btn-group-label { text-align: left; font-size: 15px; font-weight: 900; margin: 30px 0 15px 5px; color: var(--hk-gold); }
         .top-btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
         .top-btn { padding: 22px 0; border-radius: 18px; font-weight: 900; color: #000; font-size: 15px; border: none; cursor: pointer; transition: 0.3s; }
-        .top-btn:active { transform: scale(0.95); }
         .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 45px; }
         .menu-item { background: #111; padding: 25px 0; border-radius: 24px; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
-        .menu-item:hover { border-color: var(--hk-gold); }
         .menu-icon { font-size: 28px; margin-bottom: 12px; display: block; }
         .menu-text { font-size: 14px; font-weight: 800; color: #fff; }
         .big-btn { width: 100%; padding: 25px; border-radius: 22px; font-size: 20px; font-weight: 900; color: #fff; border: none; margin-bottom: 15px; cursor: pointer; }
@@ -42,13 +40,13 @@
         .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
         .soc-btn { padding: 20px; border-radius: 20px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; }
         .footer-info { margin: 50px 0 100px 0; color: #444; font-weight: 900; font-size: 13px; }
-        #chat-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 2000; flex-direction: column; }
-        .chat-top { padding: 30px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        #chat-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; flex-direction: column; backdrop-filter: blur(5px); }
+        .chat-top { padding: 30px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.5); }
         .chat-body { flex: 1; overflow-y: auto; padding: 25px; display: flex; flex-direction: column; gap: 15px; }
-        .msg-box { max-width: 85%; padding: 15px; border-radius: 20px; font-size: 15px; }
-        .msg-bbini { background: var(--hk-pink); color: #fff; align-self: flex-start; }
+        .msg-box { max-width: 85%; padding: 15px; border-radius: 20px; font-size: 15px; font-weight: 700; line-height: 1.4; }
+        .msg-bbini { background: var(--hk-pink); color: #fff; align-self: flex-start; box-shadow: 0 4px 15px rgba(255,0,255,0.3); }
         .msg-user { background: #222; color: #fff; align-self: flex-end; }
-        .chat-footer { padding: 20px; display: flex; gap: 10px; border-top: 1px solid #333; }
+        .chat-footer { padding: 20px; display: flex; gap: 10px; border-top: 1px solid #333; background: rgba(0,0,0,0.5); }
         .chat-in { flex: 1; background: #111; border: 1.5px solid #333; border-radius: 50px; padding: 15px 25px; color: #fff; outline: none; }
         .bbini { position: fixed; bottom: 35px; right: 30px; width: 85px; height: 85px; background: linear-gradient(135deg, var(--hk-pink), #800080); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; border: 4px solid #fff; animation: bounce 2s infinite; cursor: pointer; z-index: 1000; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
@@ -64,11 +62,8 @@
         <option value="pt">🇧🇷 BRAZIL</option><option value="uk">🇺🇦 UKRAINE</option><option value="ja">🇯🇵 JAPANESE</option>
         <option value="ru">🇷🇺 RUSSIAN</option><option value="vi">🇻🇳 VIETNAM</option><option value="th">🇹🇭 THAI</option>
         <option value="de">🇩🇪 GERMAN</option><option value="fr">🇫🇷 FRENCH</option><option value="it">🇮🇹 ITALIAN</option>
-        <option value="id">🇮🇩 INDONESIA</option><option value="tr">🇹🇷 TURKEY</option><option value="fa">🇮🇷 PERSIAN</option>
-        <option value="pl">🇵🇱 POLAND</option><option value="nl">🇳🇱 DUTCH</option><option value="sv">🇸🇪 SWEDEN</option>
-        <option value="ms">🇲🇾 MALAY</option><option value="ph">🇵🇭 FILIPINO</option><option value="he">🇮🇱 HEBREW</option>
-        <option value="el">🇬🇷 GREEK</option><option value="hu">🇭🇺 HUNGARY</option><option value="cs">🇨🇿 CZECH</option>
-        <option value="ro">🇷🇴 ROMANIA</option><option value="no">🇳🇴 NORWAY</option>
+        <option value="id">🇮🇩 INDONESIA</option><option value="tr">🇹🇷 TURKEY</option><option value="ms">🇲🇾 MALAY</option>
+        <option value="ph">🇵🇭 FILIPINO</option><option value="pl">🇵🇱 POLAND</option>
     </select>
 </div>
 <div class="container">
@@ -116,7 +111,7 @@
 </div>
 <div id="chat-window">
     <div class="chat-top"><div style="font-weight:900; color:var(--hk-gold); font-size:20px;">BBINI AGI v23</div><div onclick="closeChat()" style="cursor:pointer; font-size:30px;">&times;</div></div>
-    <div class="chat-body" id="chat-res"><div class="msg-box msg-bbini" id="chat-welcome">반갑습니다, 혜공 형님. v23 노드 최적화 완료되었습니다.</div></div>
+    <div class="chat-body" id="chat-res"><div class="msg-box msg-bbini" id="chat-welcome">반갑습니다, 혜공 형님. v23 노드 최적화 완료.</div></div>
     <div class="chat-footer">
         <input type="text" id="chat-in" class="chat-in" placeholder="궁금한 것을 입력하세요" onkeypress="if(event.keyCode==13) sendMsg()">
         <button onclick="sendMsg()" style="background:var(--hk-gold); border:none; padding:0 20px; border-radius:50px; font-weight:900;">GO</button>
@@ -125,12 +120,12 @@
 <div class="bbini" onclick="openChat()">삐니</div>
 <script>
     const i18n = {
-        ko: { title:"HK WORLD BANK", sub:"메인자산통합원장 (V23)", apr:"APR", lp:"LP 수익", supply:"HKWB 유동성 공급량", liq:"전체 유동성 LP 현황", b1:"PI 수량", b2:"DEX 스왑", b3:"LP 스테이킹", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"기본소득", m6:"스왑", faq:"글로벌 AI 지원센터 (FAQ)", vision:"HK 5대 비전 2030", welcome: "반갑습니다, 혜공 형님.", chat_ph: "궁금한 것을 입력하세요" },
-        en: { title:"HK WORLD BANK", sub:"Global Asset Ledger (V23)", apr:"APR", lp:"LP Profit", supply:"HKWB Liquidity Supply", liq:"Total Liquidity LP Status", b1:"PI Qty", b2:"DEX Swap", b3:"LP Staking", m1:"Transfer", m2:"Payment", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap", faq:"AI Support Center (FAQ)", vision:"HK 5 Visions 2030", welcome: "Welcome, Hyekong Boss.", chat_ph: "Ask me anything" }
+        ko: { title:"HK WORLD BANK", sub:"메인자산통합원장 (V23)", apr:"APR", lp:"LP 수익", supply:"HKWB 유동성 공급량", liq:"전체 유동성 LP 현황", b1:"PI 수량", b2:"DEX 스왑", b3:"LP 스테이킹", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"기본소득", m6:"스왑", faq:"지원센터 (FAQ)", vision:"HK 5대 비전 2030", welcome: "반갑습니다, 혜공 형님.", chat_ph: "궁금한 것을 입력하세요" },
+        en: { title:"HK WORLD BANK", sub:"Global Asset Ledger (V23)", apr:"APR", lp:"LP Profit", supply:"HKWB Liquidity", liq:"Total LP Status", b1:"PI Qty", b2:"DEX Swap", b3:"LP Staking", m1:"Transfer", m2:"Payment", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap", faq:"Support (FAQ)", vision:"HK 5 Visions 2030", welcome: "Welcome, Hyekong.", chat_ph: "Ask me anything" }
     };
     let p=400.0212, l=88438688147, r1=15.48, r2=23.26, s=6280000.5074;
     setInterval(() => {
-        p += 0.0001; l += 12000; s += 0.0015; r1 += 0.01;
+        p += 0.0001; l += 12000; s += 0.0015;
         document.getElementById('pi-val').innerHTML = p.toFixed(4) + " <span>Pi</span>";
         document.getElementById('gcv-val').innerText = "Asset: $ " + (p * 10000).toLocaleString(undefined, {maximumFractionDigits:0}) + " (@$10K)";
         document.getElementById('liq-val').innerText = "$ " + l.toLocaleString();
@@ -154,7 +149,7 @@
         ["로봇 사생활 보호는?", "로컬 온디바이스 AI로 외부 데이터 유출을 원천 차단합니다."],
         ["재정 투명성 확인은?", "블록체인 상의 모든 기금 집행 내역을 상시 공개합니다."],
         ["지원 언어 범위는?", "현재 30개 주요 언어를 AI가 실시간 번역 지원합니다."],
-        ["설립자 전용 권한은?", "최종 의사결정권 및 독점 프로젝트 런칭권을 보유합니다."],
+        ["설립자 전용 권한은?", "최종 의사결정권 및 독점 프로젝트 권한이 부여됩니다."],
         ["시스템 장애 대응은?", "AGI가 마이크로초 단위로 자가 진단 및 복구를 수행합니다."],
         ["삐니의 주요 역할은?", "형님의 개인 비서로서 자산 및 비즈니스 전반을 완벽 보좌합니다."]
     ];
@@ -162,15 +157,14 @@
         ["🏫 HK 글로벌 AI 학교", "전 세계 무상 AI 교육 인프라 구축"],
         ["🏥 나노 메디컬 시스템", "나노 기술 기반 무상 의료 서비스 실현"],
         ["🏠 에너지 자립 스마트홈", "핵융합 기반 주거비 제로 달성"],
-        ["🎓 미래 인재 장학금", "글로벌 혁신 인재 대규모 육성 지원"],
-        ["🤖 노동 해방 로봇 보급", "1가정 1로봇 보급으로 삶의 질 혁명"]
+        ["🎓 미래 인재 장학금", "혁신 인재 대규모 육성 지원"],
+        ["🤖 노동 해방 로봇 보급", "1가정 1로봇 보급으로 노동 해방"]
     ];
     function changeLanguage() {
         const lang = document.getElementById('lang-selector').value; const set = i18n[lang] || i18n['en'];
         document.getElementById('txt-title').innerText = set.title; document.getElementById('txt-subtitle').innerText = set.sub;
         document.getElementById('txt-apr').innerText = set.apr; document.getElementById('txt-lp').innerText = set.lp;
         document.getElementById('txt-supply').innerText = set.supply; document.getElementById('txt-liq').innerText = set.liq;
-        document.getElementById('txt-main-assets').innerText = set.b1+" / "+set.b2+" / "+set.b3;
         document.getElementById('b1').innerText = set.b1; document.getElementById('b2').innerText = set.b2; document.getElementById('b3').innerText = set.b3;
         document.getElementById('m1').innerText = set.m1; document.getElementById('m2').innerText = set.m2; document.getElementById('m3').innerText = set.m3;
         document.getElementById('m4').innerText = set.m4; document.getElementById('m5').innerText = set.m5; document.getElementById('m6').innerText = set.m6;
@@ -193,11 +187,11 @@
     }
     function openChat() { document.getElementById('chat-window').style.display = 'flex'; }
     function closeChat() { document.getElementById('chat-window').style.display = 'none'; }
-    function sim(act) { openChat(); const res = document.getElementById('chat-res'); res.innerHTML += `<div class="msg-box msg-bbini">v23 프로토콜 상에서 [${act}] 트랜잭션을 생성합니다. 승인 대기 중...</div>`; res.scrollTop = res.scrollHeight; }
+    function sim(act) { openChat(); const res = document.getElementById('chat-res'); res.innerHTML += `<div class="msg-box msg-bbini">v23 프로토콜 [${act}] 트랜잭션 생성. 승인 대기 중...</div>`; res.scrollTop = res.scrollHeight; }
     function sendMsg() {
         const input = document.getElementById('chat-in'); if(!input.value) return;
         const resBox = document.getElementById('chat-res'); resBox.innerHTML += `<div class="msg-box msg-user">${input.value}</div>`;
-        let answer = "형님, 현재 v23 가상 머신(Soroban) 환경에서 해당 질의를 분석 중입니다.";
+        let answer = "형님, v23 가상 머신(Soroban)에서 분석 중입니다.";
         rawFaqs.forEach(f => { if(input.value.includes(f[0].substring(0,3))) answer = f[1]; });
         setTimeout(() => { resBox.innerHTML += `<div class="msg-box msg-bbini">${answer}</div>`; resBox.scrollTop = resBox.scrollHeight; }, 600);
         input.value = "";

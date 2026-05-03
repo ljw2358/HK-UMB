@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - GLOBAL MASTER v10.0</title>
+    <title>HK WORLD BANK - GLOBAL MASTER v13.0</title>
     <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
@@ -16,29 +16,32 @@
         .global-lang-box select { background: transparent; color: var(--hk-gold); border: none; font-weight: 900; outline: none; font-size: 14px; cursor: pointer; }
 
         .header-section { margin: 60px 0 20px 0; }
-        .header-title { font-size: 36px; font-weight: 900; color: var(--hk-gold); letter-spacing: -1px; }
-        .sub-header { color: var(--hk-blue); font-size: 17px; margin-top: 10px; font-weight: 800; letter-spacing: 1px; }
+        .header-title { font-size: 38px; font-weight: 900; color: var(--hk-gold); letter-spacing: -1px; }
+        .sub-header { color: var(--hk-blue); font-size: 17px; margin-top: 10px; font-weight: 800; letter-spacing: 2px; }
 
         .pi-main { font-size: 58px; font-weight: 900; margin: 20px 0 10px 0; }
         .pi-main span { color: var(--hk-gold); font-size: 28px; }
         .gcv-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 10px 35px; border-radius: 50px; font-size: 17px; font-weight: 900; margin-bottom: 25px; background: rgba(57, 255, 20, 0.05); }
 
         .liq-card { border: 2.5px solid var(--hk-gold); background: rgba(255,255,255,0.03); padding: 25px 20px; margin-bottom: 20px; border-radius: 20px; }
-        .section-label { font-size: 14px; color: var(--hk-blue); font-weight: 900; margin-bottom: 15px; display: block; }
-        .section-val { font-size: 34px; font-weight: 900; letter-spacing: 1px; }
+        .section-label { font-size: 14px; color: var(--hk-blue); font-weight: 900; margin-bottom: 12px; display: block; }
+        .section-val { font-size: 32px; font-weight: 900; }
 
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-        .stat-card { background: #111; padding: 18px; border-radius: 20px; border: 1px solid #333; }
-        .stat-name { font-size: 13px; color: #aaa; margin-bottom: 8px; display: block; font-weight: 700; }
-        .stat-num { font-size: 24px; font-weight: 900; }
+        .total-liq-box { border: 2.5px solid var(--hk-green); background: rgba(57, 255, 20, 0.02); padding: 25px 20px; margin-bottom: 30px; border-radius: 20px; }
+        .total-liq-val { font-size: 32px; font-weight: 900; color: var(--hk-green); }
 
-        /* [추가] 전체 유동성 DEX LP 공급 현황 */
-        .total-liq-box { border: 2.5px solid var(--hk-green); background: rgba(57, 255, 20, 0.02); padding: 25px 20px; margin-bottom: 35px; border-radius: 20px; }
-        .total-liq-val { font-size: 32px; font-weight: 900; color: var(--hk-green); letter-spacing: 1px; }
+        /* 핵심 엔진 3종 */
+        .core-engine-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .engine-item { background: linear-gradient(145deg, #1a1a1a, #000); padding: 15px 5px; border-radius: 15px; border: 1px solid #333; }
+        .engine-label { font-size: 11px; color: #888; display: block; margin-bottom: 5px; font-weight: 700; }
+        .engine-val { font-size: 15px; font-weight: 900; color: var(--hk-gold); }
 
+        .btn-group-label { text-align: left; font-size: 15px; font-weight: 900; margin: 20px 0 15px 5px; color: var(--hk-gold); }
+        
+        /* 에코시스템 메뉴 2단 그리드 (3x2) */
         .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
         .menu-item { background: #111; padding: 22px 0; border-radius: 24px; border: 1px solid #222; }
-        .menu-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+        .menu-icon { font-size: 26px; margin-bottom: 8px; display: block; }
         .menu-text { font-size: 13px; font-weight: 800; }
 
         .big-btn { width: 100%; padding: 22px; border-radius: 22px; font-size: 18px; font-weight: 900; color: #fff; border: none; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
@@ -50,12 +53,9 @@
         .vision-item b { color: var(--hk-blue); font-size: 16px; display: block; margin-bottom: 5px; }
 
         .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .soc-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px; border-radius: 22px; font-weight: 900; text-decoration: none; color: #fff; font-size: 17px; }
-        .youtube-btn { background: #FF0000; }
-        .tiktok-btn { background: #111; border: 1.5px solid #333; }
+        .soc-btn { padding: 18px; border-radius: 20px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; font-size: 16px; }
         
         .footer { margin: 50px 0 100px 0; color: #444; font-size: 11px; font-weight: 900; }
-        .bbini-float { position: fixed; bottom: 30px; right: 20px; width: 70px; height: 70px; background: var(--hk-pink); border-radius: 50%; border: 3px solid #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 15px rgba(255,0,255,0.5); z-index: 9999; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -82,28 +82,33 @@
         <div class="section-val" id="total-supply">6,280,000.4231</div>
     </div>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <span class="stat-name" id="lbl-staking">스태이킹 이율</span>
-            <div class="stat-num" style="color: var(--hk-blue);">17.64%</div>
-        </div>
-        <div class="stat-card">
-            <span class="stat-name" id="lbl-lp">LP 수익률</span>
-            <div class="stat-num" style="color: var(--hk-pink);">28.57%</div>
-        </div>
-    </div>
-
     <div class="total-liq-box">
         <span class="section-label" id="txt-liq-label" style="color: var(--hk-green);">전체 유동성 현황 (DEX)</span>
-        <div class="total-liq-val">$ 88,438,688,147</div>
+        <div class="total-liq-val" id="liq-val">$ 88,438,688,147</div>
     </div>
 
+    <div class="core-engine-grid">
+        <div class="engine-item">
+            <span class="engine-label" id="lbl-pi-qty">PI 수량</span>
+            <div class="engine-val" id="engine-pi">400.02</div>
+        </div>
+        <div class="engine-item" style="border-color: var(--hk-blue);">
+            <span class="engine-label" id="lbl-swap-eng">DEX 스왑</span>
+            <div class="engine-val" style="color: var(--hk-blue);">READY</div>
+        </div>
+        <div class="engine-item" style="border-color: var(--hk-pink);">
+            <span class="engine-label" id="lbl-staking-eng">LP 스테이킹</span>
+            <div class="engine-val" style="color: var(--hk-pink);">18.5%</div>
+        </div>
+    </div>
+
+    <div class="btn-group-label" id="txt-eco">HK ECOSYSTEM</div>
     <div class="menu-grid">
         <div class="menu-item"><span class="menu-icon">🚀</span><span class="menu-text" id="m1">송금</span></div>
         <div class="menu-item"><span class="menu-icon">🛒</span><span class="menu-text" id="m2">결제</span></div>
         <div class="menu-item"><span class="menu-icon">🏦</span><span class="menu-text" id="m3">예치</span></div>
     </div>
-    <div class="menu-grid" style="margin-bottom: 40px;">
+    <div class="menu-grid" style="margin-bottom: 45px;">
         <div class="menu-item"><span class="menu-icon">🎁</span><span class="menu-text" id="m4">보상</span></div>
         <div class="menu-item"><span class="menu-icon">💴</span><span class="menu-text" id="m5">기본소득</span></div>
         <div class="menu-item"><span class="menu-icon">🔄</span><span class="menu-text" id="m6">스왑</span></div>
@@ -116,19 +121,18 @@
     <div id="vision-panel" class="panel"><div id="vision-list"></div></div>
 
     <div class="social-row">
-        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="soc-btn youtube-btn">🎬 YouTube</a>
-        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="soc-btn tiktok-btn">🎵 TikTok</a>
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="soc-btn" style="background: #FF0000;">YouTube</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="soc-btn" style="background: #111; border: 1px solid #333;">TikTok</a>
     </div>
 
     <div class="footer">HK GROUP GLOBAL HEADQUARTERS</div>
 </div>
 
-<div class="bbini-float" onclick="alert('혜공 형님, 삐니가 항상 응원합니다!')">삐니</div>
-
 <script>
     const db = {
         ko: {
-            title: "HK WORLD BANK", subtitle: "메인자산통합원장", supply: "HKWB 실시간 공급량", staking: "스태이킹 이율", lp: "LP 수익률", liq: "전체 유동성 현황 (DEX)",
+            title: "HK WORLD BANK", subtitle: "메인자산통합원장", liq: "전체 유동성 현황 (DEX)", supply: "HKWB 실시간 공급량", eco: "HK ECOSYSTEM",
+            pi_qty: "PI 수량", swap_eng: "DEX 스왑", staking_eng: "LP 스테이킹",
             m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑",
             faq_btn: "글로벌 AI 지원센터 (FAQ 20)", vision_btn: "HK 사회 재단 비전 2030",
             faqs: [
@@ -162,7 +166,8 @@
             ]
         },
         en: {
-            title: "HK WORLD BANK", subtitle: "Global Asset Ledger", supply: "HKWB Real-time Supply", staking: "Staking", lp: "LP APR", liq: "Total Liquidity (DEX)",
+            title: "HK WORLD BANK", subtitle: "Global Asset Ledger", liq: "Total Liquidity (DEX)", supply: "HKWB Supply", eco: "HK ECOSYSTEM",
+            pi_qty: "PI Qty", swap_eng: "DEX Swap", staking_eng: "LP Staking",
             m1: "Transfer", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Swap",
             faq_btn: "AI Support (FAQ 20)", vision_btn: "HK Vision 2030",
             faqs: [
@@ -196,17 +201,18 @@
             ]
         },
         zh: {
-            title: "HK 世界银行", subtitle: "全球资产账本", supply: "HKWB 实时供应量", staking: "质押利率", lp: "LP 收益率", liq: "总流动性 (DEX)",
+            title: "HK 世界银行", subtitle: "全球资产账本", liq: "总流动性 (DEX)", supply: "HKWB 实时供应量", eco: "HK 生态系统",
+            pi_qty: "PI 数量", swap_eng: "DEX 闪兑", staking_eng: "LP 质押",
             m1: "汇款", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "闪兑",
             faq_btn: "AI 支持 (FAQ 20)", vision_btn: "HK 2030 愿景",
             faqs: [
                 ["安全水平?", "采用量子加密技术的全球最高安全级别。"],
-                ["基本收入?", "自动分配集团利润의 30%。"],
+                ["基本收入?", "自动分配集团利润的 30%。"],
                 ["免费机器人?", "按申请顺序向每个家庭发放机器人。"],
                 ["主网转换?", "测试网数据将以 1:1 比例安全转换。"],
                 ["能源自给?", "结合核聚变技术，实现零居住成本。"],
                 ["教育支持?", "AI 导师 24 小时提供免费个性化教育。"],
-                ["医疗福利?", "基金会全액资助癌症及疑难病治疗。"],
+                ["医疗福利?", "基金会全额资助癌症及疑难病治疗。"],
                 ["手续费政策?", "90% 的手续费立即返还给生态贡献者。"],
                 ["如何参与?", "通过节点运营和应用内活动参与。"],
                 ["未来价值?", "整合 HK 集团所有尖端技术的经济中心。"],
@@ -216,13 +222,13 @@
                 ["投资安全?", "实时算法防御流动性以保护价值。"],
                 ["社会贡献?", "利润用于消除全球贫困。"],
                 ["机器人安全?", "本地化存储防止黑客攻击和外泄。"],
-                ["奖学금?", "为创新人才提供每月最高 5000 美元的资助。"],
+                ["奖学金?", "为创新人才提供每月最高 5000 美元的资助。"],
                 ["治理权限?", "保障创始人的最终决定权和策划权。"],
                 ["稳定性?", "AI 自我诊断确保系统不间단运行。"],
                 ["삐니的角色?", "作为专属助手，协助资产与技术管理。"]
             ],
             visions: [
-                ["🏫 HK 全球 AI 学校", "建设全球免费教育系统"],
+                ["🏫 HK 全球 AI 학교", "建设全球免费教育系统"],
                 ["🏥 纳米医疗中心", "攻克癌症及疑难病的医疗支持"],
                 ["🏠 能源自给智能家居", "实现零能源成本的居住环境"],
                 ["🎓 未来人才培养", "全额资助创新人才的研究与生活"],
@@ -236,10 +242,12 @@
         const s = db[lang];
         document.getElementById('txt-title').innerText = s.title;
         document.getElementById('txt-subtitle').innerText = s.subtitle;
-        document.getElementById('txt-supply-label').innerText = s.supply;
-        document.getElementById('lbl-staking').innerText = s.staking;
-        document.getElementById('lbl-lp').innerText = s.lp;
         document.getElementById('txt-liq-label').innerText = s.liq;
+        document.getElementById('txt-supply-label').innerText = s.supply;
+        document.getElementById('txt-eco').innerText = s.eco;
+        document.getElementById('lbl-pi-qty').innerText = s.pi_qty;
+        document.getElementById('lbl-swap-eng').innerText = s.swap_eng;
+        document.getElementById('lbl-staking-eng').innerText = s.staking_eng;
         document.getElementById('m1').innerText = s.m1;
         document.getElementById('m2').innerText = s.m2;
         document.getElementById('m3').innerText = s.m3;
@@ -274,6 +282,7 @@
         p += Math.random()*0.0001;
         s += Math.random()*0.0005;
         document.getElementById('pi-val').innerHTML = p.toFixed(4) + " <span>Pi</span>";
+        document.getElementById('engine-pi').innerText = p.toFixed(2);
         document.getElementById('total-supply').innerText = s.toLocaleString(undefined, {minimumFractionDigits: 4});
     }, 1000);
 

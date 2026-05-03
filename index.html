@@ -3,44 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - THE ORIGINAL</title>
+    <title>HK WORLD BANK - GLOBAL MASTERPIECE</title>
     <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
-            --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #111111;
+            --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #121212;
         }
-        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; }
+        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 500px; padding: 25px; box-sizing: border-box; text-align: center; }
         
+        /* 다국어 셀렉터 */
         .lang-select-box { position: fixed; top: 15px; right: 15px; z-index: 9999; }
-        .lang-select-box select { background: #111; color: var(--hk-gold); border: 2.5px solid var(--hk-gold); border-radius: 12px; padding: 8px; font-weight: 900; }
+        .lang-select-box select { background: #111; color: var(--hk-gold); border: 2.5px solid var(--hk-gold); border-radius: 12px; padding: 8px; font-weight: 900; outline: none; }
 
-        .header-section { margin: 55px 0 30px 0; }
-        .header-title { font-size: 42px; font-weight: 900; color: var(--hk-gold); letter-spacing: -1.5px; }
+        .header-section { margin: 55px 0 35px 0; }
+        .header-title { font-size: 42px; font-weight: 900; color: var(--hk-gold); letter-spacing: -1.5px; text-shadow: 0 0 20px rgba(255,215,0,0.4); }
         .sub-header { color: var(--hk-blue); font-size: 18px; font-weight: 800; margin-top: 10px; letter-spacing: 1px; }
 
-        .pi-display { font-size: 65px; font-weight: 900; margin: 35px 0; color: #fff; }
+        .pi-display { font-size: 65px; font-weight: 900; margin: 35px 0; }
         .pi-display span { color: var(--hk-gold); font-size: 32px; margin-left: 10px; }
 
+        /* 스테이킹 이율 소수점 2자리 고정 */
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .stat-box { background: var(--hk-card); padding: 25px; border-radius: 25px; border: 1px solid #333; }
+        .stat-box { background: var(--hk-card); padding: 25px; border-radius: 25px; border: 1px solid #222; }
         .stat-label { font-size: 13px; color: #888; font-weight: 800; margin-bottom: 12px; display: block; }
         .stat-val { font-size: 26px; font-weight: 900; }
 
         .liq-card { border: 3.5px solid var(--hk-green); background: rgba(57, 255, 20, 0.05); padding: 35px 20px; border-radius: 25px; margin-bottom: 40px; }
         .liq-val { font-size: 34px; font-weight: 900; color: var(--hk-green); }
 
-        /* 메뉴 개별 로고 디자인 */
+        /* 6개 메뉴 개별 로고 스타일 */
         .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 45px; }
-        .menu-item { background: #111; padding: 28px 0; border-radius: 26px; border: 1.5px solid #222; }
-        .menu-icon { font-size: 35px; display: block; margin-bottom: 12px; }
+        .menu-item { background: linear-gradient(145deg, #1a1a1a, #0d0d0d); padding: 28px 0; border-radius: 26px; border: 1.5px solid #252525; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.3s; }
+        .menu-item:active { transform: scale(0.95); background: #222; }
+        .menu-icon { font-size: 35px; display: block; margin-bottom: 12px; filter: drop-shadow(0 0 8px rgba(255,255,255,0.2)); }
         .menu-text { font-size: 15px; font-weight: 900; color: #fff; }
 
-        .big-btn { width: 100%; padding: 25px; border-radius: 25px; font-size: 20px; font-weight: 900; color: #fff; border: none; margin-bottom: 18px; cursor: pointer; }
+        /* 액션 버튼 및 패널 */
+        .action-btn { width: 100%; padding: 25px; border-radius: 25px; font-size: 20px; font-weight: 900; color: #fff; border: none; margin-bottom: 18px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .panel { display: none; background: #080808; border-radius: 30px; padding: 30px; border: 1px solid #333; text-align: left; margin-bottom: 25px; }
         
+        /* FAQ & 비전 원본 스타일 */
         .faq-item { margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 18px; }
-        .faq-q { color: var(--hk-gold); font-weight: 900; font-size: 16px; margin-bottom: 10px; display: flex; gap: 8px; }
+        .faq-q { color: var(--hk-gold); font-weight: 900; font-size: 16px; margin-bottom: 10px; display: flex; gap: 8px; line-height: 1.4; }
         .faq-a { color: #ddd; font-size: 14px; line-height: 1.8; }
 
         .vision-item { margin-bottom: 25px; padding-left: 18px; border-left: 5px solid var(--hk-blue); }
@@ -48,7 +53,7 @@
         .vision-desc { color: #bbb; font-size: 14px; line-height: 1.7; }
 
         .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
-        .soc-btn { padding: 22px; border-radius: 22px; color: #fff; text-decoration: none; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .soc-btn { padding: 22px; border-radius: 22px; color: #fff; text-decoration: none; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; }
 
         .footer { margin: 80px 0 100px 0; color: #444; font-size: 12px; font-weight: 900; letter-spacing: 2px; }
     </style>
@@ -57,11 +62,9 @@
 
 <div class="lang-select-box">
     <select id="lang-selector" onchange="updateView()">
-        <option value="ko">🇰🇷 KOREAN</option><option value="en">🇺🇸 ENGLISH</option><option value="zh">🇨🇳 CHINESE</option>
-        <option value="ar">🇸🇦 ARABIC</option><option value="hi">🇮🇳 HINDI</option><option value="es">🇪🇸 SPANISH</option>
-        <option value="pt">🇧🇷 BRAZIL</option><option value="uk">🇺🇦 UKRAINE</option><option value="ja">🇯🇵 JAPANESE</option>
-        <option value="ru">🇷🇺 RUSSIAN</option><option value="vi">🇻🇳 VIETNAM</option><option value="th">🇹🇭 THAILAND</option>
-        <option value="id">🇮🇩 INDONESIA</option>
+        <option value="ko">🇰🇷 KOREAN</option>
+        <option value="en">🇺🇸 ENGLISH</option>
+        <option value="zh">🇨🇳 CHINESE</option>
     </select>
 </div>
 
@@ -91,10 +94,10 @@
 
     <div class="menu-grid" id="menu-box"></div>
 
-    <button class="big-btn" style="background: var(--hk-pink);" onclick="toggle('faq-panel')" id="btn-faq">글로벌 AI 지원센터 (FAQ 20)</button>
+    <button class="action-btn" style="background: var(--hk-pink);" onclick="toggle('faq-panel')" id="btn-faq">글로벌 AI 지원센터 (FAQ 20)</button>
     <div id="faq-panel" class="panel"></div>
 
-    <button class="big-btn" style="background: #2c3e50;" onclick="toggle('vision-panel')" id="btn-vision">HK 사회 재단 비전</button>
+    <button class="action-btn" style="background: #2c3e50;" onclick="toggle('vision-panel')" id="btn-vision">HK 사회 재단 비전</button>
     <div id="vision-panel" class="panel"></div>
 
     <div class="social-grid">
@@ -106,12 +109,11 @@
 </div>
 
 <script>
-    const data = {
+    const globalData = {
         ko: {
             sub: "통합 자산 관리 시스템", stake: "스테이킹 이율", lp: "LP 수익률", liq: "전체 유동성 (DEX LP)",
             menus: ["송금", "결제", "예치", "보상", "기본소득", "스왑"],
-            faq_btn: "글로벌 AI 지원센터 (FAQ 20)",
-            vision_btn: "HK 사회 재단 비전",
+            faq_btn: "글로벌 AI 지원센터 (FAQ 20)", vision_btn: "HK 사회 재단 비전",
             faqs: [
                 ["HK WORLD BANK의 보안 수준은?", "양자 컴퓨터의 공격도 막아내는 최첨단 양자 내성 암호화(PQC) 기술과 다중 분산 원장 기술을 결합하여, 전 세계 금융 시스템 중 가장 안전한 보안 수준을 자랑합니다."],
                 ["기본소득 배분은 어떻게 이루어지나요?", "HK 그룹 전체 순이익의 30%를 전 인류에게 공평하게 나누어주는 시스템으로, HK 월드뱅크 계좌를 보유한 모든 사용자에게 실시간으로 자동 배분됩니다."],
@@ -141,12 +143,17 @@
                 ["🎓 글로벌 혁신 인재 장학 재단", "전 세계의 천재적인 인재들이 돈 걱정 없이 연구에만 몰두할 수 있도록 파격적인 연구비와 생활비를 무기한 지원합니다."],
                 ["🤖 1가정 1로봇 휴머노이드 보급", "모든 가정에 가사 노동을 전담할 로봇을 무상 보급하여 인류를 고된 노동에서 해방시키고 오직 창의적인 삶에만 집중하게 합니다."]
             ]
+        },
+        en: {
+            sub: "Integrated Asset Management", stake: "Staking APR", lp: "LP Yield", liq: "Total Liquidity",
+            menus: ["Send", "Pay", "Deposit", "Reward", "UBI", "Swap"],
+            faq_btn: "AI Support Center (FAQ 20)", vision_btn: "HK Foundation Vision"
         }
     };
 
     function updateView() {
         const lang = document.getElementById('lang-selector').value;
-        const s = data[lang] || data.ko; // 기본 한국어로 설정
+        const s = globalData[lang] || globalData.ko;
 
         document.getElementById('txt-sub').innerText = s.sub;
         document.getElementById('lbl-stake').innerText = s.stake;
@@ -158,22 +165,22 @@
         // 메뉴 구성
         const icons = ["🚀", "💳", "🏦", "💎", "🏛️", "🔄"];
         let mHtml = "";
-        const mList = s.menus || data.ko.menus;
+        const mList = s.menus || globalData.ko.menus;
         mList.forEach((m, i) => {
             mHtml += `<div class="menu-item"><span class="menu-icon">${icons[i]}</span><span class="menu-text">${m}</span></div>`;
         });
         document.getElementById('menu-box').innerHTML = mHtml;
 
-        // FAQ 20 원본 복구
+        // FAQ 원본 출력 (한국어 데이터 고정)
         let fHtml = "";
-        data.ko.faqs.forEach((f, i) => {
+        globalData.ko.faqs.forEach((f, i) => {
             fHtml += `<div class="faq-item"><div class="faq-q">Q${i+1}. ${f[0]}</div><div class="faq-a">${f[1]}</div></div>`;
         });
         document.getElementById('faq-panel').innerHTML = fHtml;
 
-        // 5대 비전 원본 복구
+        // 비전 원본 출력 (한국어 데이터 고정)
         let vHtml = "";
-        data.ko.visions.forEach(v => {
+        globalData.ko.visions.forEach(v => {
             vHtml += `<div class="vision-item"><b class="vision-title">${v[0]}</b><div class="vision-desc">${v[1]}</div></div>`;
         });
         document.getElementById('vision-panel').innerHTML = vHtml;
@@ -186,17 +193,17 @@
         el.style.display = isV ? 'none' : 'block';
     }
 
-    // 숫자 애니메이션
-    let p = 412.3171, l = 88438688147, st = 17.61, lp = 28.56;
+    // 숫자 애니메이션 (이율 소수점 2자리 고정)
+    let pi = 412.3171, liq = 88438688147, st = 17.61, lp_y = 28.56;
     setInterval(() => {
-        p += Math.random() * 0.0002;
-        l += Math.floor(Math.random() * 20000);
+        pi += Math.random() * 0.0002;
+        liq += Math.floor(Math.random() * 20000);
         st += (Math.random() - 0.5) * 0.01;
-        lp += (Math.random() - 0.5) * 0.01;
-        document.getElementById('val-pi').innerText = p.toFixed(4);
-        document.getElementById('val-liq').innerText = "$ " + l.toLocaleString();
+        lp_y += (Math.random() - 0.5) * 0.01;
+        document.getElementById('val-pi').innerText = pi.toFixed(4);
+        document.getElementById('val-liq').innerText = "$ " + liq.toLocaleString();
         document.getElementById('val-stake').innerText = st.toFixed(2) + "%";
-        document.getElementById('val-lp').innerText = lp.toFixed(2) + "%";
+        document.getElementById('val-lp').innerText = lp_y.toFixed(2) + "%";
     }, 1300);
 
     updateView();

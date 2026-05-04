@@ -2,186 +2,156 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HKWB - HK Group Vision 2030</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK WORLD BANK - GLOBAL MASTER</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
-        body { font-family: 'Noto Sans KR', sans-serif; background-color: #030508; color: #f1f5f9; }
-        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .accordion-content { max-height: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; }
-        .accordion-item.active .accordion-content { max-height: 1000px; opacity: 1; padding: 1.5rem; background: rgba(255, 255, 255, 0.03); }
-        .lang-marquee { display: flex; width: max-content; animation: marquee 60s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .gold-glow { text-shadow: 0 0 15px rgba(251, 191, 36, 0.6); }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;900&display=swap');
+        body { font-family: 'Poppins', 'Noto Sans KR', sans-serif; background-color: #000000; color: #ffffff; }
+        .pi-glow { text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+        .glass-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: all 0.5s ease; opacity: 0; }
+        .accordion-item.active .accordion-content { max-height: 1000px; opacity: 1; margin-top: 10px; }
+        .pi-font { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
-<body class="pb-32">
+<body class="pb-24">
 
-    <div class="glass border-b border-white/5 py-3 overflow-hidden">
-        <div class="lang-marquee space-x-8 text-[10px] font-bold text-gray-500">
-            <span>🇰🇷 한국어</span><span>🇺🇸 English</span><span>🇨🇳 中文</span><span>🇸🇦 العربية</span><span>🇮🇳 हिन्दी</span>
-            <span>🇪🇸 Español</span><span>🇧🇷 Português</span><span>🇺🇦 Українська</span><span>🇯🇵 日本語</span><span>🇷🇺 Русский</span>
-            <span>🇻🇳 Tiếng Việt</span><span>🇹🇭 ไทย</span><span>🇮🇩 Indonesia</span><span>🇫🇷 Français</span><span>🇩🇪 Deutsch</span>
-            <span>... 글로벌 40개국 지원 ...</span>
-            <span>🇰🇷 한국어</span><span>🇺🇸 English</span><span>🇨🇳 中文</span><span>🇸🇦 العربية</span>
+    <div class="px-4 py-1 flex justify-between items-center text-[11px] text-gray-500">
+        <div>SKT <span class="font-bold text-white">21:07</span></div>
+        <div class="flex items-center space-x-1">
+            <i class="fas fa-signal"></i><i class="fas fa-wifi"></i><i class="fas fa-battery-three-quarters text-green-500"></i> <span class="font-bold text-white">91</span>
         </div>
     </div>
 
-    <header class="py-12 text-center">
-        <h1 class="text-6xl font-black tracking-tighter gold-glow italic text-white uppercase">HKWB</h1>
-        <p class="text-yellow-500 text-xs mt-4 tracking-[0.4em] font-bold">HK GROUP GLOBAL ADVANCED CENTER</p>
-    </header>
+    <main class="max-w-md mx-auto px-5 pt-3 space-y-7">
 
-    <main class="max-w-2xl mx-auto px-6 space-y-10">
+        <header class="flex justify-between items-center">
+            <h1 class="text-[22px] font-black tracking-tighter text-yellow-400">HK WORLD BANK</h1>
+            <button class="flex items-center space-x-1 glass-card border border-yellow-500 rounded-full px-4 py-1 text-[11px]">
+                <span>🇰🇷 KOREAN</span><i class="fas fa-chevron-down text-[8px] text-yellow-600"></i>
+            </button>
+        </header>
 
-        <section class="glass rounded-[2rem] p-8 grid grid-cols-3 gap-4 text-center border border-yellow-500/20">
-            <div><p class="text-[10px] text-gray-500 mb-1">PI 수량</p><p class="font-bold text-white uppercase">Secured</p></div>
-            <div><p class="text-[10px] text-gray-500 mb-1">DEX 스왑</p><i class="fas fa-sync text-yellow-500"></i></div>
-            <div><p class="text-[10px] text-gray-500 mb-1">LP 스테이킹</p><p class="text-green-400 font-bold">28.57%</p></div>
+        <div class="text-center">
+            <h2 class="text-[12px] font-semibold text-blue-400">메인자산통합원장</h2>
+        </div>
+
+        <section class="text-center space-y-2">
+            <p class="text-5xl font-black pi-font pi-glow leading-none">400.0220</p>
+            <p class="text-[20px] font-black text-yellow-500">Pi</p>
         </section>
 
-        <section class="space-y-4">
-            <h2 class="text-2xl font-black text-center mb-6 italic text-yellow-500">HK 사회 재단 5대 비전 2030</h2>
-            <div class="glass rounded-[2.5rem] overflow-hidden border border-white/10">
-                <div class="accordion-item border-b border-white/5">
-                    <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex justify-between items-center group">
-                        <span class="font-bold text-sm">01. 글로벌 AI 통합 지원 시스템 구축</span>
-                        <i class="fas fa-chevron-down text-xs text-gray-600 group-hover:text-yellow-500"></i>
-                    </button>
-                    <div class="accordion-content text-xs text-gray-400 leading-relaxed">
-                        전 세계 모든 사용자가 언어와 기술의 장벽 없이 AI 혜택을 누릴 수 있도록 24시간 실시간 글로벌 지원 센터를 운영합니다.
-                    </div>
+        <div class="text-center py-4 border-2 border-green-500 rounded-[2rem] shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+            <p class="text-[15px] font-bold text-green-500 pi-font">Value: $ 125,663,600 (GCV)</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="glass-card rounded-[1.2rem] p-5 text-center">
+                <p class="text-[11px] text-gray-600 mb-1">스테이킹 이율</p>
+                <p class="text-[14px] font-bold text-blue-400 pi-font">18.5% (APY)</p>
+            </div>
+            <div class="glass-card rounded-[1.2rem] p-5 text-center">
+                <p class="text-[11px] text-gray-600 mb-1">LP 수익률</p>
+                <p class="text-[14px] font-bold text-pink-500 pi-font">24.5% (Yield)</p>
+            </div>
+        </div>
+
+        <div class="glass-card rounded-[1.2rem] p-6 text-center border border-yellow-500 shadow-[0_0_20px_rgba(251,191,36,0.2)]">
+            <p class="text-[12px] font-bold text-gray-500 mb-2">전체 유동성 현황 (DEX LP)</p>
+            <p class="text-3xl font-black text-green-500 pi-font leading-none">$ 88,438,688,147</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-x-2 gap-y-6 pt-3 text-center">
+            <button class="flex flex-col items-center group">
+                <i class="fas fa-paper-plane text-2xl text-blue-500 mb-2 group-active:scale-95"></i>
+                <span class="text-[10px] text-gray-400">송금</span>
+            </button>
+            <button class="flex flex-col items-center group">
+                <i class="fas fa-shopping-cart text-2xl text-yellow-500 mb-2 group-active:scale-95"></i>
+                <span class="text-[10px] text-gray-400">결제</span>
+            </button>
+            <button class="flex flex-col items-center group">
+                <i class="fas fa-bank text-2xl text-red-500 mb-2 group-active:scale-95"></i>
+                <span class="text-[10px] text-gray-400">예치</span>
+            </button>
+            <button class="flex flex-col items-center group">
+                <i class="fas fa-gift text-2xl text-orange-500 mb-2 group-active:scale-95"></i>
+                <span class="text-[10px] text-gray-400">보상</span>
+            </button>
+            <button class="flex flex-col items-center group">
+                <i class="fas fa-id-card text-2xl text-yellow-600 mb-2 group-active:scale-95"></i>
+                <span class="text-[10px] text-gray-400">기본소득</span>
+            </button>
+            <button class="flex flex-col items-center group">
+                <i class="fas fa-sync text-2xl text-blue-400 mb-2 group-active:scale-95"></i>
+                <span class="text-[10px] text-gray-400">스왑</span>
+            </button>
+        </div>
+
+        <section class="space-y-3 pt-5">
+            <div class="accordion-item">
+                <button onclick="toggleAccordion(this)" class="w-full bg-yellow-500 text-black py-4 rounded-[1.2rem] font-bold text-sm shadow-[0_5px_15px_rgba(251,191,36,0.3)] hover:scale-[1.02] active:scale-95 transition-all">
+                    HK 사회 재단 5대 비전 2030 (계층 구조)
+                </button>
+                <div class="accordion-content glass-card rounded-[1.2rem] p-5 text-xs text-gray-300 space-y-3 leading-relaxed">
+                    <p><span class="text-yellow-500 font-bold">01.</span> 글로벌 AI 통합 지원 시스템 구축</p>
+                    <p><span class="text-yellow-500 font-bold">02.</span> 휴머노이드 로봇(Figure AI) 산업 육성</p>
+                    <p><span class="text-yellow-500 font-bold">03.</span> 무한 청정 에너지 핵융합 인프라</p>
+                    <p><span class="text-yellow-500 font-bold">04.</span> PI 네트워크 기반 디지털 금융 평등</p>
+                    <p><span class="text-yellow-500 font-bold">05.</span> 글로벌 기본 소득 재단 실현</p>
                 </div>
-                <div class="accordion-item border-b border-white/5">
-                    <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex justify-between items-center group">
-                        <span class="font-bold text-sm">02. 휴머노이드 로봇(Figure AI) 산업 육성</span>
-                        <i class="fas fa-chevron-down text-xs text-gray-600"></i>
-                    </button>
-                    <div class="accordion-content text-xs text-gray-400 leading-relaxed">
-                        차세대 로봇 기술을 통해 인류의 단순 반복 노동을 해방시키고 더 높은 가치의 창의적 삶을 지원합니다.
-                    </div>
-                </div>
-                <div class="accordion-item border-b border-white/5">
-                    <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex justify-between items-center group">
-                        <span class="font-bold text-sm">03. 무한 청정 에너지 핵융합 인프라</span>
-                        <i class="fas fa-chevron-down text-xs text-gray-600"></i>
-                    </button>
-                    <div class="accordion-content text-xs text-gray-400 leading-relaxed">
-                        핵융합 에너지와 우주 인프라 구축을 통해 에너지 걱정 없는 인류 문명의 새로운 기틀을 마련합니다.
-                    </div>
-                </div>
-                <div class="accordion-item border-b border-white/5">
-                    <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex justify-between items-center group">
-                        <span class="font-bold text-sm">04. PI 네트워크 기반 디지털 금융 평등</span>
-                        <i class="fas fa-chevron-down text-xs text-gray-600"></i>
-                    </button>
-                    <div class="accordion-content text-xs text-gray-400 leading-relaxed">
-                        HKWB 자산 관리 시스템을 통해 전 세계 누구나 공정하게 디지털 자산을 형성하고 결제할 수 있는 환경을 제공합니다.
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex justify-between items-center group">
-                        <span class="font-bold text-sm">05. 글로벌 기본 소득 재단 실현</span>
-                        <i class="fas fa-chevron-down text-xs text-gray-600"></i>
-                    </button>
-                    <div class="accordion-content text-xs text-gray-400 leading-relaxed">
-                        2030년까지 전 지구적 네트워크 보상을 통해 최소한의 삶의 질을 보장하는 사회적 안전망을 구축합니다.
-                    </div>
+            </div>
+            
+            <div class="accordion-item">
+                <button onclick="toggleAccordion(this)" class="w-full bg-[#1e293b] text-white py-4 rounded-[1.2rem] font-bold text-sm shadow-xl active:scale-95 transition-all">
+                    글로벌 AI 지원센터 (FAQ 20선)
+                </button>
+                <div class="accordion-content glass-card rounded-[1.2rem] p-5 text-xs text-gray-300 space-y-2 leading-relaxed">
+                    <p class="font-bold text-yellow-500">양파를 까듯 20가지 질문에 대한 핵심 정보가 숨겨져 있습니다.</p>
+                    <p> Q. HKWB는 어떤 서비스인가요?</p>
+                    <p> Q. PI 자산 보안은 어떻게 되나요?</p>
+                    <p> Q. 40개 언어 지원 범위는 어디까지인가요?</p>
+                    <p>... Ask Anything 버튼으로 직접 문의하세요 ...</p>
                 </div>
             </div>
         </section>
 
-        <section class="space-y-4">
-            <h2 class="text-2xl font-black text-center mb-6 italic text-blue-400">Global AI Center FAQ 20</h2>
-            <div class="space-y-3">
-                <script>
-                    const faqs = [
-                        "HKWB는 어떤 서비스를 제공하나요?",
-                        "PI 코인과 HKWB의 연동 방식은?",
-                        "DEX 스왑 수수료는 어떻게 되나요?",
-                        "LP 스테이킹 보상은 언제 지급되나요?",
-                        "전 세계 40개 언어 상담이 가능한가요?",
-                        "HK 사회 재단의 가입 조건은?",
-                        "AI 챗봇은 어떻게 이용하나요?",
-                        "보안 및 자산 보호 시스템은?",
-                        "휴머노이드 로봇 산업 투자는 어떻게?",
-                        "핵융합 에너지 프로젝트 진행 현황은?",
-                        "글로벌 기본소득 수령 방법은?",
-                        "HKWB 앱 설치 가이드",
-                        "비전 2030의 구체적 로드맵",
-                        "이메일 지원센터 운영 시간",
-                        "YouTube 및 TikTok 채널 안내",
-                        "HKWB 지갑 생성 및 복구 방법",
-                        "GVC 자산 평가 기준은?",
-                        "스마트 컨트랙트 검증 여부",
-                        "글로벌 파트너십 현황",
-                        "회장님(Hyekong)의 메시지 확인 방법"
-                    ];
-                    document.write(faqs.map((f, i) => `
-                        <div class="accordion-item glass rounded-2xl overflow-hidden">
-                            <button onclick="toggleAccordion(this)" class="w-full p-5 text-left flex justify-between items-center text-xs font-semibold">
-                                <span>${i+1}. ${f}</span>
-                                <i class="fas fa-plus text-[10px] text-yellow-600 transition-transform"></i>
-                            </button>
-                            <div class="accordion-content">
-                                <p class="text-xs text-gray-400 leading-relaxed">
-                                    해당 질문에 대한 답변은 HKWB 글로벌 AI 상담사가 고객님의 자산 현황과 지역에 맞춰 최적화된 정보를 실시간으로 분석하여 제공합니다. 지금 아래 'ASK ANYTHING' 버튼을 눌러 확인하세요.
-                                </p>
-                            </div>
-                        </div>
-                    `).join(''));
-                </script>
-            </div>
-        </section>
-
-        <div class="flex gap-4">
-            <a href="#" class="flex-1 glass py-5 rounded-3xl flex flex-col items-center space-y-2 border border-red-500/10">
-                <i class="fab fa-youtube text-red-600 text-2xl"></i>
-                <span class="text-[10px] font-bold">YOUTUBE</span>
+        <div class="grid grid-cols-2 gap-4 pt-3">
+            <a href="#" class="bg-red-600 rounded-[1.2rem] py-4 text-center font-bold text-sm shadow-lg group active:scale-95 transition-all">
+                <i class="fab fa-youtube text-lg mr-2 group-active:scale-110"></i>YouTube
             </a>
-            <a href="#" class="flex-1 glass py-5 rounded-3xl flex flex-col items-center space-y-2 border border-white/10">
-                <i class="fab fa-tiktok text-white text-2xl"></i>
-                <span class="text-[10px] font-bold">TIKTOK</span>
+            <a href="#" class="glass-card rounded-[1.2rem] py-4 text-center font-bold text-sm shadow-xl group active:scale-95 transition-all border border-white/10">
+                <i class="fab fa-tiktok text-lg mr-2 group-active:scale-110"></i>TikTok
             </a>
         </div>
 
     </main>
 
-    <footer class="mt-24 pb-16 text-center">
-        <p class="text-xs text-yellow-500 mb-4 font-bold tracking-widest uppercase">Contact Us</p>
-        <a href="mailto:support@hkwb.world" class="text-2xl font-light underline decoration-yellow-500 underline-offset-8">
-            support@hkwb.world
-        </a>
-        <div class="mt-12 text-[9px] text-gray-700 tracking-widest leading-loose">
-            HK GROUP FOUNDER & CHAIRMAN LEE JAEWAN (HYEKONG)<br>
-            GLOBAL ADVANCED CLUSTER PROJECT 2026
-        </div>
+    <footer class="mt-16 text-center text-[10px] text-gray-700 font-mono tracking-wider">
+        <p>Contact: support@hkwb.world</p>
+        <p class="mt-1">© 2026 HK GROUP BY HYEKONG</p>
     </footer>
 
-    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md z-50">
-        <button class="w-full bg-yellow-500 text-black py-4 rounded-2xl font-black text-sm shadow-[0_20px_60px_rgba(251,191,36,0.3)] hover:scale-[1.02] transition-transform">
-            <i class="fas fa-comment-dots mr-2"></i> ASK ANYTHING (40 LANGUAGES SUPPORT)
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md">
+        <button class="w-full bg-yellow-500 text-black py-4 rounded-full font-black text-xs shadow-[0_20px_50px_rgba(251,191,36,0.4)] active:scale-95 transition-all">
+            <i class="fas fa-comment-dots mr-2"></i>ASK ANYTHING (40 LANGUAGES SUPPORT)
         </button>
     </div>
 
     <script>
+        // 양파까기(아코디언) 기능 자바스크립트
         function toggleAccordion(btn) {
             const item = btn.closest('.accordion-item');
             const isActive = item.classList.contains('active');
             
-            // 다른 아코디언은 닫기
-            document.querySelectorAll('.accordion-item').forEach(el => {
-                el.classList.remove('active');
-                const icon = el.querySelector('.fa-plus, .fa-chevron-down');
-                if(icon) icon.style.transform = "rotate(0deg)";
-            });
+            // 모든 아코디언은 닫기
+            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
 
             if (!isActive) {
+                // 현재 클릭한 것만 열기
                 item.classList.add('active');
-                const icon = btn.querySelector('.fa-plus, .fa-chevron-down');
-                if(icon) icon.style.transform = "rotate(180deg)";
             }
         }
     </script>

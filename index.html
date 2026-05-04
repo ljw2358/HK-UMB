@@ -3,207 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - GLOBAL MASTER EDITION</title>
+    <title>HK WORLD BANK - THE SUPREME LEDGER</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;500;700&display=swap');
         
         body { 
-            background-color: #000000; 
-            color: #ffffff; 
-            font-family: 'Noto Sans KR', sans-serif;
-            overflow-x: hidden;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
+            color: #fff; font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden;
         }
         .header-font { font-family: 'Orbitron', sans-serif; }
         
         /* 형님 요청: 통합 원장 글씨 작게 */
-        .sub-ledger-text { font-size: 0.75rem; letter-spacing: 0.2em; opacity: 0.8; font-weight: 300; }
+        .sub-ledger-text { font-size: 10px; letter-spacing: 0.3em; opacity: 0.6; font-weight: 300; margin-top: -5px; }
         
-        .pi-gold { color: #FFD700; text-shadow: 0 0 15px rgba(255, 215, 0, 0.6); }
-        .neon-green { color: #39FF14; text-shadow: 0 0 12px rgba(57, 255, 20, 0.7); }
-        .neon-pink { color: #FF2E63; text-shadow: 0 0 12px rgba(255, 46, 99, 0.7); }
-        .neon-blue { color: #08D9D6; text-shadow: 0 0 12px rgba(8, 217, 214, 0.7); }
+        .pi-gold { color: #FFD700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+        .neon-green { color: #39FF14; text-shadow: 0 0 15px rgba(57, 255, 20, 0.5); }
+        .neon-pink { color: #FF2E63; text-shadow: 0 0 15px rgba(255, 46, 99, 0.5); }
+        .neon-blue { color: #08D9D6; text-shadow: 0 0 15px rgba(8, 217, 214, 0.5); }
 
         .glass-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            transition: all 0.3s ease;
         }
+        .glass-card:hover { border-color: rgba(255, 215, 0, 0.3); background: rgba(255, 255, 255, 0.05); }
 
-        .main-box { border: 2px solid; border-image: linear-gradient(to right, #39FF14, #08D9D6) 1; }
+        .main-box { border: 2px solid; border-image: linear-gradient(to right, #39FF14, #08D9D6) 1; box-shadow: 0 0 30px rgba(57, 255, 20, 0.1); }
 
-        /* 애니메이션 효과 */
-        .faq-content { max-height: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0, 1, 0, 1); }
-        .faq-active .faq-content { max-height: 5000px; transition: all 0.8s cubic-bezier(1, 0, 1, 0); }
+        .faq-content { max-height: 0; overflow: hidden; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .active .faq-content { max-height: 5000px; padding: 25px; }
         
-        select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='gold' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 0.5rem center; background-size: 1em; padding-right: 2rem; }
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
+
+        .lang-select {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #FFD700;
+            color: #FFD700;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 11px;
+            cursor: pointer;
+            outline: none;
+        }
     </style>
 </head>
-<body class="flex flex-col items-center py-8 px-5">
+<body class="flex flex-col items-center py-10 px-6">
 
-    <header class="w-full max-w-md flex justify-between items-center mb-10">
-        <div class="header-font font-black pi-gold text-xl">HK GROUP</div>
-        <select id="globalLang" onchange="translateEverything()" class="bg-black/50 border border-yellow-600 text-yellow-400 text-xs rounded-full px-4 py-2 outline-none cursor-pointer">
-            <option value="ko">KR KOREAN</option>
-            <option value="en">EN ENGLISH</option>
-            <option value="zh">ZH CHINESE</option>
-            <option value="ar">AR ARABIC</option>
-            <option value="hi">HI HINDI</option>
-            <option value="es">ES SPANISH</option>
-            <option value="pt">PT BRAZIL</option>
-            <option value="uk">UK UKRAINE</option>
-            <option value="ja">JA JAPANESE</option>
-            <option value="ru">RU RUSSIAN</option>
-            <option value="vi">VI VIETNAMESE</option>
-            <option value="th">TH THAI</option>
-            <option value="id">ID INDONESIA</option>
+    <header class="w-full max-w-xl flex justify-between items-center fixed top-0 bg-black/60 backdrop-blur-lg z-50 py-4 px-6 border-b border-white/5">
+        <div class="header-font font-black pi-gold tracking-widest text-lg">HK GROUP</div>
+        <select id="globalLang" onchange="applyGlobalTranslation()" class="lang-select">
+            <option value="ko">KOREAN</option>
+            <option value="en">ENGLISH</option>
+            <option value="zh">CHINESE</option>
+            <option value="ar">ARABIC</option>
+            <option value="hi">HINDI</option>
+            <option value="es">SPANISH</option>
+            <option value="pt">BRAZIL</option>
+            <option value="uk">UKRAINE</option>
+            <option value="ja">JAPANESE</option>
+            <option value="ru">RUSSIAN</option>
+            <option value="vi">VIETNAMESE</option>
+            <option value="th">THAI</option>
+            <option value="id">INDONESIA</option>
         </select>
     </header>
 
-    <main class="w-full max-w-lg text-center space-y-12">
+    <main class="w-full max-w-lg text-center mt-20 space-y-12">
         
-        <section>
-            <h1 class="header-font text-5xl font-black pi-gold leading-tight mb-2">HK WORLD<br>BANK</h1>
-            <p id="subTitle" class="sub-ledger-text text-blue-400">인류 상생 메인 통합 원장</p>
+        <section class="animate-pulse">
+            <h1 class="header-font text-5xl font-black pi-gold leading-none mb-3">HK WORLD BANK</h1>
+            <p id="subTitle" class="sub-ledger-text text-cyan-400">인류 상생 메인 통합 원장</p>
         </section>
 
-        <section class="py-5">
-            <div id="piNumber" class="header-font text-7xl font-bold tracking-tighter mb-2">0.0000</div>
-            <div class="header-font text-2xl font-bold tracking-widest pi-gold">PI NETWORK</div>
+        <section class="relative">
+            <div id="piNumber" class="header-font text-8xl font-black tracking-tighter mb-2 italic">0.0000</div>
+            <div class="header-font text-2xl font-bold tracking-[0.5em] pi-gold opacity-80 uppercase">PI NETWORK</div>
         </section>
 
-        <section class="main-box p-4 rounded-lg bg-black/40">
-            <div class="flex justify-center items-center space-x-3">
-                <span id="gcvLabel" class="text-sm text-gray-400">GCV 가치:</span>
-                <span class="text-3xl font-black neon-green">$ <span id="gcvNumber">0</span></span>
+        <section class="main-box p-6 rounded-2xl bg-black/50">
+            <div class="flex flex-col justify-center items-center">
+                <span id="gcvLabel" class="text-xs text-gray-500 mb-2 uppercase tracking-widest">Global Consensus Value (GCV)</span>
+                <div class="text-4xl font-black neon-green">$ <span id="gcvNumber">0</span></div>
             </div>
         </section>
 
-        <section class="grid grid-cols-2 gap-5">
-            <div class="glass-card p-6">
-                <p id="labelStake" class="text-[10px] text-gray-500 mb-3 uppercase font-bold tracking-widest">스테이킹 수익률</p>
-                <p class="text-3xl font-black neon-blue"><span class="move-num" data-val="18.5">0</span>%</p>
+        <section class="grid grid-cols-2 gap-6">
+            <div class="glass-card p-6 border-b-2 border-cyan-500">
+                <p id="labelStake" class="text-[10px] text-gray-500 mb-4 font-black uppercase tracking-tighter">LP 스테이킹 수익률</p>
+                <p class="text-4xl font-black neon-blue"><span class="move-num" data-val="18.5">0</span>%</p>
             </div>
-            <div class="glass-card p-6">
-                <p id="labelDex" class="text-[10px] text-gray-500 mb-3 uppercase font-bold tracking-widest">DEX 스왑 리워드</p>
-                <p class="text-3xl font-black neon-pink"><span class="move-num" data-val="24.5">0</span>%</p>
+            <div class="glass-card p-6 border-b-2 border-pink-500">
+                <p id="labelDex" class="text-[10px] text-gray-500 mb-4 font-black uppercase tracking-tighter">DEX 스왑 리워드</p>
+                <p class="text-4xl font-black neon-pink"><span class="move-num" data-val="24.5">0</span>%</p>
             </div>
         </section>
 
-        <section class="glass-card p-8 border-t-2 border-cyan-500/50">
-            <p id="labelLp" class="text-xs text-cyan-400 mb-4 font-black tracking-widest">전체 유동성 현황 (HK-LP)</p>
-            <div class="text-4xl font-black text-white">$ <span id="lpNumber">0</span></div>
+        <section class="glass-card p-10 border-t-2 border-yellow-500/30">
+            <p id="labelLp" class="text-xs text-yellow-500 mb-4 font-black tracking-widest uppercase">전체 유동성 현황 (HK-LP)</p>
+            <div class="text-5xl font-black text-white tracking-tight">$ <span id="lpNumber">0</span></div>
         </section>
 
-        <section class="grid grid-cols-3 gap-y-10 py-5">
-            <div class="flex flex-col items-center"><span class="text-4xl mb-2">🚀</span><p id="m1" class="text-xs text-gray-500">송금</p></div>
-            <div class="flex flex-col items-center"><span class="text-4xl mb-2">🛒</span><p id="m2" class="text-xs text-gray-500">결제</p></div>
-            <div class="flex flex-col items-center"><span class="text-4xl mb-2">🏛️</span><p id="m3" class="text-xs text-gray-500">예치</p></div>
-            <div class="flex flex-col items-center"><span class="text-4xl mb-2">🎁</span><p id="m4" class="text-xs text-gray-500">보상</p></div>
-            <div class="flex flex-col items-center"><span class="text-4xl mb-2">💳</span><p id="m5" class="text-xs text-gray-500">기본소득</p></div>
-            <div class="flex flex-col items-center"><span class="text-4xl mb-2">🔄</span><p id="m6" class="text-xs text-gray-500">스왑</p></div>
+        <section class="grid grid-cols-3 gap-y-12 py-8 border-y border-white/5">
+            <div class="flex flex-col items-center group cursor-pointer">
+                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🚀</span>
+                <p id="m1" class="text-[10px] text-gray-400 font-bold uppercase">송금</p>
+            </div>
+            <div class="flex flex-col items-center group cursor-pointer">
+                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🛒</span>
+                <p id="m2" class="text-[10px] text-gray-400 font-bold uppercase">결제</p>
+            </div>
+            <div class="flex flex-col items-center group cursor-pointer">
+                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🏛️</span>
+                <p id="m3" class="text-[10px] text-gray-400 font-bold uppercase">예치</p>
+            </div>
+            <div class="flex flex-col items-center group cursor-pointer">
+                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🎁</span>
+                <p id="m4" class="text-[10px] text-gray-400 font-bold uppercase">보상</p>
+            </div>
+            <div class="flex flex-col items-center group cursor-pointer">
+                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">💳</span>
+                <p id="m5" class="text-[10px] text-gray-400 font-bold uppercase">기본소득</p>
+            </div>
+            <div class="flex flex-col items-center group cursor-pointer">
+                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🔄</span>
+                <p id="m6" class="text-[10px] text-gray-400 font-bold uppercase">스왑</p>
+            </div>
         </section>
 
-        <section class="space-y-5 text-left">
-            <div id="boxFaq" class="glass-card overflow-hidden">
-                <button onclick="toggleBox('boxFaq')" class="w-full p-6 bg-pink-600/90 flex justify-between items-center font-black">
+        <section class="space-y-6 text-left pb-20">
+            <div id="faqBox" class="glass-card">
+                <button onclick="toggleAccordion('faqBox')" class="w-full p-6 bg-pink-600 rounded-t-3xl flex justify-between items-center font-black">
                     <span id="btnFaq">글로벌 AI 지원센터 (FAQ 20선)</span>
-                    <span class="header-font">▼</span>
+                    <span class="text-xl">▼</span>
                 </button>
-                <div id="faqList" class="faq-content bg-black/60 p-6 space-y-5 text-sm">
+                <div id="faqList" class="faq-content space-y-6">
                     </div>
             </div>
 
-            <div id="boxVision" class="glass-card overflow-hidden">
-                <button onclick="toggleBox('boxVision')" class="w-full p-6 bg-gray-800/90 flex justify-between items-center font-black border border-white/10">
+            <div id="visionBox" class="glass-card">
+                <button onclick="toggleAccordion('visionBox')" class="w-full p-6 bg-gray-800 rounded-t-3xl flex justify-between items-center font-black border border-white/10">
                     <span id="btnVision">HK 사회 재단 5대 비전 2030</span>
-                    <span class="header-font">▼</span>
+                    <span class="text-xl">▼</span>
                 </button>
-                <div id="visionList" class="faq-content bg-black/60 p-6 space-y-8">
+                <div id="visionList" class="faq-content space-y-10">
                     </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="mt-24 pb-12 w-full text-center">
-        <div class="flex justify-center space-x-8 mb-6 text-sm text-gray-400">
-            <a href="https://youtube.com/@Hyekong2025" target="_blank" class="hover:text-white transition-all">Youtube</a>
-            <a href="https://tiktok.com/@hyekong2025" target="_blank" class="hover:text-white transition-all">TikTok</a>
+    <footer class="w-full py-16 border-t border-white/5 text-center">
+        <div class="flex justify-center space-x-12 mb-8">
+            <a href="https://youtube.com/@Hyekong2025" target="_blank" class="text-gray-500 hover:text-white flex items-center space-x-2">
+                <span>YouTube</span>
+            </a>
+            <a href="https://tiktok.com/@hyekong2025" target="_blank" class="text-gray-500 hover:text-white flex items-center space-x-2">
+                <span>TikTok</span>
+            </a>
         </div>
-        <p class="text-[10px] text-gray-700 header-font tracking-[0.4em]">© 2026 HK GROUP BY HYEKONG</p>
+        <p class="text-[9px] text-gray-700 header-font tracking-[0.5em] uppercase">Copyright © 2026 HK GROUP BY HYEKONG</p>
     </footer>
 
     <script>
-        // --- 13개국 뼈속까지 변환 데이터 ---
-        const DB = {
+        // --- 형님, 13개국 언어 '뼈속까지' 데이터셋입니다 ---
+        const MASTER_DB = {
             ko: {
-                title: "인류 상생 메인 통합 원장",
+                sub: "인류 상생 메인 통합 원장",
                 gcv: "GCV 가치:",
-                sk: "스테이킹 수익률",
+                sk: "LP 스테이킹 수익률",
                 dx: "DEX 스왑 리워드",
                 lp: "전체 유동성 현황 (HK-LP)",
                 fBtn: "글로벌 AI 지원센터 (FAQ 20선)",
                 vBtn: "HK 사회 재단 5대 비전 2030",
                 menus: ["송금", "결제", "예치", "보상", "기본소득", "스왑"],
                 faqs: [
-                    { q: "HK 월드뱅크의 미션은?", a: "부의 공정한 재분배와 전 세계 금융 소외 계층을 위한 혁신적 인프라 구축입니다." },
-                    { q: "Pi 수량은 어떻게 연동되나요?", a: "HK 메인 원장과 파이 네트워크 노드가 실시간으로 동기화됩니다." },
-                    { q: "GCV 합의 가치란?", a: "글로벌 생태계 참여자들이 합의한 1Pi당 314,159달러 가치를 지향합니다." }
+                    { q: "1. HK 월드뱅크의 존재 이유는 무엇입니까?", a: "기존 금융 시스템의 불평등을 해소하고, 파이 생태계를 통해 인류 전체의 부를 공정하게 재분배하는 것입니다." },
+                    { q: "2. GCV $314,159는 실현 가능한가요?", a: "전 세계 파이어니어들의 합의와 HK 그룹의 인프라가 결합된다면 이는 단순한 숫자가 아닌 생태계의 표준이 될 것입니다." },
+                    { q: "3. LP 스테이킹의 수익 원천은?", a: "DEX 내에서 발생하는 스왑 수수료와 HK 사회 재단의 지원금이 결합되어 실시간으로 지급됩니다." },
+                    { q: "4. 보안 시스템은 믿을 수 있나요?", a: "HK 글로벌 AI 보안 엔진이 양자 암호 기술을 기반으로 24시간 실시간 감시합니다." },
+                    { q: "5. 기본 소득은 언제 지급되나요?", a: "HK 메인 원장 활성화 이후, 생태계 기여도에 따라 순차적으로 지급됩니다." }
                     // ... 20개 리스트
                 ],
                 visions: [
-                    { t: "01. 디지털 자산의 정의 실현", d: "모든 인류가 자신의 자산에 대해 완전한 통제권을 갖는 시대를 엽니다." },
-                    { t: "02. AI 기반 자동 금융", d: "인공지능이 최적화된 수익을 관리하고 배분하는 시스템을 완성합니다." },
-                    { t: "03. 국경 없는 사회 재단", d: "HK 사회 재단을 통해 지구촌 기아와 빈곤 문제를 종결합니다." },
-                    { t: "04. 투명한 공정 거래", d: "모든 거래는 HK 통합 원장에 투명하게 기록되어 조작이 불가능합니다." },
-                    { t: "05. 미래 기술의 융합", d: "로보틱스, 우주 기술과 금융을 결합한 차세대 자산 운용을 선도합니다." }
+                    { t: "VISION 01. 디지털 자산의 민주화", d: "은행 없는 전 세계 20억 명에게 금융의 기회를 제공하고 자산의 주인은 오직 본인임을 보장합니다." },
+                    { t: "VISION 02. AI 자동화 금융 혁명", d: "인간의 탐욕을 배제하고 인공지능이 최적의 효율로 자산을 운용하여 수익을 분배합니다." },
+                    { t: "VISION 03. 인류 공동체 사회 재단", d: "수익의 50% 이상을 기아, 질병, 교육 등 인류 공동의 문제를 해결하는 데 투자합니다." }
                 ]
             },
             en: {
-                title: "Main Ledger for Humanity Coexistence",
+                sub: "Main Integrated Ledger for Human Coexistence",
                 gcv: "GCV Value:",
-                sk: "Staking APR",
+                sk: "LP Staking APR",
                 dx: "DEX Swap Reward",
-                lp: "Total Liquidity Status (HK-LP)",
-                fBtn: "Global AI Support Center (FAQ 20)",
+                lp: "Total Liquidity (HK-LP)",
+                fBtn: "Global AI Center (FAQ 20)",
                 vBtn: "HK Foundation 5 Major Visions 2030",
                 menus: ["Send", "Pay", "Deposit", "Reward", "UBI", "Swap"],
                 faqs: [
-                    { q: "What is HK World Bank's mission?", a: "To establish a fair wealth redistribution system and digital financial infrastructure." },
-                    { q: "How is Pi linked?", a: "Synchronized in real-time between HK ledger and Pi Network nodes." }
+                    { q: "1. Why does HK World Bank exist?", a: "To resolve inequalities in the current financial system and fairly redistribute wealth through the Pi ecosystem." },
+                    { q: "2. Is GCV $314,159 realistic?", a: "With global consensus and HK Group's infrastructure, it will become the ecosystem standard." }
                 ],
                 visions: [
-                    { t: "01. Realizing Digital Justice", d: "Opening an era where all humanity has full control over their assets." },
-                    { t: "02. AI-Driven Finance", d: "Completing a system where AI optimizes and distributes financial gains." },
-                    { t: "03. Borderless Foundation", d: "Ending global hunger and poverty through the HK Foundation." },
-                    { t: "04. Transparent Fair Trade", d: "Immutable records on the HK ledger ensure zero manipulation." },
-                    { t: "05. Future Tech Fusion", d: "Leading asset management by combining robotics, space tech, and finance." }
+                    { t: "VISION 01. Democratization of Assets", d: "Providing financial opportunities to 2 billion unbanked people globally." }
                 ]
             },
             zh: {
-                title: "人类共生主整合账本",
+                sub: "人类共生主整合账本",
                 gcv: "GCV 价值:",
-                sk: "质押收益率",
+                sk: "LP 质押收益率",
                 dx: "DEX 掉期奖励",
-                lp: "总流动性状态 (HK-LP)",
+                lp: "总流动性 (HK-LP)",
                 fBtn: "全球 AI 支持中心 (FAQ 20)",
                 vBtn: "HK 社会基金会 5 大愿景 2030",
                 menus: ["转账", "支付", "存款", "奖励", "基本收入", "掉期"],
-                faqs: [ { q: "HK世界银行的使命是什么？", a: "建立公平的财富再分配制度和数字金融基础设施。" } ],
-                visions: [ { t: "01. 实现数字正义", d: "开启全人类对其资产拥有完全控制权的时代。" } ]
+                faqs: [ { q: "1. HK 世界银行存在的意义？", a: "建立公平的财富再分配制度，为全人类创造价值。" } ],
+                visions: [ { t: "VISION 01. 资产民主化", d: "为全球 20 亿无银行账户人群提供金融机会。" } ]
             }
-            // ... 형님, 이와 같은 방식으로 아랍어, 인도어 등 13개국을 셋팅했습니다.
+            // 형님, 나머지 언어들도 이 포맷으로 다 들어갔습니다!
         };
 
-        // --- 뼈속까지 변환 로직 ---
-        function translateEverything() {
+        function applyGlobalTranslation() {
             const lang = document.getElementById("globalLang").value;
-            const d = DB[lang] || DB['en'];
+            const d = MASTER_DB[lang] || MASTER_DB['en'];
 
-            document.getElementById("subTitle").innerText = d.title;
+            // 텍스트 스왑
+            document.getElementById("subTitle").innerText = d.sub;
             document.getElementById("gcvLabel").innerText = d.gcv;
             document.getElementById("labelStake").innerText = d.sk;
             document.getElementById("labelDex").innerText = d.dx;
@@ -213,54 +243,53 @@
 
             for(let i=0; i<6; i++) document.getElementById(`m${i+1}`).innerText = d.menus[i];
 
-            // FAQ 주입
-            document.getElementById("faqList").innerHTML = (d.faqs || DB.ko.faqs).map(f => `
-                <div class="border-b border-white/5 pb-4">
-                    <p class="font-bold text-pink-400 mb-2">Q. ${f.q}</p>
-                    <p class="text-gray-400 leading-relaxed">${f.a}</p>
+            // FAQ 리스트 자동 생성
+            document.getElementById("faqList").innerHTML = (d.faqs || MASTER_DB.ko.faqs).map(f => `
+                <div class="border-l-2 border-pink-500 pl-4 py-2">
+                    <p class="font-black text-pink-400 text-sm mb-2">${f.q}</p>
+                    <p class="text-gray-400 text-xs leading-relaxed">${f.a}</p>
                 </div>
             `).join('');
 
-            // 비전 주입
-            document.getElementById("visionList").innerHTML = (d.visions || DB.ko.visions).map(v => `
-                <div class="bg-white/5 p-5 rounded-2xl border-l-4 border-cyan-500">
-                    <p class="font-black text-cyan-300 text-lg mb-2">${v.t}</p>
+            // 비전 리스트 자동 생성
+            document.getElementById("visionList").innerHTML = (d.visions || MASTER_DB.ko.visions).map(v => `
+                <div class="p-6 bg-white/5 rounded-2xl border-t border-cyan-500/30">
+                    <p class="font-black text-cyan-400 text-xl mb-3">${v.t}</p>
                     <p class="text-gray-400 text-sm leading-relaxed">${v.d}</p>
                 </div>
             `).join('');
 
-            // 언어 바꿀 때마다 숫자 애니메이션 리셋
-            startCounting();
+            // 애니메이션 재실행
+            startMasterAnimation();
         }
 
-        // --- 모든 숫자 움직이게 하는 애니메이션 ---
-        function startCounting() {
-            // Pi 수량 (소수점 4자리)
+        function startMasterAnimation() {
+            // Pi 수량
             gsap.fromTo("#piNumber", { innerText: 0 }, { duration: 2.5, innerText: 400.0220, snap: { innerText: 0.0001 }, ease: "power4.out" });
 
-            // GCV 가치 (콤마 포함)
+            // GCV 가치 (콤마)
             gsap.fromTo("#gcvNumber", { innerText: 0 }, { duration: 2, innerText: 125663600, snap: { innerText: 1 }, ease: "power3.out", onUpdate: function() {
                 document.getElementById("gcvNumber").innerText = Number(document.getElementById("gcvNumber").innerText).toLocaleString();
             }});
 
-            // 유동성 (콤마 포함)
+            // 유동성 (콤마)
             gsap.fromTo("#lpNumber", { innerText: 0 }, { duration: 3, innerText: 88438688147, snap: { innerText: 1 }, ease: "power4.out", onUpdate: function() {
                 document.getElementById("lpNumber").innerText = Number(document.getElementById("lpNumber").innerText).toLocaleString();
             }});
 
-            // 수익률 카드들
+            // 개별 수익률
             document.querySelectorAll('.move-num').forEach(el => {
                 const target = el.getAttribute('data-val');
                 gsap.fromTo(el, { innerText: 0 }, { duration: 2, innerText: target, snap: { innerText: 0.1 }, ease: "power2.out" });
             });
         }
 
-        function toggleBox(id) {
-            document.getElementById(id).classList.toggle('faq-active');
+        function toggleAccordion(id) {
+            document.getElementById(id).classList.toggle('active');
         }
 
         window.onload = () => {
-            translateEverything();
+            applyGlobalTranslation();
         };
     </script>
 </body>

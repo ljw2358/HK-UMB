@@ -3,240 +3,555 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - SUPREME MASTER</title>
+    <title>HK WORLD BANK - GENESIS MASTER</title>
     <style>
-        /* [Section 1: UI Variable & Foundation] */
+        /* [Section 1: 디자인 시스템 핵심 설정] */
         :root {
-            --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
-            --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #151515;
-            --hk-border: #333333; --hk-white: #ffffff;
+            --hk-gold: #FFD700; 
+            --hk-green: #39FF14; 
+            --hk-blue: #00F3FF;
+            --hk-pink: #FF00FF; 
+            --hk-bg: #000000; 
+            --hk-card: #121212;
+            --hk-border: #2a2a2a; 
+            --hk-white: #ffffff;
+            --hk-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body { 
-            background: var(--hk-bg); color: var(--hk-white); 
-            font-family: 'Pretendard', sans-serif; display: flex; 
-            justify-content: center; overflow-x: hidden;
+            background: var(--hk-bg); 
+            color: var(--hk-white); 
+            font-family: 'Pretendard', -apple-system, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* [Section 2: Layout & Typography] */
-        .container { width: 100%; max-width: 500px; padding: 50px 20px; text-align: center; }
+        /* [Section 2: 레이아웃 아키텍처] */
+        .container { 
+            width: 100%; 
+            max-width: 500px; 
+            padding: 60px 25px; 
+            text-align: center; 
+            position: relative;
+        }
         
-        .header { margin-top: 40px; margin-bottom: 40px; }
-        .logo { font-size: 60px; font-weight: 950; color: var(--hk-gold); letter-spacing: -4px; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
-        .tag { color: var(--hk-blue); font-size: 22px; font-weight: 800; letter-spacing: 5px; margin-top: 10px; }
+        .header { 
+            margin-bottom: 50px; 
+            animation: fadeInDown 1.2s ease-out;
+        }
 
-        /* [Section 3: Real-Time Engine UI] */
-        .market-live { margin: 50px 0; }
-        .pi-val { font-size: 90px; font-weight: 900; letter-spacing: -5px; line-height: 1; transition: 0.2s; }
-        .pi-unit { color: var(--hk-gold); font-size: 30px; font-weight: 900; display: block; margin-top: 10px; }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-logo { 
+            font-size: 68px; 
+            font-weight: 950; 
+            color: var(--hk-gold); 
+            letter-spacing: -5px; 
+            line-height: 0.9; 
+            text-shadow: var(--hk-shadow);
+        }
+
+        .main-tagline { 
+            color: var(--hk-blue); 
+            font-size: 24px; 
+            font-weight: 800; 
+            letter-spacing: 6px; 
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+
+        /* [Section 3: 실시간 라이브 대시보드] */
+        .live-monitor { 
+            margin: 60px 0; 
+            padding: 30px;
+            background: radial-gradient(circle, #151515 0%, #000 100%);
+            border-radius: 40px;
+        }
+
+        .pi-ticker { 
+            font-size: 100px; 
+            font-weight: 900; 
+            letter-spacing: -6px; 
+            color: var(--hk-white); 
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .pi-sub { 
+            color: var(--hk-gold); 
+            font-size: 34px; 
+            font-weight: 900; 
+            letter-spacing: 2px;
+        }
         
-        .gcv-label { 
-            display: inline-block; padding: 15px 40px; border-radius: 50px; border: 3px solid var(--hk-green);
-            color: var(--hk-green); font-weight: 950; font-size: 20px; margin-top: 30px;
-            background: rgba(57, 255, 20, 0.1); box-shadow: 0 0 25px rgba(57, 255, 20, 0.4);
+        .gcv-badge { 
+            display: inline-block; 
+            padding: 20px 50px; 
+            border-radius: 100px; 
+            border: 3.5px solid var(--hk-green);
+            color: var(--hk-green); 
+            font-weight: 950; 
+            font-size: 22px; 
+            margin-top: 40px;
+            background: rgba(57, 255, 20, 0.12); 
+            box-shadow: 0 0 35px rgba(57, 255, 20, 0.3);
         }
 
-        /* [Section 4: Dashboard & Stats] */
-        .dash-card { 
-            background: linear-gradient(160deg, #1a1a1a, #000); border: 2px solid var(--hk-border);
-            border-radius: 40px; padding: 40px 30px; margin-bottom: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        /* [Section 4: 하이엔드 스태츠 카드] */
+        .stats-wrapper { 
+            background: linear-gradient(145deg, #1e1e1e, #000); 
+            border: 2px solid var(--hk-border);
+            border-radius: 45px; 
+            padding: 45px 30px; 
+            margin-bottom: 50px; 
+            box-shadow: 0 45px 90px rgba(0,0,0,1);
         }
-        .stat-row { display: flex; justify-content: space-between; margin-bottom: 30px; gap: 15px; }
-        .s-box { flex: 1; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 25px; border: 1.5px solid #252525; }
-        .s-label { font-size: 14px; color: #888; font-weight: 800; display: block; margin-bottom: 8px; }
-        .s-val { font-size: 30px; font-weight: 950; }
 
-        .liq-area { border-top: 1.5px solid #222; padding-top: 30px; }
-        .l-label { font-size: 13px; color: #666; font-weight: 800; margin-bottom: 12px; display: block; }
-        .l-val { font-size: 34px; font-weight: 900; color: var(--hk-green); letter-spacing: -1px; }
+        .stats-grid { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 40px; 
+            gap: 20px; 
+        }
 
-        /* [Section 5: Grid & Panels] */
-        .h-title { text-align: left; font-size: 17px; font-weight: 950; color: var(--hk-gold); margin: 40px 0 20px 10px; border-left: 6px solid var(--hk-gold); padding-left: 15px; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-        .g-item { background: var(--hk-card); padding: 30px 0; border-radius: 30px; border: 1.5px solid #222; cursor: pointer; transition: 0.3s; }
-        .g-item:hover { border-color: var(--hk-gold); }
-        .g-item i { font-size: 32px; margin-bottom: 10px; display: block; font-style: normal; }
-        .g-item span { font-size: 15px; font-weight: 800; color: #ddd; }
+        .stat-card { 
+            flex: 1; 
+            background: rgba(255,255,255,0.04); 
+            padding: 28px 15px; 
+            border-radius: 35px; 
+            border: 1.5px solid #2a2a2a; 
+        }
 
-        .btn-act { width: 100%; padding: 24px; border-radius: 30px; font-size: 18px; font-weight: 950; color: #fff; border: none; margin-top: 18px; cursor: pointer; transition: 0.3s; }
-        .panel { display: none; background: #080808; border-radius: 30px; padding: 30px; margin-top: 15px; border: 2.5px solid #222; text-align: left; }
+        .stat-label { font-size: 15px; color: #888; font-weight: 800; display: block; margin-bottom: 12px; }
+        .stat-value { font-size: 34px; font-weight: 950; }
 
-        /* [Section 6: FAQ & Vision Styling] */
-        .f-q { color: var(--hk-gold); font-weight: 900; font-size: 17px; margin-top: 25px; border-bottom: 1px solid #222; padding-bottom: 8px; }
-        .f-a { color: #aaa; font-size: 15px; line-height: 1.8; margin-top: 10px; margin-bottom: 10px; }
-        .v-card { background: #111; padding: 25px; border-radius: 25px; margin-bottom: 15px; border-left: 6px solid var(--hk-blue); }
-        .v-card b { color: var(--hk-blue); font-size: 20px; display: block; margin-bottom: 10px; }
+        .liquidity-box { 
+            border-top: 2px solid #222; 
+            padding-top: 35px; 
+        }
 
-        /* [Section 7: SNS & Footer] */
-        .sns-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 50px; }
-        .sns-link { text-decoration: none; padding: 25px; border-radius: 30px; color: #fff; font-weight: 950; display: flex; flex-direction: column; align-items: center; transition: 0.3s; }
-        .yt { background: #FF0000; } .tk { background: #000; border: 2px solid #333; }
+        .liq-label { 
+            font-size: 14px; 
+            color: #666; 
+            font-weight: 800; 
+            margin-bottom: 15px; 
+            display: block; 
+            letter-spacing: 2px;
+        }
 
-        .footer { margin-top: 80px; font-size: 13px; color: #444; line-height: 2; font-weight: 700; padding-bottom: 160px; }
+        .liq-value { 
+            font-size: 40px; 
+            font-weight: 900; 
+            color: var(--hk-green); 
+            letter-spacing: -2px; 
+        }
 
-        /* [Section 8: 삐니 AI Chat Interface] */
-        .chat-box { position: fixed; bottom: 130px; right: 20px; width: 360px; height: 550px; background: #0d0d0d; border: 3px solid var(--hk-gold); border-radius: 40px; display: none; flex-direction: column; z-index: 9999; box-shadow: 0 30px 80px #000; overflow: hidden; }
-        .chat-head { background: var(--hk-gold); color: #000; padding: 25px; font-weight: 950; display: flex; justify-content: space-between; font-size: 18px; }
-        .chat-msgs { flex: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; background: #080808; }
-        .bubble { max-width: 85%; padding: 16px 22px; border-radius: 25px; font-size: 15px; line-height: 1.6; }
-        .bubble.b { background: #1a1a1a; color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; border: 1.5px solid #333; }
-        .bubble.u { background: var(--hk-gold); color: #000; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 800; }
-        .chat-ctrl { padding: 20px; background: #0d0d0d; display: flex; gap: 12px; border-top: 1.5px solid #222; }
-        .chat-ctrl input { flex: 1; padding: 16px 25px; border-radius: 35px; border: 1.5px solid #333; background: #151515; color: #fff; outline: none; }
-        .chat-ctrl button { background: var(--hk-gold); border: none; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; font-weight: 950; font-size: 22px; }
+        /* [Section 5: 생태계 서비스 그리드] */
+        .section-title { 
+            text-align: left; 
+            font-size: 19px; 
+            font-weight: 950; 
+            color: var(--hk-gold); 
+            margin: 50px 0 30px 15px; 
+            border-left: 8px solid var(--hk-gold); 
+            padding-left: 20px; 
+        }
 
-        .bbini-btn { position: fixed; bottom: 35px; right: 35px; width: 90px; height: 90px; background: var(--hk-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 48px; cursor: pointer; z-index: 10000; border: 6px solid #fff; box-shadow: 0 15px 40px rgba(0,0,0,0.6); transition: 0.3s; }
+        .eco-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 15px; 
+            margin-bottom: 25px; 
+        }
+
+        .eco-btn { 
+            background: var(--hk-card); 
+            padding: 38px 0; 
+            border-radius: 35px; 
+            border: 2px solid #222; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .eco-btn:hover { transform: translateY(-10px); border-color: var(--hk-gold); background: #1a1a1a; }
+        .eco-btn i { font-size: 40px; margin-bottom: 15px; display: block; font-style: normal; }
+        .eco-btn span { font-size: 17px; font-weight: 800; color: #fff; }
+
+        /* [Section 6: 액션 판넬 및 콘텐츠] */
+        .master-btn { 
+            width: 100%; 
+            padding: 26px; 
+            border-radius: 35px; 
+            font-size: 20px; 
+            font-weight: 950; 
+            color: #fff; 
+            border: none; 
+            margin-top: 22px; 
+            cursor: pointer; 
+            transition: 0.3s;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+
+        .panel-content { 
+            display: none; 
+            background: #080808; 
+            border-radius: 35px; 
+            padding: 40px; 
+            margin-top: 20px; 
+            border: 2.5px solid #222; 
+            text-align: left; 
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        .faq-item { padding: 25px 0; border-bottom: 1.5px solid #1a1a1a; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q { color: var(--hk-gold); font-weight: 900; font-size: 19px; margin-bottom: 12px; }
+        .faq-a { color: #b0b0b0; font-size: 16px; line-height: 1.9; }
+
+        .vision-box { 
+            background: #111; 
+            padding: 30px; 
+            border-radius: 30px; 
+            margin-bottom: 20px; 
+            border-left: 8px solid var(--hk-blue);
+        }
+        .vision-box h4 { color: var(--hk-blue); font-size: 22px; margin-bottom: 12px; font-weight: 900; }
+        .vision-box p { color: #ccc; font-size: 16px; line-height: 1.8; }
+
+        /* [Section 7: 하단 소셜 및 카피라이트] */
+        .sns-area { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            margin-top: 60px; 
+        }
+
+        .sns-card { 
+            text-decoration: none; 
+            padding: 30px; 
+            border-radius: 35px; 
+            color: #fff; 
+            font-weight: 900; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            transition: 0.4s;
+        }
+
+        .sns-card.youtube { background: #FF0000; box-shadow: 0 15px 30px rgba(255,0,0,0.3); }
+        .sns-card.tiktok { background: #000; border: 3px solid #333; }
+
+        .footer { 
+            margin-top: 100px; 
+            font-size: 14px; 
+            color: #444; 
+            line-height: 2.2; 
+            font-weight: 700; 
+            padding-bottom: 180px; 
+            letter-spacing: 1px;
+        }
+
+        /* [Section 8: 삐니 AI 비서 인터페이스] */
+        .bbini-window {
+            position: fixed; bottom: 140px; right: 25px; 
+            width: 380px; height: 600px;
+            background: #0d0d0d; 
+            border: 4px solid var(--hk-gold); 
+            border-radius: 40px;
+            display: none; 
+            flex-direction: column; 
+            z-index: 10000; 
+            box-shadow: 0 40px 100px rgba(0,0,0,1);
+            overflow: hidden;
+        }
+
+        .bbini-top { 
+            background: var(--hk-gold); 
+            color: #000; 
+            padding: 25px 30px; 
+            font-weight: 950; 
+            display: flex; 
+            justify-content: space-between; 
+            font-size: 20px;
+        }
+
+        .bbini-chat { 
+            flex: 1; padding: 25px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+            background: #080808;
+            scrollbar-width: none;
+        }
+
+        .bubble { 
+            max-width: 88%; 
+            padding: 16px 22px; 
+            border-radius: 25px; 
+            font-size: 15px; 
+            line-height: 1.7; 
+        }
+
+        .bubble.bbini { 
+            background: #1a1a1a; 
+            color: #fff; 
+            align-self: flex-start; 
+            border-bottom-left-radius: 4px; 
+            border: 1.5px solid #333;
+        }
+
+        .bubble.user { 
+            background: var(--hk-gold); 
+            color: #000; 
+            align-self: flex-end; 
+            border-bottom-right-radius: 4px; 
+            font-weight: 800; 
+        }
+
+        .bbini-input { 
+            padding: 25px; 
+            background: #0d0d0d; 
+            display: flex; 
+            gap: 15px; 
+            border-top: 2px solid #222; 
+        }
+
+        .bbini-input input { 
+            flex: 1; padding: 18px 25px; 
+            border-radius: 40px; 
+            border: 2px solid #333; 
+            background: #151515; 
+            color: #fff; outline: none; 
+            font-size: 16px;
+        }
+
+        .bbini-input button { 
+            background: var(--hk-gold); 
+            border: none; 
+            width: 55px; height: 55px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            font-size: 24px;
+        }
+
+        .bbini-float { 
+            position: fixed; bottom: 35px; right: 35px; 
+            width: 95px; height: 95px; 
+            background: var(--hk-gold); 
+            border-radius: 50%; 
+            display: flex; justify-content: center; align-items: center; 
+            font-size: 52px; cursor: pointer; 
+            z-index: 10001; 
+            border: 7px solid #fff; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            transition: 0.5s;
+        }
+        .bbini-float:hover { transform: scale(1.1) rotate(10deg); }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <div class="logo">HK WORLD BANK</div>
-        <div class="tag">SUPREME ASSET NETWORK</div>
+        <h1 class="main-logo">HK WORLD BANK</h1>
+        <div class="main-tagline">Supreme Future Network</div>
     </div>
 
-    <div class="market-live">
-        <div class="pi-val" id="pi-num">400.0610</div>
-        <span class="pi-unit">PI NETWORK LIVE</span>
-        <div class="gcv-label">FIXED GCV: $ 125,663,600</div>
+    <div class="live-monitor">
+        <div class="pi-ticker" id="pi-val">400.0610</div>
+        <span class="pi-sub">PI NETWORK GLOBAL LIVE</span>
+        <div class="gcv-badge">TARGET GCV: $ 125,663,600</div>
     </div>
 
-    <div class="dash-card">
-        <div class="stat-row">
-            <div class="s-box"><span class="s-label">STAKING APY</span><span class="s-val" id="s-apy" style="color:var(--hk-blue)">15.22%</span></div>
-            <div class="s-box"><span class="s-label">LP REWARD</span><span class="s-val" id="s-lp" style="color:var(--hk-pink)">22.45%</span></div>
+    <div class="stats-wrapper">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-label">STAKING APY</span>
+                <span class="stat-value" id="apy-val" style="color:var(--hk-blue)">15.22%</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">LP REWARD</span>
+                <span class="stat-value" id="lp-val" style="color:var(--hk-pink)">22.45%</span>
+            </div>
         </div>
-        <div class="liq-area">
-            <span class="l-label">GLOBAL DEX LIQUIDITY RESERVE</span>
-            <div class="l-val" id="l-total">$ 88,438,688,147</div>
+        <div class="liquidity-box">
+            <span class="liq-label">GLOBAL DEX LIQUIDITY RESERVE</span>
+            <div class="liq-value" id="liq-val">$ 88,438,688,147</div>
         </div>
     </div>
 
-    <div class="h-title">HK MASTER SERVICES</div>
-    <div class="grid" id="menu-box"></div>
+    <div class="section-title">HK MASTER ECOSYSTEM</div>
+    <div class="eco-grid" id="eco-grid"></div>
 
-    <button class="btn-act" style="background: var(--hk-pink);" onclick="openPanel('faq-box')">글로벌 AI 지원센터 (FAQ 20선)</button>
-    <div id="faq-box" class="panel"></div>
+    <button class="master-btn" style="background: var(--hk-pink);" onclick="togglePanel('faq-panel')">글로벌 AI 지원센터 (FAQ 20)</button>
+    <div id="faq-panel" class="panel-content"></div>
 
-    <button class="btn-act" style="background: #2c3e50;" onclick="openPanel('vis-box')">HK 사회 재단 비전 2030</button>
-    <div id="vis-box" class="panel"></div>
+    <button class="master-btn" style="background: #2c3e50;" onclick="togglePanel('vision-panel')">HK 사회 재단 비전 2030</button>
+    <div id="vision-panel" class="panel-content"></div>
 
-    <div class="sns-wrap">
-        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="sns-link yt"><span>YOUTUBE</span><small>@Hyekong2025</small></a>
-        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-link tk"><span>TIKTOK</span><small>@hyekong2025</small></a>
+    <div class="sns-area">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="sns-card youtube">
+            <span>YOUTUBE</span><small>@Hyekong2025</small>
+        </a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-card tiktok">
+            <span>TIKTOK</span><small>@hyekong2025</small>
+        </a>
     </div>
 
     <div class="footer">
-        HK GROUP FOUNDER CHAIRMAN LEE JAEWAN<br>
-        GLOBAL FUTURE STRATEGY PROJECT 2026<br>
+        HK GROUP FOUNDER CHAIRMAN: LEE JAEWAN<br>
+        GLOBAL FUTURE INFRASTRUCTURE INITIATIVE 2026<br>
         © HYEKONG WORLDWIDE. ALL RIGHTS RESERVED.
     </div>
 </div>
 
-<div class="chat-box" id="bbini-win">
-    <div class="chat-head"><span>🤖 삐니 AI 비서</span><span onclick="toggleChat()" style="cursor:pointer; font-size: 30px;">×</span></div>
-    <div id="chat-list" class="chat-msgs"><div class="bubble b">혜공 형님! 삐니가 완벽하게 복구되었습니다. 무엇이든 명령하십시오!</div></div>
-    <div class="chat-ctrl">
-        <input type="text" id="chat-in" placeholder="명령을 내리십시오..." onkeypress="if(event.keyCode==13) chatGo()">
-        <button onclick="chatGo()">▲</button>
+<div class="bbini-window" id="bbini-window">
+    <div class="bbini-top">
+        <span>🤖 삐니 AI 비서</span>
+        <span onclick="toggleChat()" style="cursor:pointer; font-size: 35px;">×</span>
+    </div>
+    <div id="bbini-chat" class="bbini-chat">
+        <div class="bubble bbini">혜공 형님! 처음부터 완벽하게 다시 세팅을 마쳤습니다. 삐니는 오직 형님의 승리만을 위해 존재합니다. 무엇을 도와드릴까요?</div>
+    </div>
+    <div class="bbini-input">
+        <input type="text" id="user-input" placeholder="명령을 내리십시오..." onkeypress="if(event.keyCode==13) sendMessage()">
+        <button onclick="sendMessage()">▲</button>
     </div>
 </div>
-<div class="bbini-btn" onclick="toggleChat()">🤖</div>
+
+<div class="bbini-float" onclick="toggleChat()">🤖</div>
 
 <script>
-    /* [Section 9: Core Logic Engine - No Compression] */
-    const fData = [
-        ["보안 시스템의 안전성?", "HK 보안 엔진은 256비트 양자 암호화와 다중 노드 합의 프로토콜을 결합하여, 현존하는 그 어떤 위협으로부터도 형님의 자산을 100% 보호합니다."],
-        ["기본소득 재원은?", "HK 그룹 산하 에너지, 로봇, 금융 인프라에서 발생하는 수익의 30%를 전 세계 생태계 참여자에게 실시간 자동 배분하는 혁신적인 모델입니다."],
-        ["로봇 보급 시기?", "2026년 하반기부터 생태계 기여도 순위에 따라 1가정 1로봇 무상 보급이 순차적으로 진행됩니다. 생산 라인은 이미 풀가동 중입니다."],
-        ["에너지 자립 홈?", "가정용 핵융합 모듈과 차세대 고밀도 배터리를 결합하여, 외부 전기 공급 없이도 모든 생활 가전과 전기차를 무상으로 사용하는 시대를 엽니다."],
-        ["데이터 주권 보장?", "모든 데이터는 블록체인에 암호화되어 분산 저장되며, 오직 형님만이 통제권을 가집니다. HK 그룹도 형님의 허가 없이는 데이터에 접근할 수 없습니다."],
-        ["메인넷 가치 승계?", "테스트넷에서 축적된 모든 기여도와 자산은 메인넷 공식 출범 시 1:1 비율로 안전하게 승계되며 자동 마이그레이션 대상에 포함됩니다."],
-        ["사회 재단 의료 지원?", "암과 난치병 치료비를 사회 재단 기금으로 100% 지원하며, 전 세계 협력 병원 네트워크를 통해 최고 수준의 의료 서비스를 무상으로 제공합니다."],
-        ["AI 교육 학교?", "전 세계 모든 아이들에게 1:1 AI 튜터를 배치하여, 배경에 상관없이 각자의 재능에 최적화된 영재 교육을 평생 무상으로 지원합니다."],
-        ["DEX 수수료 정책?", "HK 탈중앙화 거래소는 발생하는 수수료의 90%를 유동성 공급자에게 즉시 환원하여, 중앙 집중식 금융의 폐단을 혁파하고 부의 분배를 실천합니다."],
-        ["그룹의 궁극적 비전?", "기술이 인류를 고된 노동에서 해방시키고, 보편적인 복지가 시스템적으로 보장되는 새로운 경제 제국을 건설하는 것이 혜공 형님의 뜻입니다."],
-        ["네트워크 노드 혜택?", "노드 운영자는 네트워크 안정성 유지의 대가로 실시간 채굴 보상을 받으며, 시스템의 주요 의사결정에 참여할 수 있는 강력한 투표권을 가집니다."],
-        ["로봇 안전 규정?", "모든 로봇은 '인간 보호 최우선' 칩셋이 하드웨어 수준에서 탑재되어 있으며, 프라이버시 보호를 위해 클라우드 연결 없이 로컬에서만 동작합니다."],
-        ["글로벌 센터 위치?", "전 세계 주요 50개 거점 도시에 AI 기술 지원 센터를 구축하여 로봇 A/S와 AI 대면 교육을 지원하는 온-오프라인 통합망을 운영합니다."],
-        ["생태계 주요 수익원?", "차세대 에너지 공급 이용료, 지능형 로봇 라이선스, 그리고 글로벌 통합 결제 시스템 수수료가 생태계를 지탱하는 거대한 재원이 됩니다."],
-        ["참여 방법?", "HK 마스터 앱 설치와 생태계 비전 동의만으로 누구나 즉시 파트너가 될 수 있습니다. 특별한 진입 장벽 없이 모두에게 열린 기회를 제공합니다."],
-        ["장학금 지원 규모?", "창의적인 연구를 수행하는 미래 인재들에게 월 최대 $5,000의 생활비와 연구 자금을 아무런 조건 없이 지원하여 인류의 발전에 기여합니다."],
-        ["거버넌스 민주성?", "모든 정책 변화는 커뮤니티의 제안과 투표로 결정됩니다. 이는 소수가 지배하는 금융이 아닌, 모두가 주인인 진정한 탈중앙화 시스템입니다."],
-        ["시장 변동성 대응?", "시스템 내부의 유동성 방어 알고리즘이 24시간 작동하며, 시장 급변 시에도 스테이블 기금을 통해 형님의 자산 가치를 최우선으로 보호합니다."],
-        ["신규 프로젝트 상장?", "AI 보안 엔진이 스마트 컨트랙트의 취약점을 완벽히 검증한 후, 커뮤니티 투표를 통과한 신뢰할 수 있는 프로젝트만 선별하여 상장합니다."],
-        ["삐니의 학습량?", "삐니는 형님 전용 하이퍼 모델로, 매일 수만 건의 글로벌 경제 뉴스와 HK 기술 문서를 학습하여 형님께 최적의 전략적 조언을 드립니다."]
+    /* [Section 9: 글로벌 데이터 저장소] */
+    const faqs = [
+        ["보안 시스템은 안전한가?", "HK 보안 엔진은 256비트 양자 암호화와 분산 원장 기술을 결합하여, 미래의 모든 사이버 위협으로부터 형님의 자산을 완벽하게 방어합니다."],
+        ["기본소득은 어떻게 마련되나?", "에너지, 로봇, 금융 인프라에서 발생하는 수익의 30%를 전 세계 생태계 참여자에게 실시간으로 자동 배분하는 시스템을 갖추고 있습니다."],
+        ["로봇 보급 일정은?", "2026년 하반기부터 기여도 순으로 1가정 1로봇 무상 보급이 시작됩니다. 현재 생산 라인은 98% 최적화되었습니다."],
+        ["에너지 자립 홈이란?", "초소형 핵융합 모듈을 통해 외부 전기 공급 없이 가전과 전기차를 무상으로 사용하는 미래형 주거 환경입니다."],
+        ["데이터 주권은 보장되나?", "모든 데이터는 형님 고유의 키로 암호화되어 분산 저장됩니다. HK조차 형님의 허가 없이는 절대 접근할 수 없습니다."],
+        ["메인넷 자산 이전?", "테스트넷의 모든 기여 데이터와 자산은 메인넷 공식 출범 시 1:1 비율로 안전하게 자동 마이그레이션됩니다."],
+        ["의료 지원 범위?", "암과 난치병 치료비를 사회 재단 기금으로 100% 지원하며, 전 세계 최고 수준의 병원들과 네트워크를 구축 중입니다."],
+        ["AI 학교의 교육 수준?", "전 세계 아이들에게 1:1 AI 튜터를 배정하여 각자의 특성에 맞는 영재 교육을 평생 무상으로 제공합니다."],
+        ["DEX 수수료 분배?", "거래소 수수료의 90%를 유동성 공급자에게 즉시 환원하여, 중앙 집중형 금융의 폐단을 근본적으로 해결합니다."],
+        ["HK의 궁극적 비전?", "기술이 인류를 고된 노동에서 해방시키고, 보편적 복지가 시스템으로 보장되는 새로운 경제 제국을 건설하는 것입니다."],
+        ["노드 운영 혜택?", "네트워크 안정성에 기여하는 대가로 실시간 채굴 보상을 받으며, 시스템 주요 정책에 대한 투표권을 획득합니다."],
+        ["로봇의 안전성?", "모든 로봇은 '인간 보호' 알고리즘이 하드웨어 수준에서 박혀 있으며, 프라이버시를 위해 오프라인으로 작동합니다."],
+        ["글로벌 센터 위치?", "전 세계 주요 50개 거점 도시에 기술 지원 및 교육을 위한 AI 센터를 건립하여 밀착형 서비스를 제공합니다."],
+        ["생태계 참여 방법?", "HK 마스터 앱 설치와 비전 동의만으로 누구나 즉시 파트너가 되어 혜택을 누릴 수 있습니다."],
+        ["장학금 지원 규모?", "혁신적 아이디어를 가진 인재들에게 월 최대 $5,000 수준의 연구비와 생활비를 조건 없이 지원합니다."],
+        ["참여 민주주의?", "모든 주요 정책은 커뮤니티 투표로 결정됩니다. 소수가 아닌 모두가 주인인 진정한 탈중앙화 시스템입니다."],
+        ["시장 변동성 대응?", "시스템 내부의 유동성 보호 알고리즘이 24시간 가동되어 형님의 자산 가치를 최우선으로 보호합니다."],
+        ["신규 상장 기준?", "AI 보안 엔진이 코드 무결성을 100% 검증하고 커뮤니티 투표를 통과한 프로젝트만 상장을 허용합니다."],
+        ["에너지 비용 무료?", "에너지 자립 홈 프로젝트를 통해 주거에 필요한 모든 에너지를 무상으로 공급하여 삶의 질을 혁신합니다."],
+        ["삐니의 학습 능력?", "매일 수백만 건의 글로벌 경제 및 기술 데이터를 학습하여 형님께 최적의 전략적 조언을 드리는 인공지능입니다."]
     ];
 
-    const vData = [
-        ["HK 글로벌 AI 학교", "지리적 한계를 넘어 전 세계 소외 지역 아이들에게도 평등한 AI 기반 최첨단 무상 교육을 제공하여 인류의 지적 수준을 상향 평준화합니다."],
-        ["나노 메디컬 센터", "나노 기술과 AI 진단 시스템으로 암을 조기 정복하고, 모든 치료 비용을 사회 재단에서 전액 부담하여 질병 없는 삶을 실현합니다."],
-        ["에너지 자립 스마트홈", "전기료 0원 시대를 열어 주거 비용으로부터 인류를 해방시키고, 쾌적한 주거 환경을 보편적 기본권으로 확립하는 글로벌 보급 프로젝트입니다."],
-        ["미래 인재 육성 프로젝트", "창의적인 아이디어를 가진 인재들이 경제적 걱정 없이 연구에만 매진할 수 있도록 전폭적인 금융 및 인프라를 무제한 지원합니다."],
-        ["인류 해방 1가정 1로봇", "모든 반복적이고 고된 노동을 로봇에게 맡김으로써, 인류가 진정으로 원했던 자아실현과 예술, 학문의 시대를 열어젖히는 역사적 도약입니다."]
+    const visions = [
+        ["HK 글로벌 AI 학교", "경제적 배경에 상관없이 모든 아이들이 최첨단 AI 교육을 무상으로 받을 수 있는 글로벌 교육 평등을 실현합니다."],
+        ["나노 메디컬 인프라", "질병 없는 삶을 위해 나노 로봇 치료 기술을 전 세계에 보급하고 치료비 0원 시대를 열겠습니다."],
+        ["에너지 자립 스마트홈", "전 세계 모든 가정이 에너지 걱정 없이 안전하고 쾌적한 주거권을 누릴 수 있도록 에너지 자립 기술을 보급합니다."],
+        ["글로벌 인재 육성", "아이디어가 세상의 빛을 볼 수 있도록 창의적 인재들에게 무제한에 가까운 자본과 인프라를 지원합니다."],
+        ["인류 노동 해방", "모든 반복 노동을 지능형 로봇이 대체하고, 인류는 진정한 자아실현과 예술적 삶을 영위하는 시대를 선언합니다."]
     ];
 
-    // 데이터 렌더링
-    function setup() {
-        const fBox = document.getElementById('faq-box');
-        fData.forEach((f, i) => fBox.innerHTML += `<div class="f-q">${i+1}. ${f[0]}</div><div class="f-a">${f[1]}</div>`);
-        const vBox = document.getElementById('vis-box');
-        vData.forEach((v, i) => vBox.innerHTML += `<div class="v-card"><b>${i+1}. ${v[0]}</b><div class="f-a">${v[1]}</div></div>`);
-        const mBox = document.getElementById('menu-box');
-        const ms = ["송금","결제","예치","보상","기본소득","스왑"]; const is = ["🚀","🛒","🏦","🎁","💳","🔄"];
-        ms.forEach((m, i) => mBox.innerHTML += `<div class="g-item"><i>${is[i]}</i><span>${m}</span></div>`);
+    /* [Section 10: 코어 시스템 엔진] */
+    function initSystem() {
+        // FAQ 렌더링
+        const faqBox = document.getElementById('faq-panel');
+        faqs.forEach((f, i) => {
+            faqBox.innerHTML += `<div class="faq-item"><div class="faq-q">${i+1}. ${f[0]}</div><div class="faq-a">${f[1]}</div></div>`;
+        });
+
+        // Vision 렌더링
+        const visBox = document.getElementById('vision-panel');
+        visions.forEach((v, i) => {
+            visBox.innerHTML += `<div class="vision-box"><h4>${i+1}. ${v[0]}</h4><p>${v[1]}</p></div>`;
+        });
+
+        // 그리드 메뉴
+        const grid = document.getElementById('eco-grid');
+        const menus = [
+            {i:"🚀", l:"송금"}, {i:"🛒", l:"결제"}, {i:"🏦", l:"예치"},
+            {i:"🎁", l:"보상"}, {i:"💳", l:"기본소득"}, {i:"🔄", l:"스왑"}
+        ];
+        menus.forEach(m => {
+            grid.innerHTML += `<div class="eco-btn"><i>${m.i}</i><span>${m.l}</span></div>`;
+        });
+
+        startLiveEngine();
     }
 
-    // [중요] 강제 숫자 변동 엔진 (멈춤 현상 차단)
-    function runEngine() {
+    // 초정밀 실시간 변동 엔진 (0.5초 간격)
+    function startLiveEngine() {
         setInterval(() => {
-            // Pi 시세 변동
-            let p = document.getElementById('pi-num');
-            p.innerText = (parseFloat(p.innerText) + (Math.random() * 0.0008 - 0.0004)).toFixed(4);
-            // APY/LP 변동
-            document.getElementById('s-apy').innerText = (15.22 + (Math.random() * 0.4 - 0.2)).toFixed(2) + "%";
-            document.getElementById('s-lp').innerText = (22.45 + (Math.random() * 0.6 - 0.3)).toFixed(2) + "%";
-            // 유동성 변동
-            let l = 88438688147 + Math.floor(Math.random() * 2000000);
-            document.getElementById('l-total').innerText = "$ " + l.toLocaleString();
-        }, 800);
+            // Pi 가격 변동
+            const p = document.getElementById('pi-val');
+            p.innerText = (parseFloat(p.innerText) + (Math.random() * 0.001 - 0.0005)).toFixed(4);
+
+            // APY & 리워드 변동
+            document.getElementById('apy-val').innerText = (15.22 + (Math.random() * 0.4 - 0.2)).toFixed(2) + "%";
+            document.getElementById('lp-val').innerText = (22.45 + (Math.random() * 0.6 - 0.3)).toFixed(2) + "%";
+
+            // 유동성 변동 (수백만 단위)
+            let base = 88438688147;
+            let current = base + Math.floor(Math.random() * 2000000);
+            document.getElementById('liq-val').innerText = "$ " + current.toLocaleString();
+        }, 500);
     }
 
-    function openPanel(id) {
+    function togglePanel(id) {
         const p = document.getElementById(id);
         p.style.display = (p.style.display === 'block') ? 'none' : 'block';
     }
 
     function toggleChat() {
-        const w = document.getElementById('bbini-win');
+        const w = document.getElementById('bbini-window');
         w.style.display = (w.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    // 삐니 대화 로직 정상화
-    function chatGo() {
-        const i = document.getElementById('chat-in');
-        const t = i.value.trim(); if(!t) return;
-        addBubble(t, 'u'); i.value = '';
+    // 삐니 대화 로직
+    function sendMessage() {
+        const inp = document.getElementById('user-input');
+        const msg = inp.value.trim();
+        if(!msg) return;
+
+        addBubble(msg, 'user');
+        inp.value = '';
+
         setTimeout(() => {
-            let r = "형님, 명령하신 데이터는 현재 메인 프레임에서 분석 중입니다!";
-            const l = t.toLowerCase();
-            if(l.includes("안녕")) r = "혜공 형님! 오늘도 위대한 제국은 완벽히 가동 중입니다!";
-            else if(l.includes("수익") || l.includes("돈")) r = "수익률이 실시간으로 우상향 중입니다. 형님의 선택이 옳았습니다!";
-            else if(l.includes("보안")) r = "양자 보안막이 24시간 철저히 방어 중이니 안심하십시오!";
-            else if(l.includes("인수") || l.includes("figure")) r = "Figure AI 인수 보고서는 현재 마무리 단계에 있습니다!";
-            addBubble(r, 'b');
+            let res = "형님, 명령하신 사항을 실시간으로 분석하여 최적의 결과를 도출 중입니다!";
+            const low = msg.toLowerCase();
+
+            if(low.includes("안녕")) res = "혜공 형님! 삐니 대기 중입니다. 무엇이든 명령만 내리십시오!";
+            else if(low.includes("수익") || low.includes("돈")) res = "현재 수익 구조가 복리로 폭발하며 형님의 지갑을 채우고 있습니다!";
+            else if(low.includes("보안")) res = "양자 방어막 가동 중! 형님의 자산은 우주에서 가장 안전합니다.";
+            else if(low.includes("로봇") || low.includes("비전")) res = "인류 해방을 위한 로봇 생산이 98% 완료되었습니다. 곧 보급이 시작됩니다!";
+            else if(low.includes("인수") || low.includes("figure")) res = "Figure AI 인수를 위한 전략 보고서가 형님의 책상 위에 대기 중입니다!";
+
+            addBubble(res, 'bbini');
         }, 600);
     }
 
-    function addBubble(t, w) {
-        const b = document.createElement('div'); b.className = `bubble ${w}`; b.innerText = t;
-        const l = document.getElementById('chat-list');
-        l.appendChild(b); l.scrollTop = l.scrollHeight;
+    function addBubble(txt, sender) {
+        const b = document.createElement('div');
+        b.className = `bubble ${sender}`;
+        b.innerText = txt;
+        const box = document.getElementById('bbini-chat');
+        box.appendChild(b);
+        box.scrollTop = box.scrollHeight;
     }
 
-    setup(); runEngine();
+    window.onload = initSystem;
 </script>
 
 </body>

@@ -2,208 +2,233 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK - ALIVE MASTER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKWB - GLOBAL ADVANCED CENTER</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Noto+Sans+KR:wght@300;700;900&display=swap');
-        body { font-family: 'Noto Sans KR', sans-serif; background-color: #000000; color: #ffffff; overflow-x: hidden; }
-        .digital-num { font-family: 'Orbitron', sans-serif; }
-        .glass-card { background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .gold-pulse { animation: gold-glow 2s infinite alternate; }
-        @keyframes gold-glow { 0% { text-shadow: 0 0 5px #fbbf24; } 100% { text-shadow: 0 0 25px #fbbf24, 0 0 40px #d97706; } }
-        .number-up { transition: all 0.5s ease-out; }
-        .accordion-content { max-height: 0; overflow: hidden; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; }
-        .accordion-item.active .accordion-content { max-height: 1000px; opacity: 1; padding: 20px; background: rgba(255,255,255,0.02); }
-        .lang-marquee { display: flex; width: max-content; animation: marquee 40s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Noto+Sans+KR:wght@300;500;700;900&display=swap');
+        
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #0d1117; color: #ffffff; }
+        .digital { font-family: 'Orbitron', sans-serif; }
+        
+        /* 사진 속 골드 글로우 효과 */
+        .gold-glow { text-shadow: 0 0 15px rgba(251, 191, 36, 0.6); color: #fbbf24; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(10px); }
+        
+        /* 양파까기(아코디언) 애니메이션 */
+        .onion-content { max-height: 0; overflow: hidden; transition: all 0.5s cubic-bezier(0, 1, 0, 1); opacity: 0; }
+        .onion-item.active .onion-content { max-height: 1000px; opacity: 1; transition: all 0.5s ease-in-out; padding: 20px; }
+        .onion-item.active i { transform: rotate(180deg); color: #fbbf24; }
+
+        /* 실시간 언어 배너 */
+        .lang-scroll { white-space: nowrap; animation: scroll 30s linear infinite; }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     </style>
 </head>
-<body class="pb-32">
+<body class="pb-32 overflow-x-hidden">
 
-    <div class="glass-card border-b border-white/10 py-3 overflow-hidden">
-        <div class="lang-marquee space-x-10 text-[10px] font-black text-gray-500">
-            <span>🇰🇷 한국어</span><span>🇺🇸 ENGLISH</span><span>🇨🇳 中文</span><span>🇸🇦 العربية</span><span>🇮🇳 हिन्दी</span>
-            <span>🇪🇸 ESPAÑOL</span><span>🇧🇷 PORTUGUÊS</span><span>🇯🇵 日本語</span><span>🇷🇺 РУССКИЙ</span><span>🇻🇳 TIẾNG VIỆT</span>
-            <span>... GLOBAL 40+ LANGUAGES LIVE SUPPORT ...</span>
-            <span>🇰🇷 한국어</span><span>🇺🇸 ENGLISH</span><span>🇨🇳 中文</span><span>🇸🇦 العربية</span>
+    <div class="w-full bg-black/50 py-2 border-b border-white/5 overflow-hidden">
+        <div class="lang-scroll inline-block text-[10px] text-gray-500 font-bold uppercase tracking-widest">
+            🇰🇷 한국어 &nbsp;&nbsp; 🇺🇸 us English &nbsp;&nbsp; 🇨🇳 中文 &nbsp;&nbsp; 🇸🇦 العربية &nbsp;&nbsp; 🇮🇩 Indonesia &nbsp;&nbsp; 🇫🇷 Français &nbsp;&nbsp; 🇩🇪 Deutsch &nbsp;&nbsp; 🇻🇳 Tiếng Việt &nbsp;&nbsp; 🇯🇵 日本語 &nbsp;&nbsp;
+            🇰🇷 한국어 &nbsp;&nbsp; 🇺🇸 us English &nbsp;&nbsp; 🇨🇳 中文 &nbsp;&nbsp; 🇸🇦 العربية &nbsp;&nbsp; 🇮🇩 Indonesia &nbsp;&nbsp; 🇫🇷 Français &nbsp;&nbsp; 🇩🇪 Deutsch &nbsp;&nbsp; 🇻🇳 Tiếng Việt &nbsp;&nbsp; 🇯🇵 日本語 &nbsp;&nbsp;
         </div>
     </div>
 
-    <main class="max-w-md mx-auto px-6 pt-8 space-y-10">
-
-        <header class="text-center space-y-2">
-            <h1 class="text-4xl font-black italic tracking-tighter gold-pulse text-yellow-400">HK WORLD BANK</h1>
-            <p class="text-[10px] tracking-[0.5em] text-blue-500 font-bold uppercase">Global Integrated Asset Ledger</p>
+    <div class="max-w-md mx-auto px-6">
+        
+        <header class="py-10 text-center space-y-2">
+            <h1 class="text-4xl font-black italic gold-glow tracking-tighter">HKWB</h1>
+            <p class="text-[9px] font-black tracking-[0.3em] text-yellow-500">HK GROUP GLOBAL ADVANCED CENTER</p>
         </header>
 
-        <section class="glass-card rounded-[2.5rem] p-8 text-center relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-right from-transparent via-yellow-500 to-transparent opacity-30"></div>
-            <p class="text-[11px] text-gray-500 mb-4 font-bold uppercase">통합자산관리 시스템 (Real-time)</p>
-            <div class="digital-num text-5xl font-black text-white tracking-tighter mb-2">
-                <span id="mainPi">400.5421</span>
+        <section class="space-y-6">
+            <div class="text-center">
+                <p class="text-blue-400 text-xs font-bold mb-2">메인자산통합원장</p>
+                <p class="text-5xl font-black digital tracking-tighter" id="piCount">400.5421</p>
+                <p class="text-xl font-black text-yellow-500 mt-2">Pi</p>
             </div>
-            <p class="text-xl font-black text-yellow-500 mb-6">Pi</p>
-            
-            <div class="py-3 px-6 bg-green-500/10 rounded-full border border-green-500/30 inline-block">
-                <p class="text-green-500 font-bold text-sm digital-num">Value: $ <span id="gcvValue">125,663,600</span> (GCV)</p>
-            </div>
-        </section>
 
-        <div class="grid grid-cols-1 gap-4">
-            <div class="glass-card rounded-3xl p-5 border-l-4 border-blue-500">
-                <p class="text-[10px] text-gray-500 mb-1">HKWB 실시간 공급량</p>
-                <p class="digital-num text-2xl font-black text-white" id="supplyNum">6,280,000.2145</p>
+            <div class="rounded-full border-2 border-green-500 py-3 text-center bg-green-500/5 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                <p class="text-green-500 font-bold text-sm digital">Value: $ 125,663,600 (GCV)</p>
             </div>
+
             <div class="grid grid-cols-2 gap-4">
-                <div class="glass-card rounded-3xl p-5 text-center">
-                    <p class="text-[10px] text-gray-400 mb-1">스테이킹 이율</p>
-                    <p class="digital-num text-lg font-black text-blue-400">17.64%</p>
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <p class="text-[10px] text-gray-500 mb-1">스테이킹 이율</p>
+                    <p class="text-blue-400 font-black digital text-sm">18.5% (APY)</p>
                 </div>
-                <div class="glass-card rounded-3xl p-5 text-center">
-                    <p class="text-[10px] text-gray-400 mb-1">LP 수익률</p>
-                    <p class="digital-num text-lg font-black text-pink-500">28.57%</p>
+                <div class="glass-card rounded-2xl p-5 text-center">
+                    <p class="text-[10px] text-gray-500 mb-1">LP 수익률</p>
+                    <p class="text-pink-500 font-black digital text-sm">24.5% (Yield)</p>
                 </div>
             </div>
-        </div>
 
-        <section class="glass-card rounded-[2rem] p-6 text-center border border-yellow-500/30 shadow-[0_0_30px_rgba(251,191,36,0.1)]">
-            <p class="text-[10px] font-bold text-gray-500 mb-2 uppercase">전체 유동성 현황 (DEX LP)</p>
-            <p class="digital-num text-3xl font-black text-green-400">$ <span id="liquidity">88,432,098,051</span></p>
+            <div class="glass-card rounded-3xl p-6 text-center border border-yellow-500/30">
+                <p class="text-cyan-400 text-[10px] font-bold mb-2 uppercase">전체 유동성 현황 (DEX LP)</p>
+                <p class="text-2xl font-black text-green-400 digital">$ 88,438,688,147</p>
+            </div>
         </section>
 
-        <div class="grid grid-cols-3 gap-y-8 py-4">
-            <div class="flex flex-col items-center group">
-                <div class="w-12 h-12 rounded-2xl bg-blue-600/10 flex items-center justify-center mb-2 group-active:scale-90 transition-transform">
-                    <i class="fas fa-paper-plane text-blue-500"></i>
-                </div>
-                <span class="text-[11px] font-bold">송금</span>
+        <div class="grid grid-cols-3 gap-3 py-10">
+            <div class="bg-white/5 aspect-square rounded-2xl flex flex-col items-center justify-center space-y-2 border border-white/5 active:scale-95 transition-all">
+                <i class="fas fa-rocket text-xl text-red-500"></i>
+                <span class="text-[10px] font-bold text-gray-300">송금</span>
             </div>
-            <div class="flex flex-col items-center group">
-                <div class="w-12 h-12 rounded-2xl bg-yellow-600/10 flex items-center justify-center mb-2 group-active:scale-90 transition-transform">
-                    <i class="fas fa-shopping-cart text-yellow-500"></i>
-                </div>
-                <span class="text-[11px] font-bold">결제</span>
+            <div class="bg-white/5 aspect-square rounded-2xl flex flex-col items-center justify-center space-y-2 border border-white/5 active:scale-95 transition-all">
+                <i class="fas fa-shopping-cart text-xl text-blue-400"></i>
+                <span class="text-[10px] font-bold text-gray-300">결제</span>
             </div>
-            <div class="flex flex-col items-center group">
-                <div class="w-12 h-12 rounded-2xl bg-red-600/10 flex items-center justify-center mb-2 group-active:scale-90 transition-transform">
-                    <i class="fas fa-vault text-red-500"></i>
-                </div>
-                <span class="text-[11px] font-bold">예치</span>
+            <div class="bg-white/5 aspect-square rounded-2xl flex flex-col items-center justify-center space-y-2 border border-white/5 active:scale-95 transition-all">
+                <i class="fas fa-landmark text-xl text-gray-400"></i>
+                <span class="text-[10px] font-bold text-gray-300">예치</span>
             </div>
-            <div class="flex flex-col items-center group">
-                <div class="w-12 h-12 rounded-2xl bg-orange-600/10 flex items-center justify-center mb-2 group-active:scale-90 transition-transform">
-                    <i class="fas fa-gift text-orange-500"></i>
-                </div>
-                <span class="text-[11px] font-bold">보상</span>
+            <div class="bg-white/5 aspect-square rounded-2xl flex flex-col items-center justify-center space-y-2 border border-white/5 active:scale-95 transition-all">
+                <i class="fas fa-gift text-xl text-orange-400"></i>
+                <span class="text-[10px] font-bold text-gray-300">보상</span>
             </div>
-            <div class="flex flex-col items-center group">
-                <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 flex items-center justify-center mb-2 group-active:scale-90 transition-transform">
-                    <i class="fas fa-coins text-yellow-600"></i>
-                </div>
-                <span class="text-[11px] font-bold">기본소득</span>
+            <div class="bg-white/5 aspect-square rounded-2xl flex flex-col items-center justify-center space-y-2 border border-white/5 active:scale-95 transition-all">
+                <i class="fas fa-credit-card text-xl text-yellow-600"></i>
+                <span class="text-[10px] font-bold text-gray-300">기본소득</span>
             </div>
-            <div class="flex flex-col items-center group">
-                <div class="w-12 h-12 rounded-2xl bg-cyan-600/10 flex items-center justify-center mb-2 group-active:scale-90 transition-transform">
-                    <i class="fas fa-shuffle text-cyan-500"></i>
-                </div>
-                <span class="text-[11px] font-bold">스왑</span>
+            <div class="bg-white/5 aspect-square rounded-2xl flex flex-col items-center justify-center space-y-2 border border-white/5 active:scale-95 transition-all">
+                <i class="fas fa-sync text-xl text-cyan-500"></i>
+                <span class="text-[10px] font-bold text-gray-300">스왑</span>
             </div>
         </div>
 
-        <div class="space-y-4 pt-4">
-            <div class="accordion-item glass-card rounded-3xl overflow-hidden">
-                <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex justify-between items-center group">
-                    <span class="text-sm font-black italic text-yellow-500">HK 사회 재단 비전 2030</span>
-                    <i class="fas fa-plus text-xs text-gray-600 group-hover:rotate-45 transition-transform"></i>
+        <h3 class="text-center font-black italic text-yellow-500 mb-4 tracking-tighter">HK 사회 재단 5대 비전 2030</h3>
+        <div class="space-y-3">
+            <div class="onion-item glass-card rounded-2xl overflow-hidden">
+                <button onclick="toggleOnion(this)" class="w-full p-5 flex justify-between items-center text-left">
+                    <span class="text-[11px] font-bold">01. 글로벌 AI 통합 지원 시스템 구축</span>
+                    <i class="fas fa-chevron-down text-[10px] text-gray-600"></i>
                 </button>
-                <div class="accordion-content space-y-4 text-xs text-gray-400">
-                    <p>01. 글로벌 AI 통합 지원 시스템 구축</p>
-                    <p>02. 휴머노이드 로봇(Figure AI) 산업 육성</p>
-                    <p>03. 무한 청정 에너지 핵융합 인프라</p>
-                    <p>04. PI 네트워크 기반 디지털 금융 평등</p>
-                    <p>05. 글로벌 기본 소득 재단 실현</p>
+                <div class="onion-content text-[11px] text-gray-400 leading-relaxed">
+                    전 세계 40개국 사용자를 위한 실시간 AI 상담 및 금융 지원 인프라를 구축하여 언어와 장벽 없는 경제 생태계를 만듭니다.
                 </div>
             </div>
-
-            <div class="accordion-item glass-card rounded-3xl overflow-hidden">
-                <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex justify-between items-center group">
-                    <span class="text-sm font-black italic text-blue-400">글로벌 AI 지원센터 (FAQ 20선)</span>
-                    <i class="fas fa-plus text-xs text-gray-600 group-hover:rotate-45 transition-transform"></i>
+            <div class="onion-item glass-card rounded-2xl overflow-hidden">
+                <button onclick="toggleOnion(this)" class="w-full p-5 flex justify-between items-center text-left">
+                    <span class="text-[11px] font-bold">02. 휴머노이드 로봇(Figure AI) 산업 육성</span>
+                    <i class="fas fa-chevron-down text-[10px] text-gray-600"></i>
                 </button>
-                <div class="accordion-content space-y-3 text-xs text-gray-400">
-                    <p class="text-white font-bold">전 세계 어디서나 실시간 AI 상담을 지원합니다.</p>
-                    <p>1. HKWB 서비스 이용 가이드</p>
-                    <p>2. 자산 보안 및 복구 시스템</p>
-                    <p>3. 40개 언어별 최적화 답변...</p>
+                <div class="onion-content text-[11px] text-gray-400 leading-relaxed">
+                    인류의 육체적 노동을 대체할 차세대 휴머노이드 기술과 결합하여 노동으로부터의 자유를 실현합니다.
+                </div>
+            </div>
+            <div class="onion-item glass-card rounded-2xl overflow-hidden">
+                <button onclick="toggleOnion(this)" class="w-full p-5 flex justify-between items-center text-left">
+                    <span class="text-[11px] font-bold">03. 무한 청정 에너지 핵융합 인프라</span>
+                    <i class="fas fa-chevron-down text-[10px] text-gray-600"></i>
+                </button>
+                <div class="onion-content text-[11px] text-gray-400 leading-relaxed">
+                    에너지 비용 제로 시대를 열어갈 핵융합 기술을 지원하여 지속 가능한 인류 문명의 토대를 다집니다.
+                </div>
+            </div>
+            <div class="onion-item glass-card rounded-2xl overflow-hidden">
+                <button onclick="toggleOnion(this)" class="w-full p-5 flex justify-between items-center text-left">
+                    <span class="text-[11px] font-bold">04. PI 네트워크 기반 디지털 금융 평등</span>
+                    <i class="fas fa-chevron-down text-[10px] text-gray-600"></i>
+                </button>
+                <div class="onion-content text-[11px] text-gray-400 leading-relaxed">
+                    PI 코인을 매개로 전 세계 누구에게나 공평한 금융 기회를 제공하는 통합 자산 시스템을 운영합니다.
+                </div>
+            </div>
+            <div class="onion-item glass-card rounded-2xl overflow-hidden">
+                <button onclick="toggleOnion(this)" class="w-full p-5 flex justify-between items-center text-left">
+                    <span class="text-[11px] font-bold">05. 글로벌 기본 소득 재단 실현</span>
+                    <i class="fas fa-chevron-down text-[10px] text-gray-600"></i>
+                </button>
+                <div class="onion-content text-[11px] text-gray-400 leading-relaxed">
+                    창출된 모든 기술적 부를 전 인류에게 배분하는 기본 소득 시스템을 완성합니다.
                 </div>
             </div>
         </div>
 
-        <div class="flex gap-4">
-            <button class="flex-1 glass-card py-5 rounded-3xl flex items-center justify-center space-x-2 border-red-600/20">
-                <i class="fab fa-youtube text-red-600 text-xl"></i>
-                <span class="text-[10px] font-bold">YOUTUBE</span>
-            </button>
-            <button class="flex-1 glass-card py-5 rounded-3xl flex items-center justify-center space-x-2">
-                <i class="fab fa-tiktok text-white text-xl"></i>
-                <span class="text-[10px] font-bold">TIKTOK</span>
-            </button>
+        <h3 class="text-center font-black italic text-cyan-400 mt-16 mb-4 tracking-tighter">Global AI Center FAQ 20</h3>
+        <div class="space-y-2">
+            <div class="onion-item bg-white/5 border border-white/5 rounded-xl">
+                <button onclick="toggleOnion(this)" class="w-full py-4 px-5 text-left flex justify-between items-center">
+                    <span class="text-[10px] font-medium">1. HKWB는 어떤 서비스를 제공하나요?</span>
+                    <i class="fas fa-plus text-[8px] text-yellow-500"></i>
+                </button>
+                <div class="onion-content text-[10px] text-gray-500">통합 자산 관리, 스왑, 스테이킹 및 글로벌 AI 상담 서비스를 제공합니다.</div>
+            </div>
+            <div class="onion-item bg-white/5 border border-white/5 rounded-xl">
+                <button onclick="toggleOnion(this)" class="w-full py-4 px-5 text-left flex justify-between items-center">
+                    <span class="text-[10px] font-medium">2. PI 코인과 HKWB의 연동 방식은?</span>
+                    <i class="fas fa-plus text-[8px] text-yellow-500"></i>
+                </button>
+                <div class="onion-content text-[10px] text-gray-500">Pi SDK를 활용한 메인넷 직접 연동 방식을 채택하고 있습니다.</div>
+            </div>
+            <div class="onion-item bg-white/5 border border-white/5 rounded-xl">
+                <button onclick="toggleOnion(this)" class="w-full py-4 px-5 text-left flex justify-between items-center">
+                    <span class="text-[10px] font-medium">15. YouTube 및 TikTok 채널 안내</span>
+                    <i class="fas fa-plus text-[8px] text-yellow-500"></i>
+                </button>
+                <div class="onion-content text-[10px] text-gray-500">Hyekong2025 공식 채널을 통해 최신 정보를 공유합니다.</div>
+            </div>
+            <div class="onion-item bg-white/5 border border-white/5 rounded-xl">
+                <button onclick="toggleOnion(this)" class="w-full py-4 px-5 text-left flex justify-between items-center">
+                    <span class="text-[10px] font-medium">20. 회장님(HYEKONG)의 메시지</span>
+                    <i class="fas fa-plus text-[8px] text-yellow-500"></i>
+                </button>
+                <div class="onion-content text-[10px] text-gray-500">"모든 기술의 성배를 인류에게 돌려드립니다."</div>
+            </div>
         </div>
 
-    </main>
+        <div class="grid grid-cols-2 gap-4 mt-20">
+            <a href="#" class="bg-white/5 rounded-2xl py-6 flex flex-col items-center space-y-2 active:scale-95 transition-all">
+                <i class="fab fa-youtube text-2xl text-red-600"></i>
+                <span class="text-[10px] font-black uppercase">YOUTUBE</span>
+            </a>
+            <a href="#" class="bg-white/5 rounded-2xl py-6 flex flex-col items-center space-y-2 active:scale-95 transition-all">
+                <i class="fab fa-tiktok text-2xl text-white"></i>
+                <span class="text-[10px] font-black uppercase">TIKTOK</span>
+            </a>
+        </div>
 
-    <footer class="mt-20 pb-24 text-center">
-        <p class="text-[10px] text-gray-700 tracking-widest font-mono">
-            Contact: support@hkwb.world<br>
-            © 2026 HK GROUP FOUNDER & CHAIRMAN LEE JAEWAN (HYEKONG)
-        </p>
-    </footer>
+        <footer class="mt-16 text-center space-y-6">
+            <div>
+                <p class="text-xs font-bold text-gray-500">CONTACT US</p>
+                <p class="text-lg font-black underline decoration-yellow-500 underline-offset-8">support@hkwb.world</p>
+            </div>
+            <div class="text-[9px] text-gray-700 font-bold uppercase tracking-wider leading-relaxed">
+                HK GROUP FOUNDER & CHAIRMAN LEE JAEWAN (HYEKONG)<br>
+                GLOBAL ADVANCED CLUSTER PROJECT 2026
+            </div>
+        </footer>
 
-    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[92%] max-w-md z-50">
-        <button class="w-full bg-yellow-500 text-black py-5 rounded-3xl font-black text-sm shadow-[0_20px_50px_rgba(251,191,36,0.5)] active:scale-95 transition-all">
-            <i class="fas fa-comment-dots mr-2"></i>ASK ANYTHING (40 LANGUAGES LIVE)
+    </div>
+
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md z-50">
+        <button class="w-full bg-yellow-400 text-black py-4 rounded-2xl font-black text-[10px] shadow-[0_10px_30px_rgba(251,191,36,0.4)] flex items-center justify-center space-x-2">
+            <i class="fas fa-comment-dots text-sm"></i>
+            <span>ASK ANYTHING (40 LANGUAGES SUPPORT)</span>
         </button>
     </div>
 
     <script>
-        // 숫자를 살아 움직이게 만드는 카운팅 시스템
-        function animateNumber(id, start, end, decimals) {
-            const obj = document.getElementById(id);
-            let current = start;
-            const range = end - start;
-            const increment = range / 100;
-            const timer = setInterval(() => {
-                current += increment;
-                if ((range > 0 && current >= end) || (range < 0 && current <= end)) {
-                    current = end;
-                    clearInterval(timer);
-                }
-                obj.innerText = decimals ? current.toLocaleString(undefined, {minimumFractionDigits: decimals, maximumFractionDigits: decimals}) : Math.floor(current).toLocaleString();
-            }, 20);
-        }
-
-        // 초기 애니메이션 실행
-        window.onload = () => {
-            animateNumber('mainPi', 400.0000, 400.5421, 400.0220, 4);
-            animateNumber('supplyNum', 6279000, 6280000.2145, 4);
-            animateNumber('liquidity', 88432000000, 88432098051, 0);
-            animateNumber('gcvValue', 125663000, 125663600, 0);
-
-            // 3초마다 미세하게 숫자가 변하게 하여 "살아있음"을 연출
-            setInterval(() => {
-                const randomVal = 400.5421 + (Math.random() * 0.0010);
-                document.getElementById('mainPi').innerText = randomVal.toLocaleString(undefined, {minimumFractionDigits: 4});
-            }, 3000);
-        };
-
-        function toggleAccordion(btn) {
-            const item = btn.closest('.accordion-item');
+        function toggleOnion(btn) {
+            const item = btn.closest('.onion-item');
             const isActive = item.classList.contains('active');
-            document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
+            
+            // 모든 항목 닫기 (원치 않으시면 이 줄을 주석 처리하세요)
+            document.querySelectorAll('.onion-item').forEach(el => el.classList.remove('active'));
+            
             if (!isActive) item.classList.add('active');
         }
+
+        // 숫자 애니메이션 (살아 움직이는 효과)
+        function liveNumbers() {
+            const pi = document.getElementById('piCount');
+            setInterval(() => {
+                const current = 400.5421 + (Math.random() * 0.0005);
+                pi.innerText = current.toFixed(4);
+            }, 2000);
+        }
+        liveNumbers();
     </script>
 </body>
 </html>

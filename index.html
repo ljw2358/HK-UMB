@@ -3,114 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - IMMORTAL MASTER</title>
+    <title>HK WORLD BANK - THE ETERNAL</title>
     <style>
         :root { 
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF; 
             --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #0d0d0d; 
-            --hk-red: #FF0000;
         }
         body { 
             background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; 
             margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;
-            overflow-x: hidden;
         }
-        /* 불멸의 아우라 효과 */
-        .container { 
-            width: 100%; max-width: 500px; padding: 20px; box-sizing: border-box; text-align: center;
-            position: relative; z-index: 1;
-        }
-        .aura {
-            position: fixed; top: 50%; left: 50%; width: 100vw; height: 100vh;
-            background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, rgba(0,0,0,0) 70%);
-            transform: translate(-50%, -50%); z-index: 0; pointer-events: none;
-        }
+        .container { width: 100%; max-width: 500px; padding: 20px; box-sizing: border-box; text-align: center; }
         
         .header { display: flex; justify-content: flex-end; width: 100%; margin-bottom: 20px; }
         .lang-select { 
-            background: rgba(255,215,0,0.1); border: 1px solid var(--hk-gold); padding: 8px 12px; 
-            border-radius: 10px; font-size: 11px; font-weight: bold; color: var(--hk-gold); outline: none;
+            background: #111; border: 2px solid var(--hk-gold); padding: 10px; 
+            border-radius: 12px; font-size: 13px; font-weight: bold; color: var(--hk-gold); cursor: pointer;
         }
 
-        .title-main { color: var(--hk-gold); font-size: 36px; font-weight: 900; text-shadow: 0 0 15px rgba(255,215,0,0.5); }
-        .subtitle { color: var(--hk-blue); font-size: 14px; font-weight: bold; margin-bottom: 30px; letter-spacing: 2px; }
+        .title-main { color: var(--hk-gold); font-size: 38px; font-weight: 900; text-shadow: 0 0 20px rgba(255,215,0,0.4); }
+        .subtitle { color: var(--hk-blue); font-size: 15px; font-weight: bold; margin-bottom: 40px; letter-spacing: 1px; }
 
-        /* [핵심 1] PI 수량 - 불멸의 금빛 각인 */
-        .asset-section { margin-bottom: 40px; }
-        .pi-val { font-size: 60px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--hk-gold); margin: 10px 0; }
-        .pi-unit { color: var(--hk-gold); font-size: 28px; font-weight: bold; }
-        .gcv-badge { 
-            display: inline-block; border: 2px solid var(--hk-green); padding: 10px 25px; 
-            border-radius: 50px; color: var(--hk-green); font-weight: 900; font-size: 16px; margin-top: 10px;
-            box-shadow: 0 0 10px rgba(57,255,20,0.3);
-        }
+        /* 숫자 애니메이션 스타일 */
+        .pi-val { font-size: 65px; font-weight: 900; color: #fff; margin: 10px 0; text-shadow: 0 0 20px var(--hk-gold); }
+        .pi-unit { color: var(--hk-gold); font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .gcv-box { border: 2px solid var(--hk-green); border-radius: 50px; padding: 15px; color: var(--hk-green); font-weight: bold; margin-bottom: 30px; font-size: 18px; }
 
-        /* [핵심 2] DEX 스왑 & LP 스테이킹 대시보드 */
-        .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 30px 0; }
-        .dash-card { 
-            background: linear-gradient(145deg, #111, #050505); border: 1px solid #222; 
-            padding: 20px; border-radius: 20px; position: relative; overflow: hidden;
-        }
-        .dash-card::after {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
-            transform: rotate(45deg); animation: shine 3s infinite;
-        }
-        @keyframes shine { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
-        
-        .dash-label { font-size: 11px; color: #777; margin-bottom: 8px; font-weight: bold; }
-        .dash-val { font-size: 22px; font-weight: 900; }
+        /* 대시보드 (DEX, LP) */
+        .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .dash-card { background: var(--hk-card); border: 1px solid #222; padding: 20px; border-radius: 20px; border-bottom: 3px solid var(--hk-gold); }
+        .dash-lab { font-size: 12px; color: #888; margin-bottom: 8px; font-weight: bold; }
+        .dash-num { font-size: 24px; font-weight: 900; }
 
-        /* 유동성 현황 */
-        .liq-box { 
-            background: rgba(0,243,255,0.05); border: 1px solid var(--hk-blue); 
-            padding: 20px; border-radius: 20px; margin-bottom: 30px;
-        }
-        .liq-title { font-size: 12px; color: var(--hk-blue); margin-bottom: 10px; font-weight: bold; }
-        .liq-val { font-size: 28px; font-weight: 900; color: var(--hk-green); }
+        .liq-box { border: 1px solid var(--hk-blue); background: rgba(0,243,255,0.05); padding: 25px; border-radius: 20px; margin-bottom: 35px; }
+        .liq-num { font-size: 32px; font-weight: 900; color: var(--hk-green); margin-top: 5px; }
 
-        /* 6대 핵심 생태계 메뉴 */
+        /* 6대 메뉴 */
         .eco-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
-        .eco-item { 
-            background: var(--hk-card); padding: 20px 5px; border-radius: 18px; 
-            border: 1px solid #1a1a1a; transition: 0.3s; cursor: pointer;
-        }
-        .eco-item:hover { border-color: var(--hk-gold); background: #151515; }
-        .eco-icon { font-size: 26px; margin-bottom: 10px; display: block; }
-        .eco-text { font-size: 12px; font-weight: bold; color: #bbb; }
+        .eco-item { background: #111; padding: 20px 5px; border-radius: 18px; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
+        .eco-item:hover { border-color: var(--hk-gold); transform: translateY(-5px); }
+        .eco-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+        .eco-text { font-size: 12px; font-weight: bold; }
 
-        /* [핵심 3] FAQ 20 & 5대 비전 (금강경 버전) */
-        .btn-action { 
-            width: 100%; padding: 20px; border-radius: 18px; font-weight: 900; 
-            font-size: 15px; margin-top: 15px; border: none; cursor: pointer; text-align: left;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .btn-faq { background: var(--hk-pink); color: #fff; box-shadow: 0 10px 20px rgba(255,0,255,0.2); }
-        .btn-vis { background: #1a1f2b; color: #fff; border: 1px solid #333; }
+        /* FAQ & VISION 버튼 */
+        .btn-large { width: 100%; padding: 22px; border-radius: 20px; font-weight: 900; font-size: 16px; margin-top: 15px; border: none; cursor: pointer; text-align: left; transition: 0.3s; }
+        .btn-faq { background: var(--hk-pink); color: #fff; box-shadow: 0 10px 20px rgba(255,0,255,0.15); }
+        .btn-vision { background: #1a1f2b; color: #fff; border: 1px solid #333; }
         
-        .content-area { 
-            display: none; background: #050505; padding: 25px; text-align: left; 
-            font-size: 14px; color: #ccc; border-radius: 0 0 20px 20px; 
-            border: 1px solid #222; border-top: none; line-height: 2;
-        }
-        .content-area b { color: var(--hk-gold); display: inline-block; width: 60px; }
+        .acc-content { display: none; background: #050505; padding: 25px; text-align: left; font-size: 14px; color: #ddd; border-radius: 0 0 20px 20px; border: 1px solid #222; line-height: 2.2; }
+        b { color: var(--hk-gold); margin-right: 5px; }
 
-        .sns-row { display: flex; gap: 10px; margin-top: 40px; }
-        .sns-btn { 
-            flex: 1; padding: 18px; border-radius: 15px; font-weight: bold; 
-            text-decoration: none; font-size: 14px; color: #fff;
-        }
-        
-        footer { margin-top: 60px; font-size: 11px; color: #444; padding-bottom: 80px; letter-spacing: 1px; }
+        footer { margin-top: 60px; font-size: 12px; color: #555; padding-bottom: 100px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="aura"></div>
-
 <div class="container">
     <div class="header">
-        <select class="lang-select" id="langSelect" onchange="updateAll()">
+        <select class="lang-select" id="langSelect" onchange="changeLanguage()">
             <option value="ko">🇰🇷 KOREAN</option>
             <option value="en">🇺🇸 ENGLISH</option>
             <option value="zh">🇨🇳 CHINESE</option>
@@ -120,26 +70,24 @@
     <div class="title-main">HK WORLD BANK</div>
     <div id="sub_title" class="subtitle">GLOBAL INTEGRATED LEDGER</div>
 
-    <div class="asset-section">
-        <div class="pi-val">400.0220</div>
-        <div class="pi-unit">Pi Network Assets</div>
-        <div id="gcv_val" class="gcv-badge">GCV: $ 125,663,600</div>
-    </div>
+    <div class="pi-val" id="pi_num">0</div>
+    <div class="pi-unit">Pi Network</div>
+    <div class="gcv-box" id="gcv_box">Value: $ 125,663,600</div>
 
     <div class="dash-grid">
         <div class="dash-card">
-            <div id="l_r1" class="dash-label">LP STAKING</div>
-            <div id="v_r1" class="dash-val" style="color:var(--hk-blue)">18.5%</div>
+            <div id="lab_staking" class="dash-lab">스테이킹 수익률</div>
+            <div class="dash-num" style="color:var(--hk-blue)"><span id="num_staking">0</span>%</div>
         </div>
         <div class="dash-card">
-            <div id="l_r2" class="dash-label">DEX SWAP YIELD</div>
-            <div id="v_r2" class="dash-val" style="color:var(--hk-pink)">24.5%</div>
+            <div id="lab_swap" class="dash-lab">DEX 스왑 리워드</div>
+            <div class="dash-num" style="color:var(--hk-pink)"><span id="num_swap">0</span>%</div>
         </div>
     </div>
 
     <div class="liq-box">
-        <div id="liq_t" class="liq-title">TOTAL LIQUIDITY (HK-LP)</div>
-        <div id="liq_v" class="liq-val">$ 88,438,688,147</div>
+        <div id="lab_liq" class="dash-lab" style="color:var(--hk-blue)">TOTAL LIQUIDITY (HK-LP)</div>
+        <div class="liq-num">$ <span id="num_liq">0</span></div>
     </div>
 
     <div class="eco-grid">
@@ -147,82 +95,100 @@
         <div class="eco-item"><span class="eco-icon">🛒</span><span id="m2" class="eco-text">결제</span></div>
         <div class="eco-item"><span class="eco-icon">🏛️</span><span id="m3" class="eco-text">예치</span></div>
     </div>
-    <div class="eco-grid" style="margin-bottom: 30px;">
+    <div class="eco-grid" style="margin-bottom: 25px;">
         <div class="eco-item"><span class="eco-icon">🎁</span><span id="m4" class="eco-text">보상</span></div>
         <div class="eco-item"><span class="eco-icon">💳</span><span id="m5" class="eco-text">기본소득</span></div>
         <div class="eco-item"><span class="eco-icon">🔄</span><span id="m6" class="eco-text">스왑</span></div>
     </div>
 
-    <button id="f_btn" class="btn-action btn-faq" onclick="toggleAcc('faq')">
-        <span>GLOBAL AI SUPPORT (FAQ 20)</span><span>▼</span>
-    </button>
-    <div id="faq" class="content-area"></div>
+    <button id="faq_btn" class="btn-large btn-faq" onclick="toggleAcc('faq')">GLOBAL AI SUPPORT (FAQ 20) ▼</button>
+    <div id="faq" class="acc-content"></div>
 
-    <button id="v_btn" class="btn-action btn-vis" onclick="toggleAcc('vision')">
-        <span>HK FOUNDATION VISION 2030</span><span>▼</span>
-    </button>
-    <div id="vision" class="content-area"></div>
+    <button id="vis_btn" class="btn-large btn-vision" onclick="toggleAcc('vision')">HK FOUNDATION VISION 2030 ▼</button>
+    <div id="vision" class="acc-content"></div>
 
-    <div class="sns-row">
-        <a href="https://youtube.com/@Hyekong2025" class="sns-btn" style="background:var(--hk-red)">YOUTUBE</a>
-        <a href="https://tiktok.com/@hyekong2025" class="sns-btn" style="background:#111; border:1px solid #333;">TIKTOK</a>
-    </div>
-
-    <footer>© 2026 HK GROUP · FOUNDER HYEKONG</footer>
+    <footer>© 2026 HK GROUP BY HYEKONG</footer>
 </div>
 
 <script>
-    const data = {
+    const translations = {
         ko: {
-            sub: "인류 상생 메인 통합 원장", m1: "해외 송금", m2: "GCV 결제", m3: "자산 예치", m4: "기여 보상", m5: "기본 소득", m6: "DEX 스왑",
-            gcv: "GCV 가치: $ 125,663,600", r1: "LP 스테이킹", v1: "18.5% (APY)", r2: "DEX 스왑 수익", v2: "24.5% (Yield)",
-            liqT: "전체 유동성 현황 (HK-POOL)", liqV: "$ 88,438,688,147",
-            fb: "글로벌 AI 지원센터 (FAQ 20)", vb: "HK 사회 재단 비젼 2030",
-            faq: `<b>Q1.</b> 설립 목적? 인류 기술 격차 해소 및 상생<br><b>Q2.</b> 지원 대상? 글로벌 혁신 파트너 및 개척자<br><b>Q3.</b> GPU 자원? 고성능 인프라 단계별 무상 할당<br><b>Q4.</b> 신청 방법? 공식 포털 제안서 상시 접수<br><b>Q5.</b> 기술 소유? 개발자 귀속 원칙 및 보호<br><b>Q6.</b> 거점 위치? 서울 및 글로벌 7대 전략 허브<br><b>Q7.</b> 윤리 기준? 인간 존엄성을 최우선 가치로 실현<br><b>Q8.</b> 로봇 지원? Figure AI 등 휴머노이드 프로젝트<br><b>Q9.</b> 교육 과정? AI 및 로봇 전문 인재 양성<br><b>Q10.</b> 컨설팅? 법률 대응 및 비즈니스 모델 설계<br><b>Q11.</b> 투자 매칭? HK 글로벌 펀드와 직접 연결<br><b>Q12.</b> 보안 환경? 양자 내성 암호 샌드박스 제공<br><b>Q13.</b> 오픈소스? 공익 프로젝트 서버 무상 지원<br><b>Q14.</b> 중단 기준? 기술 악용 및 비윤리적 사용 시<br><b>Q15.</b> 기술 지원? 24/7 글로벌 엔지니어 상주<br><b>Q16.</b> 언어 지원? 실시간 다국어 협업 시스템<br><b>Q17.</b> 수익 배분? 사회 재단 환원 및 선순환 구조<br><b>Q18.</b> 테스트베드? 하드웨어 및 실물 경제 실증<br><b>Q19.</b> 커뮤니티? 글로벌 개발자 포럼 참여<br><b>Q20.</b> 미래 비전? 전 인류 1인 1AI 기술 복지`,
-            vis: "<b>1. AI 격차 해소:</b> 정보 소외 없는 기술 평등<br><b>2. 에너지 혁신:</b> 무한 청정 핵융합 에너지 지원<br><b>3. 인재 육성:</b> 차세대 우주·로봇 리더 양성<br><b>4. 의료 복지:</b> AI 기반 보편적 건강권 확보<br><b>5. 기술 윤리:</b> 도덕적 기술 표준 글로벌 선도"
+            sub: "인류 상생 메인 통합 원장",
+            gcv: "GCV 가치: $ 125,663,600",
+            staking: "스테이킹 수익률", swap: "DEX 스왑 리워드", liq: "전체 유동성 현황 (HK-LP)",
+            m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑",
+            faqTitle: "글로벌 AI 지원센터 (FAQ 20) ▼",
+            visTitle: "HK 사회 재단 비젼 2030 ▼",
+            faqContent: `<b>Q1.</b> 설립 목적? 인류 기술 격차 해소 및 상생<br><b>Q2.</b> 지원 대상? 글로벌 혁신 파트너 및 개척자<br><b>Q3.</b> GPU 자원? 고성능 인프라 무상 할당<br><b>Q4.</b> 신청 방법? 공식 포털 제안서 상시 접수<br><b>Q5.</b> 기술 소유? 개발자 귀속 원칙 보호<br><b>Q6.</b> 거점 위치? 서울 및 글로벌 7대 전략 허브<br><b>Q7.</b> 윤리 기준? 인간 존엄성 최우선 가치<br><b>Q8.</b> 로봇 지원? Figure AI 등 휴머노이드 프로젝트 지원<br><b>Q9.</b> 교육 과정? AI 전문 인재 양성<br><b>Q10.</b> 컨설팅? 법률 및 비즈니스 모델 설계 지원<br><b>Q11.</b> 투자 매칭? HK 글로벌 펀드 직접 연결<br><b>Q12.</b> 보안 환경? 양자 내성 암호 환경 제공<br><b>Q13.</b> 오픈소스? 공익 프로젝트 서버 무상 지원<br><b>Q14.</b> 중단 기준? 기술 악용 시 즉각 차단<br><b>Q15.</b> 기술 지원? 24/7 글로벌 엔지니어 상주<br><b>Q16.</b> 언어 지원? 실시간 다국어 협업 시스템<br><b>Q17.</b> 수익 배분? 사회 재단 환원 선순환<br><b>Q18.</b> 실증 센터? 하드웨어 및 실물 경제 실증<br><b>Q19.</b> 커뮤니티? 글로벌 개발자 포럼 운영<br><b>Q20.</b> 미래 비전? 전 인류 1인 1AI 기술 복지 실현`,
+            visContent: "<b>1. AI 격차 해소:</b> 정보 소외 없는 기술 평등<br><b>2. 에너지 혁신:</b> 무한 청정 에너지 연구 지원<br><b>3. 인재 육성:</b> 차세대 우주·로봇 리더 양성<br><b>4. 의료 복지:</b> AI 기반 보편적 건강권 확보<br><b>5. 기술 윤리:</b> 도덕적 기술 표준 글로벌 선도"
         },
         en: {
-            sub: "HUMANITY COEXISTENCE LEDGER", m1: "TRANSFER", m2: "PAYMENT", m3: "DEPOSIT", m4: "REWARD", m5: "UBI", m6: "SWAP",
-            gcv: "GCV VALUE: $ 314,159,000", r1: "LP STAKING", v1: "18.5%", r2: "SWAP YIELD", v2: "24.5%",
-            liqT: "TOTAL LIQUIDITY (HK-POOL)", liqV: "$ 95,204,441,800",
-            fb: "GLOBAL AI SUPPORT (FAQ 20)", vb: "HK FOUNDATION VISION 2030",
-            faq: "<b>FAQ 1-20:</b> Dedicated to closing the tech gap, providing GPU resources, and human-centric AI development...",
-            vis: "<b>1. AI Equality 2. Clean Energy 3. Global Talent 4. Universal Health 5. Tech Ethics</b>"
+            sub: "HUMANITY COEXISTENCE MAIN LEDGER",
+            gcv: "GCV VALUE: $ 314,159,000",
+            staking: "STAKING APY", swap: "DEX SWAP YIELD", liq: "TOTAL LIQUIDITY (HK-LP)",
+            m1: "SEND", m2: "PAY", m3: "SAVE", m4: "REWARD", m5: "UBI", m6: "SWAP",
+            faqTitle: "GLOBAL AI SUPPORT (FAQ 20) ▼",
+            visTitle: "HK FOUNDATION VISION 2030 ▼",
+            faqContent: `<b>Q1.</b> Purpose? Closing tech gaps & coexistence<br><b>Q2.</b> Targets? Global innovators & pioneers<br><b>Q3.</b> GPU? High-perf infrastructure allocation<br><b>Q4.</b> Apply? Open proposal submission<br><b>Q5.</b> Rights? Developer-centric ownership<br><b>Q6.</b> Hubs? Seoul & 7 Strategic Global Hubs<br><b>Q7.</b> Ethics? Human dignity as core value<br><b>Q8.</b> Robots? Supporting Figure AI & Humanoids<br><b>Q9.</b> Talent? AI expert training courses<br><b>Q10.</b> Consulting? Legal & BM design support<br><b>Q11.</b> Investment? HK Global Fund matching<br><b>Q12.</b> Security? Quantum-resistant encryption<br><b>Q13.</b> OpenSource? Free servers for public projects<br><b>Q14.</b> Ban? Instant cut for tech misuse<br><b>Q15.</b> Support? 24/7 global engineering team<br><b>Q16.</b> Language? Real-time multilingual collab<br><b>Q17.</b> Profit? Foundation reinvestment cycle<br><b>Q18.</b> Testing? Hardware & real-economy testbeds<br><b>Q19.</b> Community? Global developer forum<br><b>Q20.</b> Vision? 1 AI per person welfare`,
+            visContent: "<b>1. Bridge AI Gap:</b> Tech equality for all<br><b>2. Energy:</b> Supporting clean fusion energy<br><b>3. Talent:</b> Raising space & robot leaders<br><b>4. Health:</b> AI-driven universal healthcare<br><b>5. Ethics:</b> Leading moral tech standards"
         },
         zh: {
-            sub: "人类共生综合账本", m1: "转账", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "互换",
-            gcv: "GCV 价值: ¥ 2,199,113,000", r1: "质押收益", v1: "18.5%", r2: "互换收益", v2: "24.5%",
-            liqT: "总流动性 (HK-池)", liqV: "¥ 680,105,800,000",
-            fb: "全球 AI 支持 (FAQ 20)", vb: "HK 基金会 愿景 2030",
-            faq: "<b>FAQ 1-20:</b> 致力于消除技术差距，提供高性能 GPU 资源，并以人为本开发 AI...",
-            vis: "<b>1. 消除 AI 差距 2. 能源创新 3. 人才培养 4. 医疗福利 5. 技术伦理</b>"
+            sub: "人类共生全球综合账本",
+            gcv: "GCV 价值: ¥ 2,199,113,000",
+            staking: "质押收益率", swap: "DEX 互换奖励", liq: "总流动性 (HK-LP)",
+            m1: "转账", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "互换",
+            faqTitle: "全球 AI 支持中心 (FAQ 20) ▼",
+            visTitle: "HK 社会基金会 2030 愿景 ▼",
+            faqContent: `<b>Q1.</b> 宗旨? 消除技术差距与共生<br><b>Q2.</b> 对象? 全球创新合作伙伴<br><b>Q3.</b> GPU? 免费分配高性能基础设施<br><b>Q4.</b> 申请? 官方门户常时提交提案<br><b>Q5.</b> 权利? 开发者归属原则保护<br><b>Q6.</b> 据点? 首尔及全球7大战略枢纽<br><b>Q7.</b> 伦理? 人类尊严为核心价值<br><b>Q8.</b> 机器人? 支持 Figure AI 等项目<br><b>Q9.</b> 培训? 培养 AI 专业人才<br><b>Q10.</b> 咨询? 法律与商业模式支持<br><b>Q11.</b> 投资? HK 全球基金直接对接<br><b>Q12.</b> 安全? 提供抗量子加密环境<br><b>Q13.</b> 开源? 公益项目免费服务器<br><b>Q14.</b> 中止? 滥用技术时立即封禁<br><b>Q15.</b> 技术? 24/7 全球工程师在岗<br><b>Q16.</b> 语言? 实时多语言协作系统<br><b>Q17.</b> 利润? 社会基金会回馈循环<br><b>Q18.</b> 验证? 硬件与实体经济验证<br><b>Q19.</b> 社区? 运营全球开发者论坛<br><b>Q20.</b> 愿景? 实现全人类 1人 1AI`,
+            visContent: "<b>1. 消除 AI 差距:</b> 技术平权<br><b>2. 能源创新:</b> 支持清洁能源研究<br><b>3. 人才培养:</b> 培养航天与机器人领袖<br><b>4. 医疗福利:</b> AI 普及健康权<br><b>5. 技术伦理:</b> 领跑全球道德标准"
         }
     };
 
-    function updateAll() {
+    function animateValue(id, start, end, duration, decimals = 0) {
+        const obj = document.getElementById(id);
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const val = (progress * (end - start) + start).toFixed(decimals);
+            obj.innerHTML = val.toLocaleString();
+            if (progress < 1) window.requestAnimationFrame(step);
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    function changeLanguage() {
         const lang = document.getElementById('langSelect').value;
-        const s = data[lang];
-        document.getElementById('sub_title').innerText = s.sub;
-        document.getElementById('m1').innerText = s.m1; document.getElementById('m2').innerText = s.m2;
-        document.getElementById('m3').innerText = s.m3; document.getElementById('m4').innerText = s.m4;
-        document.getElementById('m5').innerText = s.m5; document.getElementById('m6').innerText = s.m6;
-        document.getElementById('gcv_val').innerText = s.gcv;
-        document.getElementById('l_r1').innerText = s.r1; document.getElementById('v_r1').innerText = s.v1;
-        document.getElementById('l_r2').innerText = s.r2; document.getElementById('v_r2').innerText = s.v2;
-        document.getElementById('liq_t').innerText = s.liqT; document.getElementById('liq_v').innerText = s.liqV;
-        document.getElementById('f_btn').firstElementChild.innerText = s.fb;
-        document.getElementById('faq').innerHTML = s.faq;
-        document.getElementById('v_btn').firstElementChild.innerText = s.vb;
-        document.getElementById('vision').innerHTML = s.vis;
+        const t = translations[lang];
+
+        document.getElementById('sub_title').innerText = t.sub;
+        document.getElementById('gcv_box').innerText = t.gcv;
+        document.getElementById('lab_staking').innerText = t.staking;
+        document.getElementById('lab_swap').innerText = t.swap;
+        document.getElementById('lab_liq').innerText = t.liq;
+        document.getElementById('m1').innerText = t.m1; document.getElementById('m2').innerText = t.m2;
+        document.getElementById('m3').innerText = t.m3; document.getElementById('m4').innerText = t.m4;
+        document.getElementById('m5').innerText = t.m5; document.getElementById('m6').innerText = t.m6;
+        document.getElementById('faq_btn').innerText = t.faqTitle;
+        document.getElementById('faq').innerHTML = t.faqContent;
+        document.getElementById('vis_btn').innerText = t.visTitle;
+        document.getElementById('vision').innerHTML = t.visContent;
+
+        // 숫자 다시 애니메이션 (뼈속까지 움직임)
+        animateValue("pi_num", 0, 400.0220, 1500, 4);
+        animateValue("num_staking", 0, 18.5, 1200, 1);
+        animateValue("num_swap", 0, 24.5, 1200, 1);
+        animateValue("num_liq", 0, 88438688147, 2000, 0);
     }
 
     function toggleAcc(id) {
         const target = document.getElementById(id);
         const active = target.style.display === 'block';
-        document.querySelectorAll('.content-area').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.acc-content').forEach(el => el.style.display = 'none');
         target.style.display = active ? 'none' : 'block';
     }
-    window.onload = updateAll;
+
+    window.onload = changeLanguage;
 </script>
 </body>
 </html>

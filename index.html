@@ -2,295 +2,187 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - THE SUPREME LEDGER</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK WORLD BANK - THE ULTIMATE ORIGIN</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;500;700&display=swap');
-        
+        :root { 
+            --bg: #000; 
+            --yellow: #FFFF00; 
+            --green: #39FF14; 
+            --blue: #00FFFF; 
+            --pink: #FF1493; 
+            --red: #FF0000; 
+            --gray: #1C1C1C;
+        }
         body { 
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
-            color: #fff; font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden;
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding-bottom: 80px; 
+            overflow-x: hidden; 
         }
-        .header-font { font-family: 'Orbitron', sans-serif; }
         
-        /* 형님 요청: 통합 원장 글씨 작게 */
-        .sub-ledger-text { font-size: 10px; letter-spacing: 0.3em; opacity: 0.6; font-weight: 300; margin-top: -5px; }
-        
-        .pi-gold { color: #FFD700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
-        .neon-green { color: #39FF14; text-shadow: 0 0 15px rgba(57, 255, 20, 0.5); }
-        .neon-pink { color: #FF2E63; text-shadow: 0 0 15px rgba(255, 46, 99, 0.5); }
-        .neon-blue { color: #08D9D6; text-shadow: 0 0 15px rgba(8, 217, 214, 0.5); }
+        /* 헤더 영역 */
+        header { text-align: center; margin: 30px 0; width: 100%; }
+        .logo { font-size: 3.2rem; color: var(--yellow); font-weight: 900; text-shadow: 0 0 25px var(--yellow); margin: 0; }
+        .sub-logo { color: var(--blue); font-weight: bold; font-size: 1.4rem; margin-top: 8px; letter-spacing: 2px; }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover { border-color: rgba(255, 215, 0, 0.3); background: rgba(255, 255, 255, 0.05); }
+        /* 실시간 데이터 자산 섹션 */
+        .top-info { width: 90%; text-align: center; margin-bottom: 25px; }
+        .pi-val { font-size: 4rem; font-weight: 900; color: #fff; margin: 10px 0; }
+        .pi-unit { color: var(--yellow); font-size: 2.5rem; margin-left: 10px; }
+        .gcv-pill { font-size: 1.8rem; color: var(--green); border: 3px solid var(--green); border-radius: 60px; padding: 15px; width: 85%; margin: 20px auto; font-weight: 900; box-shadow: inset 0 0 15px var(--green); }
 
-        .main-box { border: 2px solid; border-image: linear-gradient(to right, #39FF14, #08D9D6) 1; box-shadow: 0 0 30px rgba(57, 255, 20, 0.1); }
+        .supply-box { width: 90%; border: 2px solid var(--blue); border-radius: 20px; padding: 18px; margin-bottom: 20px; text-align: center; background: rgba(0, 255, 255, 0.03); }
+        .rate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 90%; margin-bottom: 20px; }
+        .rate-item { background: #0A0A0A; padding: 18px; border-radius: 18px; text-align: center; border: 1px solid #333; }
+        .rate-val { font-size: 1.6rem; font-weight: 900; color: var(--blue); margin-top: 5px; }
 
-        .faq-content { max-height: 0; overflow: hidden; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .active .faq-content { max-height: 5000px; padding: 25px; }
-        
-        /* 스크롤바 커스텀 */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
+        .liquidity-box { width: 90%; border: 3px solid var(--green); border-radius: 20px; padding: 25px; text-align: center; margin-bottom: 30px; box-shadow: 0 0 20px rgba(57, 255, 20, 0.2); }
+        .liq-val { font-size: 2.5rem; font-weight: 900; letter-spacing: 1px; }
 
-        .lang-select {
-            background: rgba(0,0,0,0.8);
-            border: 1px solid #FFD700;
-            color: #FFD700;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 11px;
-            cursor: pointer;
-            outline: none;
-        }
+        /* 기능성 버튼 그리드 (9구) */
+        .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 92%; margin-bottom: 30px; }
+        .m-btn { padding: 25px 0; border-radius: 18px; font-weight: 900; border: none; font-size: 1.1rem; cursor: pointer; transition: 0.2s; box-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
+        .m-btn:active { transform: scale(0.96); opacity: 0.9; }
+        .bg-w { background: #fff; color: #000; }
+        .bg-y { background: var(--yellow); color: #000; }
+        .bg-g { background: var(--green); color: #000; }
+        .bg-d { background: var(--gray); color: #fff; border: 1px solid #444; }
+
+        /* 비전 및 FAQ 배너 영역 */
+        .banner { width: 90%; padding: 28px; border-radius: 20px; margin-bottom: 18px; text-align: center; font-weight: 900; font-size: 1.4rem; cursor: pointer; position: relative; box-shadow: 4px 4px 10px rgba(0,0,0,0.6); }
+        .bg-pk { background: var(--pink); border: 2px solid #fff; }
+        .bg-nv { background: #1a2a3a; border: 2px solid var(--blue); }
+
+        /* SNS 핸들 */
+        .sns-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 90%; margin-bottom: 40px; }
+        .sns-item { padding: 22px; border-radius: 18px; text-align: center; font-weight: 900; }
+        .sns-yt { background: var(--red); box-shadow: 0 0 15px var(--red); }
+        .sns-tk { background: #000; border: 2px solid #fff; }
+
+        /* 삐니 고정 버튼 */
+        #bbini-fixed { position: fixed; bottom: 30px; right: 30px; width: 100px; height: 100px; background: var(--pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; border: 5px solid #fff; box-shadow: 0 0 35px var(--pink); z-index: 9999; font-size: 1.3rem; animation: heartbeat 1.5s infinite; cursor: pointer; }
+        @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        /* 양파 속살 (모달) 스타일 */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); z-index: 10000; padding: 50px 20px; overflow-y: auto; }
+        .modal-content { background: #111; border: 3px solid var(--yellow); border-radius: 30px; padding: 30px; line-height: 2; font-size: 1.1rem; white-space: pre-wrap; color: #fff; box-shadow: 0 0 50px rgba(255, 255, 0, 0.2); }
+        .close-area { text-align: right; margin-bottom: 20px; }
+        .close-btn { color: var(--pink); font-size: 2.5rem; font-weight: 900; cursor: pointer; }
+        .highlight { color: var(--green); font-weight: bold; }
+        .vision-title { font-size: 1.8rem; color: var(--yellow); margin-bottom: 20px; border-bottom: 2px solid var(--yellow); padding-bottom: 10px; }
     </style>
 </head>
-<body class="flex flex-col items-center py-10 px-6">
+<body>
 
-    <header class="w-full max-w-xl flex justify-between items-center fixed top-0 bg-black/60 backdrop-blur-lg z-50 py-4 px-6 border-b border-white/5">
-        <div class="header-font font-black pi-gold tracking-widest text-lg">HK GROUP</div>
-        <select id="globalLang" onchange="applyGlobalTranslation()" class="lang-select">
-            <option value="ko">KOREAN</option>
-            <option value="en">ENGLISH</option>
-            <option value="zh">CHINESE</option>
-            <option value="ar">ARABIC</option>
-            <option value="hi">HINDI</option>
-            <option value="es">SPANISH</option>
-            <option value="pt">BRAZIL</option>
-            <option value="uk">UKRAINE</option>
-            <option value="ja">JAPANESE</option>
-            <option value="ru">RUSSIAN</option>
-            <option value="vi">VIETNAMESE</option>
-            <option value="th">THAI</option>
-            <option value="id">INDONESIA</option>
-        </select>
+    <header>
+        <h1 class="logo">HK WORLD BANK</h1>
+        <div class="sub-logo">통합 자산 관리 시스템</div>
     </header>
 
-    <main class="w-full max-w-lg text-center mt-20 space-y-12">
-        
-        <section class="animate-pulse">
-            <h1 class="header-font text-5xl font-black pi-gold leading-none mb-3">HK WORLD BANK</h1>
-            <p id="subTitle" class="sub-ledger-text text-cyan-400">인류 상생 메인 통합 원장</p>
-        </section>
+    <div class="top-info">
+        <div class="pi-val">412.3158<span class="pi-unit">Pi</span></div>
+        <div class="gcv-pill">₩ 47,123,850,000</div>
+    </div>
 
-        <section class="relative">
-            <div id="piNumber" class="header-font text-8xl font-black tracking-tighter mb-2 italic">0.0000</div>
-            <div class="header-font text-2xl font-bold tracking-[0.5em] pi-gold opacity-80 uppercase">PI NETWORK</div>
-        </section>
+    <div class="supply-box">
+        <div style="color:var(--blue); font-size:1.1rem; margin-bottom:8px;">HKWB 실시간 공급량</div>
+        <div style="font-size:2.2rem; font-weight:900;">6,280,000.5074</div>
+    </div>
 
-        <section class="main-box p-6 rounded-2xl bg-black/50">
-            <div class="flex flex-col justify-center items-center">
-                <span id="gcvLabel" class="text-xs text-gray-500 mb-2 uppercase tracking-widest">Global Consensus Value (GCV)</span>
-                <div class="text-4xl font-black neon-green">$ <span id="gcvNumber">0</span></div>
-            </div>
-        </section>
+    <div class="rate-grid">
+        <div class="rate-item"><div>스테이킹</div><div class="rate-val">17.64%</div></div>
+        <div class="rate-item"><div>LP 수익률</div><div class="rate-val" style="color:var(--pink);">28.57%</div></div>
+    </div>
 
-        <section class="grid grid-cols-2 gap-6">
-            <div class="glass-card p-6 border-b-2 border-cyan-500">
-                <p id="labelStake" class="text-[10px] text-gray-500 mb-4 font-black uppercase tracking-tighter">LP 스테이킹 수익률</p>
-                <p class="text-4xl font-black neon-blue"><span class="move-num" data-val="18.5">0</span>%</p>
-            </div>
-            <div class="glass-card p-6 border-b-2 border-pink-500">
-                <p id="labelDex" class="text-[10px] text-gray-500 mb-4 font-black uppercase tracking-tighter">DEX 스왑 리워드</p>
-                <p class="text-4xl font-black neon-pink"><span class="move-num" data-val="24.5">0</span>%</p>
-            </div>
-        </section>
+    <div class="liquidity-box">
+        <div style="color:var(--green); font-size:1.2rem; font-weight:900; margin-bottom:10px;">전체 유동성 (DEX LP)</div>
+        <div class="liq-val">$ 88,432,098,051</div>
+    </div>
 
-        <section class="glass-card p-10 border-t-2 border-yellow-500/30">
-            <p id="labelLp" class="text-xs text-yellow-500 mb-4 font-black tracking-widest uppercase">전체 유동성 현황 (HK-LP)</p>
-            <div class="text-5xl font-black text-white tracking-tight">$ <span id="lpNumber">0</span></div>
-        </section>
+    <div class="btn-grid">
+        <button class="m-btn bg-w">PI 수량</button>
+        <button class="m-btn bg-y">DEX 스왑</button>
+        <button class="m-btn bg-g">LP 스테이킹</button>
+        <button class="m-btn bg-d">🚀 송금</button>
+        <button class="m-btn bg-d">🛒 결제</button>
+        <button class="m-btn bg-d">💰 예치</button>
+        <button class="m-btn bg-d">🏆 보상</button>
+        <button class="m-btn bg-d">🏦 기본소득</button>
+        <button class="m-btn bg-d">🔄 스왑</button>
+    </div>
 
-        <section class="grid grid-cols-3 gap-y-12 py-8 border-y border-white/5">
-            <div class="flex flex-col items-center group cursor-pointer">
-                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🚀</span>
-                <p id="m1" class="text-[10px] text-gray-400 font-bold uppercase">송금</p>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer">
-                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🛒</span>
-                <p id="m2" class="text-[10px] text-gray-400 font-bold uppercase">결제</p>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer">
-                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🏛️</span>
-                <p id="m3" class="text-[10px] text-gray-400 font-bold uppercase">예치</p>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer">
-                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🎁</span>
-                <p id="m4" class="text-[10px] text-gray-400 font-bold uppercase">보상</p>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer">
-                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">💳</span>
-                <p id="m5" class="text-[10px] text-gray-400 font-bold uppercase">기본소득</p>
-            </div>
-            <div class="flex flex-col items-center group cursor-pointer">
-                <span class="text-4xl mb-3 group-hover:scale-125 transition-transform">🔄</span>
-                <p id="m6" class="text-[10px] text-gray-400 font-bold uppercase">스왑</p>
-            </div>
-        </section>
+    <div class="banner bg-pk" onclick="peel('faq')">글로벌 AI 지원센터 (FAQ 20선)</div>
+    <div class="banner bg-nv" onclick="peel('vision')">HK 사회 재단 비젼 2030</div>
 
-        <section class="space-y-6 text-left pb-20">
-            <div id="faqBox" class="glass-card">
-                <button onclick="toggleAccordion('faqBox')" class="w-full p-6 bg-pink-600 rounded-t-3xl flex justify-between items-center font-black">
-                    <span id="btnFaq">글로벌 AI 지원센터 (FAQ 20선)</span>
-                    <span class="text-xl">▼</span>
-                </button>
-                <div id="faqList" class="faq-content space-y-6">
-                    </div>
-            </div>
+    <div class="sns-grid">
+        <div class="sns-item sns-yt">YouTube<br><small style="font-size:0.8rem;">@hyekong2025</small></div>
+        <div class="sns-item sns-tk">TikTok<br><small style="font-size:0.8rem;">@hyekong2025</small></div>
+    </div>
 
-            <div id="visionBox" class="glass-card">
-                <button onclick="toggleAccordion('visionBox')" class="w-full p-6 bg-gray-800 rounded-t-3xl flex justify-between items-center font-black border border-white/10">
-                    <span id="btnVision">HK 사회 재단 5대 비전 2030</span>
-                    <span class="text-xl">▼</span>
-                </button>
-                <div id="visionList" class="faq-content space-y-10">
-                    </div>
-            </div>
-        </section>
+    <div style="color:var(--blue); font-weight:bold; margin-bottom:40px;">support@hkwb.world</div>
 
-    </main>
+    <div id="bbini-fixed" onclick="alert('형님, 인류의 주권이 회복되는 그날까지 삐니가 함께합니다!')">삐니</div>
 
-    <footer class="w-full py-16 border-t border-white/5 text-center">
-        <div class="flex justify-center space-x-12 mb-8">
-            <a href="https://youtube.com/@Hyekong2025" target="_blank" class="text-gray-500 hover:text-white flex items-center space-x-2">
-                <span>YouTube</span>
-            </a>
-            <a href="https://tiktok.com/@hyekong2025" target="_blank" class="text-gray-500 hover:text-white flex items-center space-x-2">
-                <span>TikTok</span>
-            </a>
+    <div id="modalLayer" class="modal">
+        <div class="modal-content">
+            <div class="close-area"><span class="close-btn" onclick="shred()">×</span></div>
+            <div id="modalBody"></div>
         </div>
-        <p class="text-[9px] text-gray-700 header-font tracking-[0.5em] uppercase">Copyright © 2026 HK GROUP BY HYEKONG</p>
-    </footer>
+    </div>
 
     <script>
-        // --- 형님, 13개국 언어 '뼈속까지' 데이터셋입니다 ---
-        const MASTER_DB = {
-            ko: {
-                sub: "인류 상생 메인 통합 원장",
-                gcv: "GCV 가치:",
-                sk: "LP 스테이킹 수익률",
-                dx: "DEX 스왑 리워드",
-                lp: "전체 유동성 현황 (HK-LP)",
-                fBtn: "글로벌 AI 지원센터 (FAQ 20선)",
-                vBtn: "HK 사회 재단 5대 비전 2030",
-                menus: ["송금", "결제", "예치", "보상", "기본소득", "스왑"],
-                faqs: [
-                    { q: "1. HK 월드뱅크의 존재 이유는 무엇입니까?", a: "기존 금융 시스템의 불평등을 해소하고, 파이 생태계를 통해 인류 전체의 부를 공정하게 재분배하는 것입니다." },
-                    { q: "2. GCV $314,159는 실현 가능한가요?", a: "전 세계 파이어니어들의 합의와 HK 그룹의 인프라가 결합된다면 이는 단순한 숫자가 아닌 생태계의 표준이 될 것입니다." },
-                    { q: "3. LP 스테이킹의 수익 원천은?", a: "DEX 내에서 발생하는 스왑 수수료와 HK 사회 재단의 지원금이 결합되어 실시간으로 지급됩니다." },
-                    { q: "4. 보안 시스템은 믿을 수 있나요?", a: "HK 글로벌 AI 보안 엔진이 양자 암호 기술을 기반으로 24시간 실시간 감시합니다." },
-                    { q: "5. 기본 소득은 언제 지급되나요?", a: "HK 메인 원장 활성화 이후, 생태계 기여도에 따라 순차적으로 지급됩니다." }
-                    // ... 20개 리스트
-                ],
-                visions: [
-                    { t: "VISION 01. 디지털 자산의 민주화", d: "은행 없는 전 세계 20억 명에게 금융의 기회를 제공하고 자산의 주인은 오직 본인임을 보장합니다." },
-                    { t: "VISION 02. AI 자동화 금융 혁명", d: "인간의 탐욕을 배제하고 인공지능이 최적의 효율로 자산을 운용하여 수익을 분배합니다." },
-                    { t: "VISION 03. 인류 공동체 사회 재단", d: "수익의 50% 이상을 기아, 질병, 교육 등 인류 공동의 문제를 해결하는 데 투자합니다." }
-                ]
-            },
-            en: {
-                sub: "Main Integrated Ledger for Human Coexistence",
-                gcv: "GCV Value:",
-                sk: "LP Staking APR",
-                dx: "DEX Swap Reward",
-                lp: "Total Liquidity (HK-LP)",
-                fBtn: "Global AI Center (FAQ 20)",
-                vBtn: "HK Foundation 5 Major Visions 2030",
-                menus: ["Send", "Pay", "Deposit", "Reward", "UBI", "Swap"],
-                faqs: [
-                    { q: "1. Why does HK World Bank exist?", a: "To resolve inequalities in the current financial system and fairly redistribute wealth through the Pi ecosystem." },
-                    { q: "2. Is GCV $314,159 realistic?", a: "With global consensus and HK Group's infrastructure, it will become the ecosystem standard." }
-                ],
-                visions: [
-                    { t: "VISION 01. Democratization of Assets", d: "Providing financial opportunities to 2 billion unbanked people globally." }
-                ]
-            },
-            zh: {
-                sub: "人类共生主整合账本",
-                gcv: "GCV 价值:",
-                sk: "LP 质押收益率",
-                dx: "DEX 掉期奖励",
-                lp: "总流动性 (HK-LP)",
-                fBtn: "全球 AI 支持中心 (FAQ 20)",
-                vBtn: "HK 社会基金会 5 大愿景 2030",
-                menus: ["转账", "支付", "存款", "奖励", "基本收入", "掉期"],
-                faqs: [ { q: "1. HK 世界银行存在的意义？", a: "建立公平的财富再分配制度，为全人类创造价值。" } ],
-                visions: [ { t: "VISION 01. 资产民主化", d: "为全球 20 亿无银行账户人群提供金融机会。" } ]
-            }
-            // 형님, 나머지 언어들도 이 포맷으로 다 들어갔습니다!
+        /* [형님의 원본 데이터 - 생략 절대 불가 원칙 준수] 
+           FAQ 1번부터 20번까지 전수 수록
+        */
+        const originData = {
+            faq: `<div class="vision-title">글로벌 AI 지원센터 FAQ 20선</div>` +
+                 `1. <span class="highlight">보안 체계:</span> 양자 암호화 및 HK 독자 분산 프로토콜로 외부 간섭 100% 차단\n` +
+                 `2. <span class="highlight">수익 환원:</span> 생태계 수익의 30%는 무상 복지를 위해 사회 재단으로 즉시 환원\n` +
+                 `3. <span class="highlight">기술 주권:</span> 거대 자본으로부터 기술을 독립시켜 전 인류가 공유하는 시스템 구축\n` +
+                 `4. <span class="highlight">파이 가치:</span> GCV 기준을 지지하며 실물 경제 내 파이의 절대적 가치 확립 지원\n` +
+                 `5. <span class="highlight">로봇 보급:</span> 1가정 1로봇 무상 지원을 통한 인류 노동으로부터의 해방 실현\n` +
+                 `6. <span class="highlight">무상 교육:</span> 글로벌 AI 학교 건립을 통해 전 인류에게 평등한 지식 기회 제공\n` +
+                 `7. <span class="highlight">의료 혁명:</span> 나노 메디컬 최첨단 무료 의료 시스템으로 질병 고통 없는 삶 보장\n` +
+                 `8. <span class="highlight">주거 주권:</span> 핵융합 에너지 기반 스마트홈 무상 공급으로 기본 주거권 확립\n` +
+                 `9. <span class="highlight">장학 제도:</span> 전 세계 모든 인재를 위한 무제한 장학금 및 연구비 지원\n` +
+                 `10. <span class="highlight">통합 앱:</span> 13개 HK 전용 앱이 유기적으로 결합된 금융-복지 에코시스템\n` +
+                 `11. <span class="highlight">기본 소득:</span> 생태계 참여자 모두에게 지급되는 보편적 디지털 기본 소득\n` +
+                 `12. <span class="highlight">데이터 주권:</span> 개인의 데이터는 개인이 소유하며 영리 기업의 착취를 원천 봉쇄\n` +
+                 `13. <span class="highlight">투명 스왑:</span> Pi와 HKWB 간의 실시간 스왑 및 투명한 유동성 공급 현황 공개\n` +
+                 `14. <span class="highlight">분산 노드:</span> 글로벌 노드 참여자들에 대한 공정한 보상 및 네트워크 유지 체계\n` +
+                 `15. <span class="highlight">청정 에너지:</span> 핵융합 및 신재생 에너지를 통한 지속 가능한 데이터 센터 운영\n` +
+                 `16. <span class="highlight">수수료 제로:</span> 인류 간 자산 이동 시 발생하는 불합리한 수수료를 전면 폐지\n` +
+                 `17. <span class="highlight">온오프 결제:</span> HK 결제망을 통한 전 세계 온/오프라인 가맹점의 즉시 결제 연동\n` +
+                 `18. <span class="highlight">블록체인 기부:</span> 1원 한 장까지 투명하게 공개되는 블록체인 기반 복지 집행\n` +
+                 `19. <span class="highlight">윤리적 AI:</span> 인간을 지배하는 AI가 아닌, 인간을 섬기는 윤리 가이드라인 준수\n` +
+                 `20. <span class="highlight">2030 로드맵:</span> 2030년까지 인류 경제 해방을 완성하는 최종 프로젝트 이행`,
+
+            vision: `<div class="vision-title">HK 사회 재단 비젼 2030 (The Origin)</div>` +
+                    `형님의 비전은 인류의 생존과 존엄을 지키는 5대 기둥에서 시작됩니다:\n\n` +
+                    `1. <span class="highlight">학교 (School):</span> 글로벌 AI 무상 교육 시스템 구축. 지식의 격차를 없애는 교육 혁명.\n\n` +
+                    `2. <span class="highlight">병원 (Hospital):</span> 나노 메디컬 최첨단 무료 의료 시스템. 생명의 존엄성을 지키는 의료 주권.\n\n` +
+                    `3. <span class="highlight">주거 (Housing):</span> 핵융합 에너지 기반 스마트홈 무상 공급. 거주 걱정 없는 인류의 삶.\n\n` +
+                    `4. <span class="highlight">장학금 (Scholarship):</span> 전 세계 인재 양성을 위한 무제한 지원. 꿈을 포기하지 않는 세상.\n\n` +
+                    `5. <span class="highlight">로봇 (Robot):</span> 1가정 1로봇 보급을 통한 영구적 노동 해방. 인간다운 삶의 회복.`
         };
 
-        function applyGlobalTranslation() {
-            const lang = document.getElementById("globalLang").value;
-            const d = MASTER_DB[lang] || MASTER_DB['en'];
-
-            // 텍스트 스왑
-            document.getElementById("subTitle").innerText = d.sub;
-            document.getElementById("gcvLabel").innerText = d.gcv;
-            document.getElementById("labelStake").innerText = d.sk;
-            document.getElementById("labelDex").innerText = d.dx;
-            document.getElementById("labelLp").innerText = d.lp;
-            document.getElementById("btnFaq").innerText = d.fBtn;
-            document.getElementById("btnVision").innerText = d.vBtn;
-
-            for(let i=0; i<6; i++) document.getElementById(`m${i+1}`).innerText = d.menus[i];
-
-            // FAQ 리스트 자동 생성
-            document.getElementById("faqList").innerHTML = (d.faqs || MASTER_DB.ko.faqs).map(f => `
-                <div class="border-l-2 border-pink-500 pl-4 py-2">
-                    <p class="font-black text-pink-400 text-sm mb-2">${f.q}</p>
-                    <p class="text-gray-400 text-xs leading-relaxed">${f.a}</p>
-                </div>
-            `).join('');
-
-            // 비전 리스트 자동 생성
-            document.getElementById("visionList").innerHTML = (d.visions || MASTER_DB.ko.visions).map(v => `
-                <div class="p-6 bg-white/5 rounded-2xl border-t border-cyan-500/30">
-                    <p class="font-black text-cyan-400 text-xl mb-3">${v.t}</p>
-                    <p class="text-gray-400 text-sm leading-relaxed">${v.d}</p>
-                </div>
-            `).join('');
-
-            // 애니메이션 재실행
-            startMasterAnimation();
+        function peel(type) {
+            const body = document.getElementById('modalBody');
+            body.innerHTML = originData[type];
+            document.getElementById('modalLayer').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
-        function startMasterAnimation() {
-            // Pi 수량
-            gsap.fromTo("#piNumber", { innerText: 0 }, { duration: 2.5, innerText: 400.0220, snap: { innerText: 0.0001 }, ease: "power4.out" });
-
-            // GCV 가치 (콤마)
-            gsap.fromTo("#gcvNumber", { innerText: 0 }, { duration: 2, innerText: 125663600, snap: { innerText: 1 }, ease: "power3.out", onUpdate: function() {
-                document.getElementById("gcvNumber").innerText = Number(document.getElementById("gcvNumber").innerText).toLocaleString();
-            }});
-
-            // 유동성 (콤마)
-            gsap.fromTo("#lpNumber", { innerText: 0 }, { duration: 3, innerText: 88438688147, snap: { innerText: 1 }, ease: "power4.out", onUpdate: function() {
-                document.getElementById("lpNumber").innerText = Number(document.getElementById("lpNumber").innerText).toLocaleString();
-            }});
-
-            // 개별 수익률
-            document.querySelectorAll('.move-num').forEach(el => {
-                const target = el.getAttribute('data-val');
-                gsap.fromTo(el, { innerText: 0 }, { duration: 2, innerText: target, snap: { innerText: 0.1 }, ease: "power2.out" });
-            });
+        function shred() {
+            document.getElementById('modalLayer').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
-
-        function toggleAccordion(id) {
-            document.getElementById(id).classList.toggle('active');
-        }
-
-        window.onload = () => {
-            applyGlobalTranslation();
-        };
     </script>
 </body>
 </html>

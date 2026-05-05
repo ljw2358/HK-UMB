@@ -18,7 +18,7 @@
         .header-title { font-size: 52px; font-weight: 950; color: var(--hk-gold); margin-top: 50px; letter-spacing: -2px; }
         .sub-header { color: var(--hk-blue); font-size: 22px; font-weight: 800; margin-top: 5px; letter-spacing: 1px; }
 
-        .pi-main { font-size: 72px; font-weight: 900; margin: 30px 0 5px 0; letter-spacing: -2px; }
+        .pi-main { font-size: 72px; font-weight: 900; margin: 30px 0 5px 0; letter-spacing: -2px; color: #fff; }
         .pi-unit { color: var(--hk-gold); font-size: 28px; font-weight: 900; display: block; margin-top: -10px; margin-bottom: 15px; }
        
         .gcv-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 10px 30px; border-radius: 50px; font-size: 16px; font-weight: 900; margin-bottom: 25px; background: rgba(57, 255, 20, 0.05); }
@@ -26,31 +26,39 @@
         .liq-card { border: 2px solid #333; background: linear-gradient(145deg, #151515, #000); padding: 30px 20px 20px 20px; margin-bottom: 30px; border-radius: 25px; position: relative; }
         .rate-container { display: flex; justify-content: space-between; margin-bottom: 20px; }
         .rate-box { flex: 1; }
-        .rate-label { font-size: 16px; font-weight: 900; display: block; margin-bottom: 5px; }
-        .rate-val { font-size: 28px; font-weight: 950; }
+        .rate-label { font-size: 14px; font-weight: 900; display: block; margin-bottom: 5px; }
+        .rate-val { font-size: 24px; font-weight: 950; }
         .c-stk { color: var(--hk-blue); }
         .c-lp { color: var(--hk-pink); }
 
         .liq-label { font-size: 13px; color: #888; font-weight: 800; margin-bottom: 8px; display: block; }
         .liq-val { font-size: 28px; font-weight: 900; color: var(--hk-green); }
 
+        /* DEX 상세 정보 레이아웃 보완 */
+        .dex-detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; border-top: 1px solid #222; padding-top: 20px; }
+        .dex-item { text-align: center; }
+        .dex-n { font-size: 10px; color: #777; font-weight: 800; margin-bottom: 5px; }
+        .dex-v { font-size: 13px; color: var(--hk-gold); font-weight: 900; }
+
         .section-tag { text-align: left; font-size: 14px; font-weight: 900; color: var(--hk-gold); margin: 25px 0 15px 5px; border-left: 4px solid var(--hk-gold); padding-left: 10px; }
         .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
-        .menu-box { background: var(--hk-card); padding: 20px 0; border-radius: 22px; border: 1px solid #222; }
+        .menu-box { background: var(--hk-card); padding: 20px 0; border-radius: 22px; border: 1px solid #222; cursor: pointer; }
         .icon { font-size: 24px; margin-bottom: 8px; display: block; }
         .label { font-size: 13px; font-weight: 800; }
 
-        .action-btn { width: 100%; padding: 20px; border-radius: 20px; font-size: 16px; font-weight: 900; color: #fff; border: none; margin-top: 10px; cursor: pointer; transition: 0.3s; }
-        .action-btn:active { transform: scale(0.98); }
+        .action-btn { width: 100%; padding: 20px; border-radius: 20px; font-size: 16px; font-weight: 900; color: #fff; border: none; margin-top: 15px; cursor: pointer; transition: 0.3s; }
         .panel { display: none; background: #0d0d0d; border-radius: 20px; padding: 20px; margin-top: 10px; border: 1px solid #222; text-align: left; }
         .list-item { padding: 15px 0; border-bottom: 1px solid #222; }
         .list-q { color: var(--hk-gold); font-weight: 900; font-size: 14px; margin-bottom: 5px; }
         .list-a { color: #ccc; font-size: 12px; line-height: 1.6; }
+        
         .vision-box { background: #1a1a1a; padding: 15px; border-radius: 15px; margin-bottom: 10px; border-left: 4px solid var(--hk-blue); }
         .vision-box b { color: var(--hk-blue); display: block; margin-bottom: 5px; font-size: 16px; }
 
         .footer { margin-top: 50px; font-size: 11px; color: #555; line-height: 1.6; font-weight: 700; padding-bottom: 100px; }
-        .bbini-float { position: fixed; bottom: 30px; right: 20px; width: 70px; height: 70px; background: var(--hk-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; cursor: pointer; z-index: 1000; border: 3px solid #fff; }
+        
+        .bbini-float { position: fixed; bottom: 30px; right: 20px; width: 70px; height: 70px; background: var(--hk-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; cursor: pointer; z-index: 2000; border: 3px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .chat-bubble { position: fixed; bottom: 110px; right: 20px; width: 240px; background: #fff; color: #000; padding: 15px; border-radius: 20px; font-size: 13px; font-weight: 800; display: none; z-index: 2000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
@@ -60,8 +68,6 @@
         <select id="lang-select" onchange="changeLang(this.value)">
             <option value="ko">한국어 (KO)</option>
             <option value="en">ENGLISH (EN)</option>
-            <option value="zh">中文 (ZH)</option>
-            <option value="ja">日本語 (JA)</option>
         </select>
     </div>
 
@@ -85,6 +91,21 @@
         </div>
         <span class="liq-label" id="liq-label">전체 유동성 현황 (DEX LP)</span>
         <div class="liq-val" id="liq-display">$ 88,438,688,147</div>
+
+        <div class="dex-detail-grid">
+            <div class="dex-item">
+                <div class="dex-n">PI TOTAL</div>
+                <div class="dex-v" id="det-pi">1,240,552</div>
+            </div>
+            <div class="dex-item">
+                <div class="dex-n">DEX SWAP</div>
+                <div class="dex-v" id="det-swap">$ 314,159</div>
+            </div>
+            <div class="dex-item">
+                <div class="dex-n">LP STAKED</div>
+                <div class="dex-v" id="det-lp">85.4%</div>
+            </div>
+        </div>
     </div>
 
     <div class="section-tag" id="tag-ecosystem">HK MASTER ECOSYSTEM</div>
@@ -103,7 +124,8 @@
     </div>
 </div>
 
-<div class="bbini-float">🤖</div>
+<div class="chat-bubble" id="chat-bubble">혜공 형님, 삐니가 대기 중입니다! 무엇이든 물어보세요. 🤖</div>
+<div class="bbini-float" onclick="talkToBbini()">🤖</div>
 
 <script>
     const translations = {
@@ -141,7 +163,7 @@
             ]
         },
         en: {
-            sub: "Integrated Asset Management", stk: "Staking Rate", lp: "LP Profit", liq: "Total Liquidity (DEX LP)", eco: "HK MASTER ECOSYSTEM", faqBtn: "Global AI Support Center (FAQ 20)", visBtn: "HK Vision 2030",
+            sub: "Integrated Asset Management", stk: "Staking Rate", lp: "LP Yield", liq: "Total Liquidity (DEX LP)", eco: "HK MASTER ECOSYSTEM", faqBtn: "Global AI Support Center (FAQ 20)", visBtn: "HK Vision 2030",
             menus: ["Transfer", "Payment", "Deposit", "Rewards", "UBI", "Swap"],
             faq: [
                 ["Security Level?", "Quantum encryption & distributed ledger for top security."],
@@ -172,72 +194,6 @@
                 ["Talent Support", "Unrestricted research funding for innovative minds."],
                 ["Robot Era", "Liberating humanity from labor to focus on self-actualization."]
             ]
-        },
-        zh: {
-            sub: "集成资产管理系统", stk: "质押率", lp: "LP 收益率", liq: "总流动性状态 (DEX LP)", eco: "HK 大师生态系统", faqBtn: "全球 AI 支持中心 (FAQ 20)", visBtn: "HK 基金会 2030 愿景",
-            menus: ["汇款", "支付", "存款", "奖励", "基本收入", "互换"],
-            faq: [
-                ["系统安全性？", "结合量子加密和分布式账本技术，提供顶级安全。"],
-                ["基本收入？", "将 HK 集团总利润的 30% 自动分配给全人类。"],
-                ["机器人普及？", "生产优化后，按申请顺序发放每户一台机器人。"],
-                ["能源自给？", "通过核聚变模块实现家庭电费为零的目标。"],
-                ["数据所有权？", "所有个人数据仅由用户本人控制和拥有。"],
-                ["主网切换？", "测试网的所有价值将 1:1 安全迁移到主网。"],
-                ["医疗支持？", "旨在通过基金会全额资助癌症和疑难病症。"],
-                ["AI 导师？", "为全球儿童提供 1:1 个性化人工智能教育。"],
-                ["手续费政策？", "手续费的 90% 将立即返还给生态贡献者。"],
-                ["HK 未来？", "成为集能源、机器人、金融于一体的经济中心。"],
-                ["机器人安全？", "本地服务器存储方式，杜绝外部黑客攻击。"],
-                ["参与生态？", "通过节点运营、APP 活动、LP 供应等参与。"],
-                ["社会贡献？", "将利润投入扶贫和环境修复。"],
-                ["奖学金？", "为创新人才提供每月高达 5000 美元经费。"],
-                ["治理权？", "重大决策将积极反映社区的共识。"],
-                ["全球中心？", "在全球 50 个主要城市建设线下 AI 中心。"],
-                ["稳定性？", "全球分布式节点 24 小时运行，确保运营。"],
-                ["上场标准？", "仅通过 AI 算法审核的创新项目才能上市。"],
-                ["防御策略？", "实时算法应对波动，保护资产价值。"],
-                ["삐니 角色？", "作为 혜공 哥哥的专属秘书，协助管理和技术。"]
-            ],
-            vision: [
-                ["HK 全球 AI 学校", "建立全球通用的免费尖端教育系统。"],
-                ["纳米医疗中心", "利用纳米机器人技术征服癌症。"],
-                ["能源智能家居", "向全人类普及无能源成本支出的居住环境。"],
-                ["人才培养", "为梦想创新的天才提供无限制的研究环境。"],
-                ["机器人时代", "将人类从简单劳动中解放，保障自我实现。"]
-            ]
-        },
-        ja: {
-            sub: "統合資産管理システム", stk: "ステーキング率", lp: "LP 収益率", liq: "総流動性状況 (DEX LP)", eco: "HK マスターエコシステム", faqBtn: "グローバル AI サポートセンター (FAQ 20)", visBtn: "HK 財団 ビジョン 2030",
-            menus: ["送金", "決済", "預金", "報酬", "基本所得", "スワップ"],
-            faq: [
-                ["セキュリティは？", "量子暗号と分散台帳技術で最高水準の保護。"],
-                ["基本所得？", "HKグループ収益の30％を全人類に自動配分。"],
-                ["ロボット普及？", "最適化後、申請順に1世帯1台を無償配布。"],
-                ["エネルギー？", "核融合モジュールにより家庭内電気代をゼロに。"],
-                ["データ所有権？", "すべての個人データはユーザー本人のみが所有。"],
-                ["メインネット？", "テストネットの全データは1:1で安全に移行。"],
-                ["医療支援？", "がんや難病の治療費を全額支援することを目指す。"],
-                ["AIチューター？", "世界の子供たちに1:1のAI教育を無償提供。"],
-                ["手数料政策？", "発生手数料の90％をエコシステム貢献者に還元。"],
-                ["HKの価値？", "エネルギー、ロボット、金融を統合した経済の新中心。"],
-                ["ロボット安全？", "ローカルサーバー保存によりハッキングを遮断。"],
-                ["参加方法は？", "ノード運営、アプリ活動、LP供給などで貢献。"],
-                ["社会貢献？", "収益を貧困撲滅や環境復元に即座に投入。"],
-                ["奨学金制度？", "革新人材へ月額最大5,000ドルの研究費支援。"],
-                ["ガバナンス？", "主要な意思決定にはコミュニティ合意を反映。"],
-                ["拠点場所？", "世界の主要50都市にAIセンターを構築中。"],
-                ["安定性？", "分散ノードが24時間稼働し、無中断運営を保証。"],
-                ["上場基準？", "AIの厳格な審査を通過したプロジェクトのみ上場。"],
-                ["流動性防衛？", "リアルタイムアルゴリズムが市場変動から価値保護。"],
-                ["삐니 の役割？", "혜공 兄さんの専属秘書として資産管理と技術支援。"]
-            ],
-            vision: [
-                ["HK AI 学校", "世界中平等に受けられる無償教育システム。"],
-                ["メディカルセンター", "ナノ技術によるがん克服と治療費の全額支援。"],
-                ["エネルギー住宅", "エネルギーコストのない持続可能な住環境を普及。"],
-                ["人材育成", "革新を夢見る人材へ無制限の研究環境支援。"],
-                ["ロボット時代", "単純労働から解放され、自己実現に集中できる生活。"]
-            ]
         }
     };
 
@@ -249,7 +205,7 @@
     }
 
     function updateUI() {
-        const d = translations[currentLang] || translations['ko'];
+        const d = translations[currentLang];
         document.getElementById('sub-header').innerText = d.sub;
         document.getElementById('lbl-stk').innerText = d.stk;
         document.getElementById('lbl-lp').innerText = d.lp;
@@ -285,10 +241,23 @@
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     }
 
+    function talkToBbini() {
+        const bubble = document.getElementById('chat-bubble');
+        bubble.style.display = (bubble.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // 실시간 숫자 시뮬레이션 로직
     setInterval(() => {
-        let pVal = 400.0610 + (Math.random() * 0.0005);
-        document.getElementById('pi-display').innerText = pVal.toFixed(4);
-    }, 2000);
+        let pVal = parseFloat(document.getElementById('pi-display').innerText);
+        document.getElementById('pi-display').innerText = (pVal + (Math.random() * 0.0003)).toFixed(4);
+
+        let liqVal = 88438688147 + Math.floor(Math.random() * 20000);
+        document.getElementById('liq-display').innerText = "$ " + liqVal.toLocaleString();
+
+        document.getElementById('stk-rate').innerText = (15.22 + (Math.random() * 0.02)).toFixed(2) + "%";
+        document.getElementById('det-swap').innerText = "$ " + (314159 + Math.floor(Math.random()*10)).toLocaleString();
+        document.getElementById('det-lp').innerText = (85.4 + (Math.random()*0.1)).toFixed(1) + "%";
+    }, 2500);
 
     updateUI();
 </script>

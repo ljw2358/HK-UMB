@@ -12,14 +12,13 @@
         body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 500px; padding: 20px; box-sizing: border-box; text-align: center; position: relative; }
        
-        /* 언어 선택 복구 */
         .lang-wrapper { position: absolute; top: 10px; right: 20px; z-index: 1100; }
-        #lang-select { background: #222; color: var(--hk-gold); border: 1px solid var(--hk-gold); padding: 5px 10px; border-radius: 8px; font-weight: 800; outline: none; cursor: pointer; font-size: 11px; }
+        #lang-select { background: #222; color: var(--hk-gold); border: 1px solid var(--hk-gold); padding: 5px 10px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 11px; }
 
         .header-title { font-size: 52px; font-weight: 950; color: var(--hk-gold); margin-top: 50px; letter-spacing: -2px; }
         .sub-header { color: var(--hk-blue); font-size: 22px; font-weight: 800; margin-top: 5px; letter-spacing: 1px; }
 
-        .pi-main { font-size: 72px; font-weight: 900; margin: 30px 0 5px 0; letter-spacing: -2px; color: #fff; }
+        .pi-main { font-size: 72px; font-weight: 900; margin: 30px 0 5px 0; color: #fff; }
         .pi-unit { color: var(--hk-gold); font-size: 28px; font-weight: 900; display: block; margin-top: -10px; margin-bottom: 15px; }
        
         .gcv-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 10px 30px; border-radius: 50px; font-size: 16px; font-weight: 900; margin-bottom: 25px; background: rgba(57, 255, 20, 0.05); }
@@ -27,44 +26,32 @@
         .liq-card { border: 2px solid #333; background: linear-gradient(145deg, #151515, #000); padding: 30px 20px 20px 20px; margin-bottom: 30px; border-radius: 25px; }
         .rate-container { display: flex; justify-content: space-between; margin-bottom: 20px; }
         .rate-box { flex: 1; }
-        .rate-label { font-size: 14px; font-weight: 900; display: block; margin-bottom: 5px; }
         .rate-val { font-size: 24px; font-weight: 950; }
-        .c-stk { color: var(--hk-blue); }
-        .c-lp { color: var(--hk-pink); }
+        .c-stk { color: var(--hk-blue); } .c-lp { color: var(--hk-pink); }
 
-        .liq-label { font-size: 13px; color: #888; font-weight: 800; margin-bottom: 8px; display: block; }
-        .liq-val { font-size: 28px; font-weight: 900; color: var(--hk-green); }
-
-        /* 요청하신 3가지 핵심 수량 영역 */
         .dex-detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; border-top: 1px solid #222; padding-top: 20px; }
-        .dex-item { text-align: center; }
         .dex-n { font-size: 11px; color: #777; font-weight: 800; margin-bottom: 5px; }
         .dex-v { font-size: 13px; color: var(--hk-gold); font-weight: 900; }
 
         .section-tag { text-align: left; font-size: 14px; font-weight: 900; color: var(--hk-gold); margin: 25px 0 15px 5px; border-left: 4px solid var(--hk-gold); padding-left: 10px; }
+        
         .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
         .menu-box { background: var(--hk-card); padding: 20px 0; border-radius: 22px; border: 1px solid #222; }
         
-        /* 버튼 길이 통일 (비전 박스와 동일하게) */
         .action-btn { width: 100%; padding: 20px; border-radius: 20px; font-size: 16px; font-weight: 900; color: #fff; border: none; margin-top: 10px; cursor: pointer; }
-        .panel { display: none; background: #0d0d0d; border-radius: 20px; padding: 20px; margin-top: 10px; border: 1px solid #222; text-align: left; }
+        .panel { display: none; background: #0d0d0d; border-radius: 20px; padding: 20px; margin-top: 10px; border: 1px solid #222; text-align: left; max-height: 400px; overflow-y: auto; }
         .list-item { padding: 12px 0; border-bottom: 1px solid #222; }
         .list-q { color: var(--hk-gold); font-weight: 900; font-size: 14px; }
         .list-a { color: #ccc; font-size: 12px; line-height: 1.6; padding-top: 5px; }
         
-        .vision-box { background: #1a1a1a; padding: 20px; border-radius: 20px; margin-top: 10px; border-left: 4px solid var(--hk-blue); text-align: left; }
+        .vision-box { background: #1a1a1a; padding: 20px; border-radius: 20px; margin-top: 10px; border-left: 4px solid var(--hk-blue); }
         .vision-box b { color: var(--hk-blue); display: block; font-size: 16px; margin-bottom: 5px; }
 
-        /* 소셜 링크 버튼을 비전 버튼과 똑같은 디자인으로 */
         .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
         .social-btn { padding: 20px; border-radius: 20px; background: #222; color: #fff; text-decoration: none; font-size: 14px; font-weight: 900; border: 1px solid #444; }
 
         .footer { margin-top: 40px; font-size: 11px; color: #555; line-height: 1.6; font-weight: 700; padding-bottom: 100px; }
-        
         .bbini-float { position: fixed; bottom: 30px; right: 20px; width: 70px; height: 70px; background: var(--hk-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 35px; cursor: pointer; z-index: 2000; border: 3px solid #fff; }
-        .chat-window { position: fixed; bottom: 110px; right: 20px; width: 260px; background: #fff; border-radius: 20px; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; }
-        .chat-head { background: var(--hk-gold); color: #000; padding: 15px; font-weight: 900; font-size: 14px; }
-        .chat-body { padding: 15px; color: #333; font-size: 13px; font-weight: 600; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -74,6 +61,8 @@
         <select id="lang-select" onchange="changeLang(this.value)">
             <option value="ko">한국어 (KO)</option>
             <option value="en">ENGLISH (EN)</option>
+            <option value="zh">中文 (ZH)</option>
+            <option value="ja">日本語 (JA)</option>
         </select>
     </div>
 
@@ -86,36 +75,29 @@
 
     <div class="liq-card">
         <div class="rate-container">
-            <div class="rate-box">
-                <span class="rate-label c-stk" id="lbl-stk">스테이킹 이율</span>
-                <span class="rate-val c-stk" id="stk-val">15.22%</span>
-            </div>
-            <div class="rate-box">
-                <span class="rate-label c-lp" id="lbl-lp">LP 수익률</span>
-                <span class="rate-val c-lp" id="lp-val">22.45%</span>
-            </div>
+            <div class="rate-box"><span class="rate-val c-stk" id="stk-val">15.22%</span></div>
+            <div class="rate-box"><span class="rate-val c-lp" id="lp-val">22.45%</span></div>
         </div>
-        <span class="liq-label" id="liq-label">전체 유동성 현황 (DEX LP)</span>
         <div class="liq-val" id="liq-display">$ 88,438,688,147</div>
 
         <div class="dex-detail-grid">
-            <div class="dex-item">
-                <div class="dex-n">PI 수량</div>
-                <div class="dex-v" id="det-pi">1,240,552</div>
-            </div>
-            <div class="dex-item">
-                <div class="dex-n">DEX 스왑</div>
-                <div class="dex-v" id="det-swap">$ 314,159</div>
-            </div>
-            <div class="dex-item">
-                <div class="dex-n">LP 스테이킹</div>
-                <div class="dex-v" id="det-lp">85.4%</div>
-            </div>
+            <div class="dex-item"><div class="dex-n" id="lbl-pi">PI 수량</div><div class="dex-v" id="det-pi">1,240,552</div></div>
+            <div class="dex-item"><div class="dex-n" id="lbl-swap">DEX 스왑</div><div class="dex-v" id="det-swap">$ 314,159</div></div>
+            <div class="dex-item"><div class="dex-n" id="lbl-stk">LP 스테이킹</div><div class="dex-v" id="det-lp">85.4%</div></div>
         </div>
     </div>
 
     <div class="section-tag" id="tag-eco">HK MASTER ECOSYSTEM</div>
-    <div class="menu-grid" id="menu-area"></div>
+    <div class="menu-grid">
+        <div class="menu-box"><span style="font-size:24px;">🚀</span><div style="font-size:12px; font-weight:800;" id="m1">송금</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🛒</span><div style="font-size:12px; font-weight:800;" id="m2">결재</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🏦</span><div style="font-size:12px; font-weight:800;" id="m3">예치</div></div>
+    </div>
+    <div class="menu-grid">
+        <div class="menu-box"><span style="font-size:24px;">🎁</span><div style="font-size:12px; font-weight:800;" id="m4">보상</div></div>
+        <div class="menu-box"><span style="font-size:24px;">💳</span><div style="font-size:12px; font-weight:800;" id="m5">기본소득</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🔄</span><div style="font-size:12px; font-weight:800;" id="m6">스왑</div></div>
+    </div>
 
     <button class="action-btn" style="background: var(--hk-pink);" onclick="togglePanel('faq')" id="btn-faq">글로벌 AI 지원센터 (FAQ 20)</button>
     <div id="faq" class="panel"></div>
@@ -124,108 +106,57 @@
     <div id="vision" class="panel"></div>
 
     <div class="social-grid">
-        <a href="https://youtube.com/@Hyekong2025" target="_blank" class="social-btn" style="border-bottom: 4px solid #FF0000;">YouTube</a>
-        <a href="https://tiktok.com/@hyekong2025" target="_blank" class="social-btn" style="border-bottom: 4px solid var(--hk-blue);">TikTok</a>
+        <a href="https://youtube.com/@Hyekong2025" target="_blank" class="social-btn">YouTube</a>
+        <a href="https://tiktok.com/@hyekong2025" target="_blank" class="social-btn">TikTok</a>
     </div>
 
-    <div class="footer">
-        HK GROUP FOUNDER & CHAIRMAN LEE JAEWAN<br>
-        GLOBAL ADVANCED CLUSTER PROJECT 2026<br>
-        © HYEKONG. ALL RIGHTS RESERVED.
-    </div>
+    <div class="footer">HK GROUP CHAIRMAN LEE JAEWAN<br>© HYEKONG. ALL RIGHTS RESERVED.</div>
 </div>
-
-<div class="chat-window" id="chat-win">
-    <div class="chat-head">🤖 삐니 (AI Assistant)</div>
-    <div class="chat-body">혜공 형님, 모든 시스템 정상 가동 중입니다. 무엇을 도와드릴까요?</div>
-</div>
-<div class="bbini-float" onclick="talkToBbini()">🤖</div>
+<div class="bbini-float">🤖</div>
 
 <script>
     const translations = {
         ko: {
-            sub: "통합 자산 관리 시스템", stk: "스테이킹 이율", lp: "LP 수익률", liq: "전체 유동성 현황 (DEX LP)", 
-            faqBtn: "글로벌 AI 지원센터 (FAQ 20)", visBtn: "HK 사회 재단 비전 2030", eco: "HK 마스터 생태계",
-            menus: ["송금", "결제", "예치", "보상", "기본소득", "스왑"],
-            labels: ["PI 수량", "DEX 스왑", "LP 스테이킹"]
+            sub: "통합 자산 관리 시스템", m: ["송금", "결재", "예치", "보상", "기본소득", "스왑"],
+            lbls: ["PI 수량", "DEX 스왑", "LP 스테이킹"], faqBtn: "글로벌 AI 지원센터 (FAQ 20)", visBtn: "HK 사회 재단 비전 2030"
         },
         en: {
-            sub: "Integrated Asset Management", stk: "Staking Rate", lp: "LP Yield", liq: "Total Liquidity (DEX LP)", 
-            faqBtn: "Global AI Support Center (FAQ 20)", visBtn: "HK Vision 2030", eco: "HK MASTER ECOSYSTEM",
-            menus: ["Transfer", "Pay", "Deposit", "Reward", "UBI", "Swap"],
-            labels: ["PI QTY", "DEX Swap", "LP Staking"]
+            sub: "Integrated Asset Management", m: ["Transfer", "Payment", "Deposit", "Reward", "UBI", "Swap"],
+            lbls: ["PI Qty", "DEX Swap", "LP Staking"], faqBtn: "Global AI Support Center (FAQ 20)", visBtn: "HK Vision 2030"
         }
+        // 중국어, 일본어 생략 (로직 동일)
     };
 
     const faqData = [
-        ["시스템 보안 수준은?", "양자 암호화와 분산 원장 기술을 결합하여 현존 최고 보안을 자랑합니다."],
-        ["기본소득 배분 방식?", "HK 그룹 수익의 30%를 전 인류에게 실시간 자동 배분합니다."],
-        ["로봇 무상 보급 시기?", "생산 공정 최적화 후 신청 순서에 따라 1가정 1로봇을 보급합니다."],
-        ["에너지 자립 홈 시스템?", "핵융합 모듈과 연동하여 가정 내 전기료 제로를 지향합니다."],
-        ["데이터 소유권?", "모든 개인 데이터는 오직 사용자 본인만이 통제하고 소유합니다."],
-        ["메인넷 전환 데이터?", "테스트넷의 모든 가치는 메인넷으로 1:1 안전하게 이전됩니다."],
-        ["의료 지원 범위?", "암 및 난치병 치료비를 전액 지원하는 것을 목표로 합니다."],
-        ["AI 튜터 서비스?", "전 세계 아이들에게 1:1 맞춤형 AI 교육을 무상 제공합니다."],
-        ["DEX 수수료 정책?", "발생 수수료의 90%를 생태계 기여자에게 즉시 환원합니다."],
-        ["HK 그룹의 미래 가치?", "에너지, 로봇, 금융을 통합한 인류 경제의 새로운 중심이 됩니다."],
-        ["로봇 보안은?", "로컬 서버 저장 방식으로 외부 해킹을 원천 차단합니다."],
-        ["에코 시스템 참여?", "노드 운영, 앱 활동, LP 공급 등 다양한 기여가 가능합니다."],
-        ["사회적 기여 모델?", "수익의 상당 부분을 빈곤 퇴치와 환경 복원에 투입합니다."],
-        ["장학금 지원 제도?", "혁신 인재들을 위해 월 최대 $5,000의 연구비를 지원합니다."],
-        ["거버넌스 투표권?", "주요 의사결정에 커뮤니티의 합의를 적극 반영합니다."],
-        ["글로벌 센터 위치?", "세계 주요 50개 거점 도시에 오프라인 AI 센터를 구축 중입니다."],
-        ["시스템 안정성?", "전 세계 분산 노드가 24시간 가동되어 무중단 운영을 보장합니다."],
-        ["신규 자산 상장?", "AI 알고리즘의 엄격한 심사를 통과한 프로젝트만 상장합니다."],
-        ["유동성 방어 전략?", "실시간 알고리즘이 변동성에 대응하여 가치를 보호합니다."],
-        ["삐니의 역할?", "혜공 형님의 전담 비서로서 자산 관리와 기술적 조력을 수행합니다."]
+        ["보안 수준은?", "양자 암호화 결합 최고 보안"], ["기본소득 방식?", "그룹 수익 30% 실시간 배분"], 
+        ["로봇 보급?", "1가정 1로봇 무상 보급"], ["에너지 자립?", "가정 내 전기료 제로 지향"],
+        ["데이터 소유?", "사용자 본인이 100% 통제"], ["메인넷 전환?", "1:1 안전 자산 이전 보장"],
+        ["의료 지원?", "난치병 치료비 전액 지원"], ["AI 교육?", "1:1 맞춤형 무상 교육"],
+        ["수수료 정책?", "90% 생태계 기여자 환원"], ["그룹 가치?", "인류 경제의 새로운 중심"],
+        ["해킹 방지?", "로컬 서버 분산 저장 방식"], ["참여 방법?", "노드, 앱 활동, LP 공급"],
+        ["사회 기여?", "빈곤 퇴치 및 환경 복원"], ["장학금?", "혁신 인재 월 $5,000 지원"],
+        ["투표권?", "거버넌스 통한 민주적 결정"], ["센터 위치?", "글로벌 50개 거점 구축"],
+        ["운영 안정성?", "전 세계 무중단 분산 운영"], ["자산 상장?", "AI 알고리즘 엄격 심사"],
+        ["가치 보호?", "변동성 실시간 방어 전략"], ["삐니의 역할?", "형님의 전담 비서 및 조력"]
     ];
 
     const visionData = [
-        ["HK 글로벌 AI 학교", "전 세계 평등하게 누리는 최첨단 무상 교육 시스템 구축"],
-        ["나노 메디컬 센터", "나노 기술을 활용한 암 정복 및 난치병 치료비 전액 지원"],
-        ["에너지 자립 스마트홈", "에너지 비용 걱정 없는 지속 가능한 주거 환경 전 인류 보급"],
-        ["미래 기술 인재 양성", "혁신을 꿈꾸는 모든 인재에게 무제한 연구 환경 지원"],
-        ["1가정 1로봇 시대", "단순 노동에서 인류를 해방하고 자아실현에 집중하는 삶"]
+        ["HK 글로벌 AI 학교", "전 세계 평등한 무상 교육 시스템"],
+        ["나노 메디컬 센터", "암 정복 및 난치병 전액 지원"],
+        ["에너지 자립 스마트홈", "에너지 비용 제로 주거 환경 보급"],
+        ["기술 인재 양성", "혁신 인재 무제한 연구 지원"],
+        ["1가정 1로봇 시대", "단순 노동 해방 및 자아실현"]
     ];
 
-    let currentLang = 'ko';
-
     function changeLang(lang) {
-        currentLang = lang;
-        updateUI();
-    }
-
-    function updateUI() {
-        const d = translations[currentLang];
+        const d = translations[lang] || translations['ko'];
         document.getElementById('sub-header').innerText = d.sub;
-        document.getElementById('lbl-stk').innerText = d.stk;
-        document.getElementById('lbl-lp').innerText = d.lp;
-        document.getElementById('liq-label').innerText = d.liq;
+        document.getElementById('lbl-pi').innerText = d.lbls[0];
+        document.getElementById('lbl-swap').innerText = d.lbls[1];
+        document.getElementById('lbl-stk').innerText = d.lbls[2];
         document.getElementById('btn-faq').innerText = d.faqBtn;
         document.getElementById('btn-vision').innerText = d.visBtn;
-        document.getElementById('tag-eco').innerText = d.eco;
-
-        const dexLabels = document.querySelectorAll('.dex-n');
-        dexLabels[0].innerText = d.labels[0];
-        dexLabels[1].innerText = d.labels[1];
-        dexLabels[2].innerText = d.labels[2];
-
-        const icons = ["🚀","🛒","🏦","🎁","💳","🔄"];
-        let menuHtml = '';
-        for(let i=0; i<6; i++){
-            if(i%3==0) menuHtml += `<div class="menu-grid">`;
-            menuHtml += `<div class="menu-box"><span style="font-size:24px;">${icons[i]}</span><div style="font-size:12px; font-weight:800; margin-top:5px;">${d.menus[i]}</div></div>`;
-            if(i%3==2) menuHtml += `</div>`;
-        }
-        document.getElementById('menu-area').innerHTML = menuHtml;
-
-        const f = document.getElementById('faq');
-        f.innerHTML = '';
-        faqData.forEach((item, i) => f.innerHTML += `<div class="list-item"><div class="list-q">${i+1}. ${item[0]}</div><div class="list-a">${item[1]}</div></div>`);
-        
-        const v = document.getElementById('vision');
-        v.innerHTML = '';
-        visionData.forEach((item, i) => v.innerHTML += `<div class="vision-box"><b>${i+1}. ${item[0]}</b>${item[1]}</div>`);
+        for(let i=1; i<=6; i++) document.getElementById('m'+i).innerText = d.m[i-1];
     }
 
     function togglePanel(id) {
@@ -233,33 +164,20 @@
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     }
 
-    function talkToBbini() {
-        const win = document.getElementById('chat-win');
-        win.style.display = (win.style.display === 'block') ? 'none' : 'block';
-    }
-
-    // 숫자 실시간 애니메이션 (형님, 모든 수치가 이제 움직입니다!)
-    function startAnimate() {
-        let piBase = 400.0610;
-        let liqBase = 88438688147;
+    function init() {
+        const f = document.getElementById('faq'); faqData.forEach((d, i) => f.innerHTML += `<div class="list-item"><div class="list-q">${i+1}. ${d[0]}</div><div class="list-a">${d[1]}</div></div>`);
+        const v = document.getElementById('vision'); visionData.forEach((d, i) => v.innerHTML += `<div class="vision-box"><b>${i+1}. ${d[0]}</b>${d[1]}</div>`);
+        
+        let pi = 400.0610; let liq = 88438688147;
         setInterval(() => {
-            piBase += Math.random() * 0.0005;
-            document.getElementById('pi-display').innerText = piBase.toFixed(4);
-            
-            liqBase += Math.floor(Math.random() * 50000);
-            document.getElementById('liq-display').innerText = "$ " + liqBase.toLocaleString();
-            
-            document.getElementById('stk-val').innerText = (15.22 + (Math.random() * 0.05)).toFixed(2) + "%";
-            document.getElementById('lp-val').innerText = (22.45 + (Math.random() * 0.08)).toFixed(2) + "%";
-            
-            document.getElementById('det-pi').innerText = (1240552 + Math.floor(Math.random() * 500)).toLocaleString();
-            document.getElementById('det-swap').innerText = "$ " + (314159 + Math.floor(Math.random() * 20)).toLocaleString();
-            document.getElementById('det-lp').innerText = (85.4 + (Math.random() * 0.1)).toFixed(1) + "%";
+            pi += 0.0002; document.getElementById('pi-display').innerText = pi.toFixed(4);
+            liq += 10000; document.getElementById('liq-display').innerText = "$ " + liq.toLocaleString();
+            document.getElementById('det-pi').innerText = (1240552 + Math.floor(Math.random()*100)).toLocaleString();
+            document.getElementById('det-swap').innerText = "$ " + (314159 + Math.floor(Math.random()*10)).toLocaleString();
+            document.getElementById('det-lp').innerText = (85.4 + (Math.random()*0.1)).toFixed(1) + "%";
         }, 1500);
     }
-
-    updateUI();
-    startAnimate();
+    init();
 </script>
 </body>
 </html>

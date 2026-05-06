@@ -11,154 +11,155 @@
             --yt-red: #FF0000; --tt-black: #010101;
             --hk-white-bright: #F5F5F5;
         }
-        body {
-            background: var(--hk-bg);
-            color: #fff;
-            font-family: 'Pretendard', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            overflow-x: hidden;
+        body { 
+            background: var(--hk-bg); 
+            color: #fff; 
+            font-family: 'Pretendard', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            overflow-x: hidden; 
         }
-        .container {
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-            position: relative;
+        .container { 
+            width: 100%; 
+            max-width: 500px; 
+            padding: 20px; 
+            box-sizing: border-box; 
+            text-align: center; 
+            position: relative; 
         }
        
         .lang-wrapper { position: absolute; top: 10px; right: 20px; z-index: 1100; }
-        #lang-select {
-            background: #222;
-            color: var(--hk-gold);
-            border: 1px solid var(--hk-gold);
-            padding: 5px 10px;
-            border-radius: 8px;
-            font-weight: 800;
-            cursor: pointer;
-            font-size: 11px;
+        #lang-select { 
+            background: #222; 
+            color: var(--hk-gold); 
+            border: 1px solid var(--hk-gold); 
+            padding: 5px 10px; 
+            border-radius: 8px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            font-size: 11px; 
         }
 
-        .header-title {
-            font-size: 52px;
-            font-weight: 950;
-            color: var(--hk-gold);
-            margin-top: 50px;
-            letter-spacing: -2px;
+        .header-title { 
+            font-size: 52px; 
+            font-weight: 950; 
+            color: var(--hk-gold); 
+            margin-top: 50px; 
+            letter-spacing: -2px; 
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
         .sub-header { color: var(--hk-blue); font-size: 22px; font-weight: 800; margin-top: 5px; }
 
-        .pi-main {
-            font-size: 72px;
-            font-weight: 900;
-            margin: 30px 0 5px 0;
-            color: var(--hk-blue);
-            text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
+        /* [색상 강화] 흰색을 생동감 넘치는 컬러로 변경 */
+        .pi-main { 
+            font-size: 72px; 
+            font-weight: 900; 
+            margin: 30px 0 5px 0; 
+            color: var(--hk-blue); /* 흰색에서 Blue로 변경 */
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.6); 
         }
         .pi-unit { color: var(--hk-gold); font-size: 28px; font-weight: 900; display: block; margin-top: -10px; margin-bottom: 15px; }
        
-        .gcv-pill {
-            display: inline-block;
-            border: 2.5px solid var(--hk-green);
-            color: var(--hk-green);
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 900;
-            margin-bottom: 25px;
+        .gcv-pill { 
+            display: inline-block; 
+            border: 2.5px solid var(--hk-green); 
+            color: var(--hk-green); 
+            padding: 10px 30px; 
+            border-radius: 50px; 
+            font-size: 16px; 
+            font-weight: 900; 
+            margin-bottom: 25px; 
             box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
         }
 
-        .liq-card {
-            border: 2px solid #333;
-            background: linear-gradient(145deg, #151515, #000);
-            padding: 30px 20px 20px 20px;
-            margin-bottom: 30px;
-            border-radius: 25px;
+        .liq-card { 
+            border: 2px solid #333; 
+            background: linear-gradient(145deg, #151515, #000); 
+            padding: 30px 20px 20px 20px; 
+            margin-bottom: 30px; 
+            border-radius: 25px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
        
         .rate-container { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; }
         .rate-box { flex: 1; }
         .rate-label { font-size: 13px; font-weight: 800; color: #888; margin-bottom: 5px; display: block; }
-        .rate-val {
-            font-size: 24px;
-            font-weight: 950;
-            color: var(--hk-green);
+        .rate-val { 
+            font-size: 24px; 
+            font-weight: 950; 
+            color: var(--hk-green); /* 흰색에서 Green으로 변경 */
         }
 
         .liq-label { font-size: 13px; color: #888; font-weight: 800; margin-bottom: 8px; display: block; }
-        .liq-val {
-            font-size: 28px;
-            font-weight: 950;
-            color: var(--hk-pink);
-            margin-bottom: 20px;
+        .liq-val { 
+            font-size: 28px; 
+            font-weight: 950; 
+            color: var(--hk-pink); /* 흰색에서 Pink로 변경 */
+            margin-bottom: 20px; 
             text-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
         }
 
         .dex-detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border-top: 1px solid #222; padding-top: 20px; }
-        .dex-n { font-size: 11px; color: var(--hk-blue); font-weight: 900; margin-bottom: 5px; }
+        .dex-n { font-size: 11px; color: var(--hk-blue); font-weight: 900; margin-bottom: 5px; } /* 컬러화 */
         .dex-v { font-size: 13px; color: var(--hk-gold); font-weight: 900; }
 
-        .section-tag {
-            text-align: left;
-            font-size: 14px;
-            font-weight: 900;
-            color: var(--hk-gold);
-            margin: 25px 0 15px 5px;
-            border-left: 4px solid var(--hk-gold);
-            padding-left: 10px;
+        .section-tag { 
+            text-align: left; 
+            font-size: 14px; 
+            font-weight: 900; 
+            color: var(--hk-gold); 
+            margin: 25px 0 15px 5px; 
+            border-left: 4px solid var(--hk-gold); 
+            padding-left: 10px; 
         }
        
         .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
-        .menu-box {
-            background: var(--hk-card);
-            padding: 20px 0;
-            border-radius: 22px;
-            border: 1px solid #222;
+        .menu-box { 
+            background: var(--hk-card); 
+            padding: 20px 0; 
+            border-radius: 22px; 
+            border: 1px solid #222; 
             transition: 0.3s;
         }
         .menu-box:active { transform: scale(0.95); background: #1a1a1a; }
        
-        .action-btn {
-            width: 100%;
-            padding: 20px;
-            border-radius: 20px;
-            font-size: 16px;
-            font-weight: 900;
-            color: #fff;
-            border: none;
-            margin-top: 10px;
-            cursor: pointer;
+        .action-btn { 
+            width: 100%; 
+            padding: 20px; 
+            border-radius: 20px; 
+            font-size: 16px; 
+            font-weight: 900; 
+            color: #fff; 
+            border: none; 
+            margin-top: 10px; 
+            cursor: pointer; 
             transition: 0.3s;
         }
         .action-btn:hover { filter: brightness(1.2); }
 
-        .panel {
-            display: none;
-            background: #0d0d0d;
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 10px;
-            border: 1px solid #222;
-            text-align: left;
-            max-height: 400px;
-            overflow-y: auto;
+        .panel { 
+            display: none; 
+            background: #0d0d0d; 
+            border-radius: 20px; 
+            padding: 20px; 
+            margin-top: 10px; 
+            border: 1px solid #222; 
+            text-align: left; 
+            max-height: 400px; 
+            overflow-y: auto; 
         }
         .list-item { padding: 12px 0; border-bottom: 1px solid #222; }
         .list-q { color: var(--hk-gold); font-weight: 900; font-size: 14px; }
         .list-a { color: #ccc; font-size: 12px; line-height: 1.6; padding-top: 5px; }
        
-        .vision-box {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 20px;
-            margin-top: 10px;
-            border-left: 4px solid var(--hk-blue);
+        .vision-box { 
+            background: #1a1a1a; 
+            padding: 20px; 
+            border-radius: 20px; 
+            margin-top: 10px; 
+            border-left: 4px solid var(--hk-blue); 
         }
         .vision-box b { color: var(--hk-blue); display: block; font-size: 16px; margin-bottom: 5px; }
 
@@ -168,44 +169,46 @@
 
         .footer { margin-top: 40px; font-size: 11px; color: #555; line-height: 1.6; font-weight: 700; padding-bottom: 100px; }
        
-        .bbini-float {
-            position: fixed; bottom: 30px; right: 20px; width: 70px; height: 70px;
-            background: var(--hk-gold); border-radius: 50%; display: flex;
-            justify-content: center; align-items: center; font-size: 35px;
-            cursor: pointer; z-index: 2000; border: 3px solid #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        /* 삐니 챗봇 디자인 최적화 */
+        .bbini-float { 
+            position: fixed; bottom: 30px; right: 20px; width: 70px; height: 70px; 
+            background: var(--hk-gold); border-radius: 50%; display: flex; 
+            justify-content: center; align-items: center; font-size: 35px; 
+            cursor: pointer; z-index: 2000; border: 3px solid #fff; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
         }
-        .chat-window {
-            position: fixed; bottom: 110px; right: 20px; width: 330px;
-            background: #fff; border-radius: 25px; display: none;
-            z-index: 2000; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        .chat-window { 
+            position: fixed; bottom: 110px; right: 20px; width: 330px; 
+            background: #fff; border-radius: 25px; display: none; 
+            z-index: 2000; box-shadow: 0 15px 40px rgba(0,0,0,0.5); 
             overflow: hidden; flex-direction: column; border: 1px solid var(--hk-gold);
         }
-        .chat-head {
-            background: var(--hk-gold); color: #000; padding: 18px;
-            font-weight: 950; font-size: 16px; display: flex;
-            justify-content: space-between; align-items: center;
+        .chat-head { 
+            background: var(--hk-gold); color: #000; padding: 18px; 
+            font-weight: 950; font-size: 16px; display: flex; 
+            justify-content: space-between; align-items: center; 
         }
         .chat-close { cursor: pointer; font-size: 24px; font-weight: bold; }
-        .chat-body {
-            padding: 15px; color: #333; font-size: 13px; font-weight: 600;
+        .chat-body { 
+            padding: 15px; color: #333; font-size: 13px; font-weight: 600; 
             line-height: 1.6; height: 300px; overflow-y: auto; background: #fdfdfd;
             display: flex; flex-direction: column; gap: 10px;
         }
-       
+        
+        /* 말풍선 스타일 */
         .msg-bubble { max-width: 85%; padding: 10px 15px; border-radius: 18px; position: relative; font-size: 12.5px; }
         .bot-msg { background: #eee; align-self: flex-start; border-bottom-left-radius: 2px; color: #333; }
         .user-msg { background: var(--hk-gold); align-self: flex-end; border-bottom-right-radius: 2px; color: #000; }
 
         .chat-input-area { display: flex; padding: 12px; border-top: 1px solid #eee; background: #fff; }
-        .chat-input-area input {
-            flex: 1; border: 1px solid #ddd; padding: 10px 15px;
-            border-radius: 25px; font-size: 13px; outline: none; color: #000;
+        .chat-input-area input { 
+            flex: 1; border: 1px solid #ddd; padding: 10px 15px; 
+            border-radius: 25px; font-size: 13px; outline: none; color: #000; 
         }
-        .chat-send-btn {
-            background: var(--hk-gold); border: none; padding: 10px 18px;
-            margin-left: 8px; border-radius: 25px; font-weight: 900;
-            font-size: 13px; cursor: pointer;
+        .chat-send-btn { 
+            background: var(--hk-gold); border: none; padding: 10px 18px; 
+            margin-left: 8px; border-radius: 25px; font-weight: 900; 
+            font-size: 13px; cursor: pointer; 
         }
     </style>
 </head>
@@ -251,14 +254,14 @@
 
     <div class="section-tag" id="tag-eco">HK MASTER ECOSYSTEM</div>
     <div class="menu-grid">
-        <div class="menu-box"><span>🚀</span><div id="m1">송금</div></div>
-        <div class="menu-box"><span>🛒</span><div id="m2">결재</div></div>
-        <div class="menu-box"><span>🏦</span><div id="m3">예치</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🚀</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-blue);" id="m1">송금</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🛒</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-green);" id="m2">결재</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🏦</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-gold);" id="m3">예치</div></div>
     </div>
     <div class="menu-grid">
-        <div class="menu-box"><span>🎁</span><div id="m4">보상</div></div>
-        <div class="menu-box"><span>💳</span><div id="m5">기본소득</div></div>
-        <div class="menu-box"><span>🔄</span><div id="m6">스왑</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🎁</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-pink);" id="m4">보상</div></div>
+        <div class="menu-box"><span style="font-size:24px;">💳</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:#ddd;" id="m5">기본소득</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🔄</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-blue);" id="m6">스왑</div></div>
     </div>
 
     <button class="action-btn" style="background: var(--hk-pink);" onclick="togglePanel('faq')" id="btn-faq">글로벌 AI 지원센터 (FAQ 20)</button>
@@ -408,12 +411,12 @@
             chatTitle: "🤖 HK 秘書 삐니", chatWelcome: "こんにちは。何かお手伝いしましょうか？", chatInput: "何かご不明な点はありますか？", chatSend: "送信",
             faq: [
                 ["セキュリティは?", "量子暗号と分散型台帳で最高水準。"],
-                ["基本所得の配분?", "HK利益の30%をリアルタイム配分. "],
+                ["基本所得の配分?", "HK利益の30%をリアルタイム配分. "],
                 ["ロボットの普及?", "最適化後、1世帯1台を無償普及. "],
                 ["エネルギー自立?", "核融合モジュールで電気代ゼロ. "],
                 ["データの所有権?", "個人データは本人のみが所有. "],
                 ["メインネット移行?", "テストネットの価値を1:1で移行. "],
-                ["医療支援範囲?", "癌や難病の治療費全액支援が目標. "],
+                ["医療支援範囲?", "癌や難病の治療費全額支援が目標. "],
                 ["AI チューター?", "子供たちに1:1教育を無償提供. "],
                 ["DEX 手数料?", "手数料の90%を貢献者に還元. "],
                 ["HK グループの価値?", "エネルギー、ロボ、金融の統合. "],
@@ -480,12 +483,14 @@
         win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
     }
 
+    /* [챗봇 실제 구동] 삐니의 지능형 고객 응대 시스템 */
     function handleChat() {
         const input = document.getElementById('chat-input');
         const area = document.getElementById('chat-msg-area');
         const val = input.value.trim();
         if(!val) return;
 
+        // 사용자 말풍선 추가
         area.innerHTML += `<div class="msg-bubble user-msg">나: ${val}</div>`;
         input.value = '';
         area.scrollTop = area.scrollHeight;
@@ -493,14 +498,17 @@
         setTimeout(() => {
             const d = dataStore[currentLang];
             let reply = "";
-            const match = d.faq.find(item => val.toLowerCase().includes(item[0].replace('?', '').toLowerCase()) ||
+
+            // FAQ 데이터 기반 키워드 매칭 응대
+            const match = d.faq.find(item => val.toLowerCase().includes(item[0].replace('?', '').toLowerCase()) || 
                                            item[0].split(' ').some(word => val.includes(word) && word.length > 1));
 
             if(match) {
-                reply = `[삐니 답변] "${match[0]}"에 대한 정보: ${match[1]}`;
+                reply = `[삐니 답변] 질문하신 "${match[0]}"에 대한 정보입니다: ${match[1]}`;
             } else {
-                if(currentLang === 'ko') reply = "혜공 형님, 정밀 분석 후 곧 보고드리겠습니다! 다른 궁금한 점이 있으신가요?";
-                else reply = "Sir, I'm analyzing that right now. Bbini will get back to you soon!";
+                if(currentLang === 'ko') reply = "혜공 형님, 그 질문은 제가 데이터를 정밀 분석하여 곧 해결해 드리겠습니다! 다른 궁금한 점이 있으신가요?";
+                else if(currentLang === 'en') reply = "Sir, I'm analyzing that right now. Bbini will get back to you with the perfect answer soon!";
+                else reply = "Analysing data... Bbini will report soon!";
             }
            
             area.innerHTML += `<div class="msg-bubble bot-msg"><strong>삐니:</strong> ${reply}</div>`;
@@ -508,26 +516,124 @@
         }, 700);
     }
 
+    /* [Value 숫자 움직임 강화] 실시간 자산 수치 변동 로직 */
     function init() {
         updateUI();
-        let pi = 400.0610;
+        let pi = 400.0610; 
         let liq = 88438688147;
-       
+        
         setInterval(() => {
-            pi += Math.random() * 0.0012;
+            // 소수점 4자리까지 아주 세밀하게 실시간으로 올라가는 효과
+            pi += Math.random() * 0.0012; 
             document.getElementById('pi-display').innerText = pi.toFixed(4);
-            liq += Math.floor(Math.random() * 45000);
+            
+            // 전체 유동성 현황이 수만 달러씩 출렁이며 증가하는 효과
+            liq += Math.floor(Math.random() * 45000); 
             document.getElementById('liq-display').innerText = "$ " + liq.toLocaleString();
+            
+            // 스테이킹 및 LP 수치 실시간 변동
             const stkVar = (15.22 + (Math.random() * 0.12)).toFixed(2);
             const lpVar = (22.45 + (Math.random() * 0.18)).toFixed(2);
             document.getElementById('stk-val').innerText = stkVar + "%";
             document.getElementById('lp-val').innerText = lpVar + "%";
+            
+            // 하단 상세 수치 변동
             document.getElementById('det-pi').innerText = (1240552 + Math.floor(Math.random() * 600)).toLocaleString();
             document.getElementById('det-swap').innerText = "$ " + (314159 + Math.floor(Math.random() * 80)).toLocaleString();
             document.getElementById('det-lp').innerText = (21.4 + (Math.random() * 0.3)).toFixed(1) + "%";
-        }, 1200);
+            
+        }, 1200); // 1.2초마다 갱신하여 생동감 부여
     }
     init();
 </script>
 </body>
+<style>
+    .hk-modal {
+        display: none; position: fixed; z-index: 3000; left: 0; top: 0;
+        width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+        justify-content: center; align-items: center;
+    }
+    .modal-content {
+        background: #121212; border: 2px solid var(--hk-gold);
+        width: 90%; max-width: 400px; border-radius: 30px; padding: 30px;
+        text-align: center; box-shadow: 0 0 30px var(--hk-gold);
+    }
+    .modal-title { color: var(--hk-gold); font-size: 24px; font-weight: 900; margin-bottom: 20px; }
+    .modal-body { color: #fff; font-size: 16px; margin-bottom: 25px; line-height: 1.6; }
+    .demo-status { color: var(--hk-green); font-weight: 800; font-size: 14px; margin-top: 10px; }
+    .close-modal {
+        background: var(--hk-gold); color: #000; border: none;
+        padding: 12px 30px; border-radius: 50px; font-weight: 900; cursor: pointer;
+    }
+    /* 시연용 입력폼 스타일 */
+    .demo-input {
+        width: 80%; padding: 12px; margin-bottom: 15px; border-radius: 10px;
+        border: 1px solid #333; background: #000; color: var(--hk-blue); font-weight: 800; text-align: center;
+    }
+</style>
+
+<div id="hkDemoModal" class="hk-modal">
+    <div class="modal-content">
+        <div id="demoTitle" class="modal-title">기능 시연</div>
+        <div id="demoBody" class="modal-body">
+            </div>
+        <button class="close-modal" onclick="closeDemo()">닫기</button>
+    </div>
+</div>
+
+<script>
+    // 1. 기존 메뉴 박스에 시연 함수 연결 (원본 수정 없이 이벤트 리스너로 추가)
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuItems = [
+            { id: 'm1', name: '송금', icon: '🚀', msg: '보낼 주소와 수량을 입력하세요.' },
+            { id: 'm2', name: '결재', icon: '🛒', msg: '상점 QR을 스캔하거나 가맹점 ID를 입력하세요.' },
+            { id: 'm3', name: '예치', icon: '🏦', msg: '최대 연 20% 미만 확정 수익 플랜입니다.' },
+            { id: 'm4', name: '보상', icon: '🎁', msg: '생태계 기여에 따른 실시간 보상 내역입니다.' },
+            { id: 'm5', name: '기본소득', icon: '💳', msg: 'HK 사회 재단에서 전 인류에게 지급하는 기본소득입니다.' },
+            { id: 'm6', name: '스왑', icon: '🔄', msg: 'PI와 HK-Asset 간의 즉시 교환을 시작합니다.' }
+        ];
+
+        menuItems.forEach((item, index) => {
+            const box = document.getElementById(item.id).parentElement;
+            box.style.cursor = 'pointer';
+            box.onclick = () => openDemo(item.name, item.icon, item.msg);
+        });
+
+        // 상단 3가지 핵심 지표에도 시연 연결
+        document.getElementById('det-pi').parentElement.onclick = () => openDemo('PI 수량 상세', '📊', '현재 메인넷으로 이전 가능한 총 수량입니다.');
+        document.getElementById('det-swap').parentElement.onclick = () => openDemo('DEX 스왑 현황', '💱', '전 세계 실시간 스왑 유동성 규모입니다.');
+        document.getElementById('det-lp').parentElement.onclick = () => openDemo('LP 스테이킹', '📈', '유동성 공급에 따른 실시간 보상률입니다.');
+    });
+
+    function openDemo(title, icon, msg) {
+        const modal = document.getElementById('hkDemoModal');
+        const dTitle = document.getElementById('demoTitle');
+        const dBody = document.getElementById('demoBody');
+
+        dTitle.innerHTML = `${icon} ${title}`;
+        
+        let content = `<p>${msg}</p>`;
+        if(title === '송금' || title === '결재') {
+            content += `<input type="text" class="demo-input" placeholder="수량 입력">`;
+        } else if(title === '스왑') {
+            content += `<p style="font-size:12px; color:var(--hk-pink)">1 PI ≈ $ 314,159 (예시)</p>`;
+        }
+
+        content += `<div class="demo-status">● v23 프로토콜 동기화 대기 중...</div>`;
+        dBody.innerHTML = content;
+        modal.style.display = 'flex';
+    }
+
+    function closeDemo() {
+        document.getElementById('hkDemoModal').style.display = 'none';
+    }
+
+    // Pi SDK v23 대응 초기화 (시연용)
+    window.onload = function() {
+        if (window.Pi) {
+            Pi.init({ version: "2.0", sandbox: true });
+            console.log("HK-WorldBank: Pi SDK v23 Ready.");
+        }
+    }
+</script>
 </html> 

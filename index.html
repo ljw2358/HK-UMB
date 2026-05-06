@@ -444,7 +444,44 @@
                 ["1世帯1ロボット時代", "単純労働からの解放と自己実現"]
             ]
         },
-              hi: {
+      function updateUI() {
+    const d = dataStore[currentLang];
+    
+    // 1. 버튼 및 문구 텍스트 변경
+    document.getElementById('sub-header').innerText = d.sub;
+    document.getElementById('lbl-stk-rate').innerText = d.stkRate;
+    document.getElementById('lbl-lp-rate').innerText = d.lpRate;
+    document.getElementById('faq-btn-text').innerText = d.faqBtn;
+    document.getElementById('vis-btn-text').innerText = d.visBtn;
+
+    // 2. FAQ 리스트 새로고침 (인도어/아랍어 FAQ가 나타나게 함)
+    const faqPanel = document.getElementById('faq');
+    if(faqPanel) {
+        faqPanel.innerHTML = d.faq.map(f => `
+            <div class="faq-item">
+                <div class="faq-q">${f[0]}</div>
+                <div class="faq-a">${f[1]}</div>
+            </div>
+        `).join('');
+    }
+
+    // 3. 비전 리스트 새로고침 (인도어/아랍어 5대 비전이 나타나게 함)
+    const visPanel = document.getElementById('vision');
+    if(visPanel) {
+        visPanel.innerHTML = d.vision.map(v => `
+            <div class="faq-item">
+                <div class="faq-q" style="color:var(--hk-gold)">${v[0]}</div>
+                <div class="faq-a">${v[1]}</div>
+            </div>
+        `).join('');
+    }
+
+    // 4. 채팅창 텍스트 변경
+    document.getElementById('chat-title').innerText = d.chatTitle;
+    document.getElementById('chat-greeting').innerText = d.chatWelcome;
+    document.getElementById('chat-input').placeholder = d.chatInput;
+} 
+        hi: {
             sub: "एकीकृत संपत्ति प्रबंधन प्रणाली",
             stkRate: "स्टेकिंग दर", lpRate: "LP उपज", liq: "कुल तरलता (DEX LP)",
             pi: "PI मात्रा", swap: "DEX स्वैप", lpStk: "LP स्टेकिंग", faqBtn: "ग्लोबल AI सहायता केंद्र (FAQ 20)", visBtn: "HK ग्रुप विजन 2030",

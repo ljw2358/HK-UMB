@@ -551,30 +551,37 @@
                 ["Nurturing de Talento", "Investigación ilimitada para innovadores."],
                 ["1 Robot por Hogar", "El salto de la humanidad hacia la autorrealización."]
             ]
-        }
+            },
   
-    ,
+    };
 
-    let currentLang = 'ko';
+  
+// 558번 줄부터 시작 (기존 내용 덮어쓰기)
+let currentLang = 'ko';
 
-    function changeLang(lang) {
-        currentLang = lang;
-        updateUI();
+function changeLang(lang) {
+    currentLang = lang;
+    updateUI();
+}
+
+function updateUI() {
+    const d = datastore[currentLang];
+    
+    // ID가 정확히 일치해야 에러가 안 납니다
+    if(document.getElementById('sub-header')) document.getElementById('sub-header').innerText = d.sub;
+    if(document.getElementById('lbl-stk-rate')) document.getElementById('lbl-stk-rate').innerText = d.stkRate;
+    if(document.getElementById('lbl-lp-rate')) document.getElementById('lbl-lp-rate').innerText = d.lpRate;
+    if(document.getElementById('lbl-ps')) document.getElementById('lbl-ps').innerText = d.ps;
+    if(document.getElementById('lbl-swap')) document.getElementById('lbl-swap').innerText = d.swap;
+    if(document.getElementById('lbl-faq')) document.getElementById('lbl-faq').innerText = d.faq;
+    if(document.getElementById('btn-vision')) document.getElementById('btn-vision').innerText = d.vision;
+
+    // 하단 메뉴 리스트 (m1, m2, m3...)
+    for (let i = 0; i < d.m.length; i++) {
+        let el = document.getElementById('m' + (i + 1));
+        if (el) el.innerText = d.m[i];
     }
-
-    function updateUI() {
-        const d = dataStore[currentLang];
-        document.getElementById('sub-header').innerText = d.sub;
-        document.getElementById('lbl-stk-rate').innerText = d.stkRate;
-        document.getElementById('lbl-lp-rate').innerText = d.lpRate;
-        document.getElementById('liq-label').innerText = d.liq;
-        document.getElementById('lbl-pi').innerText = d.pi;
-        document.getElementById('lbl-swap').innerText = d.swap;
-        document.getElementById('lbl-stk').innerText = d.lpStk;
-        document.getElementById('btn-faq').innerText = d.faqBtn;
-        document.getElementById('btn-vision').innerText = d.visBtn;
-        for(let i=1; i<=6; i++) document.getElementById('m'+i).innerText = d.m[i-1];
-
+}
         document.getElementById('chat-title').innerText = d.chatTitle;
         document.getElementById('chat-greeting').innerText = d.chatWelcome;
         document.getElementById('chat-input').placeholder = d.chatInput;

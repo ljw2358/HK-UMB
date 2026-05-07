@@ -45,6 +45,10 @@
 <option value="th">ไทย</option>
 <option value="id">Bahasa Indonesia</option>
 <option value="ru">Русский</option>
+<option value="fr">Français</option>
+<option value="it">Italiano</option>
+<option value="uk">Українська</option>
+<option value="de">Deutsch</option>      
         .header-title { 
             font-size: 52px; 
             font-weight: 950; 
@@ -499,8 +503,41 @@
             m: ["Перевод", "Оплата", "Депозит", "Награда", "Базовый доход", "Своп"],
             chatTitle: "🤖 Помощник Bbini", chatWelcome: "Здравствуйте, чем я могу вам помочь?", chatInput: "Что вы хотите узнать?", chatSend: "Отправить",
             faq: [ ["Безопасность?", "Квантовое шифрование."], ["Доход?", "Распределение 30%."], ["Робот?", "1 на каждый дом."] ],
-            vision: [ ["Школа AI", "Бесплатно"], ["Медцентр", "Поддержка"], ["Робот", "Прыжок"] ]
- 
+            vision: [ ["Школа AI", "Бесплатно"], ["Медцентр", "Поддержка"], ["Робот", "Прыжок"] ],
+         },
+        fr: {
+            sub: "Système de Gestion d'Actifs Intégré", stkRate: "Taux de Staking", lpRate: "Rendement LP", liq: "Liquidité Totale (DEX LP)",
+            pi: "Quantité de PI", swap: "Échange DEX", lpStk: "Staking de LP", faqBtn: "Centre de Support AI", visBtn: "Vision HK 2030",
+            m: ["Transfert", "Paiement", "Dépôt", "Récompense", "Revenu de Base", "Swap"],
+            chatTitle: "🤖 Assistant Bbini", chatWelcome: "Bonjour, comment puis-je vous aider ?", chatInput: "Que souhaitez-vous savoir ?", chatSend: "Envoyer",
+            faq: [ ["Sécurité ?", "Cryptage quantique."], ["Revenu ?", "Distribution de 30%."], ["Robot ?", "1 par foyer."] ],
+            vision: [ ["École AI", "Gratuite"], ["Centre Médical", "Soutien"], ["1 Robot", "Saut"] ]
+        },
+        it: {
+            sub: "Sistema di Gestione Patrimoniale Integrato", stkRate: "Tasso di Staking", lpRate: "Rendimento LP", liq: "Liquidità Totale (DEX LP)",
+            pi: "Quantità di PI", swap: "Swap DEX", lpStk: "Staking di LP", faqBtn: "Centro di Supporto AI", visBtn: "Visione HK 2030",
+            m: ["Trasferimento", "Pagamento", "Deposito", "Premio", "Reddito di Base", "Swap"],
+            chatTitle: "🤖 Assistente Bbini", chatWelcome: "Ciao, come posso aiutarti?", chatInput: "Cosa vuoi sapere?", chatSend: "Invia",
+            faq: [ ["Sicurezza ?", "Crittografia quantistica."], ["Reddito ?", "Distribuzione del 30%."], ["Robot ?", "1 per casa."] ],
+            vision: [ ["Scuola AI", "Gratuita"], ["Centro Medico", "Supporto"], ["1 Robot", "Salto"] ]
+        },
+        uk: {
+            sub: "Інтегрована система управління активами", stkRate: "Ставка стейкінгу", lpRate: "Дохідність LP", liq: "Загальна ліквідність (DEX LP)",
+            pi: "Кількість PI", swap: "DEX Своп", lpStk: "LP Стейкінг", faqBtn: "Центр підтримки AI", visBtn: "Бачення HK 2030",
+            m: ["Переказ", "Оплата", "Депозит", "Нагорода", "Базовий дохід", "Своп"],
+            chatTitle: "🤖 Помічник Bbini", chatWelcome: "Вітаю, чим я можу вам допомогти?", chatInput: "Що ви хочете дізнатися?", chatSend: "Надіслати",
+            faq: [ ["Безпека?", "Квантове шифрування."], ["Дохід?", "Розподіл 30%."], ["Робот?", "1 на кожну оселю."] ],
+            vision: [ ["Школа AI", "Безкоштовно"], ["Медцентр", "Підтримка"], ["Робот", "Стрибок"] ]
+        },
+        de: {
+            sub: "Integriertes Asset-Management-System", stkRate: "Staking-Rate", lpRate: "LP-Rendite", liq: "Gesamtliquidität (DEX LP)",
+            pi: "PI-Menge", swap: "DEX-Swap", lpStk: "LP-Staking", faqBtn: "AI-Support-Center", visBtn: "HK-Vision 2030",
+            m: ["Überweisung", "Zahlung", "Einzahlung", "Belohnung", "Grundeinkommen", "Swap"],
+            chatTitle: "🤖 Assistent Bbini", chatWelcome: "Hallo, wie kann ich Ihnen helfen?", chatInput: "Was möchten Sie wissen?", chatSend: "Senden",
+            faq: [ ["Sicherheit?", "Quantenverschlüsselung."], ["Einkommen?", "30% Verteilung."], ["Robot?", "1 pro Haushalt."] ],
+            vision: [ ["AI-Schule", "Kostenlos"], ["Medizinisches Zentrum", "Unterstützung"], ["1 Roboter", "Sprung"] ]
+        }
+    }; // 최종적으로 보따리를 완전히 닫습니다!
     let currentLang = 'ko';
 
     function changeLang(lang) {

@@ -628,12 +628,38 @@
         document.getElementById('hkDemoModal').style.display = 'none';
     }
 
-    // Pi SDK v23 대응 초기화 (시연용)
-    window.onload = function() {
-        if (window.Pi) {
-            Pi.init({ version: "2.0", sandbox: true });
-            console.log("HK-WorldBank: Pi SDK v23 Ready.");
-        }
+   // --- 여기서부터 붙여넣기 ---
+function handleChat(e) {
+    if (e && e.type === 'keypress' && e.key !== 'Enter') return;
+    const input = document.getElementById('chat-input');
+    const area = document.getElementById('chat-msg-area');
+    const val = input.value.trim();
+    if (!val) return;
+
+    area.innerHTML += `<div class="msg-bubble user-msg">나: ${val}</div>`;
+    input.value = '';
+    area.scrollTop = area.scrollHeight;
+
+    setTimeout(() => {
+        const d = datastore[currentLang];
+        let reply = "";
+        const match = d.faq.find(item => val.includes(item[0].replace('?', '')));
+        if (match) reply = `[삐니] ${match[1]}`;
+        else reply = currentLang === 'ko' ? "형님, 그 내용은 제가 더 학습해서 보고하겠습니다!" : "I will report soon!";
+        
+        area.innerHTML += `<div class="msg-bubble bot-msg"><strong>삐니:</strong> ${reply}</div>`;
+        area.scrollTop = area.scrollHeight;
+    }, 600);
+}
+
+// Pi SDK 및 초기화
+window.onload = function() {
+    if (window.Pi) {
+        Pi.init({ version: "2.0", sandbox: true });
+        console.log("HK-WorldBank: Pi SDK Ready.");
     }
+    if (typeof init === 'function') init();
+};
 </script>
-</html> 
+</body>
+</html>

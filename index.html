@@ -61,6 +61,24 @@
 
         /* [색상 강화] 흰색을 생동감 넘치는 컬러로 변경 */
         .pi-main { 
+     /* 64번 줄부터 이 내용으로 교체하세요 */
+.pi-main {
+    font-size: 58px !important; /* 기존 72px에서 줄여서 겹침 방지 */
+    font-weight: 900;
+    margin: 20px 0 5px 0 !important;
+    color: var(--hk-blue);
+    text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
+    line-height: 1.2; /* 줄 간격 확보 */
+}
+
+/* 그 바로 아래 sub-header도 살짝 손봐주세요 (61번 줄 근처) */
+.sub-header {
+    color: var(--hk-blue);
+    font-size: 18px !important; /* 기존 22px에서 조정 */
+    font-weight: 800;
+    margin-top: 5px;
+    min-height: 40px; /* 글자가 길어져도 아래랑 안 겹치게 공간 확보 */
+}
             font-size: 72px; 
             font-weight: 900; 
             margin: 30px 0 5px 0; 

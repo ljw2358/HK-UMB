@@ -215,42 +215,15 @@
 <body>
 
 <div class="container">
-   <div class="lang-wrapper">
-    <select id="lang-select" onchange="changeLang(this.value)">
-        <option value="ko">🇰🇷 한국어 (Korea)</option>
-        <option value="en">🇺🇸 English (USA)</option>
-        <option value="zh">🇨🇳 中文 (China)</option>
-        <option value="ja">🇯🇵 日本語 (Japan)</option>
-        <option value="ar">🇸🇦 العربية (Saudi Arabia)</option>
-        <option value="hi">🇮🇳 हिन्दी (India)</option>
-        <option value="es">🇪🇸 Español (Spain)</option>
-        <option value="pt">🇧🇷 Português (Brazil)</option>
-        <option value="ru">🇷🇺 Русский (Russia)</option>
-        <option value="uk">🇺🇦 Українська (Ukraine)</option>
-        <option value="vi">🇻🇳 Tiếng Việt (Vietnam)</option>
-        <option value="th">🇹🇭 ไทย (Thailand)</option>
-        <option value="de">🇩🇪 Deutsch (Germany)</option>
-        <option value="fr">🇫🇷 Français (France)</option>
-        <option value="it">🇮🇹 Italiano (Italy)</option>
-        <option value="id">🇮🇩 Indonesia (Indonesia)</option>
-        <option value="tr">🇹🇷 Türkçe (Turkey)</option>
-        <option value="pl">🇵🇱 Polski (Poland)</option>
-        <option value="ro">🇷🇴 Română (Romania)</option>
-        <option value="hu">🇭🇺 Magyar (Hungary)</option>
-        <option value="sw">🇰🇪 Kiswahili (Kenya)</option>
-        <option value="am">🇪🇹 አማርኛ (Ethiopia)</option>
-        <option value="ha">🇳🇬 Hausa (Nigeria)</option>
-        <option value="zu">🇿🇦 isiZulu (South Africa)</option>
-        <option value="yo">🇳🇬 Yorùbá (Nigeria)</option>
-        <option value="ig">🇳🇬 Igbo (Nigeria)</option>
-        <option value="st">🇱🇸 Sesotho (Lesotho)</option>
-        <option value="sn">🇿🇼 Shona (Zimbabwe)</option>
-        <option value="bg">🇧🇬 Български (Bulgaria)</option>
-        <option value="cs">🇨🇿 Čeština (Czech)</option>
-        <option value="sk">🇸🇰 Slovenčina (Slovakia)</option>
-        <option value="hr">🇭🇷 Hrvatski (Croatia)</option>
-    </select>
-</div> 
+    <div class="lang-wrapper">
+        <select id="lang-select" onchange="changeLang(this.value)">
+            <option value="ko">한국어 (KO)</option>
+            <option value="en">ENGLISH (EN)</option>
+            <option value="zh">中文 (ZH)</option>
+            <option value="ja">日本語 (JA)</option>
+        </select>
+    </div>
+
     <div class="header-title">HK WORLD BANK</div>
     <div class="sub-header" id="sub-header">통합 자산 관리 시스템</div>
 
@@ -325,41 +298,149 @@
 <div class="bbini-float" onclick="toggleChat()">🤖</div>
 
 <script>
-const dataStore = {
-    ko: { sub: "통합 자산 관리 시스템", stkRate: "스테이킹 이율", lpRate: "LP 수익률", liq: "전체 유동성 현황 (DEX LP)", m: ["송금", "결재", "예치", "보상", "기본소득", "스왑"] },
-    en: { sub: "Integrated Asset Management", stkRate: "Staking APR", lpRate: "LP Yield", liq: "Total Liquidity (DEX LP)", m: ["Transfer", "Pay", "Deposit", "Reward", "UBI", "Swap"] },
-    zh: { sub: "综合资产管理系统", stkRate: "质押利率", lpRate: "LP 收益率", liq: "总流动性状况", m: ["转账", "支付", "存款", "奖励", "基本收入", "交换"] },
-    ja: { sub: "統合資産管理システム", stkRate: "利回り", lpRate: "LP 収益率", liq: "総流動性状況", m: ["送金", "決済", "預金", "報酬", "基本所得", "スワップ"] },
-    ar: { sub: "نظام إدارة الأصول", stkRate: "نسبة التحصيص", lpRate: "عائد السيولة", liq: "إجمالي السيولة", m: ["تحويل", "دفع", "إيداع", "مكافأة", "دخل", "تبادل"] },
-    hi: { sub: "एकीकृत परिसंपत्ति प्रबंधन", stkRate: "स्टेकिंग दर", lpRate: "LP लाभ", liq: "कुल तरलता", m: ["स्थानांतरण", "भुगतान", "जमा", "पुरस्कार", "आय", "स्वैप"] },
-    es: { sub: "Gestión de Activos", stkRate: "Tasa Staking", lpRate: "Rendimiento LP", liq: "Liquidez Total", m: ["Giro", "Pago", "Depósito", "Premio", "RBU", "Swap"] },
-    pt: { sub: "Gestão de Activos", stkRate: "Taxa Staking", lpRate: "Rendimento LP", liq: "Liquidez Total", m: ["Giro", "Pagamento", "Depósito", "Prêmio", "Renda", "Swap"] },
-    ru: { sub: "Управление активами", stkRate: "Стейкинг", lpRate: "Доходность LP", liq: "Общая ликвидность", m: ["Перевод", "Оплата", "Вклад", "Награда", "Доход", "Обмен"] },
-    uk: { sub: "Управління активами", stkRate: "Стейкінг", lpRate: "Дохідність LP", liq: "Загальна ліквідність", m: ["Переказ", "Оплата", "Депозит", "Нагорода", "Дохід", "Обмін"] },
-    vi: { sub: "Quản lý Tài sản", stkRate: "Lãi Staking", lpRate: "Lợi nhuận LP", liq: "Tổng thanh khoản", m: ["Chuyển", "Trả", "Gửi", "Thưởng", "Thu nhập", "Swap"] },
-    th: { sub: "ระบบจัดการสินทรัพย์", stkRate: "ดอกเบี้ย", lpRate: "กำไร LP", liq: "สภาพคล่องรวม", m: ["โอน", "จ่าย", "ฝาก", "รางวัล", "รายได้", "สวอป"] },
-    de: { sub: "Asset-Management", stkRate: "Staking", lpRate: "LP-Rendite", liq: "Gesamtliquidität", m: ["Transfer", "Zahlung", "Einzahlung", "Belohnung", "BGE", "Swap"] },
-    fr: { sub: "Gestion d'Actifs", stkRate: "Staking", lpRate: "Rendement LP", liq: "Liquidité Totale", m: ["Transfert", "Paiement", "Dépôt", "Prime", "Revenu", "Swap"] },
-    it: { sub: "Gestione Asset", stkRate: "Staking", lpRate: "Resa LP", liq: "Liquidità Totale", m: ["Trasferta", "Pagamento", "Deposito", "Premio", "Reddito", "Swap"] },
-    id: { sub: "Manajemen Aset", stkRate: "Bunga Staking", lpRate: "Hasil LP", liq: "Total Likuiditas", m: ["Transfer", "Bayar", "Simpan", "Hadiah", "UBI", "Swap"] },
-    tr: { sub: "Varlık Yönetimi", stkRate: "Staking", lpRate: "LP Getirisi", liq: "Toplam Likidite", m: ["Transfer", "Ödeme", "Mevduat", "Ödül", "Gelir", "Swap"] },
-    pl: { sub: "Zarządzanie Aktywami", stkRate: "Staking", lpRate: "Rentowność LP", liq: "Płynność", m: ["Transfer", "Płatność", "Lokata", "Nagroda", "Dochód", "Swap"] },
-    ro: { sub: "Gestionare Active", stkRate: "Staking", lpRate: "Randament LP", liq: "Lichiditate", m: ["Transfer", "Plată", "Depozit", "Premiu", "Venit", "Swap"] },
-    hu: { sub: "Eszközkezelés", stkRate: "Staking", lpRate: "LP Hozam", liq: "Likviditás", m: ["Utalás", "Fizetés", "Betét", "Jutalom", "Jövedelem", "Swap"] },
-    sw: { sub: "Usimamizi wa Mali", stkRate: "Staking", lpRate: "Mavuno", liq: "Ukataji", m: ["Tuma", "Lipa", "Weka", "Tuzo", "UBI", "Swap"] },
-    am: { sub: "የንብረት አስተዳደር", stkRate: "መደመር", lpRate: "ትርፍ", liq: "ፈሳሽ", m: ["ማስተላለፍ", "መክፈል", "ተቀማጭ", "ሽልማት", "ገቢ", "Swap"] },
-    ha: { sub: "Sarrafa Kadarori", stkRate: "Staking", lpRate: "Riba", liq: "Ruwa", m: ["Tura", "Biya", "Ajiya", "Lada", "UBI", "Swap"] },
-    zu: { sub: "Ukulawula Impahla", stkRate: "Staking", lpRate: "Isivuno", liq: "Inani", m: ["Thumela", "Khokha", "Faka", "Umklomelo", "UBI", "Swap"] },
-    yo: { sub: "Isakoso Dukia", stkRate: "Staking", lpRate: "Ere", liq: "Oloomi", m: ["Gbe", "San", "Fi-pam", "Ere", "Owo", "Swap"] },
-    ig: { sub: "Njikwa Akụ", stkRate: "Staking", lpRate: "Urụ", liq: "Ego", m: ["Ziga", "Kwụọ", "Debanye", "Onyinye", "Ego", "Swap"] },
-    st: { sub: "Tsamaiso ea Matlotlo", stkRate: "Staking", lpRate: "Lingenelo", liq: "Metsi", m: ["Romela", "Lefa", "Boloka", "Moputso", "Chelete", "Swap"] },
-    sn: { sub: "Kugadzira Pfuma", stkRate: "Staking", lpRate: "Chibereko", liq: "Mvura", m: ["Tumira", "Bhadhara", "Chengeta", "Mubairo", "Mari", "Swap"] },
-    bg: { sub: "Управление на активи", stkRate: "Стейкинг", lpRate: "Доходност", liq: "Ликвидност", m: ["Превод", "Плащане", "Депозит", "Награда", "Доход", "Обмен"] },
-    cs: { sub: "Správa aktiv", stkRate: "Staking", lpRate: "Výnos LP", liq: "Likvidita", m: ["Převod", "Platba", "Vklad", "Odměna", "Příjem", "Swap"] },
-    sk: { sub: "Správa aktív", stkRate: "Staking", lpRate: "Výnos LP", liq: "Likvidita", m: ["Prevod", "Platba", "Vklad", "Odmena", "Príjem", "Swap"] },
-    hr: { sub: "Upravljanje imovinom", stkRate: "Staking", lpRate: "Prinos LP", liq: "Likvidnost", m: ["Prijenos", "Plaćanje", "Polog", "Nagrada", "Prihod", "Swap"] }
-};
- 
+    const dataStore = {
+        ko: {
+            sub: "통합 자산 관리 시스템", stkRate: "스테이킹 이율", lpRate: "LP 수익률", liq: "전체 유동성 현황 (DEX LP)",
+            pi: "PI 수량", swap: "DEX 스왑", lpStk: "LP 스테이킹", faqBtn: "글로벌 AI 지원센터 (FAQ 20)", visBtn: "HK 사회 재단 비전 2030",
+            m: ["송금", "결재", "예치", "보상", "기본소득", "스왑"],
+            chatTitle: "🤖 HK 비서 삐니", chatWelcome: "안녕하세요? 무엇이든 물어보세요.", chatInput: "무엇이 궁금하세요?", chatSend: "보내기",
+            faq: [
+                ["보안 수준은?", "양자 암호화와 분산 원장 기술을 결합하여 현존 최고 보안을 자랑합니다."],
+                ["기본소득 배분 방식?", "HK 그룹 수익의 30%를 전 인류에게 실시간 자동 배분합니다."],
+                ["로봇 무상 보급 시기?", "생산 공정 최적화 후 신청 순서에 따라 1가정 1로봇을 보급합니다."],
+                ["에너지 자립 홈 시스템?", "핵융합 모듈과 연동하여 가정 내 전기료 제로를 지향합니다."],
+                ["데이터 소유권?", "모든 개인 데이터는 오직 사용자 본인만이 통제하고 소유합니다."],
+                ["메인넷 전환 데이터?", "테스트넷의 모든 가치는 메인넷으로 1:1 안전하게 이전됩니다."],
+                ["의료 지원 범위?", "암 및 난치병 치료비를 전액 지원하는 것을 목표로 합니다."],
+                ["AI 튜터 서비스?", "전 세계 아이들에게 1:1 맞춤형 AI 교육을 무상 제공합니다."],
+                ["DEX 수수료 정책?", "발생 수수료의 90%를 생태계 기여자에게 즉시 환원합니다."],
+                ["HK 그룹의 미래 가치?", "에너지, 로봇, 금융을 통합한 인류 경제의 새로운 중심이 됩니다."],
+                ["로봇 보안은?", "로컬 서버 저장 방식으로 외부 해킹을 원천 차단합니다."],
+                ["에코 시스템 참여?", "노드 운영, 앱 활동, LP 공급 등 다양한 기여가 가능합니다."],
+                ["사회적 기여 모델?", "수익의 상당 부분을 빈곤 퇴치와 환경 복원에 투입합니다."],
+                ["장학금 지원 제도?", "혁신 인재들을 위해 월 최대 $5,000의 연구비를 지원합니다."],
+                ["거버넌스 투표권?", "주요 의사결정에 커뮤니티의 합의를 적극 반영합니다."],
+                ["글로벌 센터 위치?", "세계 주요 50개 거점 도시에 오프라인 AI 센터를 구축 중입니다."],
+                ["시스템 안정성?", "전 세계 분산 노드가 24시간 가동되어 무중단 운영을 보장합니다."],
+                ["신규 자산 상장?", "AI 알고리즘의 엄격한 심사를 통과한 프로젝트만 상장합니다."],
+                ["유동성 방어 전략?", "실시간 알고리즘이 변동성에 대응하여 가치를 보호합니다."],
+                ["삐니의 역할?", "혜공 형님의 전담 비서로서 자산 관리와 기술적 조력을 수행합니다."]
+            ],
+            vision: [
+                ["HK 글로벌 AI 학교", "전 세계 평등하게 누리는 최첨단 무상 교육 시스템 구축"],
+                ["나노 메디컬 센터", "나노 기술을 활용한 암 정복 및 난치병 치료비 전액 지원"],
+                ["에너지 자립 스마트홈", "에너지 비용 걱정 없는 지속 가능한 주거 환경 전 인류 보급"],
+                ["미래 기술 인재 양성", "혁신을 꿈꾸는 모든 인재에게 무제한 연구 환경 지원"],
+                ["1가정 1로봇 시대", "단순 노동에서 인류를 해방하고 자아실현에 집중하는 삶"]
+            ]
+        },
+        en: {
+            sub: "Integrated Asset Management", stkRate: "Staking Rate", lpRate: "LP Yield", liq: "Total Liquidity (DEX LP)",
+            pi: "PI Qty", swap: "DEX Swap", lpStk: "LP Staking", faqBtn: "AI Support Center (FAQ 20)", visBtn: "HK Vision 2030",
+            m: ["Transfer", "Payment", "Deposit", "Reward", "UBI", "Swap"],
+            chatTitle: "🤖 Assistant Bbini", chatWelcome: "Hello? Ask me anything.", chatInput: "What are you curious about?", chatSend: "Send",
+            faq: [
+                ["Security?", "Quantum encryption & DLT integration for max safety."],
+                ["UBI?", "30% of HK profits distributed in real-time worldwide."],
+                ["Robots?", "Free 1 robot per house after production optimization."],
+                ["Energy?", "Zero electricity bills via fusion energy module."],
+                ["Data?", "Users have absolute ownership of their data."],
+                ["Mainnet?", "1:1 safe value transfer from testnet to mainnet."],
+                ["Medical?", "Full coverage for cancer and rare diseases."],
+                ["AI Tutor?", "Free tailored education for all children."],
+                ["DEX Fee?", "90% of fees go back to contributors."],
+                ["Value?", "Integration of energy, robotics, and finance."],
+                ["Robot Safety?", "Local server storage to block hacking."],
+                ["Ecosystem?", "Contribute via nodes, apps, and LP."],
+                ["Social?", "Significant profits go to poverty eradication."],
+                ["Scholarship?", "Up to $5,000 monthly for innovators."],
+                ["Governance?", "Major decisions based on community vote."],
+                ["Global Hub?", "AI centers in 50 major world cities."],
+                ["Stability?", "24/7 non-stop by global distributed nodes."],
+                ["Listing?", "Projects pass strict AI algorithm audits."],
+                ["Defense?", "Real-time algorithmic protection."],
+                ["Bbini's Role?", "Hyekong's secretary for asset and tech management."]
+            ],
+            vision: [
+                ["HK Global AI School", "Universal high-tech free education."],
+                ["Nano Medical Center", "Cancer cure and full disease support."],
+                ["Smart Home", "Energy-independent housing for everyone."],
+                ["Talent Nurturing", "Unlimited research for innovators."],
+                ["1 Robot per Home", "Humanity's leap to self-actualization."]
+            ]
+        },
+        zh: {
+            sub: "综合资产管理系统", stkRate: "质押率", lpRate: "LP 收益率", liq: "总流动性状况",
+            pi: "PI 数量", swap: "DEX 交换", lpStk: "LP 质押", faqBtn: "全球 AI 支持中心 (FAQ 20)", visBtn: "HK 愿景 2030",
+            m: ["转账", "结账", "存款", "奖励", "基本收入", "互换"],
+            chatTitle: "🤖 HK 秘书 삐니", chatWelcome: "您好？有什么可以帮您的吗？", chatInput: "您有什么疑问吗？", chatSend: "发送",
+            faq: [
+                ["保安级别?", "结合量子加密与分布式账本技术。"],
+                ["基本收入?", "HK集团利润的30%实时分配。"],
+                ["机器人普及?", "优化后每户免费提供一台机器人。"],
+                ["能源自给?", "结合核聚变模块实现零电费。"],
+                ["数据所有权?", "所有个人数据仅由用户本人掌控。"],
+                ["主网数据?", "测试网价值1:1安全转移至主网。"],
+                ["医疗支持?", "目标是全额资助癌症及疑难病治疗。"],
+                ["AI 导师?", "为全球儿童提供1:1定制教育。"],
+                ["DEX 手续费?", "90%手续费立即回馈给贡献者。"],
+                ["HK 未来价值?", "能源、机器人、金融的全球新中心。"],
+                ["机器人安全?", "本地存储方式彻底阻断外部黑客。"],
+                ["生态系统?", "通过节点运营、APP活动参与。"],
+                ["社会贡献?", "大部分收益用于消除贫困。"],
+                ["奖학金制度?", "为创新人才提供每月$5000资助。"],
+                ["治理权?", "重大决策反映社区共识。"],
+                ["全球中心?", "在全球50个核心城市建立中心。"],
+                ["稳定性?", "分布式节点24小时无间断运行。"],
+                ["新资产上市?", "仅通过AI算法严格审核的项目。"],
+                ["流动性防御?", "实时算法应对波动保护价值。"],
+                ["삐니 的角色?", "作为Hyekong兄的专职秘书提供协助。"]
+            ],
+            vision: [
+                ["HK 全球 AI 学校", "建设平等的尖端免费教育系统"],
+                ["纳米医疗中心", "全额资助癌症攻克与治疗费用"],
+                ["能源自给住宅", "普及无需担心能源费用的环境"],
+                ["培养技术人才", "为创新人才提供无限研究环境"],
+                ["一户一机时代", "让人类从单纯劳动中解放出来"]
+            ]
+        },
+        ja: {
+            sub: "統合資産管理システム", stkRate: "利回り", lpRate: "LP 収益率", liq: "総流動性状況",
+            pi: "PI 数量", swap: "DEX スワップ", lpStk: "LP 預け入れ", faqBtn: "グローバル AI サポート (FAQ 20)", visBtn: "HK ビジョン 2030",
+            m: ["送금", "決済", "預金", "報酬", "基本所得", "スワップ"],
+            chatTitle: "🤖 HK 秘書 삐니", chatWelcome: "こんにちは。何かお手伝いしましょうか？", chatInput: "何かご不明な点はありますか？", chatSend: "送信",
+            faq: [
+                ["セキュリティは?", "量子暗号と分散型台帳で最高水準。"],
+                ["基本所得の配分?", "HK利益の30%をリアルタイム配分. "],
+                ["ロボットの普及?", "最適化後、1世帯1台を無償普及. "],
+                ["エネルギー自立?", "核融合モジュールで電気代ゼロ. "],
+                ["データの所有権?", "個人データは本人のみが所有. "],
+                ["メインネット移行?", "テストネットの価値を1:1で移行. "],
+                ["医療支援範囲?", "癌や難病の治療費全額支援が目標. "],
+                ["AI チューター?", "子供たちに1:1教育を無償提供. "],
+                ["DEX 手数料?", "手数料の90%を貢献者に還元. "],
+                ["HK グループの価値?", "エネルギー、ロボ、金融の統合. "],
+                ["ロボットの保安?", "ローカル保存でハッキングを遮断. "],
+                ["エコシステム?", "ノード運営やLP供給で参加可能. "],
+                ["社会貢献モデル?", "収益の多くを貧困撲滅に投入. "],
+                ["奨学金制度?", "革新人材に月最大$5000を支援. "],
+                ["ガバナンス?", "コミュニティの合意を意思決定に反映. "],
+                ["拠点の位置?", "世界50主要都市にAIセンター構築. "],
+                ["安定性?", "分散ノードによる24時間稼働. "],
+                ["新規上場?", "AIアルゴリズムの厳格審査を通過. "],
+                ["流動性防衛?", "アルゴリズムが価値を保護. "],
+                ["삐니 の役割?", "恵空（ヒェゴン）兄貴의 専属秘書. "]
+            ],
+            vision: [
+                ["HK グローバル AI 学校", "最先端の無償教育システムの構築"],
+                ["ナノメディカルセンター", "癌克服と難病治療費の全額支援"],
+                ["自立型スマートホーム", "エネルギーコストゼロの住環境"],
+                ["未来技術人材育成", "無限の研究環境の提供"],
+                ["1世帯1ロボット時代", "単純労働からの解放と自己実現"]
+            ]
+        }
+    };
+
     let currentLang = 'ko';
 
     function changeLang(lang) {

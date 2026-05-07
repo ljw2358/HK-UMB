@@ -254,8 +254,7 @@
             <option value="ja">日本語 (JA)</option>
         </select>
     </div>
-
-<div id="main-title" style="font-size: 60px !important; font-weight: 900 !important; color: white; text-align: center; margin-bottom: 20px; display: block;">HK 월드 뱅크</div>
+<div id="main-title" style="font-size: 80px !important; font-weight: 900 !important; color: white !important; text-align: center; margin-bottom: 20px; display: block;">HK 월드 뱅크</div>
     <div class="sub-header" id="sub-header">통합 자산 관리 시스템</div>
 
     <div class="pi-main" id="pi-display">400.0610</div>
@@ -329,13 +328,13 @@
 <div class="bbini-float" onclick="toggleChat()">🤖</div>
 
 <script>
-    const dataStore = {
-        ko: {
-            sub: "통합 자산 관리 시스템", stkRate: "스테이킹 이율", lpRate: "LP 수익률", liq: "전체 유동성 현황 (DEX LP)",
-            pi: "PI 수량", swap: "DEX 스왑", lpStk: "LP 스테이킹", faqBtn: "글로벌 AI 지원센터 (FAQ 20)", visBtn: "HK 사회 재단 비전 2030",
-            m: ["송금", "결재", "예치", "보상", "기본소득", "스왑"],
-            chatTitle: "🤖 HK 비서 삐니", chatWelcome: "안녕하세요? 무엇이든 물어보세요.", chatInput: "무엇이 궁금하세요?", chatSend: "보내기",
-            faq: [
+const dataStore = {
+    ko: { mainTitle: "HK 월드 뱅크", sub: "통합 자산 관리 시스템", stkRate: "스테이킹 이율", lpRate: "LP 수익률", liq: "전체 유동성 현황 (DEX LP)" },
+    en: { mainTitle: "HK WORLD BANK", sub: "Integrated Asset Management", stkRate: "Staking APR", lpRate: "LP Yield", liq: "Total Liquidity (DEX LP)" },
+    zh: { mainTitle: "HK 世界银行", sub: "综合资产管理系统", stkRate: "质押利率", lpRate: "LP 收益率", liq: "总流动性 (DEX LP)" },
+    ja: { mainTitle: "HK ワールドバンク", sub: "統合資産管理システム", stkRate: "ステーキング利率", lpRate: "LP 収益率", liq: "総流動性 (DEX LP)" }
+};
+  
                 ["보안 수준은?", "양자 암호화와 분산 원장 기술을 결합하여 현존 최고 보안을 자랑합니다."],
                 ["기본소득 배분 방식?", "HK 그룹 수익의 30%를 전 인류에게 실시간 자동 배분합니다."],
                 ["로봇 무상 보급 시기?", "생산 공정 최적화 후 신청 순서에 따라 1가정 1로봇을 보급합니다."],

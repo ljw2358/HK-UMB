@@ -41,7 +41,10 @@
             cursor: pointer; 
             font-size: 11px; 
         }
-
+<option value="vi">Tiếng Việt</option>
+<option value="th">ไทย</option>
+<option value="id">Bahasa Indonesia</option>
+<option value="ru">Русский</option>
         .header-title { 
             font-size: 52px; 
             font-weight: 950; 
@@ -464,7 +467,40 @@
             m: ["تحويل", "دفع", "إيداع", "مكافأة", "الدخل الأساسي", "تبادل"],
             chatTitle: "🤖 المساعد 삐ني", chatWelcome: "مرحباً، كيف يمكنني مساعدتك؟", chatInput: "ما الذي تريد معرفته؟", chatSend: "إرسال",
             faq: [ ["الأمان؟", "تشفير كمي."], ["الدخل؟", "توزيع 30%."], ["الروبوت؟", "واحد لكل منزل."] ],
-            vision: [ ["مدرسة HK", "تعليم مجاني"], ["المركز الطبي", "دعم كامل"], ["روبوت", "قفزة"] ]
+            vision: [ ["مدرسة HK", "تعليم مجاني"], ["المركز الطبي", "دعم كامل"], ["روبوت", "قفزة"] ],
+               },
+        vi: {
+            sub: "Hệ thống Quản lý Tài sản Tích hợp", stkRate: "Lãi suất Staking", lpRate: "Lợi nhuận LP", liq: "Tổng thanh khoản (DEX LP)",
+            pi: "Số lượng PI", swap: "Hoán đổi DEX", lpStk: "Staking LP", faqBtn: "Trung tâm Hỗ trợ AI", visBtn: "Tầm nhìn HK 2030",
+            m: ["Chuyển khoản", "Thanh toán", "Gửi tiền", "Thưởng", "Thu nhập cơ bản", "Swap"],
+            chatTitle: "🤖 Trợ lý Bbini", chatWelcome: "Xin chào, tôi có thể giúp gì cho bạn?", chatInput: "Bạn muốn biết điều gì?", chatSend: "Gửi",
+            faq: [ ["Bảo mật?", "Mã hóa lượng tử."], ["Thu nhập?", "Phân phối 30%."], ["Robot?", "1 chiếc mỗi nhà."] ],
+            vision: [ ["Trường học AI", "Miễn phí"], ["Trung tâm y tế", "Hỗ trợ"], ["1 Robot", "Bước nhảy"] ]
+        },
+        th: {
+            sub: "ระบบจัดการสินทรัพย์แบบเบ็ดเสร็จ", stkRate: "อัตราสเตกิ้ง", lpRate: "ผลตอบแทน LP", liq: "สภาพคล่องรวม (DEX LP)",
+            pi: "จำนวน PI", swap: "สวอป DEX", lpStk: "สเตกิ้ง LP", faqBtn: "ศูนย์ช่วยเหลือ AI", visBtn: "วิสัยทัศน์ HK 2030",
+            m: ["โอน", "ชำระเงิน", "ฝาก", "รางวัล", "รายได้พื้นฐาน", "สวอป"],
+            chatTitle: "🤖 ผู้ช่วย Bbini", chatWelcome: "สวัสดีครับ มีอะไรให้ช่วยไหมครับ?", chatInput: "คุณต้องการทราบอะไร?", chatSend: "ส่ง",
+            faq: [ ["ความปลอดภัย?", "การเข้ารหัสควอนตัม"], ["รายได้?", "แจกจ่าย 30%"], ["หุ่นยนต์?", "1 ตัวต่อบ้าน"] ],
+            vision: [ ["โรงเรียน AI", "ฟรี"], ["ศูนย์การแพทย์", "ครบวงจร"], ["หุ่นยนต์", "ก้าวกระโดด"] ]
+        },
+        id: {
+            sub: "Sistem Manajemen Aset Terpadu", stkRate: "Tingkat Staking", lpRate: "Imbal Hasil LP", liq: "Total Likuiditas (DEX LP)",
+            pi: "Jumlah PI", swap: "Swap DEX", lpStk: "Staking LP", faqBtn: "Pusat Bantuan AI", visBtn: "Visi HK 2030",
+            m: ["Transfer", "Pembayaran", "Setoran", "Hadiah", "Pendapatan Dasar", "Swap"],
+            chatTitle: "🤖 Asistente Bbini", chatWelcome: "Halo, ada yang bisa saya bantu?", chatInput: "Apa yang ingin Anda ketahui?", chatSend: "Kirim",
+            faq: [ ["Keamanan?", "Enkripsi Kuantum."], ["Pendapatan?", "Distribusi 30%."], ["Robot?", "1 per rumah."] ],
+            vision: [ ["Sekolah AI", "Gratis"], ["Pusat Medis", "Dukungan"], ["1 Robot", "Lompatan"] ]
+        },
+        ru: {
+            sub: "Интегрированная система управления активами", stkRate: "Ставка стейкинга", lpRate: "Доходность LP", liq: "Общая ликвидность (DEX LP)",
+            pi: "Количество PI", swap: "DEX Своп", lpStk: "LP Стейкинг", faqBtn: "AI Центр поддержки", visBtn: "Видение HK 2030",
+            m: ["Перевод", "Оплата", "Депозит", "Награда", "Базовый доход", "Своп"],
+            chatTitle: "🤖 Помощник Bbini", chatWelcome: "Здравствуйте, чем я могу вам помочь?", chatInput: "Что вы хотите узнать?", chatSend: "Отправить",
+            faq: [ ["Безопасность?", "Квантовое шифрование."], ["Доход?", "Распределение 30%."], ["Робот?", "1 на каждый дом."] ],
+            vision: [ ["Школа AI", "Бесплатно"], ["Медцентр", "Поддержка"], ["Робот", "Прыжок"] ]
+ 
     let currentLang = 'ko';
 
     function changeLang(lang) {

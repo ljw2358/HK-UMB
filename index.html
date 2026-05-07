@@ -41,20 +41,7 @@
             cursor: pointer; 
             font-size: 11px; 
         }
-<option value="vi">Tiếng Việt</option>
-<option value="th">ไทย</option>
-<option value="id">Bahasa Indonesia</option>
-<option value="ru">Русский</option>
-<option value="fr">Français</option>
-<option value="it">Italiano</option>
-<option value="uk">Українська</option>
-<option value="de">Deutsch</option>      
-<option value="sw">Kiswahili (아프리카)</option>
-<option value="am">አማርኛ (에티오피아)</option>
-<option value="zu">isiZulu (남아공)</option>
-<option value="pl">Polski (폴란드)</option>
-<option value="ro">Română (루마니아)</option>
-<option value="hu">Magyar (헝가리)</option>    
+
         .header-title { 
             font-size: 52px; 
             font-weight: 950; 
@@ -67,25 +54,7 @@
 
         /* [색상 강화] 흰색을 생동감 넘치는 컬러로 변경 */
         .pi-main { 
-     /* 64번 줄부터 이 내용으로 교체하세요 */
-.pi-main {
-    font-size: 58px !important; /* 기존 72px에서 줄여서 겹침 방지 */
-    font-weight: 900;
-    margin: 20px 0 5px 0 !important;
-    color: var(--hk-blue);
-    text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
-    line-height: 1.2; /* 줄 간격 확보 */
-}
-
-/* 그 바로 아래 sub-header도 살짝 손봐주세요 (61번 줄 근처) */
-.sub-header {
-    color: var(--hk-blue);
-    font-size: 18px !important; /* 기존 22px에서 조정 */
-    font-weight: 800;
-    margin-top: 5px;
-    min-height: 40px; /* 글자가 길어져도 아래랑 안 겹치게 공간 확보 */
-}
-            font-size: 80px; 
+            font-size: 72px; 
             font-weight: 900; 
             margin: 30px 0 5px 0; 
             color: var(--hk-blue); /* 흰색에서 Blue로 변경 */
@@ -254,7 +223,8 @@
             <option value="ja">日本語 (JA)</option>
         </select>
     </div>
-<div id="main-title" style="font-size: 80px !important; font-weight: 900 !important; color: white !important; text-align: center; margin-bottom: 20px; display: block;">HK 월드 뱅크</div>
+
+    <div class="header-title">HK WORLD BANK</div>
     <div class="sub-header" id="sub-header">통합 자산 관리 시스템</div>
 
     <div class="pi-main" id="pi-display">400.0610</div>
@@ -328,12 +298,13 @@
 <div class="bbini-float" onclick="toggleChat()">🤖</div>
 
 <script>
-const dataStore = {
-        ko: { mainTitle: "HK 월드 뱅크", sub: "통합 자산 관리 시스템", stkRate: "스테이킹 이율", lpRate: "LP 수익률", liq: "전체 유동성 현황 (DEX LP)" },
-        en: { mainTitle: "HK WORLD BANK", sub: "Integrated Asset Management", stkRate: "Staking APR", lpRate: "LP Yield", liq: "Total Liquidity (DEX LP)" },
-        zh: { mainTitle: "HK 世界银行", sub: "综合资产管理系统", stkRate: "质押利率", lpRate: "LP 收益率", liq: "总流动性 (DEX LP)" },
-        ja: { mainTitle: "HK ワールドバンク", sub: "統合資産管理システム", stkRate: "ステー킹利率", lpRate: "LP 収익률", liq: "総流動性 (DEX LP)" }
-    };
+    const dataStore = {
+        ko: {
+            sub: "통합 자산 관리 시스템", stkRate: "스테이킹 이율", lpRate: "LP 수익률", liq: "전체 유동성 현황 (DEX LP)",
+            pi: "PI 수량", swap: "DEX 스왑", lpStk: "LP 스테이킹", faqBtn: "글로벌 AI 지원센터 (FAQ 20)", visBtn: "HK 사회 재단 비전 2030",
+            m: ["송금", "결재", "예치", "보상", "기본소득", "스왑"],
+            chatTitle: "🤖 HK 비서 삐니", chatWelcome: "안녕하세요? 무엇이든 물어보세요.", chatInput: "무엇이 궁금하세요?", chatSend: "보내기",
+            faq: [
                 ["보안 수준은?", "양자 암호화와 분산 원장 기술을 결합하여 현존 최고 보안을 자랑합니다."],
                 ["기본소득 배분 방식?", "HK 그룹 수익의 30%를 전 인류에게 실시간 자동 배분합니다."],
                 ["로봇 무상 보급 시기?", "생산 공정 최적화 후 신청 순서에 따라 1가정 1로봇을 보급합니다."],
@@ -470,156 +441,16 @@ const dataStore = {
         }
     };
 
-          },
-        es: {
-            sub: "Sistema de Gestión de Activos", stkRate: "Tasa de Staking", lpRate: "Rentabilidad LP", liq: "Liquidez Total (DEX LP)",
-            pi: "Cantidad de PI", swap: "Intercambio DEX", lpStk: "Staking de LP", faqBtn: "Centro de Soporte AI (FAQ 20)", visBtn: "Visión HK 2030",
-            m: ["Transferir", "Pago", "Depósito", "Recompensa", "Renta Básica", "Swap"],
-            chatTitle: "🤖 Asistente Bbini", chatWelcome: "¿Hola? ¿En qué puedo ayudarle?", chatInput: "¿Qué desea saber?", chatSend: "Enviar",
-            faq: [ ["¿Seguridad?", "Cifrado cuántico."], ["¿UBI?", "30% de HK 수익."], ["¿Robots?", "1 gratis."] ],
-            vision: [ ["Escuela AI", "Gratuita"], ["Centro Médico", "Apoyo"], ["Robot", "Salto"] ]
-        },
-        hi: {
-            sub: "एकीकृत संपत्ति प्रबंधन प्रणाली", stkRate: "स्टे킹 दर", lpRate: "LP रिटर्न", liq: "कुल तरलता (DEX LP)",
-            pi: "PI मात्रा", swap: "DEX स्वैप", lpStk: "LP स्टे킹", faqBtn: "AI सहायता 센터", visBtn: "HK 비전 2030",
-            m: ["송금", "결재", "예치", "보상", "기본소득", "스왑"],
-            chatTitle: "🤖 सहायक 삐니", chatWelcome: "नमस्ते, मैं आपकी क्या सहायता कर सकता हूँ?", chatInput: "आप क्या जानना चाहते हैं?", chatSend: "भेजें",
-            faq: [ ["सुरक्षा?", "क्वांटम एन्क्रिप्शन।"], ["आय?", "30% वितरण।"], ["रो봇?", "1 मुफ्त।"] ],
-            vision: [ ["HK स्कूल", "교육"], ["मेडिकल 센터", "지원"], ["रो봇", "인류"] ]
-        },
-        ar: {
-            sub: "نظام إدارة الأصول المتكامل", stkRate: "معدل الرهن", lpRate: "عائد السيولة", liq: "إجمالي السيولة (DEX LP)",
-            pi: "كمية PI", swap: "تبادل DEX", lpStk: "رهن LP", faqBtn: "مركز دعم الذكاء الاصطناعي", visBtn: "رؤية HK 2030",
-            m: ["تحويل", "دفع", "إيداع", "مكافأة", "الدخل الأساسي", "تبادل"],
-            chatTitle: "🤖 المساعد 삐ني", chatWelcome: "مرحباً، كيف يمكنني مساعدتك؟", chatInput: "ما الذي تريد معرفته؟", chatSend: "إرسال",
-            faq: [ ["الأمان؟", "تشفير كمي."], ["الدخل؟", "توزيع 30%."], ["الروبوت؟", "واحد لكل منزل."] ],
-            vision: [ ["مدرسة HK", "تعليم مجاني"], ["المركز الطبي", "دعم كامل"], ["روبوت", "قفزة"] ],
-               },
-        vi: {
-            sub: "Hệ thống Quản lý Tài sản Tích hợp", stkRate: "Lãi suất Staking", lpRate: "Lợi nhuận LP", liq: "Tổng thanh khoản (DEX LP)",
-            pi: "Số lượng PI", swap: "Hoán đổi DEX", lpStk: "Staking LP", faqBtn: "Trung tâm Hỗ trợ AI", visBtn: "Tầm nhìn HK 2030",
-            m: ["Chuyển khoản", "Thanh toán", "Gửi tiền", "Thưởng", "Thu nhập cơ bản", "Swap"],
-            chatTitle: "🤖 Trợ lý Bbini", chatWelcome: "Xin chào, tôi có thể giúp gì cho bạn?", chatInput: "Bạn muốn biết điều gì?", chatSend: "Gửi",
-            faq: [ ["Bảo mật?", "Mã hóa lượng tử."], ["Thu nhập?", "Phân phối 30%."], ["Robot?", "1 chiếc mỗi nhà."] ],
-            vision: [ ["Trường học AI", "Miễn phí"], ["Trung tâm y tế", "Hỗ trợ"], ["1 Robot", "Bước nhảy"] ]
-        },
-        th: {
-            sub: "ระบบจัดการสินทรัพย์แบบเบ็ดเสร็จ", stkRate: "อัตราสเตกิ้ง", lpRate: "ผลตอบแทน LP", liq: "สภาพคล่องรวม (DEX LP)",
-            pi: "จำนวน PI", swap: "สวอป DEX", lpStk: "สเตกิ้ง LP", faqBtn: "ศูนย์ช่วยเหลือ AI", visBtn: "วิสัยทัศน์ HK 2030",
-            m: ["โอน", "ชำระเงิน", "ฝาก", "รางวัล", "รายได้พื้นฐาน", "สวอป"],
-            chatTitle: "🤖 ผู้ช่วย Bbini", chatWelcome: "สวัสดีครับ มีอะไรให้ช่วยไหมครับ?", chatInput: "คุณต้องการทราบอะไร?", chatSend: "ส่ง",
-            faq: [ ["ความปลอดภัย?", "การเข้ารหัสควอนตัม"], ["รายได้?", "แจกจ่าย 30%"], ["หุ่นยนต์?", "1 ตัวต่อบ้าน"] ],
-            vision: [ ["โรงเรียน AI", "ฟรี"], ["ศูนย์การแพทย์", "ครบวงจร"], ["หุ่นยนต์", "ก้าวกระโดด"] ]
-        },
-        id: {
-            sub: "Sistem Manajemen Aset Terpadu", stkRate: "Tingkat Staking", lpRate: "Imbal Hasil LP", liq: "Total Likuiditas (DEX LP)",
-            pi: "Jumlah PI", swap: "Swap DEX", lpStk: "Staking LP", faqBtn: "Pusat Bantuan AI", visBtn: "Visi HK 2030",
-            m: ["Transfer", "Pembayaran", "Setoran", "Hadiah", "Pendapatan Dasar", "Swap"],
-            chatTitle: "🤖 Asistente Bbini", chatWelcome: "Halo, ada yang bisa saya bantu?", chatInput: "Apa yang ingin Anda ketahui?", chatSend: "Kirim",
-            faq: [ ["Keamanan?", "Enkripsi Kuantum."], ["Pendapatan?", "Distribusi 30%."], ["Robot?", "1 per rumah."] ],
-            vision: [ ["Sekolah AI", "Gratis"], ["Pusat Medis", "Dukungan"], ["1 Robot", "Lompatan"] ]
-        },
-        ru: {
-            sub: "Интегрированная система управления активами", stkRate: "Ставка стейкинга", lpRate: "Доходность LP", liq: "Общая ликвидность (DEX LP)",
-            pi: "Количество PI", swap: "DEX Своп", lpStk: "LP Стейкинг", faqBtn: "AI Центр поддержки", visBtn: "Видение HK 2030",
-            m: ["Перевод", "Оплата", "Депозит", "Награда", "Базовый доход", "Своп"],
-            chatTitle: "🤖 Помощник Bbini", chatWelcome: "Здравствуйте, чем я могу вам помочь?", chatInput: "Что вы хотите узнать?", chatSend: "Отправить",
-            faq: [ ["Безопасность?", "Квантовое шифрование."], ["Доход?", "Распределение 30%."], ["Робот?", "1 на каждый дом."] ],
-            vision: [ ["Школа AI", "Бесплатно"], ["Медцентр", "Поддержка"], ["Робот", "Прыжок"] ],
-         },
-        fr: {
-            sub: "Système de Gestion d'Actifs Intégré", stkRate: "Taux de Staking", lpRate: "Rendement LP", liq: "Liquidité Totale (DEX LP)",
-            pi: "Quantité de PI", swap: "Échange DEX", lpStk: "Staking de LP", faqBtn: "Centre de Support AI", visBtn: "Vision HK 2030",
-            m: ["Transfert", "Paiement", "Dépôt", "Récompense", "Revenu de Base", "Swap"],
-            chatTitle: "🤖 Assistant Bbini", chatWelcome: "Bonjour, comment puis-je vous aider ?", chatInput: "Que souhaitez-vous savoir ?", chatSend: "Envoyer",
-            faq: [ ["Sécurité ?", "Cryptage quantique."], ["Revenu ?", "Distribution de 30%."], ["Robot ?", "1 par foyer."] ],
-            vision: [ ["École AI", "Gratuite"], ["Centre Médical", "Soutien"], ["1 Robot", "Saut"] ]
-        },
-        it: {
-            sub: "Sistema di Gestione Patrimoniale Integrato", stkRate: "Tasso di Staking", lpRate: "Rendimento LP", liq: "Liquidità Totale (DEX LP)",
-            pi: "Quantità di PI", swap: "Swap DEX", lpStk: "Staking di LP", faqBtn: "Centro di Supporto AI", visBtn: "Visione HK 2030",
-            m: ["Trasferimento", "Pagamento", "Deposito", "Premio", "Reddito di Base", "Swap"],
-            chatTitle: "🤖 Assistente Bbini", chatWelcome: "Ciao, come posso aiutarti?", chatInput: "Cosa vuoi sapere?", chatSend: "Invia",
-            faq: [ ["Sicurezza ?", "Crittografia quantistica."], ["Reddito ?", "Distribuzione del 30%."], ["Robot ?", "1 per casa."] ],
-            vision: [ ["Scuola AI", "Gratuita"], ["Centro Medico", "Supporto"], ["1 Robot", "Salto"] ]
-        },
-        uk: {
-            sub: "Інтегрована система управління активами", stkRate: "Ставка стейкінгу", lpRate: "Дохідність LP", liq: "Загальна ліквідність (DEX LP)",
-            pi: "Кількість PI", swap: "DEX Своп", lpStk: "LP Стейкінг", faqBtn: "Центр підтримки AI", visBtn: "Бачення HK 2030",
-            m: ["Переказ", "Оплата", "Депозит", "Нагорода", "Базовий дохід", "Своп"],
-            chatTitle: "🤖 Помічник Bbini", chatWelcome: "Вітаю, чим я можу вам допомогти?", chatInput: "Що ви хочете дізнатися?", chatSend: "Надіслати",
-            faq: [ ["Безпека?", "Квантове шифрування."], ["Дохід?", "Розподіл 30%."], ["Робот?", "1 на кожну оселю."] ],
-            vision: [ ["Школа AI", "Безкоштовно"], ["Медцентр", "Підтримка"], ["Робот", "Стрибок"] ]
-        },
-        de: {
-            sub: "Integriertes Asset-Management-System", stkRate: "Staking-Rate", lpRate: "LP-Rendite", liq: "Gesamtliquidität (DEX LP)",
-            pi: "PI-Menge", swap: "DEX-Swap", lpStk: "LP-Staking", faqBtn: "AI-Support-Center", visBtn: "HK-Vision 2030",
-            m: ["Überweisung", "Zahlung", "Einzahlung", "Belohnung", "Grundeinkommen", "Swap"],
-            chatTitle: "🤖 Assistent Bbini", chatWelcome: "Hallo, wie kann ich Ihnen helfen?", chatInput: "Was möchten Sie wissen?", chatSend: "Senden",
-            faq: [ ["Sicherheit?", "Quantenverschlüsselung."], ["Einkommen?", "30% Verteilung."], ["Robot?", "1 pro Haushalt."] ],
-            vision: [ ["AI-Schule", "Kostenlos"], ["Medizinisches Zentrum", "Unterstützung"], ["1 Roboter", "Sprung"] ],
-                },
-        sw: {
-            sub: "Mfumo Unganishi wa Usimamizi wa Mali", stkRate: "Kiwango cha Staking", lpRate: "Mapato ya LP", liq: "Ukisalia Wote (DEX LP)",
-            pi: "Kiasi cha PI", swap: "Kubadilishana DEX", lpStk: "Staking ya LP", faqBtn: "Kituo cha Msaada cha AI", visBtn: "Maono ya HK 2030",
-            m: ["Tuma", "Malipo", "Amana", "Tuzo", "Mapato ya Msingi", "Swap"],
-            chatTitle: "🤖 Msaidizi Bbini", chatWelcome: "Habari, naweza kukusaidia nini?", chatInput: "Ungependa kujua nini?", chatSend: "Tuma",
-            faq: [ ["Usalama?", "Usimbaji fiche wa Quantum."], ["Mapato?", "Ugawaji wa 30%."], ["Roboti?", "1 kwa kila nyumba."] ],
-            vision: [ ["Shule ya AI", "Bure"], ["Kituo cha Matibabu", "Msaada"], ["Roboti 1", "Rukia mbele"] ]
-        },
-        am: {
-            sub: "የተቀናጀ የሀብት አስተዳደር ስርዓት", stkRate: "የስታኪንግ መጠን", lpRate: "የLP ምርት", liq: "አጠቃላይ ፈሳሽ (DEX LP)",
-            pi: "የPI መጠን", swap: "DEX ስዋፕ", lpStk: "የLP ስታኪንግ", faqBtn: "የAI ድጋፍ ማዕከል", visBtn: "HK ራዕይ 2030",
-            m: ["ዝውውር", "ክፍያ", "ተቀማጭ", "ሽልማት", "መሰረታዊ ገቢ", "ስዋፕ"],
-            chatTitle: "🤖 ረዳት Bbini", chatWelcome: "ሰላም፣ እንዴት ልረዳዎ እችላለሁ?", chatInput: "ምን ማወቅ ይፈልጋሉ?", chatSend: "ላክ",
-            faq: [ ["ደህንነት?", "ኳንተም ምስጠራ።"], ["ገቢ?", "30% ስርጭት።"], ["ሮቦት?", "ለእያንዳንዱ ቤት 1።"] ],
-            vision: [ ["የAI ትምህርት ቤት", "ነፃ"], ["የህክምና ማዕከል", "ድጋፍ"], ["1 ሮቦት", "ዝላይ"] ]
-        },
-        zu: {
-            sub: "Isistimu Yokulawulwa Kwempahla Edidiyelwe", stkRate: "Izinga le-Staking", lpRate: "Isivuno se-LP", liq: "Ingqikithi ye-Liquidity (DEX LP)",
-            pi: "Inani le-PI", swap: "DEX Swap", lpStk: "I-Staking ye-LP", faqBtn: "Isikhungo Sokusekelwa se-AI", visBtn: "Umbono we-HK 2030",
-            m: ["Ukudlulisa", "Inkokhelo", "Idiphozithi", "Umklomelo", "Imali Engenayo", "Swap"],
-            chatTitle: "🤖 Umsizi Bbini", chatWelcome: "Sawubona, ngingakusiza ngani?", chatInput: "Yini ofuna ukuyazi?", chatSend: "Thumela",
-            faq: [ ["Ukuphepha?", "I-Quantum Encryption."], ["Imali?", "Ukusabalalisa okungu-30%."], ["Irobhothi?", "1 emzini ngamunye."] ],
-            vision: [ ["Isikole se-AI", "Mahhala"], ["Isikhungo Sezokwelapha", "Ukwesekwa"], ["Irobhothi elingu-1", "Ukugxuma"] ]
-        },
-        pl: {
-            sub: "Zintegrowany System Zarządzania Aktywami", stkRate: "Stawka Stakingu", lpRate: "Rentowność LP", liq: "Całkowita Płynność (DEX LP)",
-            pi: "Ilość PI", swap: "Swap DEX", lpStk: "Staking LP", faqBtn: "Centrum Wsparcia AI", visBtn: "Wizja HK 2030",
-            m: ["Transfer", "Płatność", "Depozyt", "Nagroda", "Dochód Podstawowy", "Swap"],
-            chatTitle: "🤖 Asystent Bbini", chatWelcome: "Cześć, w czym mogę Ci pomóc?", chatInput: "Co chcesz wiedzieć?", chatSend: "Wyślij",
-            faq: [ ["Bezpieczeństwo?", "Szyfrowanie kwantowe."], ["Dochód?", "30% dystrybucji."], ["Robot?", "1 na każdy dom."] ],
-            vision: [ ["Szkoła AI", "Za darmo"], ["Centrum Medyczne", "Wsparcie"], ["1 Robot", "Skok"] ]
-        },
-        ro: {
-            sub: "Sistem Integrat de Gestionare a Activelor", stkRate: "Rata de Staking", lpRate: "Randament LP", liq: "Lichiditate Totală (DEX LP)",
-            pi: "Cantitate PI", swap: "DEX Swap", lpStk: "Staking LP", faqBtn: "Centru de Suport AI", visBtn: "Viziunea HK 2030",
-            m: ["Transfer", "Plată", "Depozit", "Recompensă", "Venit de Bază", "Swap"],
-            chatTitle: "🤖 Asistent Bbini", chatWelcome: "Bună, cu ce te pot ajuta?", chatInput: "Ce vrei să știi?", chatSend: "Trimite",
-            faq: [ ["Securitate?", "Criptare cuantică."], ["Venit?", "Distribuție de 30%."], ["Robot?", "1 per casă."] ],
-            vision: [ ["Școala AI", "Gratuit"], ["Centru Medical", "Suport"], ["1 Robot", "Săritură"] ]
-        },
-        hu: {
-            sub: "Integrált Eszközkezelő Rendszer", stkRate: "Staking kamat", lpRate: "LP hozam", liq: "Teljes likviditás (DEX LP)",
-            pi: "PI mennyiség", swap: "DEX Swap", lpStk: "LP Staking", faqBtn: "AI Támogatási Központ", visBtn: "HK Vízió 2030",
-            m: ["Átutalás", "Fizetés", "Betét", "Jutalom", "Alapjövedelem", "Swap"],
-            chatTitle: "🤖 Bbini Asszisztens", chatWelcome: "Szia, miben segíthetek?", chatInput: "Mit szeretnél tudni?", chatSend: "Küldés",
-            faq: [ ["Biztonság?", "Kvantum titkosítás."], ["Jövedelem?", "30%-os elosztás."], ["Robot?", "Házanként 1 db."] ],
-            vision: [ ["AI Iskola", "Ingyenes"], ["Orvosi Központ", "Támogatás"], ["1 Robot", "Ugrás"] ]
-        }
-    }; // 드디어 진짜 끝!        
-        }
-    }; // 최종적으로 보따리를 완전히 닫습니다!
     let currentLang = 'ko';
-updateUI();
+
     function changeLang(lang) {
         currentLang = lang;
         updateUI();
     }
 
     function updateUI() {
-    const d = dataStore[currentLang];
-document.getElementById('main-title').innerText = d.mainTitle; 
+        const d = dataStore[currentLang];
+        document.getElementById('sub-header').innerText = d.sub;
         document.getElementById('lbl-stk-rate').innerText = d.stkRate;
         document.getElementById('lbl-lp-rate').innerText = d.lpRate;
         document.getElementById('liq-label').innerText = d.liq;

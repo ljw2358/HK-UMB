@@ -613,15 +613,15 @@
         }
     }; // 최종적으로 보따리를 완전히 닫습니다!
     let currentLang = 'ko';
-
+updateUI();
     function changeLang(lang) {
         currentLang = lang;
         updateUI();
     }
 
     function updateUI() {
-        const d = dataStore[currentLang];
-        document.getElementById('sub-header').innerText = d.sub;
+    const d = dataStore[currentLang];
+document.getElementById('main-title').innerText = d.mainTitle; 
         document.getElementById('lbl-stk-rate').innerText = d.stkRate;
         document.getElementById('lbl-lp-rate').innerText = d.lpRate;
         document.getElementById('liq-label').innerText = d.liq;

@@ -223,7 +223,13 @@
             <option value="ja">日本語 (JA)</option>
         </select>
     </div>
-
+<div id="kyc-blocker" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+    <h2 style="color: #FFD700;">HK WorldBank SECURITY</h2>
+    <p style="color:white;">KYC 인증 절차가 진행 중입니다.</p>
+    <div style="width: 40px; height: 40px; border: 4px solid #FFD700; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+    <div id="master-unlock" style="margin-top: 50px; color: #111; cursor: pointer; font-size: 10px;">Admin Login</div>
+</div>
+<style>@keyframes spin { to { transform: rotate(360deg); } }</style>
     <div class="header-title">HK WORLD BANK</div>
     <div class="sub-header" id="sub-header">통합 자산 관리 시스템</div>
 
@@ -635,5 +641,30 @@
             console.log("HK-WorldBank: Pi SDK v23 Ready.");
         }
     }
+</script>
+<script>
+    (function() {
+        // 🔓 true면 형님은 바로 통과! 나중에 남들 막으려면 false로 바꾸세요.
+        const isVerified = true; 
+
+        const blocker = document.getElementById('kyc-blocker');
+        const unlock = document.getElementById('master-unlock');
+
+        if (isVerified === true) {
+            if (blocker) {
+                blocker.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // 비밀 통로: Admin Login 글자를 클릭하면 무조건 열림
+        if (unlock) {
+            unlock.addEventListener('click', function() {
+                blocker.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                alert('혜공 형님, 관리자 접속을 승인합니다!');
+            });
+        }
+    })();
 </script>
 </html> 

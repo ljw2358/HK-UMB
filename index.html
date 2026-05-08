@@ -642,29 +642,52 @@
         }
     }
 </script>
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>
     (function() {
-        // 🔓 true면 형님은 바로 통과! 나중에 남들 막으려면 false로 바꾸세요.
-        const isVerified = false; 
-
         const blocker = document.getElementById('kyc-blocker');
-        const unlock = document.getElementById('master-unlock');
+        const Pi = window.Pi;
 
-        if (isVerified === true) {
-            if (blocker) {
-                blocker.style.display = 'none';
-                document.body.style.overflow = 'auto';
+        // 👑 [형님 전용 예외] 이 컴퓨터를 형님 기기로 기억하고 있다면 즉시 통과
+        if (localStorage.getItem("is_hyekong_boss") === "true") {
+            if (blocker) blocker.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            return; 
+        }
+
+        // 🛡️ [일반인 검문소] Pi SDK 초기화 및 KYC 체크
+        Pi.init({ version: "2.0", sandbox: false });
+
+        async function verifyUser() {
+            try {
+                const auth = await Pi.authenticate(['username'], function(p){});
+                if (auth && auth.user) {
+                    // KYC 인증된 사람만 입장 허용
+                    blocker.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            } catch (err) {
+                console.log("KYC 미인증자 차단 중...");
             }
         }
 
-        // 비밀 통로: Admin Login 글자를 클릭하면 무조건 열림
+        // 🔑 [형님 전용 비밀 버튼] Admin Login 누르고 1004 입력하면 평생 예외 등록
+        const unlock = document.getElementById('master-unlock');
         if (unlock) {
             unlock.addEventListener('click', function() {
-                blocker.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                alert('혜공 형님, 관리자 접속을 승인합니다!');
+                const bossKey = prompt("회장님 전용 키를 입력하세요:");
+                if (bossKey === "1004") { 
+                    localStorage.setItem("is_hyekong_boss", "true");
+                    alert("혜공 형님, 환영합니다! 이제 이 기기는 프리패스입니다.");
+                    location.reload();
+                } else {
+                    alert("권한이 없습니다.");
+                }
             });
         }
+
+        verifyUser();
     })();
 </script>
+
 </html> 

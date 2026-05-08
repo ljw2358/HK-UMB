@@ -250,19 +250,7 @@
 </div>
 
 <script>
-    (function() {
-        // KYC 인증 여부 (테스트를 위해 false로 설정)
-        const isVerified = true; 
-
-        if (!isVerified) {
-            const blocker = document.getElementById('kyc-blocker');
-            if (blocker) {
-                blocker.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-    })();
-</script>
+  
 <div class="container">
     <div class="lang-wrapper">
         <select id="lang-select" onchange="changeLang(this.value)">

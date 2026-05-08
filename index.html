@@ -275,8 +275,9 @@
         <a href="https://tiktok.com/@hyekong2025" target="_blank" class="btn-tt">TikTok</a>
     </div>
 <div class="social-grid" style="margin-top: 10px;">
-  <a href="javascript:void(0)" class="btn-tt" style="background: #333;" id="m7" onclick="document.getElementById('privacy-panel').style.display='block'">개인정보처리방안</a> 
- <a href="javascript:void(0)" class="btn-tt" style="background: #333;" id="m8" onclick="document.getElementById('whitepaper-panel').style.display='block'">백서</a>
+<a href="javascript:void(0)" class="btn-tt" onclick="document.getElementById('whitepaper-panel').style.display='none'; document.getElementById('privacy-panel').style.display='block'">개인정보처리방안</a>
+<a href="javascript:void(0)" class="btn-tt" onclick="document.getElementById('privacy-panel').style.display='none'; document.getElementById('whitepaper-panel').style.display='block'">백서</a>
+
  
 </div>
 <div id="privacy-panel" class="panel">
@@ -343,12 +344,7 @@
 
  
 
-    <div class="chat-body" id="chat-msg-area">
-        <div class="msg-bubble bot-msg" id="chat-greeting">안녕하세요? 무엇이든 물어보세요.</div>
-    </div>
-    <div class="chat-input-area">
-        <input type="text" id="chat-input" placeholder="무엇이 궁금하세요?" onkeyup="if(event.keyCode==13) handleChat()">
-        <button class="chat-send-btn" id="chat-send" onclick="handleChat()">보내기</button>
+  
     </div>
 </div>
 <div class="bbini-float" onclick="toggleChat()">🤖</div>

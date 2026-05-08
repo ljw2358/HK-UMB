@@ -10,7 +10,32 @@
             --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #121212;
             --yt-red: #FF0000; --tt-black: #010101;
             --hk-white-bright: #F5F5F5;
-        }
+         }
+       /* KYC 차단 레이어 스타일 */
+    #kyc-blocker {
+        display: none; 
+        position: fixed; 
+        top: 0; left: 0;
+        width: 100%; height: 100%; 
+        background: var(--hk-bg);
+        z-index: 9999; 
+        color: #fff; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center;
+        padding: 20px;
+    }
+    .kyc-content h1 { color: var(--hk-gold); font-size: 2rem; margin-bottom: 20px; }
+    .kyc-content p { font-size: 1.1rem; margin-bottom: 30px; line-height: 1.5; }
+    .btn-kyc {
+        background: var(--hk-gold); 
+        color: #000; 
+        padding: 12px 30px;
+        border-radius: 25px; 
+        text-decoration: none; 
+        font-weight: bold;
+    } 
         body { 
             background: var(--hk-bg); 
             color: #fff; 

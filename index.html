@@ -238,7 +238,31 @@
     </style>
 </head>
 <body>
+<div id="kyc-blocker">
+    <div class="kyc-content">
+        <h1>⚠️ ACCESS RESTRICTED</h1>
+        <p>
+            HK WorldBank는 안전한 금융 생태계를 위해<br>
+            <strong>KYC 인증 완료자</strong>만 이용 가능합니다.
+        </p>
+        <a href="https://minepi.com/kyc" class="btn-kyc">KYC 인증 신청하기</a>
+    </div>
+</div>
 
+<script>
+    (function() {
+        // KYC 인증 여부 (테스트를 위해 false로 설정)
+        const isVerified = false; 
+
+        if (!isVerified) {
+            const blocker = document.getElementById('kyc-blocker');
+            if (blocker) {
+                blocker.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+    })();
+</script>
 <div class="container">
     <div class="lang-wrapper">
         <select id="lang-select" onchange="changeLang(this.value)">

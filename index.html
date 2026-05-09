@@ -216,18 +216,13 @@
 
 <div class="container">
     <div class="lang-wrapper">
- <div style="position: absolute; top: 10px; right: 10px; z-index: 9999;">
-    <select id="lang-select" onchange="changeLang(this.value)" style="font-size: 14px; padding: 5px 10px; font-weight: bold; border: 2px solid #FFD700; border-radius: 8px; background-color: #000; color: #FFD700; cursor: pointer; outline: none;">
-        <option value="ko">KO</option>
-        <option value="en">EN</option>
-        <option value="ar">AR</option>
-        <option value="hi">HI</option>
-        <option value="zh">ZH</option>
-        <option value="ja">JA</option>
-    </select>
-</div>
-    
-</select> 
+        <select id="lang-select" onchange="changeLang(this.value)">
+            <option value="ko">한국어 (KO)</option>
+            <option value="en">ENGLISH (EN)</option>
+            <option value="zh">中文 (ZH)</option>
+            <option value="ja">日本語 (JA)</option>
+        </select>
+    </div>
 <div id="kyc-blocker" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
     <h2 style="color: #FFD700;">HK WorldBank SECURITY</h2>
     <p style="color:white;">KYC 인증 절차가 진행 중입니다.</p>
@@ -451,43 +446,7 @@
             ]
         }
     };
-    // ja 끝나는 중괄호(},) 바로 뒤에 붙여넣으세요
-    ar: {
-        sub: "نظام إدارة الأصول الموحد",
-        stkRate: "معدل الحصة", lpRate: "عائد LP", liq: "السيولة الإجمالية",
-        m: ["تحويل", "دفع", "إيداع", "مكافأة", "UBI", "تبادل"],
-        vision: [
-            ["مدرسة HK العالمية للذكاء الاصطناعي", "بناء نظام تعليمي مجاني متطور"],
-            ["مركز نانو الطبي", "دعم علاج السرطان والأمراض النادرة"],
-            ["منزل ذكي ذاتي", "دعم نفقات الطاقة الصفرية"],
-            ["رعاية المواهب المستقبلية", "توفير بيئة بحثية غير محدودة"],
-            ["عصر روبوت واحد لكل أسرة", "تحرير البشر من العمل الشاق"]
-        ],
-        faq: [
-            ["الأمان؟", "تشفير كمي وتكامل DLT لأقصى درجات الأمان."],
-            ["توزيع UBI؟", "يتم توزيع 30% من أرباح HK عالمياً في الوقت الفعلي."],
-            ["الروبوتات؟", "روبوت واحد مجاني لكل منزل بعد تحسين الإنتاج."]
-        ],
-        chatTitle: "مساعد HK بيني", chatWelcome: "مرحباً! اسألني أي شيء.", chatInput: "اكتب رسالتك..."
-    },
-    hi: {
-        sub: "एकीकृत संपत्ति प्रबंधन प्रणाली",
-        stkRate: "स्टेकिंग दर", lpRate: "LP लाभ", liq: "कुल तरलता",
-        m: ["स्थानांतरण", "भुगतान", "जमा", "पुरस्कार", "UBI", "स्वैप"],
-        vision: [
-            ["HK ग्लोबल AI स्कूल", "मुफ्त उन्नत शिक्षा प्रणाली का निर्माण"],
-            ["नैनो मेडिकल सेंटर", "कैंसर और दुर्लभ बीमारियों के लिए सहायता"],
-            ["स्व-चालित स्मार्ट होम", "शून्य ऊर्जा लागत सहायता"],
-            ["भविष्य की प्रतिभा", "असीमित शोध वातावरण प्रदान करना"],
-            ["प्रति घर एक रोबोट", "मानवता को कठिन परिश्रम से मुक्त करना"]
-        ],
-        faq: [
-            ["सुरक्षा?", "अधिकतम सुरक्षा के लिए क्वांटم एन्क्रिप्शन।"],
-            ["UBI वितरण?", "HK लाभ का 30% वास्तविक समय में वितरित किया जाता है।"],
-            ["रोबोट?", "उत्पादन अनुकूलन के बाद प्रति घर एक मुफ्त रोबोट।"]
-        ],
-        chatTitle: "HK सहायक बिनी", chatWelcome: "नमस्ते! मुझसे कुछ भी पूछें।", chatInput: "अपना संदेश लिखें..."
-    },
+
     let currentLang = 'ko';
 
     function changeLang(lang) {
@@ -741,4 +700,4 @@
 
         verifyUser();
     })();
-</script>      
+</script>     

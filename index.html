@@ -216,25 +216,13 @@
 
 <div class="container">
     <div class="lang-wrapper">
-   <select id="lang-select" onchange="changeLang(this.value)" style="font-size: 12px; padding: 2px; width: auto;">
-    <option value="ko">KO</option>
-    <option value="en">EN</option>
-    <option value="zh">ZH</option>
-    <option value="ja">JA</option>
-    <option value="ar">AR</option>
-    <option value="hi">HI</option>
-    <option value="vi">VI</option>
-    <option value="id">ID</option>
-    <option value="th">TH</option>
-    <option value="ph">PH</option>
-    <option value="ms">MS</option>
-    <option value="de">DE</option>
-    <option value="fr">FR</option>
-    <option value="it">IT</option>
-    <option value="es">ES</option>
-    <option value="ru">RU</option>
-    <option value="tr">TR</option>
-</select> 
+        <select id="lang-select" onchange="changeLang(this.value)">
+            <option value="ko">한국어 (KO)</option>
+            <option value="en">ENGLISH (EN)</option>
+            <option value="zh">中文 (ZH)</option>
+            <option value="ja">日本語 (JA)</option>
+        </select>
+    </div>
 <div id="kyc-blocker" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
     <h2 style="color: #FFD700;">HK WorldBank SECURITY</h2>
     <p style="color:white;">KYC 인증 절차가 진행 중입니다.</p>
@@ -458,47 +446,13 @@
             ]
         }
     };
-// 462번 줄부터 시작
-let currentLang = 'ko'; 
 
-function changeLang(lang) {
-    currentLang = lang; 
-    updateUI();
-}
+    let currentLang = 'ko';
 
-function updateUI() {
-    // datastore의 's'가 소문자인지 대문자인지만 확인하면 끝!
-    const d = datastore[currentLang]; 
-    if (!d) return;
-    // 1. 기본 텍스트 및 라벨 변경 (485~491번 줄 대응)
-    document.getElementById('sub-header').innerText = d.sub;
-    document.getElementById('lbl-stk-rate').innerText = d.stkRate;
-    document.getElementById('lbl-lp-rate').innerText = d.lpRate;
-    document.getElementById('liq-label').innerText = d.liq;
-    document.getElementById('lbl-pi').innerText = d.pi;
-    document.getElementById('lbl-swap').innerText = d.swap;
-    document.getElementById('lbl-stk').innerText = d.lpStk;
-
-    // 2. 버튼 텍스트 변경 (492~493번 줄 대응)
-    document.getElementById('btn-faq').innerText = d.faqBtn;
-    document.getElementById('btn-vision').innerText = d.visBtn;
-
-    // 3. 5대 비전 반복문 처리 (494번 줄 대응)
-    for(let i=1; i<=5; i++) {
-        const visionEl = document.getElementById('m' + i);
-        if(visionEl) visionEl.innerText = d.visionList[i-1];
+    function changeLang(lang) {
+        currentLang = lang;
+        updateUI();
     }
-
-    // 4. 챗봇 인터페이스 변경 (496~499번 줄 대응)
-    document.getElementById('chat-title').innerText = d.chatTitle;
-    document.getElementById('chat-greeting').innerText = d.chatWel;
-    document.getElementById('chat-input').placeholder = d.chatIn;
-    document.getElementById('chat-send').innerText = d.chatSend;
-
-    // 5. 특수 설정 (아랍어 등 RTL 적용)
-    document.body.dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
-}
-
 
     function updateUI() {
         const d = dataStore[currentLang];

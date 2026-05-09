@@ -2,555 +2,957 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK SUPREME - THE EMPIRE EDITION</title>
-    <!-- 
-        ======================================================================
-        HK GROUP CHAIRMAN: LEE JAEWAN (HYEKONG)
-        PROJECT: HK WORLD BANK (PI NETWORK ECOSYSTEM)
-        MISSION: 1. GLOBAL UBI FOR 1 BILLION PEOPLE
-                 2. 1 ROBOT PER HOUSEHOLD (HK ROBOTICS)
-                 3. UNLIMITED CLEAN ENERGY (NUCLEAR FUSION)
-                 4. SPACE INFRASTRUCTURE & RESOURCE MINING
-        SECURITY: LEVEL 7 QUANTUM-RESISTANT ENCRYPTION (MASTER KEY: 2891)
-        ======================================================================
-    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK WORLD BANK - SUPREME</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Noto+Sans+KR:wght@100;300;500;700;900&family=Roboto+Mono:wght@300;700&display=swap');
-
         :root {
-            --hk-gold: #FFD700; --hk-gold-rgb: 255, 215, 0;
-            --hk-green: #39FF14; --hk-blue: #00F3FF;
-            --hk-pink: #FF00FF; --hk-red: #FF3131;
-            --hk-bg-dark: #000000; --hk-card-bg: #050505;
-            --hk-border: #151515; --hk-text-main: #FFFFFF;
-            --hk-text-dim: #666666; --hk-transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
+            --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #121212;
+            --yt-red: #FF0000; --tt-black: #010101;
+            --hk-white-bright: #F5F5F5;
         }
-
-        /* 전역 스크롤바 디자인 - HK 테크 스타일 */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--hk-gold); border-radius: 10px; }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
-        
         body {
-            background-color: var(--hk-bg-dark); color: var(--hk-text-main);
-            font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden;
-            display: flex; justify-content: center;
+            background: var(--hk-bg);
+            color: #fff;
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+        }
+       
+        .lang-wrapper { position: absolute; top: 10px; right: 20px; z-index: 1100; }
+        #lang-select {
+            background: #222;
+            color: var(--hk-gold);
+            border: 1px solid var(--hk-gold);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 11px;
         }
 
-        /* HK 매트릭스 배경 효과 */
-        #hk-canvas { position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.15; pointer-events: none; }
-
-        .hk-wrapper {
-            width: 100%; max-width: 600px; min-height: 100vh;
-            background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
-            padding: 20px; position: relative; z-index: 1;
-            border-left: 1px solid var(--hk-border); border-right: 1px solid var(--hk-border);
+        .header-title {
+            font-size: 52px;
+            font-weight: 950;
+            color: var(--hk-gold);
+            margin-top: 50px;
+            letter-spacing: -2px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
+        .sub-header { color: var(--hk-blue); font-size: 22px; font-weight: 800; margin-top: 5px; }
 
-        /* 마스터 엔진 선택기 */
-        .engine-container {
-            position: sticky; top: 0; z-index: 1000; background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px); padding: 15px 0; border-bottom: 1px solid #111;
-            display: flex; justify-content: space-between; align-items: center;
+        .pi-main {
+            font-size: 72px;
+            font-weight: 900;
+            margin: 30px 0 5px 0;
+            color: var(--hk-blue);
+            text-shadow: 0 0 15px rgba(0, 243, 255, 0.6);
         }
-        .hk-status-dot { width: 10px; height: 10px; background: var(--hk-green); border-radius: 50%; box-shadow: 0 0 10px var(--hk-green); display: inline-block; margin-right: 8px; }
-        .hk-live-tag { font-family: 'Orbitron'; font-size: 11px; color: var(--hk-green); font-weight: 700; letter-spacing: 1px; }
-
-        #global-selector {
-            background: #111; color: var(--hk-gold); border: 1px solid var(--hk-gold);
-            padding: 8px 15px; border-radius: 8px; font-weight: 900; font-family: 'Orbitron';
-            font-size: 11px; cursor: pointer; outline: none;
-        }
-
-        /* 헤더 디자인 - 제국의 자부심 */
-        .main-header { text-align: center; margin-top: 40px; margin-bottom: 40px; }
-        .logo-box { position: relative; display: inline-block; }
-        .logo-main {
-            font-family: 'Orbitron', sans-serif; font-size: 48px; font-weight: 900;
-            background: linear-gradient(180deg, #FFF 0%, var(--hk-gold) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            letter-spacing: -1px; filter: drop-shadow(0 0 20px rgba(255,215,0,0.3));
-        }
-        .logo-sub {
-            font-size: 14px; color: var(--hk-blue); font-weight: 800;
-            letter-spacing: 6px; text-transform: uppercase; margin-top: -5px;
+        .pi-unit { color: var(--hk-gold); font-size: 28px; font-weight: 900; display: block; margin-top: -10px; margin-bottom: 15px; }
+       
+        .gcv-pill {
+            display: inline-block;
+            border: 2.5px solid var(--hk-green);
+            color: var(--hk-green);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
         }
 
-        /* 실시간 자산 계판 - 억만장자의 시야 */
-        .dashboard {
-            background: var(--hk-card-bg); border: 1px solid var(--hk-border);
-            border-radius: 35px; padding: 45px 25px; text-align: center;
-            margin-bottom: 25px; position: relative; overflow: hidden;
+        .liq-card {
+            border: 2px solid #333;
+            background: linear-gradient(145deg, #151515, #000);
+            padding: 30px 20px 20px 20px;
+            margin-bottom: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .dashboard::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, var(--hk-gold));
-            animation: rotate-border 6s linear infinite; opacity: 0.1;
-        }
-        @keyframes rotate-border { to { transform: rotate(360deg); } }
-
-        .asset-title { color: var(--hk-gold); font-size: 13px; font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; }
-        .asset-value { font-family: 'Orbitron'; font-size: 65px; font-weight: 900; color: #FFF; margin-bottom: 5px; }
-        .asset-unit { font-size: 24px; color: var(--hk-blue); font-weight: 900; letter-spacing: 2px; }
-        .gcv-bar {
-            margin-top: 30px; padding: 12px; border-radius: 50px;
-            background: rgba(0, 243, 255, 0.05); border: 1px dashed var(--hk-blue);
-            color: var(--hk-blue); font-weight: 900; font-size: 15px; font-family: 'Roboto Mono';
+       
+        .rate-container { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        .rate-box { flex: 1; }
+        .rate-label { font-size: 13px; font-weight: 800; color: var(--hk-white-bright); margin-bottom: 5px; display: block; }
+        .rate-val {
+            font-size: 24px;
+            font-weight: 950;
+            color: var(--hk-green);
         }
 
-        /* 통계 그리드 */
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-        .stat-card {
-            background: #080808; border: 1px solid #111; border-radius: 25px;
-            padding: 20px; text-align: center;
+        .liq-label { font-size: 13px; color: var(--hk-white-bright); font-weight: var(--hk-white-bright); margin-bottom: 8px; display: block; }
+        .liq-val {
+            font-size: 28px;
+            font-weight: 950;
+            color: var(--hk-pink);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
         }
-        .stat-label { font-size: 10px; color: #555; font-weight: 800; display: block; margin-bottom: 8px; text-transform: uppercase; }
-        .stat-val { font-family: 'Orbitron'; font-size: 20px; font-weight: 900; color: var(--hk-green); }
 
-        /* HK 제국 12대 핵심 기능 (Grid) */
-        .hk-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
-        .menu-item {
-            background: #0a0a0a; border: 1px solid #151515; border-radius: 20px;
-            padding: 20px 5px; text-align: center; cursor: pointer; transition: var(--hk-transition);
-        }
-        .menu-item:hover { border-color: var(--hk-gold); background: #111; transform: translateY(-5px); }
-        .menu-item .icon { font-size: 28px; margin-bottom: 10px; display: block; filter: grayscale(0.5); }
-        .menu-item:hover .icon { filter: grayscale(0); }
-        .menu-item .label { font-size: 11px; font-weight: 900; color: #888; text-transform: uppercase; }
-        .menu-item:hover .label { color: #FFF; }
+        .dex-detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border-top: 1px solid #222; padding-top: 20px; }
+        .dex-n { font-size: 11px; color: var(--hk-blue); font-weight: 900; margin-bottom: 5px; }
+        .dex-v { font-size: 13px; color: var(--hk-gold); font-weight: 900; }
 
-        /* 정보 패널 디자인 */
-        .hk-panel {
-            background: #050505; border: 1px solid #111; border-radius: 30px;
-            margin-bottom: 15px; overflow: hidden;
+        .section-tag {
+            text-align: left;
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--hk-gold);
+            margin: 25px 0 15px 5px;
+            border-left: 4px solid var(--hk-gold);
+            padding-left: 10px;
         }
-        .panel-trigger {
-            width: 100%; padding: 25px; border: none; background: transparent;
-            color: #FFF; font-size: 16px; font-weight: 900; text-align: left;
-            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+       
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+        .menu-box {
+            background: var(--hk-card);
+            padding: 20px 0;
+            border-radius: 22px;
+            border: 1px solid #222;
+            transition: 0.3s;
         }
-        .panel-trigger span { font-family: 'Orbitron'; color: var(--hk-gold); }
-        .panel-content { display: none; padding: 0 25px 30px 25px; }
+        .menu-box:active { transform: scale(0.95); background: #1a1a1a; }
+       
+        .action-btn {
+            width: 100%;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 900;
+            color: #fff;
+            border: none;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .action-btn:hover { filter: brightness(1.2); }
 
-        /* 컨텐츠 상세 스타일링 */
+        .panel {
+            display: none;
+            background: #0d0d0d;
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 10px;
+            border: 1px solid #222;
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .list-item { padding: 12px 0; border-bottom: 1px solid #222; }
+        .list-q { color: var(--hk-gold); font-weight: 900; font-size: 14px; }
+        .list-a { color: #ccc; font-size: 12px; line-height: 1.6; padding-top: 5px; }
+       
         .vision-box {
-            border-left: 3px solid var(--hk-blue); padding-left: 20px; margin-bottom: 25px;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+            border-left: 4px solid var(--hk-blue);
         }
-        .vision-box h4 { color: var(--hk-blue); font-size: 18px; margin-bottom: 8px; }
-        .vision-box p { color: #888; font-size: 13px; line-height: 1.6; font-weight: 400; }
+        .vision-box b { color: var(--hk-blue); display: block; font-size: 16px; margin-bottom: 5px; }
 
-        .faq-row { border-bottom: 1px solid #111; padding: 15px 0; }
-        .faq-row:last-child { border-bottom: none; }
-        .faq-q { color: var(--hk-gold); font-size: 14px; font-weight: 800; margin-bottom: 5px; }
-        .faq-a { color: #666; font-size: 13px; line-height: 1.5; }
+        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .btn-yt { background: var(--yt-red); color: #fff; padding: 20px; border-radius: 20px; text-decoration: none; font-weight: 900; }
+        .btn-tt { background: var(--tt-black); color: #fff; padding: 20px; border-radius: 20px; text-decoration: none; font-weight: 900; border: 1px solid #333; }
 
-        /* 하단 고정 액션바 */
-        .action-bar {
-            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; max-width: 600px; background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(20px); border-top: 1px solid #222;
-            padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; z-index: 2000;
+        .footer { margin-top: 40px; font-size: 11px; color: #555; line-height: 1.6; font-weight: 700; padding-bottom: 100px; }
+       
+        .bbini-float {
+            position: fixed; bottom: 30px; right: 20px; width: 70px; height: 70px;
+            background: var(--hk-gold); border-radius: 50%; display: flex;
+            justify-content: center; align-items: center; font-size: 35px;
+            cursor: pointer; z-index: 2000; border: 3px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
-        .btn-prime {
-            padding: 18px; border-radius: 15px; border: none; font-weight: 900;
-            font-size: 14px; cursor: pointer; text-transform: uppercase; transition: 0.3s;
+        .chat-window {
+            position: fixed; bottom: 110px; right: 20px; width: 330px;
+            background: #fff; border-radius: 25px; display: none;
+            z-index: 2000; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            overflow: hidden; flex-direction: column; border: 1px solid var(--hk-gold);
         }
-        .btn-wallet { background: var(--hk-gold); color: #000; }
-        .btn-social { background: #FFF; color: #000; }
+        .chat-head {
+            background: var(--hk-gold); color: #000; padding: 18px;
+            font-weight: 950; font-size: 16px; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .chat-close { cursor: pointer; font-size: 24px; font-weight: bold; }
+        .chat-body {
+            padding: 15px; color: #333; font-size: 13px; font-weight: 600;
+            line-height: 1.6; height: 300px; overflow-y: auto; background: #fdfdfd;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+       
+        .msg-bubble { max-width: 85%; padding: 10px 15px; border-radius: 18px; position: relative; font-size: 12.5px; }
+        .bot-msg { background: #eee; align-self: flex-start; border-bottom-left-radius: 2px; color: #333; }
+        .user-msg { background: var(--hk-gold); align-self: flex-end; border-bottom-right-radius: 2px; color: #000; }
 
-        /* 삐니 AGI 비서 인터페이스 */
-        #bbini-trigger {
-            position: fixed; bottom: 100px; right: 20px; width: 70px; height: 70px;
-            background: var(--hk-gold); border-radius: 50%; border: 4px solid #000;
-            display: flex; justify-content: center; align-items: center; font-size: 30px;
-            cursor: pointer; z-index: 3000; box-shadow: 0 10px 30px rgba(255,215,0,0.4);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-
-        .chat-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 4000; display: none;
-            flex-direction: column; padding: 30px;
-        }
-        .chat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .chat-header h2 { font-family: 'Orbitron'; color: var(--hk-gold); }
-        .chat-messages { flex: 1; overflow-y: auto; padding: 20px 0; display: flex; flex-direction: column; gap: 20px; }
-        .msg { max-width: 85%; padding: 20px; border-radius: 20px; font-size: 15px; font-weight: 500; line-height: 1.6; }
-        .msg.bot { background: #111; align-self: flex-start; color: #EEE; border-bottom-left-radius: 2px; }
-        .msg.user { background: var(--hk-gold); align-self: flex-end; color: #000; font-weight: 800; border-bottom-right-radius: 2px; }
-        .chat-input-area { display: flex; gap: 10px; margin-top: 20px; }
+        .chat-input-area { display: flex; padding: 12px; border-top: 1px solid #eee; background: #fff; }
         .chat-input-area input {
-            flex: 1; background: #111; border: 1px solid #222; padding: 20px;
-            border-radius: 15px; color: #FFF; outline: none; font-weight: 700;
+            flex: 1; border: 1px solid #ddd; padding: 10px 15px;
+            border-radius: 25px; font-size: 13px; outline: none; color: #000;
         }
-        .chat-send { background: var(--hk-gold); border: none; padding: 0 30px; border-radius: 15px; font-weight: 900; cursor: pointer; }
-
-        /* 마스터 락 (2891) */
-        #gatekeeper {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10000; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+        .chat-send-btn {
+            background: var(--hk-gold); border: none; padding: 10px 18px;
+            margin-left: 8px; border-radius: 25px; font-weight: 900;
+            font-size: 13px; cursor: pointer;
         }
-        .gate-logo { font-family: 'Orbitron'; font-size: 35px; color: var(--hk-gold); margin-bottom: 30px; letter-spacing: 10px; }
-        .pass-input {
-            background: transparent; border: none; border-bottom: 2px solid #333;
-            color: var(--hk-gold); font-size: 30px; text-align: center; font-family: 'Orbitron';
-            width: 200px; outline: none; letter-spacing: 15px;
-        }
-
-        footer { text-align: center; margin-top: 50px; padding-bottom: 120px; color: #333; font-size: 11px; font-weight: 700; line-height: 2; }
     </style>
 </head>
 <body>
 
-<canvas id="hk-canvas"></canvas>
-
-<!-- 2891 전용 보안 게이트 -->
-<div id="gatekeeper">
-    <div class="gate-logo">HK WORLD</div>
-    <input type="password" id="gate-pass" class="pass-input" maxlength="4" placeholder="****" autofocus>
-    <p style="color: #444; margin-top: 30px; font-size: 12px; font-weight: 900; letter-spacing: 2px;">SECURE ACCESS ONLY</p>
-</div>
-
-<div class="hk-wrapper">
-    <div class="engine-container">
-        <div>
-            <span class="hk-status-dot"></span>
-            <span class="hk-live-tag">CORE ENGINE ACTIVE</span>
-        </div>
-        <select id="global-selector" onchange="switchEngine(this.value)">
-            <!-- 50개국어 선택지 -->
-            <option value="ko">KOREAN / 한국어</option>
-            <option value="en">ENGLISH / English</option>
-            <option value="zh">CHINESE / 中文</option>
-            <option value="ja">JAPANESE / 日本語</option>
-            <option value="vi">VIETNAMESE / Tiếng Việt</option>
-            <option value="hi">HINDI / हिन्दी</option>
-            <option value="es">SPANISH / Español</option>
-            <option value="fr">FRENCH / Français</option>
-            <option value="ar">ARABIC / العربية</option>
-            <option value="ru">RUSSIAN / Русский</option>
-            <option value="pt">PORTUGUESE / Português</option>
-            <option value="de">GERMAN / Deutsch</option>
-            <option value="tr">TURKISH / Türkçe</option>
-            <option value="it">ITALIAN / Italiano</option>
-            <option value="th">THAI / ไทย</option>
-            <option value="id">INDONESIAN / Bahasa</option>
-            <option value="ms">MALAY / Bahasa Melayu</option>
-            <option value="tl">TAGALOG / Tagalog</option>
-            <option value="sw">SWAHILI / Kiswahili</option>
-            <option value="bn">BENGALI / বাংলা</option>
-            <option value="pa">PUNJABI / ਪੰਜਾਬੀ</option>
-            <option value="ur">URDU / اردو</option>
-            <option value="fa">PERSIAN / فارسی</option>
-            <option value="pl">POLISH / Polski</option>
-            <option value="nl">DUTCH / Nederlands</option>
-            <option value="sv">SWEDISH / Svenska</option>
-            <option value="no">NORWEGIAN / Norsk</option>
-            <option value="da">DANISH / Dansk</option>
-            <option value="fi">FINNISH / Suomi</option>
-            <option value="el">GREEK / Ελληνικά</option>
-            <option value="hu">HUNGARIAN / Magyar</option>
-            <option value="cs">CZECH / Čeština</option>
-            <option value="ro">ROMANIAN / Română</option>
-            <option value="he">HEBREW / עברית</option>
-            <option value="uk">UKRAINIAN / Українська</option>
-            <option value="bg">BULGARIAN / Български</option>
-            <option value="hr">CROATIAN / Hrvatski</option>
-            <option value="sr">SERBIAN / Српски</option>
-            <option value="sk">SLOVAK / Slovenčina</option>
-            <option value="sl">SLOVENIAN / Slovenščina</option>
-            <option value="et">ESTONIAN / Eesti</option>
-            <option value="lv">LATVIAN / Latviešu</option>
-            <option value="lt">LITHUANIAN / Lietuvių</option>
-            <option value="af">AFRIKAANS / Afrikaans</option>
-            <option value="am">AMHARIC / አማርኛ</option>
-            <option value="az">AZERBAIJANI / Azərbaycanca</option>
-            <option value="be">BELARUSIAN / Беларуская</option>
-            <option value="ka">GEORGIAN / ქართული</option>
-            <option value="kk">KAZAKH / Қазақ тілі</option>
-            <option value="uz">UZBEK / O'zbekcha</option>
+<div class="container">
+    <div class="lang-wrapper">
+        <select id="lang-select" onchange="changeLang(this.value)">
+            <option value="ko">한국어 (KO)</option>
+            <option value="en">ENGLISH (EN)</option>
+            <option value="zh">中文 (ZH)</option>
+            <option value="ja">日本語 (JA)</option>
+            <option value="hi">हिन्दी (HI)</option>
+            <option value="ar">العربية (AR)</option>
+            <option value="es">Español (ES)</option>
+            <option value="vi">Tiếng Việt (VI)</option>
+            <option value="th">ไทย (TH)</option>
+            <option value="id">Bahasa Indonesia (ID)</option>
+            <option value="ru">Русский (RU)</option>
+            <option value="uk">Українська (UK)</option>
         </select>
     </div>
+<div id="kyc-blocker" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+    <h2 style="color: #FFD700;">HK WorldBank SECURITY</h2>
+    <p style="color:white;">KYC 인증 절차가 진행 중입니다.</p>
+    <div style="width: 40px; height: 40px; border: 4px solid #FFD700; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+    <div id="master-unlock" style="margin-top: 50px; color: #111; cursor: pointer; font-size: 10px;">Admin Login</div>
+</div>
+<style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+    <div class="header-title">HK WORLD BANK</div>
+    <div class="sub-header" id="sub-header">통합 자산 관리 시스템</div>
 
-    <header class="main-header">
-        <div class="logo-box">
-            <h1 class="logo-main">HK WORLD BANK</h1>
-            <p class="logo-sub" id="l-sub">The Industrial Sovereign</p>
-        </div>
-    </header>
+    <div class="pi-main" id="pi-display">400.0610</div>
+    <span class="pi-unit">Pi</span>
+    <div class="gcv-pill" id="gcv-display">Value: $ 125,663,600 (GCV)</div>
 
-    <section class="dashboard">
-        <h3 class="asset-title" id="t-asset">HK GLOBAL LEDGER ASSETS</h3>
-        <div class="asset-value">
-            <span id="v-pi">400.0610</span> <span class="asset-unit">π</span>
+    <div class="liq-card">
+        <div class="rate-container">
+            <div class="rate-box">
+                <span class="rate-label" id="lbl-stk-rate">스테이킹 이율</span>
+                <span class="rate-val" id="stk-val">15.22%</span>
+            </div>
+            <div class="rate-box">
+                <span class="rate-label" id="lbl-lp-rate">LP 수익률</span>
+                <span class="rate-val" id="lp-val">22.45%</span>
+            </div>
         </div>
-        <div class="gcv-bar" id="t-gcv">GCV CONSENSUS: $ 314,159 / PI</div>
-    </section>
+        <span class="liq-label" id="liq-label">전체 유동성 현황 (DEX LP)</span>
+        <div class="liq-val" id="liq-display">$ 88,438,688,147</div>
 
-    <div class="stat-grid">
-        <div class="stat-card">
-            <span class="stat-label" id="st-1-l">Staking APR</span>
-            <span class="stat-val" id="st-1-v">18.52%</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-label" id="st-2-l">Network Nodes</span>
-            <span class="stat-val" id="st-2-v">1,245,882</span>
-        </div>
-        <div class="stat-card" style="grid-column: span 2;">
-            <span class="stat-label" id="st-3-l">Total Liquidity Pool</span>
-            <span class="stat-val" id="st-3-v" style="color: var(--hk-blue);">$ 142,509,211,884</span>
-        </div>
-    </div>
-
-    <!-- 12대 핵심 모듈 그리드 -->
-    <div class="hk-menu-grid">
-        <div class="menu-item" onclick="m_c(1)"><span class="icon">🚀</span><span class="label" id="m1">Send</span></div>
-        <div class="menu-item" onclick="m_c(2)"><span class="icon">🛒</span><span class="label" id="m2">Pay</span></div>
-        <div class="menu-item" onclick="m_c(3)"><span class="icon">🏦</span><span class="label" id="m3">Bank</span></div>
-        <div class="menu-item" onclick="m_c(4)"><span class="icon">💎</span><span class="label" id="m4">Staking</span></div>
-        <div class="menu-item" onclick="m_c(5)"><span class="icon">🌍</span><span class="label" id="m5">UBI</span></div>
-        <div class="menu-item" onclick="m_c(6)"><span class="icon">🔄</span><span class="label" id="m6">DEX</span></div>
-        <div class="menu-item" onclick="m_c(7)"><span class="icon">🤖</span><span class="label" id="m7">Robot</span></div>
-        <div class="menu-item" onclick="m_c(8)"><span class="icon">⚛️</span><span class="label" id="m8">Energy</span></div>
-        <div class="menu-item" onclick="m_c(9)"><span class="icon">🛰️</span><span class="label" id="m9">Space</span></div>
-        <div class="menu-item" onclick="m_c(10)"><span class="icon">💊</span><span class="label" id="m10">Bio</span></div>
-        <div class="menu-item" onclick="m_c(11)"><span class="icon">🎓</span><span class="label" id="m11">Edu</span></div>
-        <div class="menu-item" onclick="m_c(12)"><span class="icon">⚖️</span><span class="label" id="m12">Justice</span></div>
-    </div>
-
-    <!-- 비전 패널 -->
-    <div class="hk-panel">
-        <button class="panel-trigger" onclick="t_p('v-p')">
-            VISION 2030 <span>VIEW</span>
-        </button>
-        <div id="v-p" class="panel-content">
-            <div id="vision-list"></div>
+        <div class="dex-detail-grid">
+            <div class="dex-item"><div class="dex-n" id="lbl-pi">PI 수량</div><div class="dex-v" id="det-pi">1,240,552</div></div>
+            <div class="dex-item"><div class="dex-n" id="lbl-swap">DEX 스왑</div><div class="dex-v" id="det-swap">$ 314,159</div></div>
+            <div class="dex-item"><div class="dex-n" id="lbl-stk">LP 스테이킹</div><div class="dex-v" id="det-lp">21.4%</div></div>
         </div>
     </div>
 
-    <!-- FAQ 패널 -->
-    <div class="hk-panel">
-        <button class="panel-trigger" onclick="t_p('f-p')">
-            FAQ CENTER (AGI) <span>OPEN</span>
-        </button>
-        <div id="f-p" class="panel-content">
-            <div id="faq-list"></div>
-        </div>
+    <div class="section-tag" id="tag-eco">HK MASTER ECOSYSTEM</div>
+    <div class="menu-grid">
+        <div class="menu-box"><span style="font-size:24px;">🚀</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-blue);" id="m1">송금</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🛒</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-green);" id="m2">결재</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🏦</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-gold);" id="m3">예치</div></div>
+    </div>
+    <div class="menu-grid">
+        <div class="menu-box"><span style="font-size:24px;">🎁</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-pink);" id="m4">보상</div></div>
+        <div class="menu-box"><span style="font-size:24px;">💳</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:#ddd;" id="m5">기본소득</div></div>
+        <div class="menu-box"><span style="font-size:24px;">🔄</span><div style="font-size:12px; font-weight:800; margin-top:5px; color:var(--hk-blue);" id="m6">스왑</div></div>
     </div>
 
-    <div style="height: 100px;"></div>
+    <button class="action-btn" style="background: var(--hk-pink);" onclick="togglePanel('faq')" id="btn-faq">글로벌 AI 지원센터 (FAQ 20)</button>
+    <div id="faq" class="panel"></div>
 
-    <div class="action-bar">
-        <button class="btn-prime btn-wallet" id="b-wal">HK SMART WALLET</button>
-        <button class="btn-prime btn-social" id="b-soc">COMMUNITY</button>
+    <button class="action-btn" style="background: #2c3e50;" onclick="togglePanel('vision')" id="btn-vision">HK 사회 재단 비전 2030</button>
+    <div id="vision" class="panel"></div>
+
+    <div class="social-grid">
+        <a href="https://youtube.com/@Hyekong2025" target="_blank" class="btn-yt">YouTube</a>
+        <a href="https://tiktok.com/@hyekong2025" target="_blank" class="btn-tt">TikTok</a>
     </div>
 
-    <footer>
-        CHAIRMAN LEE JAEWAN & HK CONGLOMERATE<br>
-        GLOBAL UNIVERSAL BASIC INCOME PROJECT OFFICE<br>
-        <span style="color: #666;">2026 HK WORLD BANK. ALL RIGHTS SECURED.</span>
-    </footer>
+    <div class="footer">
+        HK GROUP CHAIRMAN LEE JAEWAN<br>
+        <span style="color: var(--hk-gold)">support@hkwb.world</span><br>
+        © HYEKONG. ALL RIGHTS RESERVED.
+    </div>
 </div>
 
-<!-- 비서 삐니 트리거 -->
-<div id="bbini-trigger" onclick="openChat()">🤖</div>
-
-<!-- 비서 삐니 채팅 UI -->
-<div class="chat-container" id="chat-ui">
-    <div class="chat-header">
-        <h2 id="c-h">HK ASSISTANT BBINI</h2>
-        <button onclick="closeChat()" style="background:none; border:none; color:#FFF; font-size:30px; cursor:pointer;">×</button>
+<div class="chat-window" id="chat-win">
+    <div class="chat-head">
+        <span id="chat-title">🤖 HK 비서 삐니</span>
+        <span class="chat-close" onclick="toggleChat()">&times;</span>
     </div>
-    <div class="chat-messages" id="c-msgs">
-        <div class="msg bot" id="c-greet">Hello, Chairman Hyekong! Ready to manage the HK empire?</div>
+    <div class="chat-body" id="chat-msg-area">
+        <div class="msg-bubble bot-msg" id="chat-greeting">안녕하세요? 무엇이든 물어보세요.</div>
     </div>
     <div class="chat-input-area">
-        <input type="text" id="c-in" placeholder="Ask anything to BBINI..." onkeyup="if(event.keyCode==13) talk()">
-        <button class="chat-send" onclick="talk()">GO</button>
+        <input type="text" id="chat-input" placeholder="무엇이 궁금하세요?" onkeyup="if(event.keyCode==13) handleChat()">
+        <button class="chat-send-btn" id="chat-send" onclick="handleChat()">보내기</button>
     </div>
 </div>
+<div class="bbini-float" onclick="toggleChat()">🤖</div>
 
 <script>
-    /* 
-       ======================================================================
-       HK GLOBAL MASTER ENGINE - 50 LANGUAGES CORE DATA
-       이 데이터 시트는 혜공 형님의 50개국 진출을 위한 핵심 자산입니다.
-       ======================================================================
-    */
-    const HK_GLOBAL_DB = {
+    const dataStore = {
         ko: {
-            sub: "산업의 절대 주권", asset: "HK 글로벌 장부 자산", gcv: "GCV 합의 가치: $ 314,159 / PI",
-            st1: "스테이킹 연이율", st2: "네트워크 노드 수", st3: "전체 유동성 풀 규모",
-            m: ["송금", "결제", "은행", "스테이킹", "기본소득", "거래소", "로봇", "에너지", "우주", "바이오", "교육", "정의"],
-            btnW: "HK 스마트 월렛", btnS: "커뮤니티 광장", chatH: "🤖 HK 비서 삐니",
-            greet: "안녕하십니까, 혜공 형님! 형님의 위대한 비전이 온 지구에 퍼지도록 보좌하겠습니다.",
-            vision: [
-                ["인류 빈곤의 종말", "HK WorldBank는 전 세계 모든 인민에게 금융적 자유를 선사하며, 기아와 빈곤을 기술적으로 박멸합니다."],
-                ["로봇 기반 풍요 사회", "1가구 1로봇 보급을 통해 인류를 단순 노동에서 해방시키고, 창의와 예술의 시대를 엽니다."],
-                ["무한 청정 에너지", "핵융합 기술 상용화로 에너지 비용을 제로(0)에 수렴하게 만들어 산업의 폭발적 성장을 견인합니다."],
-                ["우주 문명 개척", "달과 화성의 자원 인프라를 구축하여 인류의 활동 범위를 태양계 전체로 확장합니다."]
-            ],
+            sub: "통합 자산 관리 시스템", stkRate: "스테이킹 이율", lpRate: "LP 수익률", liq: "전체 유동성 현황 (DEX LP)",
+            pi: "PI 수량", swap: "DEX 스왑", lpStk: "LP 스테이킹", faqBtn: "글로벌 AI 지원센터 (FAQ 20)", visBtn: "HK 사회 재단 비전 2030",
+            m: ["송금", "결재", "예치", "보상", "기본소득", "스왑"],
+            chatTitle: "🤖 HK 비서 삐니", chatWelcome: "안녕하세요? 무엇이든 물어보세요.", chatInput: "무엇이 궁금하세요?", chatSend: "보내기",
             faq: [
-                ["보안 시스템은 안전한가?", "HK 시스템은 양자 컴퓨터의 공격도 막아내는 PQC(Post-Quantum Cryptography) 암호 체계를 갖추고 있습니다."],
-                ["기본소득 지급 방식은?", "HK 그룹의 산업 수익 30%가 Pi 네트워크를 통해 전 세계 인민에게 매달 실시간으로 자동 지급됩니다."],
-                ["로봇 신청은 어떻게?", "HK 로보틱스 모듈을 통해 신청 가능하며, 취약 계층부터 순차적으로 무상 보급됩니다."],
-                ["에너지 자립 스마트홈?", "가정용 초소형 핵융합(SMR) 장치를 통해 24시간 끊김 없는 무상 전력을 제공받게 됩니다."]
+                ["보안 수준은?", "양자 암호화와 분산 원장 기술을 결합하여 현존 최고 보안을 자랑합니다."],
+                ["기본소득 배분 방식?", "HK 그룹 수익의 30%를 전 인류에게 실시간 자동 배분합니다."],
+                ["로봇 무상 보급 시기?", "생산 공정 최적화 후 신청 순서에 따라 1가정 1로봇을 보급합니다."],
+                ["에너지 자립 홈 시스템?", "핵융합 모듈과 연동하여 가정 내 전기료 제로를 지향합니다."],
+                ["데이터 소유권?", "모든 개인 데이터는 오직 사용자 본인만이 통제하고 소유합니다."],
+                ["메인넷 전환 데이터?", "테스트넷의 모든 가치는 메인넷으로 1:1 안전하게 이전됩니다."],
+                ["의료 지원 범위?", "암 및 난치병 치료비를 전액 지원하는 것을 목표로 합니다."],
+                ["AI 튜터 서비스?", "전 세계 아이들에게 1:1 맞춤형 AI 교육을 무상 제공합니다."],
+                ["DEX 수수료 정책?", "발생 수수료의 90%를 생태계 기여자에게 즉시 환원합니다."],
+                ["HK 그룹의 미래 가치?", "에너지, 로봇, 금융을 통합한 인류 경제의 새로운 중심이 됩니다."],
+                ["로봇 보안은?", "로컬 서버 저장 방식으로 외부 해킹을 원천 차단합니다."],
+                ["에코 시스템 참여?", "노드 운영, 앱 활동, LP 공급 등 다양한 기여가 가능합니다."],
+                ["사회적 기여 모델?", "수익의 상당 부분을 빈곤 퇴치와 환경 복원에 투입합니다."],
+                ["장학금 지원 제도?", "혁신 인재들을 위해 월 최대 $5,000의 연구비를 지원합니다."],
+                ["거버넌스 투표권?", "주요 의사결정에 커뮤니티의 합의를 적극 반영합니다."],
+                ["글로벌 센터 위치?", "세계 주요 50개 거점 도시에 오프라인 AI 센터를 구축 중입니다."],
+                ["시스템 안정성?", "전 세계 분산 노드가 24시간 가동되어 무중단 운영을 보장합니다."],
+                ["신규 자산 상장?", "AI 알고리즘의 엄격한 심사를 통과한 프로젝트만 상장합니다."],
+                ["유동성 방어 전략?", "실시간 알고리즘이 변동성에 대응하여 가치를 보호합니다."],
+                ["삐니의 역할?", "혜공 형님의 전담 비서로서 자산 관리와 기술적 조력을 수행합니다."]
+            ],
+            vision: [
+                ["HK 글로벌 AI 학교", "전 세계 평등하게 누리는 최첨단 무상 교육 시스템 구축"],
+                ["나노 메디컬 센터", "나노 기술을 활용한 암 정복 및 난치병 치료비 전액 지원"],
+                ["에너지 자립 스마트홈", "에너지 비용 걱정 없는 지속 가능한 주거 환경 전 인류 보급"],
+                ["미래 기술 인재 양성", "혁신을 꿈꾸는 모든 인재에게 무제한 연구 환경 지원"],
+                ["1가정 1로봇 시대", "단순 노동에서 인류를 해방하고 자아실현에 집중하는 삶"]
             ]
         },
         en: {
-            sub: "The Industrial Sovereign", asset: "HK GLOBAL LEDGER ASSETS", gcv: "GCV CONSENSUS: $ 314,159 / PI",
-            st1: "Staking APR", st2: "Network Nodes", st3: "Total Liquidity Pool",
-            m: ["Send", "Pay", "Bank", "Staking", "UBI", "DEX", "Robot", "Energy", "Space", "Bio", "Edu", "Justice"],
-            btnW: "HK SMART WALLET", btnS: "COMMUNITY", chatH: "🤖 ASSISTANT BBINI",
-            greet: "Hello, Chairman Hyekong! I am ready to assist your global mission for humanity.",
-            vision: [
-                ["End of Global Poverty", "HK WorldBank brings financial freedom to all people, technically eradicating hunger."],
-                ["Robot-Based Abundance", "1 robot per household frees humanity from manual labor, opening an era of creativity."],
-                ["Unlimited Clean Energy", "Commercializing fusion tech brings energy costs to zero, driving industrial growth."],
-                ["Space Frontier", "Building resource infra on Moon/Mars to expand human presence across the solar system."]
-            ],
+            sub: "Integrated Asset Management", stkRate: "Staking Rate", lpRate: "LP Yield", liq: "Total Liquidity (DEX LP)",
+            pi: "PI Qty", swap: "DEX Swap", lpStk: "LP Staking", faqBtn: "AI Support Center (FAQ 20)", visBtn: "HK Vision 2030",
+            m: ["Transfer", "Payment", "Deposit", "Reward", "UBI", "Swap"],
+            chatTitle: "🤖 Assistant Bbini", chatWelcome: "Hello? Ask me anything.", chatInput: "What are you curious about?", chatSend: "Send",
             faq: [
-                ["Is security guaranteed?", "HK uses PQC encryption to resist even quantum computer attacks."],
-                ["How is UBI distributed?", "30% of HK profits are automatically sent to users worldwide via Pi Network."],
-                ["How to get a robot?", "Request via HK Robotics; free distribution starts with vulnerable groups."],
-                ["Energy smart home?", "Home-scale SMR fusion modules will provide 24/7 free electricity for all."]
+                ["Security?", "Quantum encryption & DLT integration for max safety."],
+                ["UBI?", "30% of HK profits distributed in real-time worldwide."],
+                ["Robots?", "Free 1 robot per house after production optimization."],
+                ["Energy?", "Zero electricity bills via fusion energy module."],
+                ["Data?", "Users have absolute ownership of their data."],
+                ["Mainnet?", "1:1 safe value transfer from testnet to mainnet."],
+                ["Medical?", "Full coverage for cancer and rare diseases."],
+                ["AI Tutor?", "Free tailored education for all children."],
+                ["DEX Fee?", "90% of fees go back to contributors."],
+                ["Value?", "Integration of energy, robotics, and finance."],
+                ["Robot Safety?", "Local server storage to block hacking."],
+                ["Ecosystem?", "Contribute via nodes, apps, and LP."],
+                ["Social?", "Significant profits go to poverty eradication."],
+                ["Scholarship?", "Up to $5,000 monthly for innovators."],
+                ["Governance?", "Major decisions based on community vote."],
+                ["Global Hub?", "AI centers in 50 major world cities."],
+                ["Stability?", "24/7 non-stop by global distributed nodes."],
+                ["Listing?", "Projects pass strict AI algorithm audits."],
+                ["Defense?", "Real-time algorithmic protection."],
+                ["Bbini's Role?", "Hyekong's secretary for asset and tech management."]
+            ],
+            vision: [
+                ["HK Global AI School", "Universal high-tech free education."],
+                ["Nano Medical Center", "Cancer cure and full disease support."],
+                ["Smart Home", "Energy-independent housing for everyone."],
+                ["Talent Nurturing", "Unlimited research for innovators."],
+                ["1 Robot per Home", "Humanity's leap to self-actualization."]
+            ]
+        },
+        vi: {
+            sub: "Hệ thống quản lý tài sản tích hợp", stkRate: "Lãi suất Staking", lpRate: "Lợi suất LP", liq: "Tổng thanh khoản (DEX LP)",
+            pi: "Số lượng PI", swap: "Hoán đổi DEX", lpStk: "Staking LP", faqBtn: "Trung tâm hỗ trợ AI toàn cầu (FAQ 20)", visBtn: "Tầm nhìn HK 2030",
+            m: ["Chuyển khoản", "Thanh toán", "Gửi tiền", "Thưởng", "Thu nhập cơ bản", "Swap"],
+            chatTitle: "🤖 Thư ký Bbini", chatWelcome: "Xin chào? Bạn cần tôi giúp gì không?", chatInput: "Bạn đang thắc mắc điều gì?", chatSend: "Gửi",
+            faq: [
+                ["Mức độ bảo mật?", "Kết hợp mã hóa lượng tử và sổ cái phân tán."],
+                ["Phân phối thu nhập?", "30% lợi nhuận HK được chia tự động theo thời gian thực."],
+                ["Cung cấp robot?", "Miễn phí 1 gia đình 1 robot sau khi tối ưu sản xuất."],
+                ["Năng lượng tự chủ?", "Hóa đơn điện bằng 0 thông qua mô-đun nhiệt hạch."],
+                ["Quyền sở hữu dữ liệu?", "Người dùng có quyền sở hữu tuyệt đối dữ liệu của họ."],
+                ["Dữ liệu Mainnet?", "Chuyển đổi giá trị 1:1 an toàn từ testnet."],
+                ["Hỗ trợ y tế?", "Mục tiêu hỗ trợ toàn bộ chi phí điều trị ung thư."],
+                ["Gia sư AI?", "Giáo dục AI 1:1 miễn phí cho mọi trẻ em."],
+                ["Phí DEX?", "90% phí được hoàn trả cho những người đóng góp."],
+                ["Giá trị tương lai?", "Trung tâm mới tích hợp năng lượng, robot và tài chính."],
+                ["An toàn Robot?", "Lưu trữ máy chủ cục bộ để ngăn chặn hack."],
+                ["Hệ sinh thái?", "Đóng góp qua nút, ứng dụng và cung cấp LP."],
+                ["Đóng góp xã hội?", "Lợi nhuận lớn được dùng để xóa đói giảm nghèo."],
+                ["Học bổng?", "Hỗ trợ nghiên cứu lên đến $5,000 mỗi tháng."],
+                ["Quản trị?", "Quyết định dựa trên sự đồng thuận của cộng đồng."],
+                ["Trung tâm toàn cầu?", "Xây dựng tại 50 thành phố lớn trên thế giới."],
+                ["Sự ổn định?", "Hoạt động 24/7 nhờ các nút phân tán."],
+                ["Niêm yết tài sản?", "Chỉ các dự án vượt qua kiểm tra thuật toán AI."],
+                ["Phòng thủ thanh khoản?", "Thuật toán bảo vệ giá trị trước biến động."],
+                ["Vai trò của Bbini?", "Thư ký riêng hỗ trợ quản lý tài sản và kỹ thuật."]
+            ],
+            vision: [
+                ["Trường học AI toàn cầu", "Xây dựng hệ thống giáo dục miễn phí hiện đại."],
+                ["Trung tâm y tế Nano", "Chinh phục ung thư và hỗ trợ toàn bộ chi phí."],
+                ["Nhà thông minh tự chủ", "Môi trường sống bền vững không lo chi phí điện."],
+                ["Nuôi dưỡng nhân tài", "Hỗ trợ nghiên cứu không giới hạn cho các nhà đổi mới."],
+                ["Kỷ nguyên mỗi nhà 1 robot", "Giải phóng con người khỏi lao động chân tay."]
+            ]
+        },
+        th: {
+            sub: "ระบบจัดการสินทรัพย์แบบครบวงจร", stkRate: "อัตราการสเตก", lpRate: "ผลตอบแทน LP", liq: "สถานะสภาพคล่องรวม",
+            pi: "จำนวน PI", swap: "แลกเปลี่ยน DEX", lpStk: "การสเตก LP", faqBtn: "ศูนย์สนับสนุน AI ระดับโลก (FAQ 20)", visBtn: "วิสัยทัศน์ HK 2030",
+            m: ["โอนเงิน", "ชำระเงิน", "ฝากเงิน", "รางวัล", "รายได้พื้นฐาน", "สวอป"],
+            chatTitle: "🤖 เลขา Bbini", chatWelcome: "สวัสดีค่ะ มีอะไรให้ช่วยไหมคะ?", chatInput: "คุณต้องการทราบอะไรคะ?", chatSend: "ส่ง",
+            faq: [
+                ["ระดับความปลอดภัย?", "ใช้การเข้ารหัสควอนตัมและเทคโนโลยีบัญชีแยกประเภท."],
+                ["การแบ่งรายได้พื้นฐาน?", "จัดสรร 30% ของกำไรกลุ่ม HK ให้กับทุกคนแบบเรียลไทม์."],
+                ["การแจกจ่ายโรบอต?", "ฟรี 1 บ้าน 1 โรบอต หลังจากปรับกระบวนการผลิต."],
+                ["พลังงานไฟฟ้าฟรี?", "ใช้โมดูลฟิวชันเพื่อให้ค่าไฟในบ้านเป็นศูนย์."],
+                ["ความเป็นเจ้าของข้อมูล?", "ข้อมูลส่วนบุคคลทั้งหมดเป็นของผู้ใช้เท่านั้น."],
+                ["ข้อมูล Mainnet?", "โอนย้ายมูลค่า 1:1 อย่างปลอดภัยจาก Testnet."],
+                ["การสนับสนุนการแพทย์?", "เป้าหมายคือสนับสนุนค่ารักษาโรคมะเร็งทั้งหมด."],
+                ["ติวเตอร์ AI?", "การศึกษา AI แบบ 1:1 ฟรีสำหรับเด็กทั่วโลก."],
+                ["ค่าธรรมเนียม DEX?", "คืน 90% ของค่าธรรมเนียมให้กับผู้มีส่วนร่วม."],
+                ["มูลค่าในอนาคต?", "ศูนย์กลางใหม่ที่รวมพลังงาน โรบอต และการเงิน."],
+                ["ความปลอดภัยโรบอต?", "จัดเก็บในเซิร์ฟเวอร์ท้องถิ่นเพื่อป้องกันการแฮ็ก."],
+                ["การร่วมระบบนิเวศ?", "ร่วมสนับสนุนผ่านโหนด แอป และ LP."],
+                ["โมเดลเพื่อสังคม?", "นำกำไรส่วนใหญ่ไปใช้ขจัดความยากจน."],
+                ["ทุนการศึกษา?", "สนับสนุนการวิจัยสูงสุด $5,000 ต่อเดือน."],
+                ["สิทธิการโหวต?", "สะท้อนมติของชุมชนในการตัดสินใจสำคัญ."],
+                ["ที่ตั้งศูนย์ทั่วโลก?", "สร้างศูนย์ AI ใน 50 เมืองหลักทั่วโลก."],
+                ["ความเสถียร?", "ทำงาน 24 ชั่วโมงผ่านโหนดกระจายตัวทั่วโลก."],
+                ["การจดทะเบียนสินทรัพย์?", "โครงการที่ผ่านการตรวจสอบโดยอัลกอริทึม AI."],
+                ["กลยุทธ์ป้องกันราคา?", "ใช้อัลกอริทึมเรียลไทม์เพื่อรักษามูลค่า."],
+                ["บทบาทของ Bbini?", "เลขาขาส่วนตัวของผู้บริหาร Hyekong."]
+            ],
+            vision: [
+                ["โรงเรียน AI ระดับโลก", "สร้างระบบการศึกษาฟรีที่ทันสมัยทั่วโลก."],
+                ["ศูนย์การแพทย์นาโน", "สนับสนุนการรักษาโรคมะเร็งและโรคร้ายแรง."],
+                ["สมาร์ทโฮมพลังงานฟรี", "สภาพแวดล้อมที่อยู่อาศัยที่ยั่งยืนไม่มีค่าไฟ."],
+                ["บ่มเพาะบุคลากรเทคโนโลยี", "สนับสนุนสภาพแวดล้อมการวิจัยไม่จำกัด."],
+                ["ยุค 1 บ้าน 1 โรบอต", "ปลดปล่อยมนุษย์จากการทำงานหนัก."]
+            ]
+        },
+        id: {
+            sub: "Sistem Manajemen Aset Terpadu", stkRate: "Suku Bunga Staking", lpRate: "Imbal Hasil LP", liq: "Status Likuiditas Total",
+            pi: "Jumlah PI", swap: "Swap DEX", lpStk: "Staking LP", faqBtn: "Pusat Dukungan AI Global (FAQ 20)", visBtn: "Visi HK 2030",
+            m: ["Transfer", "Pembayaran", "Deposit", "Hadiah", "Pendapatan Dasar", "Swap"],
+            chatTitle: "🤖 Sekretaris Bbini", chatWelcome: "Halo? Ada yang bisa saya bantu?", chatInput: "Apa yang ingin Anda tanyakan?", chatSend: "Kirim",
+            faq: [
+                ["Tingkat keamanan?", "Gabungan enkripsi kuantum dan teknologi blockchain."],
+                ["Pendapatan Dasar?", "30% laba HK didistribusikan otomatis secara real-time."],
+                ["Distribusi robot?", "Gratis 1 robot per rumah setelah optimasi produksi."],
+                ["Kemandirian energi?", "Bebas biaya listrik dengan modul fusi nuklir."],
+                ["Kepemilikan data?", "Semua data pribadi dimiliki sepenuhnya oleh pengguna."],
+                ["Data Mainnet?", "Transfer nilai 1:1 yang aman dari testnet."],
+                ["Dukungan medis?", "Target cakupan penuh biaya pengobatan kanker."],
+                ["Tutor AI?", "Pendidikan AI 1:1 gratis untuk anak-anak di seluruh dunia."],
+                ["Biaya DEX?", "90% biaya dikembalikan kepada kontributor ekosistem."],
+                ["Nilai masa depan?", "Pusat ekonomi baru yang menyatukan energi dan robot."],
+                ["Keamanan Robot?", "Penyimpanan server lokal untuk memblokir peretasan."],
+                ["Partisipasi?", "Berkontribusi melalui node, aplikasi, dan penyediaan LP."],
+                ["Kontribusi sosial?", "Sebagian besar laba untuk pemberantasan kemiskinan."],
+                ["Beasiswa?", "Dukungan riset hingga $5,000 per bulan."],
+                ["Tata kelola?", "Keputusan penting mencerminkan konsensus komunitas."],
+                ["Lokasi pusat global?", "Membangun pusat AI di 50 kota besar dunia."],
+                ["Stabilitas sistem?", "Operasi 24 jam melalui node terdistribusi global."],
+                ["Listing aset baru?", "Proyek harus lulus audit algoritma AI yang ketat."],
+                ["Pertahanan likuiditas?", "Algoritma real-time melindungi nilai dari volatilitas."],
+                ["Peran Bbini?", "Sekretaris pribadi yang mendukung manajemen aset."]
+            ],
+            vision: [
+                ["Sekolah AI Global HK", "Sistem pendidikan gratis tercanggih yang merata."],
+                ["Pusat Medis Nano", "Dukungan penuh pengobatan kanker dengan nanoteknologi."],
+                ["Rumah Pintar Mandiri", "Hunian berkelanjutan tanpa biaya energi."],
+                ["Pengembangan Bakat", "Lingkungan riset tanpa batas bagi inovator."],
+                ["Era 1 Rumah 1 Robot", "Membebaskan manusia dari kerja manual."]
+            ]
+        },
+        ru: {
+            sub: "Интегрированная система управления активами", stkRate: "Ставка стейкинга", lpRate: "Доходность LP", liq: "Общая ликвидность (DEX LP)",
+            pi: "Кол-во PI", swap: "DEX Своп", lpStk: "LP Стейкинг", faqBtn: "Глобальный AI центр поддержки (FAQ 20)", visBtn: "Видение HK 2030",
+            m: ["Перевод", "Оплата", "Депозит", "Награды", "Базовый доход", "Своп"],
+            chatTitle: "🤖 Секретарь Bbini", chatWelcome: "Здравствуйте! Чем я могу вам помочь?", chatInput: "Что вас интересует?", chatSend: "Отправить",
+            faq: [
+                ["Уровень безопасности?", "Квантовое шифрование и распределенный реестр."],
+                ["Базовый доход?", "30% прибыли HK распределяется в реальном времени."],
+                ["Роботы?", "Бесплатно 1 робот на семью после оптимизации производства."],
+                ["Энергозависимость?", "Нулевые счета за электричество через термоядерный модуль."],
+                ["Владение данными?", "Все данные принадлежат исключительно пользователю."],
+                ["Mainnet?", "Безопасный перенос ценности 1:1 из тестовой сети."],
+                ["Медицина?", "Цель — полное покрытие расходов на лечение рака."],
+                ["AI Тьютор?", "Бесплатное обучение AI 1:1 для детей во всем мире."],
+                ["Комиссии DEX?", "90% комиссий возвращается участникам экосистемы."],
+                ["Будущая ценность?", "Интеграция энергии, робототехники и финансов."],
+                ["Безопасность роботов?", "Локальное хранение для защиты от хакинга."],
+                ["Участие?", "Через узлы, приложения и предоставление ликвидности."],
+                ["Социальный вклад?", "Большая часть прибыли на борьбу с бедностью."],
+                ["Стипендии?", "До $5,000 в месяц на исследования."],
+                ["Управление?", "Решения на основе консенсуса сообщества."],
+                ["Глобальные центры?", "В 50 крупнейших городах мира."],
+                ["Стабильность?", "Круглосуточная работа через распределенные узлы."],
+                ["Листинг?", "Только после строгой проверки AI алгоритмами."],
+                ["Защита ликвидности?", "Алгоритмы реального времени защищают стоимость."],
+                ["Роль Bbini?", "Личный помощник для управления активами."]
+            ],
+            vision: [
+                ["Глобальная AI школа", "Бесплатная современная система образования."],
+                ["Наномедцентр", "Полная поддержка в лечении рака и редких болезней."],
+                ["Умный дом", "Устойчивое жилье без затрат на электроэнергию."],
+                ["Поддержка талантов", "Безграничная среда для инноваторов."],
+                ["Робот в каждый дом", "Освобождение человечества от рутины."]
+            ]
+        },
+        uk: {
+            sub: "Інтегрована система управління активами", stkRate: "Ставка стейкінгу", lpRate: "Дохідність LP", liq: "Загальна ліквідність (DEX LP)",
+            pi: "Кількість PI", swap: "DEX Своп", lpStk: "LP Стейкінг", faqBtn: "Глобальний AI центр підтримки (FAQ 20)", visBtn: "Візія HK 2030",
+            m: ["Переказ", "Оплата", "Депозит", "Нагороди", "Базовий дохід", "Своп"],
+            chatTitle: "🤖 Секретар Bbini", chatWelcome: "Вітаю! Чим я можу допомогти?", chatInput: "Що вас цікавить?", chatSend: "Надіслати",
+            faq: [
+                ["Рівень безпеки?", "Квантове шифрування та технологія блокчейн."],
+                ["Базовий дохід?", "30% прибутку HK розподіляється автоматично."],
+                ["Роботи?", "Безкоштовно 1 робот на сім'ю після оптимізації."],
+                ["Енергонезалежність?", "Нульові рахунки за світло завдяки термоядерним модулям."],
+                ["Власність даних?", "Усі дані належать виключно користувачеві."],
+                ["Mainnet?", "Безпечне перенесення вартості 1:1 з тестової мережі."],
+                ["Медична підтримка?", "Повне покриття витрат на лікування раку."],
+                ["AI Тьютор?", "Безкоштовне навчання 1:1 для дітей у всьому світі."],
+                ["Комісії DEX?", "90% комісій повертається учасникам екосистеми."],
+                ["Майбутня цінність?", "Новий центр енергії, робототехніки та фінансів."],
+                ["Безпека роботів?", "Локальне зберігання для захисту від злому."],
+                ["Участь?", "Через вузли, додатки та ліквідність."],
+                ["Соціальний внесок?", "Більшість прибутку на боротьбу з бідністю."],
+                ["Стипендії?", "До $5,000 на місяць для інноваторів."],
+                ["Управління?", "Рішення на основі голосування спільноти."],
+                ["Глобальні хаби?", "У 50 найбільших містах світу."],
+                ["Стабільність?", "Цілодобова робота розподіленої мережі вузлів."],
+                ["Лістинг?", "Тільки після суворої перевірки AI алгоритмами."],
+                ["Захист вартості?", "Алгоритми реального часу проти волатильності."],
+                ["Роль Bbini?", "Ваш особистий помічник в управлінні активами."]
+            ],
+            vision: [
+                ["Глобальна AI школа", "Сучасна безкоштовна освіта для всіх."],
+                ["Наномедцентр", "Повна підтримка в лікуванні раку."],
+                ["Розумний дім", "Енергонезалежне житло для кожної сім'ї."],
+                ["Розвиток талантів", "Безмежні можливості для досліджень."],
+                ["Робот у кожен дім", "Звільнення від фізичної праці."]
+            ]
+        },
+        zh: {
+            sub: "综合资产管理系统", stkRate: "质押率", lpRate: "LP 收益率", liq: "总流动性状况",
+            pi: "PI 数量", swap: "DEX 交换", lpStk: "LP 质押", faqBtn: "全球 AI 支持中心 (FAQ 20)", visBtn: "HK 愿景 2030",
+            m: ["转账", "结账", "存款", "奖励", "基本收入", "互换"],
+            chatTitle: "🤖 HK 秘书 삐니", chatWelcome: "您好？有什么可以帮您的吗？", chatInput: "您有什么疑问吗？", chatSend: "发送",
+            faq: [
+                ["保安级别?", "结合量子加密与分布式账本技术。"],
+                ["基本收入?", "HK集团利润的30%实时分配。"],
+                ["机器人普及?", "优化后每户免费提供一台机器人。"],
+                ["能源自给?", "结合核聚变模块实现零电费。"],
+                ["数据所有权?", "所有个人数据仅由用户本人掌控。"],
+                ["主网数据?", "测试网价值1:1安全转移至主网。"],
+                ["医疗支持?", "目标是全额资助癌症及疑难病治疗。"],
+                ["AI 导师?", "为全球儿童提供1:1定制教育。"],
+                ["DEX 手续费?", "90%手续费立即回馈给贡献者。"],
+                ["HK 未来价值?", "能源、机器人、金融的全球新中心。"],
+                ["机器人安全?", "本地存储方式彻底阻断外部黑客。"],
+                ["生态系统?", "通过节点运营、APP活动参与。"],
+                ["社会贡献?", "大部分收益用于消除贫困。"],
+                ["奖학金制度?", "为创新人才提供每月$5000资助。"],
+                ["治理权?", "重大决策反映社区共识。"],
+                ["全球中心?", "在全球50个核心城市建立中心。"],
+                ["稳定性?", "分布式节点24小时无间断运行。"],
+                ["新资产上市?", "仅通过AI算法严格审核的项目。"],
+                ["流动性防御?", "实时算法应对波动保护价值。"],
+                ["삐니 的角色?", "作为Hyekong兄的专职秘书提供协助。"]
+            ],
+            vision: [
+                ["HK 全球 AI 学校", "建设平等的尖端免费教育系统"],
+                ["纳米医疗中心", "全额资助癌症攻克与治疗费用"],
+                ["能源自给住宅", "普及无需担心能源费用的环境"],
+                ["培养技术人才", "为创新人才提供无限研究环境"],
+                ["一户一机时代", "让人类从单纯劳动中解放出来"]
+            ]
+        },
+        ja: {
+            sub: "統合資産管理システム", stkRate: "利回り", lpRate: "LP 収익률", liq: "総流動性状況",
+            pi: "PI 数量", swap: "DEX スワップ", lpStk: "LP 預け入れ", faqBtn: "グローバル AI サポート (FAQ 20)", visBtn: "HK ビジョン 2030",
+            m: ["送금", "決済", "預金", "報酬", "基本所得", "スワップ"],
+            chatTitle: "🤖 HK 秘書 삐니", chatWelcome: "こんにちは。何かお手伝いしましょうか？", chatInput: "何かご不明な点はありますか？", chatSend: "送信",
+            faq: [
+                ["セキュリティは?", "量子暗号と分散型台帳で最高水準。"],
+                ["基本所得の配分?", "HK利益の30%をリアルタイム配分. "],
+                ["ロボットの普及?", "最適化後、1世帯1台を無償普及. "],
+                ["エネルギー自立?", "核融合モジュールで電気代ゼロ. "],
+                ["データの所有権?", "個人データは本人のみが所有. "],
+                ["メインネット移行?", "テストネットの価値を1:1で移行. "],
+                ["医療支援範囲?", "癌や難病の治療費全액支援が目標. "],
+                ["AI チューター?", "子供たちに1:1教育를 무상 제공. "],
+                ["DEX 手数料?", "手数料의 90%를 貢献者に還元. "],
+                ["HK グループ의 価値?", "エネルギー、ロボ、金融の統合. "],
+                ["ロボット의 保安?", "ローカル保存でハッキングを遮断. "],
+                ["エコシステム?", "ノード運営やLP供給で参加可能. "],
+                ["社会貢献モデル?", "収益の多くを貧困撲滅に投入. "],
+                ["奨学金制度?", "革新人材に月最大$5000を支援. "],
+                ["ガ바넌스?", "コミュニティの合意を意思決定に反映. "],
+                ["拠点의 위치?", "世界50主要都市にAIセンター構築. "],
+                ["安定性?", "分散ノードによる24時間稼働. "],
+                ["新規上場?", "AIアルゴリズム의 厳格審査を通過. "],
+                ["流動性防衛?", "アルゴリズムが価値を保護. "],
+                ["삐니 의 役割?", "恵空（ヒェゴン）兄貴의 専属秘書. "]
+            ],
+            vision: [
+                ["HK グローバル AI 学校", "最先端の無償教育システムの構築"],
+                ["ナノメディカルセンター", "癌克服と難病治療費の全額支援"],
+                ["自立型スマートホーム", "エネルギーコストゼロの住環境"],
+                ["未来技術人材育成", "無限の研究環境の提供"],
+                ["1世帯1ロボット時代", "単純労働からの解放と自己実現"]
+            ]
+        },
+        hi: {
+            sub: "एकीकृत परिसंपत्ति प्रबंधन प्रणाली", stkRate: "स्टेकिंग दर", lpRate: "LP लाभ", liq: "कुल तरलता स्थिति (DEX LP)",
+            pi: "PI मात्रा", swap: "DEX स्वैप", lpStk: "LP स्टेकिंग", faqBtn: "ग्लोबल AI सहायता केंद्र (FAQ 20)", visBtn: "HK विजन 2030",
+            m: ["प्रेषण", "भुगतान", "जमा", "इनाम", "बुनियादी आय", "स्वैप"],
+            chatTitle: "🤖 सहायक बिनी", chatWelcome: "नमस्ते? मुझसे कुछ भी पूछें।", chatInput: "आप क्या जानना चाहते हैं?", chatSend: "भेजें",
+            faq: [
+                ["सुरक्षा स्तर?", "क्वांटम एन्क्रिप्शन और वितरित लेजर का संयोजन।"],
+                ["बुनियादी आय?", "HK समूह के लाभ का 30% वास्तविक समय में वितरण।"],
+                ["रोबोट आपूर्ति?", "उत्पादन के बाद प्रति परिवार 1 रोबोट मुफ्त।"],
+                ["ऊर्जा आत्मनिर्भरता?", "फ्यूजन मॉड्यूल के साथ शून्य बिजली बिल।"],
+                ["डेटा स्वामित्व?", "व्यक्तिगत डेटा केवल उपयोगकर्ता के नियंत्रण में।"],
+                ["मेननेट डेटा?", "1:1 सुरक्षित मूल्य हस्तांतरण।"],
+                ["चिकित्सा सहायता?", "कैंसर और दुर्लभ रोगों के लिए पूर्ण कवरेज।"],
+                ["AI ट्यूटर?", "सभी बच्चों के लिए निःशुल्क शिक्षा।"],
+                ["DEX शुल्क?", "90% शुल्क योगदानकर्ताओं को वापस।"],
+                ["भविष्य का मूल्य?", "ऊर्जा, रोबोटिक्स और वित्त का एकीकरण।"],
+                ["रोबोट सुरक्षा?", "हैकिंग रोकने के लिए स्थानीय सर्वर।"],
+                ["पारिस्थितिकी तंत्र?", "नोड्स और LP के माध्यम से योगदान।"],
+                ["सामाजिक योगदान?", "गरीबी उन्मूलन में बड़ा निवेश।"],
+                ["छात्रवृत्ति?", "नवाचारों के लिए $5,000 मासिक तक।"],
+                ["शासन?", "सामुदायिक वोट के आधार पर निर्णय।"],
+                ["ग्लोबल हब?", "50 प्रमुख शहरों में AI केंद्र।"],
+                ["स्थिरता?", "वैश्विक नोड्स द्वारा 24/7 संचालन।"],
+                ["सूचीकरण?", "सख्त AI ऑडिट पास करने वाली परियोजनाएं।"],
+                ["रक्षा रणनीति?", "मूल्य सुरक्षा के लिए एल्गोरिदम।"],
+                ["बिनी की भूमिका?", "ह्येकोंग भाई के लिए तकनीकी सहायक।"]
+            ],
+            vision: [
+                ["HK ग्लोबल AI स्कूल", "सार्वभौमिक उच्च तकनीक मुफ्त शिक्षा।"],
+                ["नैनो मेडिकल सेंटर", "कैंसर और दुर्लभ रोगों के लिए पूर्ण सहायता।"],
+                ["स्मार्ट होम", "सभी के लिए ऊर्जा-स्वतंत्र आवास।"],
+                ["प्रतिभा पोषण", "नवाचारों के लिए असीमित शोध।"],
+                ["1 घर 1 रोबोट", "मानवता की आत्म-साक्षात्कार की ओर छलांग।"]
+            ]
+        },
+        ar: {
+            sub: "نظام إدارة الأصول المتكاملة", stkRate: "معدل التخزين", lpRate: "عائد LP", liq: "إجمالي السيولة (DEX LP)",
+            pi: "كمية PI", swap: "تبادل DEX", lpStk: "تخزين LP", faqBtn: "مركز دعم AI العالمي (FAQ 20)", visBtn: "رؤية HK 2030",
+            m: ["تحويل", "دفع", "إيداع", "مكافأة", "الدخل الأساسي", "تبادل"],
+            chatTitle: "🤖 المساعدة بيني", chatWelcome: "مرحباً؟ اسألني عن أي شيء.", chatInput: "ما الذي تريد معرفته؟", chatSend: "إرسال",
+            faq: [
+                ["الأمان؟", "تشفير كمي وتقنية السجلات الموزعة."],
+                ["الدخل الأساسي؟", "توزيع 30% من الأرباح عالمياً."],
+                ["الروبوتات؟", "روبوت مجاني لكل منزل بعد الإنتاج."],
+                ["الطاقة؟", "كهرباء مجانية عبر وحدات الاندماج."],
+                ["ملكية البيانات؟", "المستخدم يملك ويتحكم في بياناته."],
+                ["الشبكة الرئيسية؟", "نقل القيمة بنسبة 1:1 بأمان."],
+                ["الدعم الطبي؟", "تغطية كاملة لعلاج السرطان والأمراض."],
+                ["معلم AI؟", "تعليم مجاني مخصص لكل الأطفال."],
+                ["رسوم DEX؟", "90% من الرسوم تعود للمساهمين."],
+                ["القيمة؟", "تكامل الطاقة والروبوتات والتمويل."],
+                ["أمان الروبوت؟", "تخزين محلي لمنع الاختراق."],
+                ["النظام البيئي؟", "المساهمة عبر العقد والسيولة."],
+                ["المساهمة الاجتماعية؟", "أرباح ضخمة للقضاء على الفقر."],
+                ["المنح؟", "دعم يصل لـ 5000 دولار للمبتكرين."],
+                ["الحوكمة؟", "القرارات بناءً على تصويت المجتمع."],
+                ["المراكز؟", "مراكز AI في 50 مدينة عالمية."],
+                ["الاستقرار؟", "عمل مستمر 24/7 عبر العقد."],
+                ["الإدراج؟", "مشاريع تمر عبر تدقيق AI صارم."],
+                ["الدفاع؟", "خوارزميات لحماية القيمة."],
+                ["دور بيني؟", "مساعدة الأخ هيه-كونغ في الإدارة."]
+            ],
+            vision: [
+                ["مدرسة HK العالمية", "تعليم متطور ومجاني للجميع."],
+                ["مركز نانو الطبي", "علاج السرطان والأمراض مجاناً."],
+                ["المنزل الذكي", "سكن مستدام بدون تكاليف طاقة."],
+                ["رعاية المواهب", "دعم بحثي غير محدود للمبتكرين."],
+                ["روبوت لكل منزل", "تحرير البشر للتركيز على الذات."]
+            ]
+        },
+        es: {
+            sub: "Sistema de Gestión de Activos", stkRate: "Tasa de Staking", lpRate: "Rendimiento LP", liq: "Liquidez Total (DEX LP)",
+            pi: "Cantidad PI", swap: "Canje DEX", lpStk: "Staking de LP", faqBtn: "Centro de Soporte AI (FAQ 20)", visBtn: "Visión HK 2030",
+            m: ["Transferir", "Pago", "Depósito", "Recompensa", "Renta Básica", "Swap"],
+            chatTitle: "🤖 Asistente Bbini", chatWelcome: "¡Hola! Pregúntame lo que sea.", chatInput: "¿Qué quieres saber?", chatSend: "Enviar",
+            faq: [
+                ["¿Seguridad?", "Cifrado cuántico y tecnología distribuida."],
+                ["¿Renta Básica?", "30% de beneficios distribuidos globalmente."],
+                ["¿Robots?", "1 robot gratis por hogar tras producción."],
+                ["¿Energía?", "Cero facturas con módulos de fusión."],
+                ["¿Propiedad?", "El usuario controla sus propios datos."],
+                ["¿Mainnet?", "Transferencia segura de valor 1:1."],
+                ["¿Médico?", "Apoyo total para cáncer y enfermedades."],
+                ["¿Tutor AI?", "Educación gratuita para todos los niños."],
+                ["¿Tarifas DEX?", "90% vuelve a los contribuyentes."],
+                ["¿Valor?", "Energía, robótica y finanzas integradas."],
+                ["¿Seguridad Robot?", "Almacenamiento local contra hackeos."],
+                ["¿Ecosistema?", "Aporte vía nodos, apps y LP."],
+                ["¿Social?", "Inversión para erradicar la pobreza."],
+                ["¿Becas?", "Hasta $5,000 mensuales para innovadores."],
+                ["¿Gobernanza?", "Decisiones basadas en la comunidad."],
+                ["¿Sede Global?", "Centros AI en 50 ciudades del mundo."],
+                ["¿Estabilidad?", "Operación 24/7 mediante nodos."],
+                ["¿Listado?", "Proyectos auditados por algoritmos AI."],
+                ["¿Defensa?", "Algoritmos para proteger el valor."],
+                ["¿Bbini?", "Asistente técnica del hermano Hyekong."]
+            ],
+            vision: [
+                ["Escuela Global HK", "Educación gratuita de alta tecnología."],
+                ["Centro Médico Nano", "Cura del cáncer y apoyo total."],
+                ["Hogar Inteligente", "Vivienda sostenible sin coste energético."],
+                ["Talento Futuro", "Investigación ilimitada para innovadores."],
+                ["1 Robot por Hogar", "Liberación humana hacia el ser."]
             ]
         }
-        /* 
-           ... 50개국어 데이터 블록은 JS 내부 메모리에 대량 적재됨 
-           (실제 서비스 시에는 API 호출 또는 JSON 분할 로딩 가능)
-        */
     };
 
-    // 보안 게이트 로직 (2891 전용)
-    const gatePass = document.getElementById('gate-pass');
-    gatePass.addEventListener('input', (e) => {
-        if(e.target.value === "2891") {
-            document.getElementById('gatekeeper').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('gatekeeper').style.display = 'none';
-                localStorage.setItem('hk_auth', 'true');
-            }, 500);
-        }
-    });
+    let currentLang = 'ko';
 
-    // 글로벌 엔진 스위칭
-    function switchEngine(lang) {
-        const d = HK_GLOBAL_DB[lang] || HK_GLOBAL_DB['en'];
-        
-        document.getElementById('l-sub').innerText = d.sub;
-        document.getElementById('t-asset').innerText = d.asset;
-        document.getElementById('t-gcv').innerText = d.gcv;
-        document.getElementById('st-1-l').innerText = d.st1;
-        document.getElementById('st-2-l').innerText = d.st2;
-        document.getElementById('st-3-l').innerText = d.st3;
-        document.getElementById('b-wal').innerText = d.btnW;
-        document.getElementById('b-soc').innerText = d.btnS;
-        document.getElementById('c-h').innerText = d.chatH;
-        document.getElementById('c-greet').innerText = d.greet;
-
-        for(let i=1; i<=12; i++) {
-            document.getElementById('m'+i).innerText = (d.m[i-1] || HK_GLOBAL_DB['en'].m[i-1]);
-        }
-
-        // Vision List Rendering
-        const vList = document.getElementById('vision-list');
-        vList.innerHTML = '';
-        (d.vision || HK_GLOBAL_DB['en'].vision).forEach(v => {
-            vList.innerHTML += `<div class="vision-box"><h4>${v[0]}</h4><p>${v[1]}</p></div>`;
-        });
-
-        // FAQ List Rendering
-        const fList = document.getElementById('faq-list');
-        fList.innerHTML = '';
-        (d.faq || HK_GLOBAL_DB['en'].faq).forEach(f => {
-            fList.innerHTML += `<div class="faq-row"><div class="faq-q">Q: ${f[0]}</div><div class="faq-a">A: ${f[1]}</div></div>`;
-        });
+    function changeLang(lang) {
+        currentLang = lang;
+        updateUI();
     }
 
-    // UI 제어 함수들
-    function t_p(id) {
+    function updateUI() {
+        const d = dataStore[currentLang];
+        document.getElementById('sub-header').innerText = d.sub;
+        document.getElementById('lbl-stk-rate').innerText = d.stkRate;
+        document.getElementById('lbl-lp-rate').innerText = d.lpRate;
+        document.getElementById('liq-label').innerText = d.liq;
+        document.getElementById('lbl-pi').innerText = d.pi;
+        document.getElementById('lbl-swap').innerText = d.swap;
+        document.getElementById('lbl-stk').innerText = d.lpStk;
+        document.getElementById('btn-faq').innerText = d.faqBtn;
+        document.getElementById('btn-vision').innerText = d.visBtn;
+        for(let i=1; i<=6; i++) document.getElementById('m'+i).innerText = d.m[i-1];
+
+        document.getElementById('chat-title').innerText = d.chatTitle;
+        document.getElementById('chat-greeting').innerText = d.chatWelcome;
+        document.getElementById('chat-input').placeholder = d.chatInput;
+        document.getElementById('chat-send').innerText = d.chatSend;
+
+        const f = document.getElementById('faq'); f.innerHTML = '';
+        d.faq.forEach((item, i) => f.innerHTML += `<div class="list-item"><div class="list-q">${i+1}. ${item[0]}</div><div class="list-a">${item[1]}</div></div>`);
+       
+        const v = document.getElementById('vision'); v.innerHTML = '';
+        d.vision.forEach((item, i) => v.innerHTML += `<div class="vision-box"><b>${i+1}. ${item[0]}</b>${item[1]}</div>`);
+    }
+
+    function togglePanel(id) {
         const el = document.getElementById(id);
         el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     }
 
-    function openChat() { document.getElementById('chat-ui').style.display = 'flex'; }
-    function closeChat() { document.getElementById('chat-ui').style.display = 'none'; }
+    function toggleChat() {
+        const win = document.getElementById('chat-win');
+        win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+    }
 
-    function talk() {
-        const input = document.getElementById('c-in');
-        const box = document.getElementById('c-msgs');
-        if(!input.value) return;
+    function handleChat() {
+        const input = document.getElementById('chat-input');
+        const area = document.getElementById('chat-msg-area');
+        const val = input.value.trim();
+        if(!val) return;
 
-        box.innerHTML += `<div class="msg user">${input.value}</div>`;
-        const q = input.value;
+        area.innerHTML += `<div class="msg-bubble user-msg">나: ${val}</div>`;
         input.value = '';
-        box.scrollTop = box.scrollHeight;
+        area.scrollTop = area.scrollHeight;
 
         setTimeout(() => {
-            let res = "HK 중심 시스템에서 형님의 명령을 분석 중입니다. 위대한 비전은 차질 없이 진행되고 있습니다.";
-            if(q.includes("안녕")) res = "반갑습니다 형님! 오늘은 어떤 대륙의 인프라를 점검하실까요?";
-            if(q.includes("2891")) res = "마스터 코드 확인. 형님 전용 관리 시스템을 활성화합니다.";
-            
-            box.innerHTML += `<div class="msg bot"><b>삐니:</b> ${res}</div>`;
-            box.scrollTop = box.scrollHeight;
-        }, 800);
+            const d = dataStore[currentLang];
+            let reply = "";
+
+            const match = d.faq.find(item => val.toLowerCase().includes(item[0].replace('?', '').toLowerCase()) ||
+                                           item[0].split(' ').some(word => val.includes(word) && word.length > 1));
+
+            if(match) {
+                reply = `[Answer] "${match[0]}" : ${match[1]}`;
+            } else {
+                if(currentLang === 'ko') reply = "혜공 형님, 그 질문은 제가 정밀 분석하여 곧 보고드리겠습니다!";
+                else reply = "Analysing... I will report soon!";
+            }
+           
+            area.innerHTML += `<div class="msg-bubble bot-msg"><strong>삐니:</strong> ${reply}</div>`;
+            area.scrollTop = area.scrollHeight;
+        }, 700);
     }
 
-    function m_c(n) {
-        const name = document.getElementById('m'+n).innerText;
-        alert(`[HK MASTER SYSTEM] ${name} 모듈 가동 성공. 혜공 형님, 시스템이 정상 작동 중입니다.`);
-    }
-
-    // 배경 매트릭스 효과 (1,500줄의 위엄을 시각화)
-    const canvas = document.getElementById('hk-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const chars = "HKWORLD2891ΠNET";
-    const fontSize = 15;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function drawMatrix() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#FFD700";
-        ctx.font = fontSize + "px Orbitron";
-        for (let i = 0; i < drops.length; i++) {
-            const text = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-        }
-    }
-    setInterval(drawMatrix, 50);
-
-    // 실시간 데이터 시뮬레이션
-    function sim() {
+    function init() {
+        updateUI();
         let pi = 400.0610;
-        let pool = 142509211884;
+        let liq = 88438688147;
+       
         setInterval(() => {
-            pi += Math.random() * 0.0005;
-            pool += Math.floor(Math.random() * 500000);
-            document.getElementById('v-pi').innerText = pi.toFixed(4);
-            document.getElementById('st-3-v').innerText = "$ " + pool.toLocaleString();
-        }, 2000);
+            pi += Math.random() * 0.0012;
+            document.getElementById('pi-display').innerText = pi.toFixed(4);
+           
+            liq += Math.floor(Math.random() * 45000);
+            document.getElementById('liq-display').innerText = "$ " + liq.toLocaleString();
+           
+            const stkVar = (15.22 + (Math.random() * 0.12)).toFixed(2);
+            const lpVar = (22.45 + (Math.random() * 0.18)).toFixed(2);
+            document.getElementById('stk-val').innerText = stkVar + "%";
+            document.getElementById('lp-val').innerText = lpVar + "%";
+           
+            document.getElementById('det-pi').innerText = (1240552 + Math.floor(Math.random() * 600)).toLocaleString();
+            document.getElementById('det-swap').innerText = "$ " + (314159 + Math.floor(Math.random() * 80)).toLocaleString();
+            document.getElementById('det-lp').innerText = (21.4 + (Math.random() * 0.3)).toFixed(1) + "%";
+           
+        }, 1200);
     }
+    init();
+</script>
+</body>
+<style>
+    .hk-modal {
+        display: none; position: fixed; z-index: 3000; left: 0; top: 0;
+        width: 100%; height: 100%; background: rgba(0,0,0,0.9);
+        justify-content: center; align-items: center;
+    }
+    .modal-content {
+        background: #121212; border: 2px solid var(--hk-gold);
+        width: 90%; max-width: 400px; border-radius: 30px; padding: 30px;
+        text-align: center; box-shadow: 0 0 30px var(--hk-gold);
+    }
+    .modal-title { color: var(--hk-gold); font-size: 24px; font-weight: 900; margin-bottom: 20px; }
+    .modal-body { color: #fff; font-size: 16px; margin-bottom: 25px; line-height: 1.6; }
+    .demo-status { color: var(--hk-green); font-weight: 800; font-size: 14px; margin-top: 10px; }
+    .close-modal {
+        background: var(--hk-gold); color: #000; border: none;
+        padding: 12px 30px; border-radius: 50px; font-weight: 900; cursor: pointer;
+    }
+    .demo-input {
+        width: 80%; padding: 12px; margin-bottom: 15px; border-radius: 10px;
+        border: 1px solid #333; background: #000; color: var(--hk-blue); font-weight: 800; text-align: center;
+    }
+</style>
 
-    window.onload = () => {
-        if(localStorage.getItem('hk_auth') === 'true') {
-            document.getElementById('gatekeeper').style.display = 'none';
-        }
-        switchEngine('ko');
-        sim();
-    };
+<div id="hkDemoModal" class="hk-modal">
+    <div class="modal-content">
+        <div id="demoTitle" class="modal-title">기능 시연</div>
+        <div id="demoBody" class="modal-body"></div>
+        <button class="close-modal" onclick="closeDemo()">닫기</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuItems = [
+            { id: 'm1', name: '송금', icon: '🚀', msg: '보낼 주소와 수량을 입력하세요.' },
+            { id: 'm2', name: '결재', icon: '🛒', msg: '상점 QR을 스캔하거나 가맹점 ID를 입력하세요.' },
+            { id: 'm3', name: '예치', icon: '🏦', msg: '최대 연 20% 미만 확정 수익 플랜입니다.' },
+            { id: 'm4', name: '보상', icon: '🎁', msg: '생태계 기여에 따른 실시간 보상 내역입니다.' },
+            { id: 'm5', name: '기본소득', icon: '💳', msg: 'HK 사회 재단에서 지급하는 기본소득입니다.' },
+            { id: 'm6', name: '스왑', icon: '🔄', msg: 'PI와 HK-Asset 간의 즉시 교환을 시작합니다.' }
+        ];
+
+        menuItems.forEach((item) => {
+            const box = document.getElementById(item.id).parentElement;
+            box.style.cursor = 'pointer';
+            box.onclick = () => openDemo(item.name, item.icon, item.msg);
+        });
+
+        document.getElementById('det-pi').parentElement.onclick = () => openDemo('PI 수량 상세', '📊', '현재 메인넷 이전 가능 수량입니다.');
+        document.getElementById('det-swap').parentElement.onclick = () => openDemo('DEX 스왑 현황', '💱', '전 세계 실시간 유동성 규모입니다.');
+        document.getElementById('det-lp').parentElement.onclick = () => openDemo('LP 스테이킹', '📈', '유동성 공급 보상률입니다.');
+    });
+
+    function openDemo(title, icon, msg) {
+        const modal = document.getElementById('hkDemoModal');
+        const dTitle = document.getElementById('demoTitle');
+        const dBody = document.getElementById('demoBody');
+        dTitle.innerHTML = `${icon} ${title}`;
+        let content = `<p>${msg}</p>`;
+        if(title === '송금' || title === '결재') content += `<input type="text" class="demo-input" placeholder="수량 입력">`;
+        content += `<div class="demo-status">● 시스템 동기화 중...</div>`;
+        dBody.innerHTML = content;
+        modal.style.display = 'flex';
+    }
+    function closeDemo() { document.getElementById('hkDemoModal').style.display = 'none'; }
 </script>
 
-</body>
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+    (function() {
+        const blocker = document.getElementById('kyc-blocker');
+        
+        // 1. 형님(관리자)은 이미 로그인했다면 즉시 통과
+        if (localStorage.getItem("is_hyekong_boss") === "true") {
+            if (blocker) blocker.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            return;
+        }
+
+        // 2. 진짜 Pi KYC 인증 확인 로직
+        async function checkPiKYC() {
+            try {
+                if (window.Pi) {
+                    const scopes = ['username', 'payments', 'wallet_address'];
+                    const auth = await Pi.authenticate(scopes, function(payment) {
+                        // 미완료 결제 처리
+                    });
+                    
+                    // 인증된 유저라면 문 열어주기
+                    if (auth && auth.user) {
+                        if (blocker) {
+                            blocker.style.transition = "opacity 0.5s";
+                            blocker.style.opacity = "0";
+                            setTimeout(() => {
+                                blocker.style.display = 'none';
+                                document.body.style.overflow = 'auto';
+                            }, 500);
+                        }
+                    }
+                }
+            } catch (err) {
+                // KYC 미인증 시 계속 막아둠
+                console.log("KYC 인증이 필요합니다.");
+            }
+        }
+
+        checkPiKYC();
+
+        // 3. 형님 전용 마스터키 버튼 (언제든 입장 가능)
+        const unlock = document.getElementById('master-unlock');
+        if (unlock) {
+            unlock.onclick = function() {
+                const pass = prompt("관리자 전용 암호를 입력하세요:");
+                if (pass === "2891") {
+                    localStorage.setItem("is_hyekong_boss", "true");
+                    alert("환영합니다, 혜공 형님!");
+                    location.reload(); 
+                } else if (pass !== null) {
+                    alert("암호가 틀렸습니다.");
+                }
+            };
+        }
+    })();
+</script>
+
 </html>

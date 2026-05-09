@@ -458,17 +458,18 @@
             ]
         }
     };
+// 462번 줄부터 시작
+let currentLang = 'ko'; 
 
-    let currentLang = 'ko';
+function changeLang(lang) {
+    currentLang = lang; 
+    updateUI();
+}
 
-    function changeLang(lang) {
-        currentLang = lang;
-        updateUI();
-    }
 function updateUI() {
-    const d = datastore[currentLang];
+    // datastore의 's'가 소문자인지 대문자인지만 확인하면 끝!
+    const d = datastore[currentLang]; 
     if (!d) return;
-
     // 1. 기본 텍스트 및 라벨 변경 (485~491번 줄 대응)
     document.getElementById('sub-header').innerText = d.sub;
     document.getElementById('lbl-stk-rate').innerText = d.stkRate;

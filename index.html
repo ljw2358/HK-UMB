@@ -1657,12 +1657,41 @@
         }
     }, true);
     autoKycCheck();
+// 5종 자산 통합 관리 (데이터 초기화 포함)
+function manageAssets() {
+    // 이전 값들 초기화
+    localStorage.removeItem('reservoir');
+    localStorage.removeItem('ubi');
+    localStorage.removeItem('fee');
+    localStorage.removeItem('pool');
+    localStorage.removeItem('wallet');
+
+    // 새로 입력받기
+    const res = prompt("1. 저수지 값을 입력하세요:");
+    const ubi = prompt("2. UBI 값을 입력하세요:");
+    const fee = prompt("3. 수수료 값을 입력하세요:");
+    const pool = prompt("4. 유동성풀 값을 입력하세요:");
+    const wall = prompt("5. 지갑 주소를 입력하세요:");
+
+    localStorage.setItem('reservoir', res);
+    localStorage.setItem('ubi', ubi);
+    localStorage.setItem('fee', fee);
+    localStorage.setItem('pool', pool);
+    localStorage.setItem('wallet', wall);
+    
+    alert("5종 자산이 모두 등록되었습니다.");
+}
+
+// 버튼 생성
+if (!document.getElementById('total-asset-btn')) {
+    var btn = document.createElement('button');
+    btn.id = 'total-asset-btn';
+    btn.innerHTML = '5종 자산 통합 등록';
+    btn.style.cssText = 'position:fixed; bottom:20px; right:20px; z-index:9999; padding:15px; background:red; color:white; cursor:pointer;';
+    btn.onclick = manageAssets;
+    document.body.appendChild(btn);
+}
+
 </script>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px;">
-        <div style="border: 2px solid gold; padding: 15px; color: white; text-align: center; border-radius: 8px;">저수지<br><strong>0 HK</strong></div>
-        <div style="border: 2px solid lime; padding: 15px; color: white; text-align: center; border-radius: 8px;">UBI<br><strong>0 HK</strong></div>
-        <div style="border: 2px solid cyan; padding: 15px; color: white; text-align: center; border-radius: 8px;">수수료<br><strong>0 HK</strong></div>
-        <div style="border: 2px solid magenta; padding: 15px; color: white; text-align: center; border-radius: 8px;">유동성풀<br><strong>0 HK</strong></div>
-    </div>
 </body>
 </html>

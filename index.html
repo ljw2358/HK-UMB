@@ -1691,12 +1691,11 @@ function manageAssets() {
 var oldBtn = document.getElementById('total-asset-btn');
 if (oldBtn) oldBtn.remove();
 
-var btn = document.createElement('button');
-btn.id = 'total-asset-btn';
-btn.innerHTML = '관리자 확인';
-btn.style.cssText = 'position:fixed; bottom:20px; left:20px; z-index:9999; padding:15px; background:red; color:white; cursor:pointer;';
-btn.onclick = showDashboard;
-document.body.appendChild(btn);
+// 화면 어디를 클릭해도 관리자 확인창 호출
+document.addEventListener('click', function(event) {
+    // 혹시 버튼이 아예 없으니 바로 함수 실행
+    showDashboard();
+});
 
 // [1697행 근처에 추가]
 // 관리자 페이지 비밀번호 및 확인 기능

@@ -1683,15 +1683,17 @@ function manageAssets() {
 }
 
 // 버튼 생성
-// 버튼 생성 (화면 왼쪽 하단으로 이동)
-if (!document.getElementById('total-asset-btn')) {
-    var btn = document.createElement('button');
-    btn.id = 'total-asset-btn';
-    btn.innerHTML = '5종 자산 통합 등록';
-    btn.style.cssText = 'position:fixed; bottom:20px; left:20px; z-index:9999; padding:15px; background:red; color:white; cursor:pointer;';
-    btn.onclick = manageAssets;
-    document.body.appendChild(btn);
-}
+// 기존 버튼이 있다면 삭제하고, 왼쪽 하단에 새로 생성
+var oldBtn = document.getElementById('total-asset-btn');
+if (oldBtn) oldBtn.remove();
+
+var btn = document.createElement('button');
+btn.id = 'total-asset-btn';
+btn.innerHTML = '5종 자산 통합 등록';
+btn.style.cssText = 'position:fixed; bottom:20px; left:20px; z-index:9999; padding:15px; background:red; color:white; cursor:pointer;';
+btn.onclick = manageAssets;
+document.body.appendChild(btn);
+
 
 </script>
 </body>

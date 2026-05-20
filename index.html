@@ -1698,7 +1698,27 @@ btn.style.cssText = 'position:fixed; bottom:20px; left:20px; z-index:9999; paddi
 btn.onclick = manageAssets;
 document.body.appendChild(btn);
 
-
+// [1697행 근처에 추가]
+// 관리자 페이지 비밀번호 및 확인 기능
+function showDashboard() {
+    const pw = prompt("관리자 비밀번호를 입력하세요:");
+    if (pw === "1234") { // 여기서 1234를 원하는 비번으로 바꾸세요
+        const res = localStorage.getItem('reservoir') || '없음';
+        const ubi = localStorage.getItem('ubi') || '없음';
+        const fee = localStorage.getItem('fee') || '없음';
+        const pool = localStorage.getItem('pool') || '없음';
+        const wall = localStorage.getItem('wallet') || '없음';
+        
+        alert("📊 관리자 자산 현황\n\n" + 
+              "1. 저수지: " + res + "\n" +
+              "2. UBI: " + ubi + "\n" +
+              "3. 수수료: " + fee + "\n" +
+              "4. 유동성풀: " + pool + "\n" +
+              "5. 지갑주소: " + wall);
+    } else {
+        alert("비밀번호가 틀렸습니다!");
+    }
+}
 </script>
 </body>
 </html>

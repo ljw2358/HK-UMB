@@ -1679,7 +1679,11 @@ function manageAssets() {
     localStorage.setItem('pool', pool);
     localStorage.setItem('wallet', wall);
     
-    alert("5종 자산이 모두 등록되었습니다.");
+ alert("등록 완료!\n\n" + 
+      "1. 저수지: " + res + "\n" +
+      "2. UBI: " + ubi + "\n" +
+      "3. 수수료: " + fee + "\n" +
+      "4. 유동성풀: " + pool);
 }
 
 // 버튼 생성

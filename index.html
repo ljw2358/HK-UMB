@@ -1722,3 +1722,12 @@ function showDashboard() {
 </script>
 </body>
 </html>
+<script>
+// 버튼 생성
+var btn = document.createElement('button');
+btn.id = 'admin-btn';
+btn.innerHTML = '관리자 확인';
+btn.style.cssText = 'position:fixed; top:20px; right:20px; z-index:99999; padding:15px; background:blue; color:white; font-size:16px; cursor:pointer;';
+btn.onclick = showDashboard; 
+document.body.appendChild(btn);
+</script>

@@ -1686,26 +1686,23 @@ function manageAssets() {
       "4. 유동성풀: " + pool);
 }
 
-// 버튼 생성
-<script>
-function showDashboard() {
-    const pw = prompt("관리자 마스터코드를 입력하세요:");
-    if (pw === "1234") {
-        const res = localStorage.getItem('reservoir') || '없음';
-        const ubi = localStorage.getItem('ubi') || '없음';
-        const fee = localStorage.getItem('fee') || '없음';
-        const pool = localStorage.getItem('pool') || '없음';
-        const wall = localStorage.getItem('wallet') || '없음';
-        alert("📊 [자산 현황]\n1. 저수지: " + res + "\n2. UBI: " + ubi + "\n3. 수수료: " + fee + "\n4. 유동성풀: " + pool + "\n5. 지갑: " + wall);
-    } else {
-        alert("비밀번호가 틀렸습니다.");
-    }
-}
 
-var btn = document.createElement('button');
-btn.id = 'admin-btn';
-btn.innerHTML = '관리자 확인';
-btn.style.cssText = 'position:fixed; top:20px; right:20px; z-index:99999; padding:15px; background:blue; color:white; font-size:16px; cursor:pointer;';
-btn.onclick = showDashboard;
-document.body.appendChild(btn);
+<script>
+// 버튼 없이, 키보드 단축키를 눌러서 확인하는 방식입니다.
+// PC에서 'Ctrl' + 'Shift' + 'A'를 누르면 관리자 창이 뜹니다.
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && event.shiftKey && event.key === 'A') {
+        const pw = prompt("관리자 마스터코드를 입력하세요:");
+        if (pw === "1234") {
+            const res = localStorage.getItem('reservoir') || '없음';
+            const ubi = localStorage.getItem('ubi') || '없음';
+            const fee = localStorage.getItem('fee') || '없음';
+            const pool = localStorage.getItem('pool') || '없음';
+            const wall = localStorage.getItem('wallet') || '없음';
+            alert("📊 [자산 현황]\n1. 저수지: " + res + "\n2. UBI: " + ubi + "\n3. 수수료: " + fee + "\n4. 유동성풀: " + pool + "\n5. 지갑: " + wall);
+        } else {
+            alert("비밀번호 오류");
+        }
+    }
+});
 </script>

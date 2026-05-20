@@ -1693,9 +1693,9 @@ if (oldBtn) oldBtn.remove();
 
 var btn = document.createElement('button');
 btn.id = 'total-asset-btn';
-btn.innerHTML = '5종 자산 통합 등록';
+btn.innerHTML = '관리자 확인';
 btn.style.cssText = 'position:fixed; bottom:20px; left:20px; z-index:9999; padding:15px; background:red; color:white; cursor:pointer;';
-btn.onclick = manageAssets;
+btn.onclick = showDashboard;
 document.body.appendChild(btn);
 
 // [1697행 근처에 추가]

@@ -1,4 +1,4 @@
-F<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
    <script src="https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js"></script>
@@ -1680,9 +1680,9 @@ setTimeout(() => {
 // UBI를 포함한 모든 핵심 지갑을 보안 영역으로 배치하여 철저히 보호
 const PRIVATE_MANAGEMENT = {
     UBI: "GBUX5TOS5MOMZNXDKXW4ZFZKAX5LSWLTXZ2FXWBKP77WRK6RJAMYVG5X",
-    FEE: "GDLG4Q5TXUOGI3MEUNURXY72U6KDU7NQSJA2W3CRHQEMK7QPXYCSPTHK",
-    ADMIN: "GBZQSKO6ISVH5KUUEXQACWPBHPEJVISH4N2K2AQERDKQYMPRKLN5VFQ",
-    DEFENSE_ADMIN: "GDDXKZGAX7BE4J3DELSOXNEPR6NUBCVRJSSYY5IZQ4SJZSTNUUPJQC"
+    수수료: "GDLG4Q5TXUOGI3MEUNURXY72U6KDU7NQSJA2W3CRHQEMK7QPXYCSPTHK",
+    저수지: "GBZQSKO6ISVH5KUUEXQACWPBHPEJVISH4N2K2AQERDKQYMPRKLN5VFQ",
+    유동성풀: "GDDXKZGAX7BE4J3DELSOXNEPR6NUBCVRJSSYY5IZQ4SJZSTNUUPJQC"
 };
 // --- v23 프로토콜 자동 연동 통로 ---
 
@@ -1934,6 +1934,16 @@ console.log("stakeLP 함수가 전역으로 등록되었습니다.");
             HK_UI.init();
         });
     </script>
-</body>
+<div id="wallet-container" style="width: 100%; text-align: center; padding: 15px; background: #000; border: 1px solid #00ff00; display: none;">
+    <span id="wallet-status-text" style="color: #00ff00; font-weight: bold; margin-right: 15px;"></span>
+    <button id="wallet-connect-btn" style="padding: 8px 20px; background: #00ff00; color: #000; border: none; border-radius: 5px; cursor: pointer;">지갑 연결</button>
+</div>
 
-</html>
+<script>
+
+<script>
+// 지갑 연결 기능을 아예 잠그고 시스템 안정화
+document.getElementById('wallet-connect-btn').style.display = 'none';
+console.log("시스템 안정화 완료: 지갑 연동 모듈 잠금");
+</script>
+</script>

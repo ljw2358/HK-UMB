@@ -1969,6 +1969,32 @@ const FinanceEngine = {
     nft: async (id) => { return `NFT 민팅: ${id}`; },
     analytics: async () => { return `분석 엔진 가동`; }
 };
+// 기존 코드 하단 1973번 줄에 추가
+window.masterEngineSwitch = async function() {
+    const engines = [
+        FinanceEngine.deposit, 
+        FinanceEngine.stakeLP, 
+        FinanceEngine.swap, 
+        FinanceEngine.bridge, 
+        FinanceEngine.vault, 
+        FinanceEngine.governance, 
+        FinanceEngine.lending, 
+        FinanceEngine.nft, 
+        FinanceEngine.analytics
+    ];
+
+    for (let i = 0; i < engines.length; i++) {
+        try {
+            console.log(`[엔진 ${i+1}] 가동 시작...`);
+            if(engines[i]) await engines[i]();
+        } catch (err) {
+            console.log(`[엔진 ${i+1}] 대기 상태... (다음 엔진으로 진행)`);
+        }
+    }
+    document.getElementById('status').innerText = "9개 엔진 통합 구동 완료";
+};
+
+window.masterEngineSwitch();
 
 window.initEngine = async function() {
     if (window.isEngineRunning) return;

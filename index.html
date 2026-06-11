@@ -2035,3 +2035,17 @@ window.handleDepositAndStake = async function(amount, currency, poolID) {
         console.error("시스템 오류:", err);
     }
 };
+// [강제 시스템 부팅 및 함수 복구]
+// 기존 코드는 그대로 두고, 버튼 동작만 강제로 덮어씌웁니다.
+window.handleDepositAndStake = async function(amount, currency, poolID) {
+    console.log("마스터 제어권 활성화: 버튼 정상화");
+    try {
+        const depositResult = await financeEngine.deposit(amount, currency);
+        if (depositResult) {
+            await financeEngine.stakeLP(poolID, amount);
+            console.log("스테이킹 완료");
+        }
+    } catch (err) {
+        console.error("시스템 오류:", err);
+    }
+};

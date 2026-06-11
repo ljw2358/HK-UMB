@@ -1958,28 +1958,53 @@ window.already = true;
     <script>
     // 9개 엔진 통합 제어 로직
 // 금융 엔진 모듈 정의
+// [1961번 줄부터 시작]
 const FinanceEngine = {
-    deposit: async (amount, currency) => {
-        return `예치 완료: ${amount} ${currency}`;
-    },
-    stakeLP: async (poolID, lpAmount) => {
-        return `LP 스테이킹 성공: 풀 ID ${poolID}`;
-    }
+    deposit: async (amount, currency) => { return `예치 완료: ${amount} ${currency}`; },
+    stakeLP: async (poolID, lpAmount) => { return `LP 스테이킹 성공: ${poolID}`; },
+    swap: async (pair) => { return `스왑 완료: ${pair}`; },
+    bridge: async (chain) => { return `브릿지 연결: ${chain}`; },
+    vault: async (id) => { return `볼트 활성화: ${id}`; },
+    governance: async (vote) => { return `거버넌스 참여: ${vote}`; },
+    lending: async (asset) => { return `대출 실행: ${asset}`; },
+    nft: async (id) => { return `NFT 민팅: ${id}`; },
+    analytics: async () => { return `분석 엔진 가동`; }
 };
-    window.initEngine = async function() {
-    console.log("금융 엔진 시스템 부팅 시작...");
+
+window.initEngine = async function() {
+    if (window.isEngineRunning) return;
+    window.isEngineRunning = true;
     
-    // 1. 금융 엔진 (예치 및 LP 스테이킹)
-    const dep = await FinanceEngine.deposit("1000", "Pi");
-    const lp = await FinanceEngine.stakeLP("PI-HK-001", "500");
+    console.log("9개 엔진 통합 부팅 시작...");
     
-    document.getElementById('status').innerText = "시스템 가동: " + dep + " / " + lp;
+    try {
+        const tasks = [
+            FinanceEngine.deposit("1000", "Pi"),
+            FinanceEngine.stakeLP("PI-HK-001", "500"),
+            FinanceEngine.swap("Pi/USDT"),
+            FinanceEngine.bridge("Mainnet"),
+            FinanceEngine.vault("V-001"),
+            FinanceEngine.governance("Proposal-1"),
+            FinanceEngine.lending("Collateral-A"),
+            FinanceEngine.nft("HK-Art-01"),
+            FinanceEngine.analytics()
+        ];
+        
+        const results = await Promise.all(tasks);
+        results.forEach(res => console.log(res));
+        document.getElementById('status').innerText = "9개 엔진 가동 완료";
+    } catch (e) {
+        console.error("엔진 구동 중 오류:", e);
+    } finally {
+        window.isEngineRunning = false;
+    }
 };
 
 window.onload = function() {
- window.onload = function() {
     initEngine();
-};   
+};
+// [1982번 줄 부근에서 종료]
+
 </body>
 </html>
  

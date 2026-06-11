@@ -2011,20 +2011,6 @@ window.onload = function() {
 </body>
 
 </html>
-// [삭제 없이 추가] 기존 로직과 충돌 방지용 통합 엔진
-// 9개 통합 엔진 (어제 구동 방식의 핵심)
-window.HK_Engine = {
-    // 9대 에코시스템 통합 정의
-    deposit: async (amt) => await fetch('/api/deposit', {method:'POST', body:JSON.stringify({amt})}),
-    lpStaking: async (amt) => await fetch('/api/lp-staking', {method:'POST', body:JSON.stringify({amt})}),
-    transfer: async (amt) => await fetch('/api/transfer', {method:'POST', body:JSON.stringify({amt})}),
-    payment: async (amt) => await fetch('/api/payment', {method:'POST', body:JSON.stringify({amt})}),
-    reward: async (amt) => await fetch('/api/reward', {method:'POST', body:JSON.stringify({amt})}),
-    ubi: async (amt) => await fetch('/api/ubi', {method:'POST', body:JSON.stringify({amt})}),
-    swap: async (amt) => await fetch('/api/swap', {method:'POST', body:JSON.stringify({amt})}),
-    pi_supply: async (amt) => await fetch('/api/pi-supply', {method:'POST', body:JSON.stringify({amt})}),
-    dex_swap: async (amt) => await fetch('/api/dex-swap', {method:'POST', body:JSON.stringify({amt})})
-};
 
 window.HK_Engine = {
     deposit: async (amount) => {

@@ -2058,87 +2058,62 @@ index.html
     </div>
 
     <div class="grid">
- <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>HK WorldBank 9 Core System</title>
-    <style>
-        body { font-family: 'Malgun Gothic', sans-serif; background-color: #121212; color: #ffffff; padding: 20px; }
-        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #f2a900; padding-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
-        .card { background: #1e1e1e; border: 1px solid #333; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .card h3 { color: #f2a900; margin-top: 0; border-bottom: 1px solid #444; padding-bottom: 10px; }
-        button { background-color: #f2a900; color: #000; border: none; padding: 10px 15px; margin: 5px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.2s; width: 45%; }
-        button:hover { background-color: #d19200; }
-        input { width: 90%; padding: 10px; margin-bottom: 10px; border: 1px solid #444; border-radius: 4px; background: #2a2a2a; color: white; }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <h1>HK WorldBank 통합 대시보드</h1>
-        <p>파이 생태계 9대 핵심 시스템</p>
+<div class="grid">
+    <!-- 1. PI 수량 -->
+    <div class="card">
+        <h3>1. PI 수량 조회</h3>
+        <p style="font-size: 24px; font-weight: bold;">잔고: 12,500.00 PI</p>
+        <button onclick="alert('지갑 연동 성공: 잔액 12,500 PI 조회됨')">지갑 연결</button>
     </div>
-
-    <div class="grid">
-        <div class="card">
-            <h3>1. PI 수량 조회</h3>
-            <p style="font-size: 24px; font-weight: bold;">잔고: <span id="piBalance">0.00</span> PI</p>
-            <button onclick="alert('지갑 연동 API를 초기화합니다.')">지갑 연결</button>
-        </div>
-
-        <div class="card">
-            <h3>2. PI 송금</h3>
-            <input type="text" id="addrInput" placeholder="받는 사람 지갑 주소">
-            <input type="number" id="amtInput" placeholder="보낼 수량 (PI)">
-            <button style="width: 90%;" onclick="alert('주소: ' + document.getElementById('addrInput').value + ' 로 ' + document.getElementById('amtInput').value + ' PI 송금 요청 완료')">송금 실행</button>
-        </div>
-
-        <div class="card">
-            <h3>3. 스마트 결재</h3>
-            <input type="text" id="billInput" placeholder="결재/청구서 번호">
-            <button style="width: 90%;" onclick="alert('청구서 ' + document.getElementById('billInput').value + ' 번 결재 승인 처리 중...')">결재 승인</button>
-        </div>
-
-        <div class="card">
-            <h3>4. 자산 예치 (Staking)</h3>
-            <input type="number" id="stakeInput" placeholder="예치할 PI 수량">
-            <button style="width: 90%;" onclick="alert(document.getElementById('stakeInput').value + ' PI 예치 완료. 보상 산정 시작')">예치하기</button>
-        </div>
-
-        <div class="card">
-            <h3>5. 예치 보상</h3>
-            <p>누적 보상: <strong>0.00 PI</strong></p>
-            <button style="width: 90%;" onclick="alert('보상 수령 완료.')">보상 수령</button>
-        </div>
-
-        <div class="card">
-            <h3>6. LP 스테이킹</h3>
-            <p>유동성 풀 (PI/USDT)</p>
-            <button onclick="alert('LP 토큰 예치 실행')">LP 예치</button>
-            <button onclick="alert('LP 토큰 회수 실행')">LP 회수</button>
-        </div>
-
-        <div class="card">
-            <h3>7. 자산 스왑 (Swap)</h3>
-            <input type="number" id="swapInput" placeholder="PI 입력">
-            <p>⬇️ 예상 수령액: 0.00 KRW</p>
-            <button style="width: 90%;" onclick="alert(document.getElementById('swapInput').value + ' PI 스왑 완료')">스왑 실행</button>
-        </div>
-
-        <div class="card">
-            <h3>8. 탈중앙화 거래 (DEX)</h3>
-            <p>네트워크: Pi Network (Mainnet)</p>
-            <button style="width: 90%;" onclick="alert('DEX 유동성 풀 연결 성공')">DEX 접속</button>
-        </div>
-
-        <div class="card">
-            <h3>9. HK 기본소득 (UBI)</h3>
-            <p>HK 사회재단 분배금액 (30%)</p>
-            <button style="width: 90%;" onclick="alert('기본소득 수급 자격 심사 통과: 즉시 지급')">UBI 신청/조회</button>
-        </div>
+    <!-- 2. 송금 -->
+    <div class="card">
+        <h3>2. PI 송금</h3>
+        <input type="text" placeholder="받는 사람 지갑 주소">
+        <input type="number" placeholder="보낼 수량 (PI)">
+        <button style="width: 90%;" onclick="alert('송금 실행 완료')">송금 실행</button>
     </div>
-
-</body>
-</html> 
+    <!-- 3. 결재 -->
+    <div class="card">
+        <h3>3. 스마트 결재</h3>
+        <input type="text" placeholder="결재/청구서 번호">
+        <button style="width: 90%;" onclick="alert('결재 승인 완료')">결재 승인</button>
+    </div>
+    <!-- 4. 예치 -->
+    <div class="card">
+        <h3>4. 자산 예치 (Staking)</h3>
+        <input type="number" placeholder="예치할 PI 수량">
+        <button style="width: 90%;" onclick="alert('예치 완료. 보상 산정 시작')">예치하기</button>
+    </div>
+    <!-- 5. 보상 -->
+    <div class="card">
+        <h3>5. 예치 보상</h3>
+        <p>누적 보상: <strong>50.00 PI</strong></p>
+        <button style="width: 90%;" onclick="alert('보상 수령 완료')">보상 수령</button>
+    </div>
+    <!-- 6. LP 스테이킹 -->
+    <div class="card">
+        <h3>6. LP 스테이킹</h3>
+        <p>유동성 풀 (PI/USDT)</p>
+        <button onclick="alert('LP 토큰 예치 실행')">LP 예치</button>
+        <button onclick="alert('LP 토큰 회수 실행')">LP 회수</button>
+    </div>
+    <!-- 7. 일반 스왑 -->
+    <div class="card">
+        <h3>7. 자산 스왑 (Swap)</h3>
+        <input type="number" placeholder="PI 입력">
+        <p>⬇️ 예상 수령액: 0.00 KRW</p>
+        <button style="width: 90%;" onclick="alert('스왑 완료')">스왑 실행</button>
+    </div>
+    <!-- 8. DEX 스왑 -->
+    <div class="card">
+        <h3>8. 탈중앙화 거래 (DEX)</h3>
+        <p>네트워크: Pi Network (Mainnet)</p>
+        <button style="width: 90%;" onclick="alert('DEX 유동성 풀 접속 성공')">DEX 접속</button>
+    </div>
+    <!-- 9. 기본소득 (UBI) -->
+    <div class="card">
+        <h3>9. HK 기본소득 (UBI)</h3>
+        <p>HK 사회재단 분배금액 (30%)</p>
+        <button style="width: 90%;" onclick="alert('기본소득 신청 완료: 자격 심사 중')">UBI 신청/조회</button>
+    </div>
+</div>

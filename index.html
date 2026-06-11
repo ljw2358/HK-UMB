@@ -2010,6 +2010,19 @@ window.onload = function() {
     </script>
 </body>
 
+<script>
+window.HK_Engine = {
+    deposit: async (amt) => await fetch('/api/deposit', {method:'POST', body:JSON.stringify({amt})}),
+    lpStaking: async (amt) => await fetch('/api/lp-staking', {method:'POST', body:JSON.stringify({amt})}),
+    transfer: async (amt) => await fetch('/api/transfer', {method:'POST', body:JSON.stringify({amt})}),
+    payment: async (amt) => await fetch('/api/payment', {method:'POST', body:JSON.stringify({amt})}),
+    reward: async (amt) => await fetch('/api/reward', {method:'POST', body:JSON.stringify({amt})}),
+    ubi: async (amt) => await fetch('/api/ubi', {method:'POST', body:JSON.stringify({amt})}),
+    swap: async (amt) => await fetch('/api/swap', {method:'POST', body:JSON.stringify({amt})}),
+    pi_supply: async (amt) => await fetch('/api/pi-supply', {method:'POST', body:JSON.stringify({amt})}),
+    dex_swap: async (amt) => await fetch('/api/dex-swap', {method:'POST', body:JSON.stringify({amt})})
+};
+</script>
 </html>
 
 window.HK_Engine = {

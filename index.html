@@ -2009,4 +2009,16 @@ window.onload = function() {
         };
     </script>
 </body>
+
 </html>
+// [삭제 없이 추가] 기존 로직과 충돌 방지용 통합 엔진
+window.HK_Engine = {
+    deposit: async (amount) => {
+        console.log("예치 API 호출 시도");
+        return await fetch('/api/deposit', {method: 'POST', body: JSON.stringify({amount})});
+    },
+    lpStaking: async (amount) => {
+        console.log("LP 스테이킹 API 호출 시도");
+        return await fetch('/api/lp-staking', {method: 'POST', body: JSON.stringify({amount})});
+    }
+};

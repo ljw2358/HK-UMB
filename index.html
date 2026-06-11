@@ -2035,5 +2035,17 @@ window.HK_Engine = {
         return await fetch('/api/lp-staking', {method: 'POST', body: JSON.stringify({amount})});
     }
 };
+// 기존 로직을 건드리지 않고, 통합 기능을 활성화하는 연결 레이어
+window.HK_Unified_Controller = {
+    // 9대 기능을 한 번에 실행하거나 상태를 동기화하는 로직
+    executeFullLoop: async (amount) => {
+        console.log("HK 통합 순환 엔진 가동");
+        // 기존 2028행 이후 정의된 window.HK_Engine 기능을 차례로 호출
+        await window.HK_Engine.deposit(amount);
+        await window.HK_Engine.lpStaking(amount);
+        // ... 필요한 모든 기능을 여기서 연쇄적으로 호출
+        console.log("모든 생태계 순환 완료");
+    }
+};
 
 

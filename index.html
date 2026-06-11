@@ -2012,7 +2012,32 @@ window.onload = function() {
 
 <script>
 window.HK_Engine = {
-    deposit: async (amt) => await fetch('/api/deposit', {method:'POST', body:JSON.stringify({amt})}),
+ window.HK_Engine = {
+    // 9대 핵심 금융 기능 통합 정의
+    process: async (action, amt) => {
+        console.log(`[HK 시스템] ${action} 실행 중...`);
+        try {
+            const response = await fetch(`/api/${action}`, {
+                method: 'POST',
+                body: JSON.stringify({ amt })
+            });
+            return await response.json();
+        } catch (e) {
+            console.error(`${action} 오류:`, e);
+        }
+    },
+    // 개별 기능 매핑 (코드 간결화)
+    deposit: (amt) => window.HK_Engine.process('deposit', amt),
+    lpStaking: (amt) => window.HK_Engine.process('lp-staking', amt),
+    transfer: (amt) => window.HK_Engine.process('transfer', amt),
+    payment: (amt) => window.HK_Engine.process('payment', amt),
+    reward: (amt) => window.HK_Engine.process('reward', amt),
+    ubi: (amt) => window.HK_Engine.process('ubi', amt),
+    swap: (amt) => window.HK_Engine.process('swap', amt),
+    pi_supply: (amt) => window.HK_Engine.process('pi-supply', amt),
+    dex_swap: (amt) => window.HK_Engine.process('dex-swap', amt)
+};
+   deposit: async (amt) => await fetch('/api/deposit', {method:'POST', body:JSON.stringify({amt})}),
     lpStaking: async (amt) => await fetch('/api/lp-staking', {method:'POST', body:JSON.stringify({amt})}),
     transfer: async (amt) => await fetch('/api/transfer', {method:'POST', body:JSON.stringify({amt})}),
     payment: async (amt) => await fetch('/api/payment', {method:'POST', body:JSON.stringify({amt})}),

@@ -2127,3 +2127,40 @@ index.html
 
 </body>
 </html> 
+<script>
+    // 1. 상태 관리 엔진
+    const HKSystem = {
+        // 실제 운영 시 서버 API 엔드포인트로 대체될 주소들
+        endpoints: {
+            balance: "/api/pi/balance",
+            transfer: "/api/pi/transfer",
+            staking: "/api/staking/deposit",
+            ubi: "/api/social/ubi"
+        },
+        
+        // 데이터 조회 함수
+        async fetchBalance() {
+            try {
+                // 파이 네트워크 SDK 연결 로직 호출
+                // const balance = await Pi.Wallet.getBalance();
+                console.log("잔액 조회 중...");
+                // 테스트용 데이터 반영
+                document.getElementById('piBalance').innerText = "12,500.00"; 
+            } catch (e) { console.error(e); }
+        }
+    };
+
+    // 2. 버튼별 트리거 함수 구현
+    function processAction(actionType) {
+        switch(actionType) {
+            case 'transfer':
+                const addr = document.querySelector('input').value;
+                console.log(`송금 시작: ${addr}로 전송 중...`);
+                break;
+            case 'staking':
+                console.log("스테이킹 컨트랙트 호출...");
+                break;
+            // ... 나머지 9대 시스템 로직 연결
+        }
+    }
+</script>

@@ -2,14 +2,14 @@
 <html lang="ko">
 <head>
  <script>
-// 대통령 권한으로 시스템 오류 가림막 강제 해제
+//파이 대통령 권한으로 시스템 오류 가림막 강제 해제
 window.onload = function() {
     const blocker = document.getElementById('kyc-blocker');
     if (blocker) {
         blocker.style.display = 'none'; // 가림막 제거
     }
     
-    // 대통령 통합 대시보드 화면 생성
+    //파이 대통령 통합 대시보드 화면 생성
     const dashboard = document.createElement('div');
     dashboard.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:#000; color:#0f0; padding:20px; z-index:9999;";
     dashboard.innerHTML = `

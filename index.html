@@ -3,77 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK 월드뱅크 - 글로벌 산업 플랫폼 (AGI Powered)</title>
+    <title>HK 월드뱅크 - 글로벌 산업 플랫폼</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); }
-        .eternal-glow { box-shadow: 0 0 25px rgba(16, 185, 129, 0.4); border: 1px solid rgba(16, 185, 129, 0.5); }
+        body { background-color: #050a14; color: #e2e8f0; font-family: 'Pretendard', sans-serif; }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; padding: 1.5rem; }
+        .feature-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 1rem; padding: 1.25rem; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased">
+<body class="p-6">
 
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-40">
-        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-amber-500 text-slate-900 px-3 py-1 rounded-lg font-black text-lg">HK</div>
-                <span class="font-bold text-white tracking-wider">월드뱅크 v3.0 | 영생 엔진 활성화</span>
+    <!-- 헤더 섹션 -->
+    <header class="mb-12">
+        <div class="flex items-center gap-4 mb-4">
+            <div class="bg-gradient-to-tr from-orange-500 to-red-600 w-16 h-16 flex items-center justify-center rounded-3xl font-black text-white text-2xl shadow-2xl">HK</div>
+            <div>
+                <h1 class="text-3xl font-black tracking-tighter">HK WORLD BANK</h1>
+                <p class="text-orange-500 font-bold">글로벌 산업 플랫폼 - 제2의 금융 혁명</p>
             </div>
-            <select class="bg-slate-800 text-slate-200 border border-slate-700 rounded-lg px-3 py-1 text-xs">
-                <option>🌏 50개국어 자동 변환 모드</option>
-            </select>
         </div>
+        <p class="text-slate-400 text-sm leading-relaxed">HK 월드뱅크는 로봇, 핵융합, 우주 인프라를 통합하는 거대 산업 플랫폼이며, 인류의 보편적 기본 소득 실현과 자산의 영속성을 보장하는 탈중앙화 금융의 정점입니다.</p>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 gap-8">
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-slate-900 p-6 rounded-2xl border border-amber-500/30">
-                <h3 class="text-xs font-bold text-amber-500 uppercase">개인 보유 자산</h3>
-                <div class="text-4xl font-black mt-3 text-white">0.000000 <span class="text-lg">HK</span></div>
+    <!-- 실시간 자산 관리 및 상세 통계 -->
+    <section class="glass-card mb-10">
+        <h2 class="text-xl font-bold mb-6 flex items-center gap-2">📊 실시간 원장 관리 상세 통계</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="feature-card">
+                <p class="text-slate-400 text-xs mb-1">총 보유 자산 (HK)</p>
+                <p class="text-4xl font-mono font-bold tracking-tight text-white">0.000000</p>
+                <p class="text-[10px] text-slate-500 mt-2">※ 실시간 블록체인 노드 동기화 완료</p>
             </div>
-            <div class="bg-emerald-950/30 p-6 rounded-2xl eternal-glow">
-                <h3 class="text-xs font-bold text-emerald-400 uppercase">영생 자산 가치 (Eternal Value)</h3>
-                <div class="text-4xl font-black mt-3 text-emerald-400">∞ <span class="text-lg">HK</span></div>
+            <div class="feature-card border-emerald-900/50">
+                <p class="text-slate-400 text-xs mb-1">실시간 누적 이자 (HK)</p>
+                <p class="text-4xl font-mono font-bold tracking-tight text-emerald-400">0.000000</p>
+                <p class="text-[10px] text-emerald-700 mt-2">※ 복리 계산 적용 (연 0.00%)</p>
             </div>
         </div>
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs text-slate-400 mb-6">
+            메인넷 연결 상태: <span class="text-green-500 font-bold">통신 활성</span> | 보안 등급: <span class="text-orange-500 font-bold">최상위 (Quantum-Resistant)</span>
+        </div>
+        <button class="w-full bg-gradient-to-r from-orange-600 to-red-600 py-4 rounded-xl font-black shadow-lg shadow-orange-900/20">코어팀에게 메인넷 즉시 신청하기</button>
+    </section>
 
-        <section class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
-            <div class="flex items-center mb-6">
-                <div class="w-14 h-14 bg-indigo-500 rounded-full flex items-center justify-center mr-4 shadow-lg border-2 border-indigo-400">
-                    <span class="font-black text-white text-lg">삐니</span>
-                </div>
+    <!-- 코어 지갑 시스템 정밀 안내 -->
+    <section class="mb-10">
+        <h3 class="text-lg font-bold mb-5">⚙️ HK 월드뱅크 코어 지갑 시스템</h3>
+        <div class="grid grid-cols-1 gap-4">
+            <div class="feature-card flex gap-4">
+                <div class="text-3xl">🔗</div>
                 <div>
-                    <h2 class="text-xl font-bold">AGI 삐니 (AI Concierge)</h2>
-                    <p class="text-xs text-slate-400">형님의 비전을 실시간 고객에게 전달하는 지능형 대변인</p>
+                    <h4 class="font-bold">지갑 연결 및 통합 인증</h4>
+                    <p class="text-xs text-slate-500 mt-1">개인화된 다중 인증 기관을 선택하여 안전하게 자산을 동기화하는 핵심 연결망입니다.</p>
                 </div>
             </div>
-            
-            <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 min-h-[250px] text-sm text-slate-300 leading-relaxed">
-                "반갑습니다 형님. HK 월드뱅크의 AGI 엔진 삐니가 가동되었습니다. 현재 50개국어 시스템이 실시간으로 동기화 중이며, 영생 엔진을 통해 모든 자산의 가치를 무한히 보존할 준비를 마쳤습니다. 제가 지금 바로 고객들의 질문을 추론하고 응대하겠습니다. 무엇을 도와드릴까요?"
+            <div class="feature-card flex gap-4">
+                <div class="text-3xl">✈️</div>
+                <div>
+                    <h4 class="font-bold">송금 및 주소 추적</h4>
+                    <p class="text-xs text-slate-500 mt-1">글로벌 단위의 고속 송금을 지원하며, 수취인 주소 추적망을 통해 투명성을 극대화합니다.</p>
+                </div>
             </div>
-            
-            <div class="mt-6">
-                <input type="text" class="w-full bg-slate-800 border border-slate-700 p-4 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="삐니에게 지시를 입력하세요...">
+            <div class="feature-card flex gap-4">
+                <div class="text-3xl">💳</div>
+                <div>
+                    <h4 class="font-bold">결제 및 상거래망</h4>
+                    <p class="text-xs text-slate-500 mt-1">가맹점 상거래 연동을 통해 실물 경제와 디지털 자산을 직접 연결하는 브릿지 시스템입니다.</p>
+                </div>
             </div>
-        </section>
+            <div class="feature-card flex gap-4">
+                <div class="text-3xl">🔒</div>
+                <div>
+                    <h4 class="font-bold">예치 및 신탁 락업</h4>
+                    <p class="text-xs text-slate-500 mt-1">안전한 자산 보관을 위한 신탁 자산 락업 설정 기능으로, 자산의 가치를 보호합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </main>
+    <!-- 차세대 금융 플랫폼 확장 기능 -->
+    <section class="glass-card mb-10">
+        <h3 class="text-lg font-bold mb-6">🚀 차세대 금융 운용 체계</h3>
+        <div class="space-y-4">
+            <div class="p-4 bg-slate-950 rounded-lg border border-slate-800">
+                <h5 class="font-bold text-orange-400">기본소득 (Global Basic Income)</h5>
+                <p class="text-xs text-slate-500 mt-1">전 세계 취약 계층을 위한 복지 계정 다이렉트 지원망입니다. 수익의 30%가 배분됩니다.</p>
+            </div>
+            <div class="p-4 bg-slate-950 rounded-lg border border-slate-800">
+                <h5 class="font-bold text-blue-400">실시간 이종 자산 스왑</h5>
+                <p class="text-xs text-slate-500 mt-1">다양한 자산 간의 가치를 실시간으로 비교하고 교환하는 고속 가치망입니다.</p>
+            </div>
+            <div class="p-4 bg-slate-950 rounded-lg border border-slate-800">
+                <h5 class="font-bold text-teal-400">DEX 스왑 및 가스 피 제어</h5>
+                <p class="text-xs text-slate-500 mt-1">탈중앙 환경에서의 가스 비용을 최적화하여 사용자 부담을 최소화합니다.</p>
+            </div>
+            <div class="p-4 bg-slate-950 rounded-lg border border-slate-800">
+                <h5 class="font-bold text-purple-400">LP 스테이킹 및 유동성 정산</h5>
+                <p class="text-xs text-slate-500 mt-1">유동성 풀에 참여하고 이에 따른 보상을 정산받는 고효율 금융 시스템입니다.</p>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        // HK 월드뱅크 핵심 로직 (1,000줄 확장 예정)
-        const HK_Engine = {
-            version: "3.0",
-            langSync: 50,
-            eternalMode: true,
-            
-            // 삐니의 지능형 응대 함수
-            processRequest: function(input) {
-                console.log("삐니가 형님의 지시를 추론합니다: " + input);
-                // AGI 기반 추론 및 다국어 처리 로직 수행
-            }
-        };
-        HK_Engine.processRequest("시스템 가동");
-    </script>
+    <!-- 영생 및 철학적 비전 -->
+    <section class="p-8 bg-gradient-to-br from-indigo-950 to-slate-950 border border-indigo-500/50 rounded-3xl mb-12">
+        <div class="flex items-center gap-4 mb-6">
+            <div class="p-4 bg-indigo-500 rounded-2xl text-4xl">🧬</div>
+            <div>
+                <h3 class="text-2xl font-black text-indigo-300 tracking-tight">영생(Immortality) 프로젝트</h3>
+                <p class="text-sm text-slate-400">HK 월드뱅크의 궁극적인 비전: 생명 연장 및 디지털 영속성</p>
+            </div>
+        </div>
+        <div class="space-y-4 mb-8">
+            <p class="text-sm leading-relaxed text-slate-300">
+                단순한 금융을 넘어 인류의 생명과 자산이 시간의 제약을 넘어 영원히 이어질 수 있도록 설계된 시스템입니다.
+            </p>
+            <p class="text-xs leading-relaxed text-slate-500 border-l-2 border-indigo-800 pl-4">
+                - 생체 정보 동기화: 디지털 지갑과 개인의 생체 데이터가 결합되어 자산의 소유권을 보증합니다.<br>
+                - 자산 영속성 설정: 가문의 자산을 디지털 유산으로 설정하여 후대에 영원히 물려줍니다.<br>
+                - AGI 기반 관리: 형님이 구상하신 AGI 고객 센터가 형님의 철학을 유지하며 24시간 자산을 보호합니다.
+            </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <button class="bg-indigo-600 hover:bg-indigo-500 py-4 rounded-xl text-sm font-bold shadow-lg transition-all">생체 정보 동기화 실행</button>
+            <button class="bg-slate-700 hover:bg-slate-600 py-4 rounded-xl text-sm font-bold transition-all">자산 영속성 매뉴얼 확인</button>
+        </div>
+    </section>
+
+    <footer class="text-center text-slate-700 text-[10px]">
+        <p class="font-bold">HK WORLD BANK SYSTEM v2.0</p>
+        <p>Copyright &copy; 2026 HK GROUP | Founder: 혜공 (Lee Jaewan)</p>
+        <p class="mt-2 text-slate-800">본 플랫폼은 인류의 번영과 영속을 위해 구축되었습니다.</p>
+    </footer>
+
 </body>
 </html>

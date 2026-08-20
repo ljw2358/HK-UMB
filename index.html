@@ -7,68 +7,265 @@
     <!-- 구글 폰트 및 아이콘 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0b0f19; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .dashboard { width: 1100px; background-color: #121824; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid #1e2638; }
-        .header { text-align: center; margin-bottom: 25px; }
-        .header h1 { font-size: 36px; font-weight: 800; color: #ffffff; letter-spacing: 2px; text-transform: uppercase; }
-        .welcome { background-color: #1a2233; padding: 20px 25px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #263248; }
-        .welcome h2 { font-size: 22px; margin-bottom: 8px; }
-        .welcome p { font-size: 14px; color: #94a3b8; }
-        .assets-container { display: flex; gap: 20px; margin-bottom: 25px; }
-        .asset-card { flex: 1; background-color: #1a2233; padding: 22px; border-radius: 12px; border: 1px solid #263248; }
-        .asset-card .label { font-size: 14px; color: #94a3b8; margin-bottom: 10px; }
-        .asset-card .value { font-size: 28px; font-weight: bold; }
-        
-        .actions-container { display: flex; gap: 20px; margin-bottom: 25px; }
-        .quick-actions { flex: 1.2; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .btn { padding: 18px; border-radius: 10px; border: none; color: white; font-weight: bold; cursor: pointer; text-align: left; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0b0f19;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .dashboard {
+            width: 1100px;
+            background-color: #121824;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border: 1px solid #1e2638;
+        }
+        /* 월드뱅크 상단 가운데 크게 배치 */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .welcome {
+            background-color: #1a2233;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #263248;
+        }
+        .welcome h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .welcome p {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+        /* 자산 잔액 및 개인 자산 수량 영역 */
+        .assets-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .asset-card {
+            flex: 1;
+            background-color: #1a2233;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #263248;
+        }
+        .asset-card .label {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+        .asset-card .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .asset-card .value.krw {
+            color: #f6ad55;
+        }
+        .asset-card .value.count {
+            color: #ffffff;
+        }
+        /* 하단 기능 버튼 영역 */
+        .actions-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .quick-actions {
+            flex: 1.2;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .btn {
+            padding: 18px;
+            border-radius: 10px;
+            border: none;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .btn span {
+            font-size: 11px;
+            color: #cbd5e0;
+            font-weight: normal;
+        }
+        .btn-darkgreen { background-color: #276749; }
         .btn-green { background-color: #2f855a; }
         .btn-blue { background-color: #2b6cb0; }
         .btn-purple { background-color: #6b46c1; }
         
-        /* PI 수량 및 하단 메뉴 통합 영역 */
-        .sub-actions { flex: 1.8; background-color: #1a2233; padding: 15px; border-radius: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; border: 1px solid #263248; }
-        .sub-btn { background-color: #232d42; border: none; color: #e2e8f0; padding: 12px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; }
-        .pi-icon { color: #f6ad55; font-size: 1.2em; margin-right: 5px; }
+        /* PI 수량 포함 서브 메뉴 영역 */
+        .sub-actions {
+            flex: 1.8;
+            background-color: #1a2233;
+            padding: 15px;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            align-content: center;
+            border: 1px solid #263248;
+        }
+        .sub-btn {
+            background-color: #232d42;
+            border: none;
+            color: #e2e8f0;
+            padding: 12px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        .pi-icon {
+            color: #f6ad55;
+        }
 
-        .chatbot-container { background-color: #1a2233; border-radius: 12px; padding: 20px; border: 1px solid #263248; }
-        .chatbot-header { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; color: #f472b6; font-weight: bold; }
-        .chatbot-message-box { background-color: #121824; padding: 15px; border-radius: 8px; margin-bottom: 12px; color: #e2e8f0; border: 1px solid #232d42; }
-        .chatbot-input-row { display: flex; gap: 10px; }
-        .chatbot-input { flex: 1; background-color: #121824; border: 1px solid #263248; border-radius: 8px; padding: 12px; color: #fff; }
-        .chatbot-send-btn { background-color: #db2777; border: none; color: white; padding: 0 25px; border-radius: 8px; cursor: pointer; }
+        /* 60개국어 지원 AGI 삐니 챗봇 박스 */
+        .chatbot-container {
+            background-color: #1a2233;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #263248;
+        }
+        .chatbot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .chatbot-title {
+            color: #f472b6;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .chatbot-status {
+            color: #48bb78;
+            font-weight: 600;
+        }
+        .chatbot-message-box {
+            background-color: #121824;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            color: #e2e8f0;
+            font-size: 14px;
+            border: 1px solid #232d42;
+        }
+        .chatbot-input-row {
+            display: flex;
+            gap: 10px;
+        }
+        .chatbot-input {
+            flex: 1;
+            background-color: #121824;
+            border: 1px solid #263248;
+            border-radius: 8px;
+            padding: 12px 15px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+        .chatbot-input:focus {
+            outline: none;
+            border-color: #f472b6;
+        }
+        .chatbot-send-btn {
+            background-color: #db2777;
+            border: none;
+            color: white;
+            padding: 0 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        .chatbot-send-btn:hover {
+            background-color: #be185d;
+        }
     </style>
 </head>
 <body>
 
     <div class="dashboard">
-        <div class="header"><h1>HK WORLDBANK</h1></div>
-        
-        <div class="welcome">
-            <h2>환영합니다, 고객님</h2>
-            <p>파이화폐(Pi) 단일 경제권과 165종 컨트랙트 타임 시스템이 60개국 언어 실시간 동기화로 구동 중입니다.</p>
+        <!-- 월드뱅크 상단 가운데 크게 배치 -->
+        <div class="header">
+            <h1>HK WORLDBANK</h1>
         </div>
 
+        <div class="welcome">
+            <h2>환영합니다, 고객님</h2>
+            <p>파이화폐(Pi) 단일 경제권과 165종 컨트랙트 타임 시스템이 60개국 언어 실시간 동기화와 함께 구동 중입니다. 대기업 임금부터 재래시장 결제까지 통합된 지상낙원 생태계입니다.</p>
+        </div>
+
+        <!-- 자산 잔액 및 개인 자산 수량 -->
         <div class="assets-container">
             <div class="asset-card">
                 <div class="label">자산 잔액</div>
-                <div class="value" style="color:#f6ad55;">1,000,000.00 ₩</div>
+                <div class="value krw">1,000,000.00 ₩</div>
             </div>
             <div class="asset-card">
                 <div class="label">개인 자산 수량</div>
-                <div class="value">150,000,000</div>
+                <div class="value count">150,000,000</div>
             </div>
         </div>
 
+        <!-- 하단 기능 버튼 영역 -->
         <div class="actions-container">
             <div class="quick-actions">
-                <button class="btn btn-green">예치하기</button>
-                <button class="btn btn-green">송금/출금</button>
-                <button class="btn btn-blue">Pi 스왑</button>
-                <button class="btn btn-purple">UBI 재단</button>
+                <button class="btn btn-darkgreen">
+                    예치하기
+                    <span>31.41% APY</span>
+                </button>
+                <button class="btn btn-green">
+                    송금/출금
+                    <span>즉시 정산</span>
+                </button>
+                <button class="btn btn-blue">
+                    Pi 스왑
+                    <span>원클릭 교환</span>
+                </button>
+                <button class="btn btn-purple">
+                    UBI 재단
+                    <span>사회 정산</span>
+                </button>
             </div>
-            <!-- PI 수량 포함 메뉴 영역 -->
+            <!-- PI 수량이 포함된 서브 메뉴 -->
             <div class="sub-actions">
                 <button class="sub-btn"><i class="fa-brands fa-pi pi-icon"></i>PI 수량</button>
                 <button class="sub-btn">네트워크설정</button>
@@ -81,17 +278,23 @@
             </div>
         </div>
 
+        <!-- 60개국어 지원 무엇이든 물어보세요 & 전송 영역 -->
         <div class="chatbot-container">
             <div class="chatbot-header">
-                <div>💬 AGI 삐니 (60개국 언어 실시간 전송 지원)</div>
-                <div style="color:#48bb78;">정상 작동 중</div>
+                <div class="chatbot-title">
+                    <span>💬</span> AGI 삐니 (60개국 언어 실시간 동기화 지원)
+                </div>
+                <div class="chatbot-status">정상 작동 중</div>
             </div>
-            <div class="chatbot-message-box">"형님, 전 세계 60개국 언어로 완벽하게 소통합니다!"</div>
+            <div class="chatbot-message-box">
+                "형님, 전 세계 60개국 언어의 소통이 완벽하게 완료되었습니다. 지구촌 어디서든 60개국어로 완벽하게 통합니다!"
+            </div>
             <div class="chatbot-input-row">
-                <input type="text" class="chatbot-input" placeholder="60개국어로 무엇이든 물어보세요">
+                <input type="text" class="chatbot-input" placeholder="AGI 삐니에게 무엇이든 물어보세요 (60개국어 실시간 전송)">
                 <button class="chatbot-send-btn">전송</button>
             </div>
         </div>
     </div>
+
 </body>
 </html>
